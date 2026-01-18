@@ -1,8 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=14 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://MainMenu/main_menu.gd" id="1_8saeu"]
 [ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://MainMenu/panel_grey_dark.png" id="2_ghw46"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://MainMenu/CherryBombOne-Regular.ttf" id="3_df05h"]
+[ext_resource type="AudioStream" uid="uid://dcnj3g2bih1qe" path="res://MainMenu/time_for_adventure.mp3" id="4_ghw46"]
+[ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://MainMenu/Audio_Volume.gd" id="5_df05h"]
+[ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://MainMenu/fullscreen_control.gd" id="6_8um5k"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6quo"]
 texture = ExtResource("2_ghw46")
@@ -34,6 +37,14 @@ shadow_offset = Vector2(0, 3.41)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onc8m"]
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8saeu"]
+color = Color(0, 0.5019608, 0.5019608, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ghw46"]
+color = Color(0.22768125, 0.40849665, 0.17381111, 1)
+thickness = 6
+
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -43,7 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8saeu")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Background" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -52,7 +63,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e6quo")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MainButtons" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -67,7 +78,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="Button" type="Button" parent="VBoxContainer"]
+[node name="StartButton" type="Button" parent="MainButtons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
 theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
@@ -82,7 +93,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
 text = "Start Game
 "
 
-[node name="Button2" type="Button" parent="VBoxContainer"]
+[node name="SettingsButton" type="Button" parent="MainButtons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
 theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
@@ -96,7 +107,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
 text = "Settings
 "
 
-[node name="Button3" type="Button" parent="VBoxContainer"]
+[node name="ExitButton" type="Button" parent="MainButtons"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
 theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
@@ -131,6 +142,91 @@ theme_override_font_sizes/font_size = 60
 text = "Game Title Here
 "
 
-[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_exit_pressed"]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ghw46")
+autoplay = true
+bus = &"Music"
+
+[node name="Settings" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.5
+offset_top = -132.0
+offset_right = 180.5
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Settings"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 46.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_fonts/font = ExtResource("3_df05h")
+theme_override_font_sizes/font_size = 30
+text = "Settings"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="Settings"]
+layout_mode = 0
+offset_left = 70.5
+offset_top = 208.0
+offset_right = 298.5
+offset_bottom = 252.0
+theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
+theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_colors/font_hover_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_fonts/font = ExtResource("3_df05h")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_kenku")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_e6quo")
+theme_override_styles/hover = SubResource("StyleBoxFlat_onc8m")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
+text = "Back
+"
+
+[node name="AudioControl" type="HSlider" parent="Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -82.0
+offset_right = 112.0
+offset_bottom = -63.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("5_df05h")
+audio_bus_name = "Music"
+
+[node name="Fullscreen_Control" type="CheckButton" parent="Settings"]
+layout_mode = 0
+offset_left = 109.5
+offset_top = 72.0
+offset_right = 248.0
+offset_bottom = 107.0
+theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_fonts/font = ExtResource("3_df05h")
+text = "Fullscreen"
+script = ExtResource("6_8um5k")
+
+[connection signal="pressed" from="MainButtons/StartButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MainButtons/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButtons/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Settings/BackButton" to="." method="_on_backbutton_pressed"]
+[connection signal="value_changed" from="Settings/AudioControl" to="Settings/AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="Settings/Fullscreen_Control" to="Settings/Fullscreen_Control" method="_on_toggled"]
