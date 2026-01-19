@@ -191,19 +191,26 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
 text = "Back
 "
 
-[node name="AudioControl" type="HSlider" parent="Settings"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -112.0
-offset_top = -82.0
-offset_right = 112.0
-offset_bottom = -63.0
+offset_left = -83.25
+offset_top = -42.75
+offset_right = 83.25
+offset_bottom = 42.75
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_constants/separation = 7
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
+layout_mode = 2
+
+[node name="AudioControl" type="HSlider" parent="Settings/VBoxContainer"]
+layout_mode = 2
 theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
 theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
 theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
@@ -213,12 +220,18 @@ value = 1.0
 script = ExtResource("5_df05h")
 audio_bus_name = "Music"
 
-[node name="Fullscreen_Control" type="CheckButton" parent="Settings"]
+[node name="Label" type="Label" parent="Settings/VBoxContainer/AudioControl"]
 layout_mode = 0
-offset_left = 109.5
-offset_top = 72.0
-offset_right = 248.0
-offset_bottom = 107.0
+offset_left = 0.25
+offset_top = -28.25
+offset_right = 98.25
+offset_bottom = -4.25
+theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_fonts/font = ExtResource("3_df05h")
+text = "Music Volume"
+
+[node name="Fullscreen_Control" type="CheckButton" parent="Settings/VBoxContainer"]
+layout_mode = 2
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
 theme_override_fonts/font = ExtResource("3_df05h")
 text = "Fullscreen"
@@ -228,5 +241,5 @@ script = ExtResource("6_8um5k")
 [connection signal="pressed" from="MainButtons/SettingsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Settings/BackButton" to="." method="_on_backbutton_pressed"]
-[connection signal="value_changed" from="Settings/AudioControl" to="Settings/AudioControl" method="_on_value_changed"]
-[connection signal="toggled" from="Settings/Fullscreen_Control" to="Settings/Fullscreen_Control" method="_on_toggled"]
+[connection signal="value_changed" from="Settings/VBoxContainer/AudioControl" to="Settings/VBoxContainer/AudioControl" method="_on_value_changed"]
+[connection signal="toggled" from="Settings/VBoxContainer/Fullscreen_Control" to="Settings/VBoxContainer/Fullscreen_Control" method="_on_toggled"]
