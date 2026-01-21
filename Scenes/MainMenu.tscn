@@ -123,15 +123,15 @@ text = "Exit
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -164.33997
-offset_top = -202.0
-offset_right = 164.33997
-offset_bottom = -129.68
+anchors_preset = -1
+anchor_left = 0.514
+anchor_top = 0.446
+anchor_right = 0.514
+anchor_bottom = 0.446
+offset_left = -209.62799
+offset_top = -175.008
+offset_right = 177.37201
+offset_bottom = 124.492004
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
@@ -139,7 +139,7 @@ theme_override_colors/font_shadow_color = Color(0.0105956, 0.0105956, 0.0105956,
 theme_override_constants/shadow_offset_y = 10
 theme_override_fonts/font = ExtResource("3_df05h")
 theme_override_font_sizes/font_size = 60
-text = "Game Title Here
+text = "Arrow Fishing
 "
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
