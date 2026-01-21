@@ -1,6 +1,7 @@
 extends Control
 @onready var main_buttons = $MainButtons
 @onready var settings = $Settings
+@onready var gameStart
 
 
 # Called when the node enters the scene tree for the first time.

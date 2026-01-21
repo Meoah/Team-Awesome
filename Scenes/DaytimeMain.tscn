@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://4wis367byvft"]
+
+[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://Graphics/MCPlaceholder.png" id="1_oxlu7"]
+
+[node name="DaytimeMain" type="Node2D"]
+
+[node name="McPlaceholder" type="Sprite2D" parent="."]
+position = Vector2(380, 314)
+scale = Vector2(0.178, 0.178)
+texture = ExtResource("1_oxlu7")
