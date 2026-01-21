@@ -14,6 +14,15 @@ config/name="TeamAwesome"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+<<<<<<< Updated upstream
+=======
+[display]
+
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/stretch/mode="canvas_items"
+
+>>>>>>> Stashed changes
 [rendering]
 
 renderer/rendering_method="gl_compatibility"
