@@ -3,31 +3,38 @@ extends Node2D
 @export var input_length : int = 3
 @export var input_string : TextEdit
 @export var reaction : Sprite2D
+@export var potential_fish : Array[FishResource]
 
 var input_array : Array[String]
 var potential_inputs : Array[String] = ["Left","Right","Up","Down"]
 var current_input = "0"
 var correct_input = "0"
 var output = ""
+var current_fish : FishResource
+
+
+
+
+func start_minigame():
+	current_fish = potential_fish.pick_random()
+	current_fish.intialize()
+	print(current_fish)
+	input_array = current_fish.current_inputs
+	input_string.set_text(output)
+	print(input_array)
+	text_render()
+	
+func end_minigame():
+	current_fish = null
+	
+
+
+
+
 
 #Initialize Script
 func _ready() -> void:
-	input_length = randi_range(3,10)
-	print(generate_inputs())
-	print(correct_input)
-	text_render()
-	input_string.set_text(output)
-	
-
-#Generates the list of Inputs
-func generate_inputs()-> Array[String]:
-	var return_array : Array[String]
-	for i in input_length:
-		var input = potential_inputs.pick_random()
-		return_array.append(input) 
-	input_array = return_array
-	print(input_array)
-	return return_array
+	start_minigame()
 	
 
 #Displays the list of inputs
@@ -57,11 +64,14 @@ func _input(event : InputEvent):
 				$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
 			clear()
 
+
+
+
 #Process for when List is empty. Prints text and resets the scene after 3 seconds
 func clear():
 	if input_array.size() == 0:
-		print("You Win!!")
-		input_string.set_text("You Win!!")
+		print(current_fish.name)
+		input_string.set_text(current_fish.name)
 		await get_tree().create_timer(3).timeout
-		get_tree().reload_current_scene()
+		start_minigame()
 		

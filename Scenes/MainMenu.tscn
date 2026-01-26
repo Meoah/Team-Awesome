@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://MainMenu/main_menu.gd" id="1_8saeu"]
 [ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://MainMenu/panel_grey_dark.png" id="2_ghw46"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://MainMenu/CherryBombOne-Regular.ttf" id="3_df05h"]
-[ext_resource type="AudioStream" uid="uid://dcnj3g2bih1qe" path="res://MainMenu/time_for_adventure.mp3" id="4_ghw46"]
+[ext_resource type="AudioStream" uid="uid://bwq4tyjgoxrm0" path="res://MainMenu/1-01 Introduction.mp3" id="4_8um5k"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://MainMenu/Audio_Volume.gd" id="5_df05h"]
 [ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://MainMenu/fullscreen_control.gd" id="6_8um5k"]
 
@@ -144,7 +144,8 @@ text = "Arrow Fishing
 "
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_ghw46")
+stream = ExtResource("4_8um5k")
+volume_db = -6.679
 autoplay = true
 bus = &"Music"
 

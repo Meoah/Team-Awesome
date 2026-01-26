@@ -1,12 +1,43 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfgqsnhiac5hx"]
+[gd_scene load_steps=9 format=3 uid="uid://dfgqsnhiac5hx"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://Scenes/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://Scenes/Arrows_Display.gd" id="2_n3w4c"]
+[ext_resource type="Script" uid="uid://mc3jtnmgq6ns" path="res://Fishes/fish_resource.gd" id="2_sopvo"]
+
+[sub_resource type="Resource" id="Resource_w3tt3"]
+script = ExtResource("2_sopvo")
+name = "Sunfish"
+correct_inputs = Array[String](["Left", "Up", "Right", "Down"])
+metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
+
+[sub_resource type="Resource" id="Resource_sopvo"]
+script = ExtResource("2_sopvo")
+name = "Tuna"
+correct_inputs = Array[String](["Left", "Right", "Up"])
+metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
+
+[sub_resource type="Resource" id="Resource_6t4uq"]
+script = ExtResource("2_sopvo")
+name = "Minnow"
+metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
+
+[sub_resource type="Resource" id="Resource_kxlbh"]
+script = ExtResource("2_sopvo")
+name = "Bluetang"
+correct_inputs = Array[String](["Left", "Right", "Left", "Right"])
+metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
+
+[sub_resource type="Resource" id="Resource_rak61"]
+script = ExtResource("2_sopvo")
+name = "Pompano"
+correct_inputs = Array[String](["Up", "Up", "Up"])
+metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string")]
 script = ExtResource("1_0iavb")
 input_length = 6
 input_string = NodePath("TextEdit")
+potential_fish = Array[ExtResource("2_sopvo")]([SubResource("Resource_w3tt3"), SubResource("Resource_sopvo"), SubResource("Resource_6t4uq"), SubResource("Resource_kxlbh"), SubResource("Resource_rak61")])
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
