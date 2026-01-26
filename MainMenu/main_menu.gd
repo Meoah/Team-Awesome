@@ -7,7 +7,7 @@ extends Control
 func _ready():
 	main_buttons.visible = true
 	settings.visible = false
-
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
