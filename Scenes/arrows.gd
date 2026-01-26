@@ -75,7 +75,7 @@ func _input(event : InputEvent):
 
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	progress_bar.value = timer.time_left
 	if cleared:
 		timer.set_paused(true)
@@ -96,7 +96,8 @@ func clear():
 		$Sprite2D.texture = current_fish.image
 		input_index = 0
 		print(current_fish.name)
-		input_string.set_text(current_fish.name)
+		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value)
+		)
 		await get_tree().create_timer(3).timeout
 		start_minigame()
 		

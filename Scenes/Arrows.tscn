@@ -17,7 +17,7 @@ image = ExtResource("3_n5qsf")
 value = 10
 weight = 3
 correct_inputs = Array[String](["Left", "Up", "Right", "Down"])
-time = 5.0
+time = 4.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_sopvo"]
@@ -26,8 +26,8 @@ script = ExtResource("2_sopvo")
 name = "Tuna"
 image = ExtResource("4_gct0i")
 value = 3
-correct_inputs = Array[String](["Left", "Right", "Up"])
-time = 3.0
+correct_inputs = Array[String](["Down", "Right", "Right"])
+time = 1.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_6t4uq"]
@@ -35,7 +35,7 @@ resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Minnow"
 image = ExtResource("5_20txf")
-time = 5.0
+time = 4.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_kxlbh"]
@@ -43,8 +43,9 @@ resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Bluetang"
 image = ExtResource("6_rvcsd")
+value = 5
 correct_inputs = Array[String](["Left", "Right", "Left", "Right"])
-time = 7.0
+time = 3.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_rak61"]
@@ -52,8 +53,9 @@ resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Pompano"
 image = ExtResource("7_lnht6")
+value = 3
 correct_inputs = Array[String](["Up", "Up", "Up"])
-time = 10.0
+time = 2.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string", "timer", "progress_bar")]
