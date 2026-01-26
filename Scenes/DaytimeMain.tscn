@@ -1,9 +1,35 @@
-[gd_scene load_steps=2 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=7 format=3 uid="uid://4wis367byvft"]
 
+[ext_resource type="Script" uid="uid://dfmads7e8k6ep" path="res://Scenes/daytime_main.gd" id="1_bebm7"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://Scenes/Actors/MainCharacter/MainCharacter.tscn" id="1_oxlu7"]
+[ext_resource type="PackedScene" uid="uid://dptqmpmoflqxv" path="res://Inventory/inventory_ui.tscn" id="2_crqjc"]
+[ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://Scenes/Actors/Bobber/Bobber.tscn" id="3_6j7wl"]
+[ext_resource type="Texture2D" uid="uid://dd3ee7km1o5o3" path="res://Graphics/Placeholder_Water.png" id="5_p8j3y"]
 
-[node name="DaytimeMain" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
+size = Vector2(1280, 80)
+
+[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "Bobber")]
+script = ExtResource("1_bebm7")
+MC = NodePath("MainCharacter")
+Bobber = NodePath("Bobber")
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(326, 567.00006)
+position = Vector2(326.00003, 589.00006)
 scale = Vector2(0.15348448, 0.15348448)
+
+[node name="Bobber" parent="." instance=ExtResource("3_6j7wl")]
+
+[node name="Inventory_UI" parent="." instance=ExtResource("2_crqjc")]
+
+[node name="Water" type="Area2D" parent="."]
+position = Vector2(640, 360)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+position = Vector2(-0.875, 297)
+shape = SubResource("RectangleShape2D_6j7wl")
+
+[node name="Sprite2D" type="Sprite2D" parent="Water"]
+texture = ExtResource("5_p8j3y")
+
+[connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]
