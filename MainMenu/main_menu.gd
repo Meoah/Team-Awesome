@@ -1,6 +1,7 @@
 extends Control
 @onready var main_buttons = $MainButtons
 @onready var settings = $Settings
+@onready var gameStart
 
 @export_file  ("*.tscn") var start_scene_path: String 
 # Called when the node enters the scene tree for the first time.

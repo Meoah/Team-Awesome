@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://4wis367byvft"]
+
+[ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://Scenes/Actors/MainCharacter/MainCharacter.tscn" id="1_oxlu7"]
+
+[node name="DaytimeMain" type="Node2D"]
+
+[node name="MainCharacter" parent="." instance=ExtResource("1_oxlu7")]
+position = Vector2(326, 567.00006)
+scale = Vector2(0.15348448, 0.15348448)
