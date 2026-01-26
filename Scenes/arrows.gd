@@ -4,13 +4,15 @@ extends Node2D
 @export var input_string : TextEdit
 @export var reaction : Sprite2D
 @export var potential_fish : Array[FishResource]
+@export var timer : Timer
+@export var progress_bar : ProgressBar
 
 var input_array : Array[String]
 var player_inputs = "0"
 var correct_inputs = "0"
 var current_fish : FishResource
 var input_index = 0
-
+var progress : float
 
 func start_minigame():
 	$Sprite2D.texture = null #Clears out the Image loaded
@@ -23,14 +25,17 @@ func start_minigame():
 	print(current_fish.correct_inputs) #Debug
 	print(current_fish.current_inputs) #Debug
 	cleared = false
+	timer.start(current_fish.time)
 	text_render()
-	
+	timer.set_paused(false)
+	progress_bar.max_value = current_fish.time
 func end_minigame():
 	current_fish = null
 	
 
 #Initialize Script
 func _ready() -> void:
+	
 	start_minigame()
 	
 
@@ -65,6 +70,21 @@ func _input(event : InputEvent):
 				print("Lame!")
 				$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
 			clear()
+			
+
+
+
+
+func _physics_process(delta):
+	progress_bar.value = timer.time_left
+	if cleared:
+		timer.set_paused(true)
+	pass
+
+func countdown():
+	timer.start(3)
+	
+
 
 
 
@@ -80,3 +100,8 @@ func clear():
 		await get_tree().create_timer(3).timeout
 		start_minigame()
 		
+		
+
+
+func _on_timer_timeout() -> void:
+	print("Times Up!") # Replace with function body.

@@ -8,6 +8,7 @@ class_name FishResource
 @export var input_length : int = 1
 @export var weight : int = 1
 @export var correct_inputs : Array[String] = ["Left","Right","Up","Down"]
+@export var time : float
 
 var current_inputs : Array[String]
 

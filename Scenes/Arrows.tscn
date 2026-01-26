@@ -17,6 +17,7 @@ image = ExtResource("3_n5qsf")
 value = 10
 weight = 3
 correct_inputs = Array[String](["Left", "Up", "Right", "Down"])
+time = 5.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_sopvo"]
@@ -26,6 +27,7 @@ name = "Tuna"
 image = ExtResource("4_gct0i")
 value = 3
 correct_inputs = Array[String](["Left", "Right", "Up"])
+time = 3.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_6t4uq"]
@@ -33,6 +35,7 @@ resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Minnow"
 image = ExtResource("5_20txf")
+time = 5.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_kxlbh"]
@@ -41,6 +44,7 @@ script = ExtResource("2_sopvo")
 name = "Bluetang"
 image = ExtResource("6_rvcsd")
 correct_inputs = Array[String](["Left", "Right", "Left", "Right"])
+time = 7.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_rak61"]
@@ -49,13 +53,16 @@ script = ExtResource("2_sopvo")
 name = "Pompano"
 image = ExtResource("7_lnht6")
 correct_inputs = Array[String](["Up", "Up", "Up"])
+time = 10.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
-[node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string")]
+[node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string", "timer", "progress_bar")]
 script = ExtResource("1_0iavb")
 input_length = 6
 input_string = NodePath("TextEdit")
 potential_fish = Array[ExtResource("2_sopvo")]([SubResource("Resource_w3tt3"), SubResource("Resource_sopvo"), SubResource("Resource_6t4uq"), SubResource("Resource_kxlbh"), SubResource("Resource_rak61")])
+timer = NodePath("Timer")
+progress_bar = NodePath("ProgressBar")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -69,3 +76,18 @@ script = ExtResource("2_n3w4c")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4.9999695, 120.00001)
 scale = Vector2(0.6746573, 0.6708732)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -166.0
+offset_top = -61.0
+offset_right = 169.0
+offset_bottom = -34.0
+max_value = 3.0
+value = 3.0
+show_percentage = false
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
