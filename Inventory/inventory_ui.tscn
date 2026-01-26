@@ -34,9 +34,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_right = 0.116000004
 anchor_bottom = 0.071
-offset_left = 141.0
+offset_left = 129.0
 offset_top = 32.0
-offset_right = 181.696
+offset_right = 172.696
 offset_bottom = 69.22
 columns = 3
 
