@@ -3,7 +3,7 @@ extends Resource
 class_name FishResource
 
 @export var name : String 
-@export var image : CompressedTexture2D
+@export var image : AtlasTexture
 @export var value : int = 1
 @export var input_length : int = 1
 @export var weight : int = 1

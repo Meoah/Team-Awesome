@@ -6,31 +6,28 @@ extends Node2D
 @export var potential_fish : Array[FishResource]
 
 var input_array : Array[String]
-var potential_inputs : Array[String] = ["Left","Right","Up","Down"]
-var current_input = "0"
-var correct_input = "0"
-var output = ""
+var player_inputs = "0"
+var correct_inputs = "0"
 var current_fish : FishResource
-
-
+var input_index = 0
 
 
 func start_minigame():
-	current_fish = potential_fish.pick_random()
-	current_fish.intialize()
-	print(current_fish)
+	$Sprite2D.texture = null #Clears out the Image loaded
+	current_fish = potential_fish.pick_random() # Picks a random fish 
+	current_fish.intialize() # Prepares the array of correct inputs
+	correct_inputs = current_fish.current_inputs # Loads the array of correct Inputs
 	input_array = current_fish.current_inputs
-	input_string.set_text(output)
-	print(input_array)
+	display_text = correct_inputs.duplicate(true)
+	print(current_fish.name) #Debug
+	print(current_fish.correct_inputs) #Debug
+	print(current_fish.current_inputs) #Debug
+	cleared = false
 	text_render()
 	
 func end_minigame():
 	current_fish = null
 	
-
-
-
-
 
 #Initialize Script
 func _ready() -> void:
@@ -38,25 +35,30 @@ func _ready() -> void:
 	
 
 #Displays the list of inputs
+
+var output = ""
+var display_text : Array[String]
 func text_render():
-	output = ""
-	for i in input_array:
-		output += i + " "
-		input_string.set_text(output)
+	if not input_index == input_array.size() :
+		output = ""
+		for i in display_text:
+			output += i + " "
+			input_string.set_text(output)
+		display_text.remove_at(0)
+			
+	else:
+		pass
 
 
-#On Key Press: Checks if Key Press is the same as Index 0 of list of inputs
+#On Key Press: Checks if Key Press is the same as the current correct input 
 func _input(event : InputEvent):
-	if input_array :
+	if input_index <= input_array.size() and cleared == false:
 		if Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("Down") or Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("Left") :
-			current_input = event.as_text() #This converts key press to string, should be changed later
-			if current_input == input_array[0]:
+			player_inputs = event.as_text() #This converts key press to string, should be changed later
+			if player_inputs == input_array[input_index]:
 				print("cool")
-				input_array.remove_at(0)
-				output = ""
-				for i in input_array:
-					output += i + " "
-				input_string.set_text(output)
+				input_index = input_index + 1 #Advances in the string index
+				text_render()
 				$Sprite2D.texture = preload("res://assets/Debug assets/Cool.png")
 				print(input_array)
 			else:
@@ -66,10 +68,13 @@ func _input(event : InputEvent):
 
 
 
-
-#Process for when List is empty. Prints text and resets the scene after 3 seconds
+#Process for when index reaches end of array. Prints text and resets the scene after 3 seconds
+var cleared = false
 func clear():
-	if input_array.size() == 0:
+	if input_index == input_array.size() :
+		cleared = true
+		$Sprite2D.texture = current_fish.image
+		input_index = 0
 		print(current_fish.name)
 		input_string.set_text(current_fish.name)
 		await get_tree().create_timer(3).timeout
