@@ -53,6 +53,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8saeu")
+start_scene_path = "uid://dobbo04y2u6w6"
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1

@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://dobbo04y2u6w6"]
+[gd_scene load_steps=2 format=3 uid="uid://dobbo04y2u6w6"]
+
+[ext_resource type="PackedScene" uid="uid://dptqmpmoflqxv" path="res://Inventory/inventory_ui.tscn" id="1_wujqx"]
 
 [node name="Vro" type="Node2D"]
+
+[node name="Inventory_UI" parent="." instance=ExtResource("1_wujqx")]
