@@ -10,6 +10,7 @@ var current_input = "0"
 var correct_input = "0"
 var output = ""
 
+#Initialize Script
 func _ready() -> void:
 	input_length = randi_range(3,10)
 	print(generate_inputs())
@@ -18,6 +19,7 @@ func _ready() -> void:
 	input_string.set_text(output)
 	
 
+#Generates the list of Inputs
 func generate_inputs()-> Array[String]:
 	var return_array : Array[String]
 	for i in input_length:
@@ -28,7 +30,7 @@ func generate_inputs()-> Array[String]:
 	return return_array
 	
 
-
+#Displays the list of inputs
 func text_render():
 	output = ""
 	for i in input_array:
@@ -36,11 +38,11 @@ func text_render():
 		input_string.set_text(output)
 
 
-
+#On Key Press: Checks if Key Press is the same as Index 0 of list of inputs
 func _input(event : InputEvent):
 	if input_array :
 		if Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("Down") or Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("Left") :
-			current_input = event.as_text()
+			current_input = event.as_text() #This converts key press to string, should be changed later
 			if current_input == input_array[0]:
 				print("cool")
 				input_array.remove_at(0)
@@ -48,13 +50,14 @@ func _input(event : InputEvent):
 				for i in input_array:
 					output += i + " "
 				input_string.set_text(output)
-				$Sprite2D.texture = preload("res://assests/Debug assests/Cool.png")
+				$Sprite2D.texture = preload("res://assets/Debug assets/Cool.png")
 				print(input_array)
 			else:
 				print("Lame!")
-				$Sprite2D.texture = preload("res://assests/Debug assests/Lame.png")
+				$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
 			clear()
 
+#Process for when List is empty. Prints text and resets the scene after 3 seconds
 func clear():
 	if input_array.size() == 0:
 		print("You Win!!")

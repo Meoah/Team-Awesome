@@ -28,7 +28,7 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://assests/": "pink"
+"res://assets/": "pink"
 }
 
 [input]
