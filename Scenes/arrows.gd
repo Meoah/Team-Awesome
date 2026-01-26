@@ -13,6 +13,7 @@ var correct_inputs = "0"
 var current_fish : FishResource
 var input_index = 0
 var progress : float
+var caught = 0
 
 func start_minigame():
 	$Sprite2D.texture = null #Clears out the Image loaded
@@ -29,6 +30,7 @@ func start_minigame():
 	text_render()
 	timer.set_paused(false)
 	progress_bar.max_value = current_fish.time
+	input_index = 0
 func end_minigame():
 	current_fish = null
 	
@@ -56,10 +58,19 @@ func text_render():
 
 
 #On Key Press: Checks if Key Press is the same as the current correct input 
-func _input(event : InputEvent):
+func _input(_event : InputEvent):
+	
+	if Input.is_action_just_pressed("Up"):
+		player_inputs = "Up"
+	if Input.is_action_just_pressed("Down"):
+		player_inputs = "Down"
+	if Input.is_action_just_pressed("Left"):
+		player_inputs = "Left"
+	if Input.is_action_just_pressed("Right"):
+		player_inputs = "Right"
+	
 	if input_index <= input_array.size() and cleared == false:
 		if Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("Down") or Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("Left") :
-			player_inputs = event.as_text() #This converts key press to string, should be changed later
 			if player_inputs == input_array[input_index]:
 				print("cool")
 				input_index = input_index + 1 #Advances in the string index
@@ -70,28 +81,32 @@ func _input(event : InputEvent):
 				print("Lame!")
 				$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
 			clear()
-			
 
 
-
-
+#Countdowns the progress bar
 func _physics_process(_delta):
 	progress_bar.value = timer.time_left
 	if cleared:
 		timer.set_paused(true)
 	pass
 
-func countdown():
-	timer.start(3)
 	
 
 
 
+func fail():
+	cleared = true
+	input_string.set_text("Times Up!!")
+	$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
+	await get_tree().create_timer(3).timeout
+	start_minigame()
 
 #Process for when index reaches end of array. Prints text and resets the scene after 3 seconds
 var cleared = false
 func clear():
 	if input_index == input_array.size() :
+		print("Caught:" + str(caught))
+		caught += 1
 		cleared = true
 		$Sprite2D.texture = current_fish.image
 		input_index = 0
@@ -105,4 +120,4 @@ func clear():
 
 
 func _on_timer_timeout() -> void:
-	print("Times Up!") # Replace with function body.
+	fail() # Replace with function body.

@@ -55,7 +55,7 @@ name = "Pompano"
 image = ExtResource("7_lnht6")
 value = 3
 correct_inputs = Array[String](["Up", "Up", "Up"])
-time = 2.0
+time = 0.8
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string", "timer", "progress_bar")]
@@ -84,10 +84,10 @@ wait_time = 3.0
 one_shot = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -166.0
-offset_top = -61.0
-offset_right = 169.0
-offset_bottom = -34.0
+offset_left = -169.0
+offset_top = -62.0
+offset_right = 166.0
+offset_bottom = -35.0
 max_value = 3.0
 value = 3.0
 show_percentage = false
