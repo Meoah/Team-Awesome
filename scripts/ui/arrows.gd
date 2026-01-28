@@ -6,6 +6,10 @@ extends Node2D
 @export var potential_fish : Array[FishResource]
 @export var timer : Timer
 @export var progress_bar : ProgressBar
+@export var success : Texture2D
+@export var failure : Texture2D
+
+
 
 var input_array : Array[String]
 var player_inputs = "0"
@@ -14,6 +18,7 @@ var current_fish : FishResource
 var input_index = 0
 var progress : float
 var caught = 0
+
 
 func start_minigame():
 	$Sprite2D.texture = null #Clears out the Image loaded
@@ -75,11 +80,11 @@ func _input(_event : InputEvent):
 				print("cool")
 				input_index = input_index + 1 #Advances in the string index
 				text_render()
-				$Sprite2D.texture = preload("res://assets/Debug assets/Cool.png")
+				$Sprite2D.set_texture(success)
 				print(input_array)
 			else:
 				print("Lame!")
-				$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
+				$Sprite2D.set_texture(failure)
 			clear()
 
 
@@ -97,9 +102,9 @@ func _physics_process(_delta):
 func fail():
 	cleared = true
 	input_string.set_text("Times Up!!")
-	$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
+	$Sprite2D.set_texture(failure)
 	await get_tree().create_timer(3).timeout
-	start_minigame()
+	queue_free()
 
 #Process for when index reaches end of array. Prints text and resets the scene after 3 seconds
 var cleared = false
