@@ -9,6 +9,7 @@ extends Control
 func _ready():
 	main_buttons.visible = true
 	settings.visible = false
+	$AudioStreamPlayer.play(65)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
