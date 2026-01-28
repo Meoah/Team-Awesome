@@ -1,5 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=6 format=3 uid="uid://bs6fqe1euvjxa"]
 
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
 [ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://assets/textures/ui/panel_grey_dark.png" id="2_bto60"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
@@ -10,48 +12,39 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6quo"]
 texture = ExtResource("2_bto60")
 modulate_color = Color(0.7162962, 0.7162962, 0.7162962, 1)
+=======
+[ext_resource type="Script" uid="uid://b00g45l37d66e" path="res://Inventory/inventory_ui.gd" id="1_8saeu"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://Inventory/InventoryUI/panel_grey.png" id="2_ghw46"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://Inventory/InventoryUI/panel_brown_damaged_dark.png" id="3_df05h"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kenku"]
-bg_color = Color(0, 0.5019608, 0.5019608, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_offset = Vector2(0, 3.41)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6gduq"]
+texture = ExtResource("2_ghw46")
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e6quo"]
-bg_color = Color(0, 0.29803923, 0.29803923, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_offset = Vector2(0, 3.41)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0pvb"]
+texture = ExtResource("3_df05h")
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_onc8m"]
-bg_color = Color(1.92523e-07, 0.29674953, 0.29674944, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-shadow_offset = Vector2(0, 3.41)
+=======
+[ext_resource type="Script" uid="uid://b00g45l37d66e" path="res://Inventory/inventory_ui.gd" id="1_8saeu"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://Inventory/InventoryUI/panel_grey.png" id="2_ghw46"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://Inventory/InventoryUI/panel_brown_damaged_dark.png" id="3_df05h"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_onc8m"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6gduq"]
+texture = ExtResource("2_ghw46")
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_8saeu"]
-color = Color(0, 0.5019608, 0.5019608, 1)
-thickness = 6
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0pvb"]
+texture = ExtResource("3_df05h")
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_ghw46"]
-color = Color(0.22768125, 0.40849665, 0.17381111, 1)
-thickness = 6
-
-[node name="Main_Menu" type="Control"]
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+[node name="Inventory_UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 script = ExtResource("1_fpthd")
 start_scene_path = "uid://4wis367byvft"
 
@@ -149,19 +142,32 @@ autoplay = true
 bus = &"Music"
 
 [node name="Settings" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -180.5
-offset_top = -132.0
-offset_right = 180.5
-offset_bottom = 132.0
-grow_horizontal = 2
-grow_vertical = 2
+=======
+script = ExtResource("1_8saeu")
 
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.016
+offset_left = 1011.0
+offset_top = 22.0
+offset_right = 1234.52
+offset_bottom = 202.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_6gduq")
+
+[node name="SlotGrid" type="GridContainer" parent="Panel"]
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.116000004
+anchor_bottom = 0.071
+offset_left = 129.0
+offset_top = 32.0
+offset_right = 172.696
+offset_bottom = 69.22
+columns = 3
+
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 [node name="Label" type="Label" parent="Settings"]
 layout_mode = 1
 anchors_preset = 10
@@ -173,9 +179,42 @@ theme_override_fonts/font = ExtResource("3_16onh")
 theme_override_font_sizes/font_size = 30
 text = "Settings"
 horizontal_alignment = 1
+=======
+=======
+script = ExtResource("1_8saeu")
 
-[node name="BackButton" type="Button" parent="Settings"]
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.016
+offset_left = 1011.0
+offset_top = 22.0
+offset_right = 1234.52
+offset_bottom = 202.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_6gduq")
+
+[node name="SlotGrid" type="GridContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.116000004
+anchor_bottom = 0.071
+offset_left = 129.0
+offset_top = 32.0
+offset_right = 172.696
+offset_bottom = 69.22
+columns = 3
+
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+[node name="Slot1" type="Panel" parent="Panel/SlotGrid"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot1"]
 layout_mode = 0
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 offset_left = 70.5
 offset_top = 208.0
 offset_right = 298.5
@@ -191,38 +230,27 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_onc8m")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
 text = "Back
 "
+=======
+offset_right = 40.0
+offset_bottom = 23.0
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+=======
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Settings"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -83.25
-offset_top = -42.75
-offset_right = 83.25
-offset_bottom = 42.75
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 7
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Settings/VBoxContainer"]
-layout_mode = 2
-
-[node name="AudioControl" type="HSlider" parent="Settings/VBoxContainer"]
-layout_mode = 2
-theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
-max_value = 1.0
-step = 0.05
-value = 1.0
-script = ExtResource("5_df05h")
-audio_bus_name = "Music"
-
-[node name="Label" type="Label" parent="Settings/VBoxContainer/AudioControl"]
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot1"]
 layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+
+[node name="Slot2" type="Panel" parent="Panel/SlotGrid"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot2"]
+layout_mode = 0
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 offset_left = 0.25
 offset_top = -28.25
 offset_right = 98.25
@@ -230,17 +258,52 @@ offset_bottom = -4.25
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
 theme_override_fonts/font = ExtResource("3_16onh")
 text = "Music Volume"
+=======
+offset_right = 40.0
+offset_bottom = 23.0
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+=======
+offset_right = 40.0
+offset_bottom = 23.0
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 
-[node name="Fullscreen_Control" type="CheckButton" parent="Settings/VBoxContainer"]
+[node name="Slot3" type="Panel" parent="Panel/SlotGrid"]
+custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
 theme_override_fonts/font = ExtResource("3_16onh")
 text = "Fullscreen"
 script = ExtResource("6_8um5k")
+=======
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
+=======
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 
-[connection signal="pressed" from="MainButtons/StartButton" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MainButtons/SettingsButton" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MainButtons/ExitButton" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Settings/BackButton" to="." method="_on_backbutton_pressed"]
-[connection signal="value_changed" from="Settings/VBoxContainer/AudioControl" to="Settings/VBoxContainer/AudioControl" method="_on_value_changed"]
-[connection signal="toggled" from="Settings/VBoxContainer/Fullscreen_Control" to="Settings/VBoxContainer/Fullscreen_Control" method="_on_toggled"]
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Slot4" type="Panel" parent="Panel/SlotGrid"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Slot5" type="Panel" parent="Panel/SlotGrid"]
+custom_minimum_size = Vector2(18, 18)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
