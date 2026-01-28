@@ -1,6 +1,21 @@
-[gd_scene load_steps=2 format=3 uid="uid://8rtag1fl3an4"]
+[gd_scene load_steps=4 format=3 uid="uid://8rtag1fl3an4"]
 
-[ext_resource type="Texture2D" uid="uid://s547mvojrov2" path="res://assets/textures/bobber.png" id="1_gymrx"]
+[ext_resource type="Texture2D" uid="uid://s547mvojrov2" path="res://Graphics/bobber.png" id="1_pntiq"]
 
-[node name="Bobber" type="Sprite2D"]
-texture = ExtResource("1_gymrx")
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pntiq"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pntiq"]
+size = Vector2(39, 24)
+
+[node name="Bobber" type="RigidBody2D"]
+physics_material_override = SubResource("PhysicsMaterial_pntiq")
+freeze = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -19.000008)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_pntiq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, -12)
+shape = SubResource("RectangleShape2D_pntiq")
