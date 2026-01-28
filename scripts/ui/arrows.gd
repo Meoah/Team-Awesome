@@ -116,8 +116,8 @@ func clear():
 		$Sprite2D.texture = current_fish.image
 		input_index = 0
 		print(current_fish.name)
-		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value)
-		)
+		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value))
+		player_data.add_score(current_fish.value)
 		await get_tree().create_timer(3).timeout
 		get_tree().reload_current_scene()
 		
