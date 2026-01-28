@@ -10,6 +10,18 @@ input_string = NodePath("TextEdit")
 reaction = NodePath("Sprite2D")
 success = "uid://ss43a7opnais"
 
+[node name="TimterText" type="TextEdit" parent="."]
+anchors_preset = -1
+anchor_left = 0.49600002
+anchor_top = 2.447
+anchor_right = 0.49600002
+anchor_bottom = 2.447
+offset_left = -346.0
+offset_top = -83.0
+offset_right = 340.0
+offset_bottom = 54.0
+script = ExtResource("2_n3w4c")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="TextEdit" type="TextEdit" parent="."]
@@ -22,3 +34,7 @@ script = ExtResource("2_n3w4c")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4.9999695, 120.00001)
 scale = Vector2(0.6746573, 0.6708732)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
