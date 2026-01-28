@@ -3,64 +3,121 @@ extends Node2D
 @export var input_length : int = 3
 @export var input_string : TextEdit
 @export var reaction : Sprite2D
-@export var success : Texture2D
-@export var failure : Texture2D
+@export var potential_fish : Array[FishResource]
+@export var timer : Timer
+@export var progress_bar : ProgressBar
 
 var input_array : Array[String]
-var potential_inputs : Array[String] = ["Left","Right","Up","Down"]
-var current_input = "0"
-var correct_input = "0"
-var output = ""
+var player_inputs = "0"
+var correct_inputs = "0"
+var current_fish : FishResource
+var input_index = 0
+var progress : float
+var caught = 0
 
-func _ready() -> void:
-	input_length = randi_range(3,10)
-	print(generate_inputs())
-	print(correct_input)
+func start_minigame():
+	$Sprite2D.texture = null #Clears out the Image loaded
+	current_fish = potential_fish.pick_random() # Picks a random fish 
+	current_fish.intialize() # Prepares the array of correct inputs
+	correct_inputs = current_fish.current_inputs # Loads the array of correct Inputs
+	input_array = current_fish.current_inputs
+	display_text = correct_inputs.duplicate(true)
+	print(current_fish.name) #Debug
+	print(current_fish.correct_inputs) #Debug
+	print(current_fish.current_inputs) #Debug
+	cleared = false
+	timer.start(current_fish.time)
 	text_render()
-	input_string.set_text(output)
+	timer.set_paused(false)
+	progress_bar.max_value = current_fish.time
+	input_index = 0
+func end_minigame():
+	current_fish = null
 	
 
-func generate_inputs()-> Array[String]:
-	var return_array : Array[String]
-	for i in input_length:
-		var input = potential_inputs.pick_random()
-		return_array.append(input) 
-	input_array = return_array
-	print(input_array)
-	return return_array
+#Initialize Script
+func _ready() -> void:
+	
+	start_minigame()
 	
 
+#Displays the list of inputs
 
+var output = ""
+var display_text : Array[String]
 func text_render():
-	output = ""
-	for i in input_array:
-		output += i + " "
-		input_string.set_text(output)
+	if not input_index == input_array.size() :
+		output = ""
+		for i in display_text:
+			output += i + " "
+			input_string.set_text(output)
+		display_text.remove_at(0)
+			
+	else:
+		pass
 
 
-
-func _input(event : InputEvent):
-	if input_array :
+#On Key Press: Checks if Key Press is the same as the current correct input 
+func _input(_event : InputEvent):
+	
+	if Input.is_action_just_pressed("Up"):
+		player_inputs = "Up"
+	if Input.is_action_just_pressed("Down"):
+		player_inputs = "Down"
+	if Input.is_action_just_pressed("Left"):
+		player_inputs = "Left"
+	if Input.is_action_just_pressed("Right"):
+		player_inputs = "Right"
+	
+	if input_index <= input_array.size() and cleared == false:
 		if Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("Down") or Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("Left") :
-			current_input = event.as_text()
-			if current_input == input_array[0]:
+			if player_inputs == input_array[input_index]:
 				print("cool")
-				input_array.remove_at(0)
-				output = ""
-				for i in input_array:
-					output += i + " "
-				input_string.set_text(output)
-				$Sprite2D.set_texture(success)
+				input_index = input_index + 1 #Advances in the string index
+				text_render()
+				$Sprite2D.texture = preload("res://assets/Debug assets/Cool.png")
 				print(input_array)
 			else:
 				print("Lame!")
-				$Sprite2D.set_texture(failure)
+				$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
 			clear()
 
+
+#Countdowns the progress bar
+func _physics_process(_delta):
+	progress_bar.value = timer.time_left
+	if cleared:
+		timer.set_paused(true)
+	pass
+
+	
+
+
+
+func fail():
+	cleared = true
+	input_string.set_text("Times Up!!")
+	$Sprite2D.texture = preload("res://assets/Debug assets/Lame.png")
+	await get_tree().create_timer(3).timeout
+	start_minigame()
+
+#Process for when index reaches end of array. Prints text and resets the scene after 3 seconds
+var cleared = false
 func clear():
-	if input_array.size() == 0:
-		print("You Win!!")
-		input_string.set_text("You Win!!")
+	if input_index == input_array.size() :
+		print("Caught:" + str(caught))
+		caught += 1
+		cleared = true
+		$Sprite2D.texture = current_fish.image
+		input_index = 0
+		print(current_fish.name)
+		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value)
+		)
 		await get_tree().create_timer(3).timeout
-		get_tree().reload_current_scene()
+		start_minigame()
 		
+		
+
+
+func _on_timer_timeout() -> void:
+	fail() # Replace with function body.
