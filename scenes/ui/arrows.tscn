@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://dfgqsnhiac5hx"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/arrows.gd" id="1_0iavb"]
-[ext_resource type="Texture2D" uid="uid://ss43a7opnais" path="res://assets/textures/debug/Cool.png" id="2_n1nn5"]
+[ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="2_n1nn5"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/arrows_display.gd" id="2_n3w4c"]
-[ext_resource type="Texture2D" uid="uid://dq83wndl4ha66" path="res://assets/textures/debug/Lame.png" id="3_4o7n5"]
+[ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="3_4o7n5"]
 
 [node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string", "reaction")]
 script = ExtResource("1_0iavb")

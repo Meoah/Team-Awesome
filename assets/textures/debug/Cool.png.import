@@ -2,25 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ss43a7opnais"
-<<<<<<<< HEAD:assets/textures/debug/Cool.png.import
+uid="uid://bqb5rtw7j46c7"
 path="res://.godot/imported/Cool.png-94792cc484cfb6080d2582adecb46690.ctex"
-========
-path="res://.godot/imported/Cool.png-7ebb9aff4a770d811197af25b03f6e30.ctex"
->>>>>>>> main:assets/Debug assets/Cool.png.import
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-<<<<<<<< HEAD:assets/textures/debug/Cool.png.import
 source_file="res://assets/textures/debug/Cool.png"
 dest_files=["res://.godot/imported/Cool.png-94792cc484cfb6080d2582adecb46690.ctex"]
-========
-source_file="res://assets/Debug assets/Cool.png"
-dest_files=["res://.godot/imported/Cool.png-7ebb9aff4a770d811197af25b03f6e30.ctex"]
->>>>>>>> main:assets/Debug assets/Cool.png.import
 
 [params]
 
