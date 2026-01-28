@@ -12,8 +12,11 @@ func _ready():
 <<<<<<< Updated upstream:scripts/game/main_menu.gd
 <<<<<<< Updated upstream:scripts/game/main_menu.gd
 <<<<<<< Updated upstream:scripts/game/main_menu.gd
+<<<<<<< Updated upstream:scripts/game/main_menu.gd
 	$AudioStreamPlayer.play(65)
 =======
+=======
+>>>>>>> Stashed changes:MainMenu/main_menu.gd
 =======
 >>>>>>> Stashed changes:MainMenu/main_menu.gd
 =======
