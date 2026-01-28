@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
 [ext_resource type="PackedScene" uid="uid://dptqmpmoflqxv" path="res://scenes/ui/inventory_ui.tscn" id="2_crqjc"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
-[ext_resource type="Texture2D" uid="uid://cmmjh0u4t34ao" path="res://assets/textures/Placeholder_Water.png" id="5_8rhjh"]
+[ext_resource type="Texture2D" uid="uid://dd3ee7km1o5o3" path="res://assets/textures/Placeholder_Water.png" id="5_8rhjh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
 size = Vector2(1280, 80)
@@ -13,7 +13,7 @@ size = Vector2(1280, 80)
 script = ExtResource("1_2jsv6")
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(328, 625)
+position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
 
 [node name="Bobber" parent="." instance=ExtResource("3_6j7wl")]
