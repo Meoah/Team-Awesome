@@ -1,70 +1,48 @@
-[gd_scene load_steps=14 format=3 uid="uid://dfgqsnhiac5hx"]
+[gd_scene load_steps=9 format=3 uid="uid://dfgqsnhiac5hx"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://Scenes/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://Scenes/Arrows_Display.gd" id="2_n3w4c"]
 [ext_resource type="Script" uid="uid://mc3jtnmgq6ns" path="res://Fishes/fish_resource.gd" id="2_sopvo"]
-[ext_resource type="Texture2D" uid="uid://br5sgoo2abrmc" path="res://Inventory/Fish/Sunfish.tres" id="3_n5qsf"]
-[ext_resource type="Texture2D" uid="uid://bb148f63qvrom" path="res://Inventory/Fish/Tuna.tres" id="4_gct0i"]
-[ext_resource type="Texture2D" uid="uid://c5qayel5j30gp" path="res://Inventory/Fish/Minnow.tres" id="5_20txf"]
-[ext_resource type="Texture2D" uid="uid://mc08757h6k5b" path="res://Inventory/Fish/Bluetang.tres" id="6_rvcsd"]
-[ext_resource type="Texture2D" uid="uid://dosk11si3sv8" path="res://Inventory/Fish/Pompano.tres" id="7_lnht6"]
 
 [sub_resource type="Resource" id="Resource_w3tt3"]
 resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Sunfish"
-image = ExtResource("3_n5qsf")
-value = 10
-weight = 3
 correct_inputs = Array[String](["Left", "Up", "Right", "Down"])
-time = 4.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_sopvo"]
 resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Tuna"
-image = ExtResource("4_gct0i")
-value = 3
-correct_inputs = Array[String](["Down", "Right", "Right"])
-time = 1.0
+correct_inputs = Array[String](["Left", "Right", "Up"])
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_6t4uq"]
 resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Minnow"
-image = ExtResource("5_20txf")
-time = 4.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_kxlbh"]
 resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Bluetang"
-image = ExtResource("6_rvcsd")
-value = 5
 correct_inputs = Array[String](["Left", "Right", "Left", "Right"])
-time = 3.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [sub_resource type="Resource" id="Resource_rak61"]
 resource_local_to_scene = true
 script = ExtResource("2_sopvo")
 name = "Pompano"
-image = ExtResource("7_lnht6")
-value = 3
 correct_inputs = Array[String](["Up", "Up", "Up"])
-time = 0.8
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
-[node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string", "timer", "progress_bar")]
+[node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string")]
 script = ExtResource("1_0iavb")
 input_length = 6
 input_string = NodePath("TextEdit")
 potential_fish = Array[ExtResource("2_sopvo")]([SubResource("Resource_w3tt3"), SubResource("Resource_sopvo"), SubResource("Resource_6t4uq"), SubResource("Resource_kxlbh"), SubResource("Resource_rak61")])
-timer = NodePath("Timer")
-progress_bar = NodePath("ProgressBar")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
@@ -78,18 +56,3 @@ script = ExtResource("2_n3w4c")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-4.9999695, 120.00001)
 scale = Vector2(0.6746573, 0.6708732)
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
-one_shot = true
-
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -169.0
-offset_top = -62.0
-offset_right = 166.0
-offset_bottom = -35.0
-max_value = 3.0
-value = 3.0
-show_percentage = false
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
