@@ -1,16 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=8 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
 [ext_resource type="PackedScene" uid="uid://dptqmpmoflqxv" path="res://scenes/ui/inventory_ui.tscn" id="2_crqjc"]
+[ext_resource type="PackedScene" uid="uid://dfgqsnhiac5hx" path="res://scenes/ui/arrows.tscn" id="2_kebv3"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
 [ext_resource type="Texture2D" uid="uid://dd3ee7km1o5o3" path="res://assets/textures/Placeholder_Water.png" id="5_8rhjh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
-size = Vector2(1280, 80)
+size = Vector2(1280, 89)
 
-[node name="DaytimeMain" type="Node2D"]
+[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "Bobber")]
 script = ExtResource("1_2jsv6")
+fishingMinigameScene = ExtResource("2_kebv3")
+MC = NodePath("MainCharacter")
+Bobber = NodePath("Bobber")
 
 [node name="MainCharacter" parent="." instance=ExtResource("1_oxlu7")]
 position = Vector2(329.00003, 583)
@@ -24,7 +28,7 @@ scale = Vector2(0.15348448, 0.15348448)
 position = Vector2(640, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
-position = Vector2(-0.875, 297)
+position = Vector2(-0.875, 292.5)
 shape = SubResource("RectangleShape2D_6j7wl")
 
 [node name="Sprite2D" type="Sprite2D" parent="Water"]
