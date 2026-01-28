@@ -9,7 +9,14 @@ extends Control
 func _ready():
 	main_buttons.visible = true
 	settings.visible = false
+<<<<<<< Updated upstream:scripts/game/main_menu.gd
 	$AudioStreamPlayer.play(65)
+=======
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+>>>>>>> Stashed changes:MainMenu/main_menu.gd
 
 
 func _on_start_pressed():

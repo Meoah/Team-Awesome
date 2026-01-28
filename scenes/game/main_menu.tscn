@@ -1,6 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bs6fqe1euvjxa"]
 
 <<<<<<< Updated upstream:scenes/game/main_menu.tscn
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
 [ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://assets/textures/ui/panel_grey_dark.png" id="2_bto60"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
@@ -23,6 +24,18 @@ texture = ExtResource("2_ghw46")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0pvb"]
 texture = ExtResource("3_df05h")
 
+=======
+[ext_resource type="Script" uid="uid://b00g45l37d66e" path="res://Inventory/inventory_ui.gd" id="1_8saeu"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://Inventory/InventoryUI/panel_grey.png" id="2_ghw46"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://Inventory/InventoryUI/panel_brown_damaged_dark.png" id="3_df05h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6gduq"]
+texture = ExtResource("2_ghw46")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n0pvb"]
+texture = ExtResource("3_df05h")
+
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 [node name="Inventory_UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -30,6 +43,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 <<<<<<< Updated upstream:scenes/game/main_menu.tscn
 script = ExtResource("1_fpthd")
 start_scene_path = "uid://4wis367byvft"
@@ -166,10 +180,36 @@ theme_override_font_sizes/font_size = 30
 text = "Settings"
 horizontal_alignment = 1
 =======
+=======
+script = ExtResource("1_8saeu")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.016
+offset_left = 1011.0
+offset_top = 22.0
+offset_right = 1234.52
+offset_bottom = 202.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_6gduq")
+
+[node name="SlotGrid" type="GridContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.116000004
+anchor_bottom = 0.071
+offset_left = 129.0
+offset_top = 32.0
+offset_right = 172.696
+offset_bottom = 69.22
+columns = 3
+
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 [node name="Slot1" type="Panel" parent="Panel/SlotGrid"]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 >>>>>>> Stashed changes:Scenes/MainMenu.tscn
 
 [node name="Label" type="Label" parent="Panel/SlotGrid/Slot1"]
@@ -194,6 +234,13 @@ text = "Back
 offset_right = 40.0
 offset_bottom = 23.0
 >>>>>>> Stashed changes:Scenes/MainMenu.tscn
+=======
+
+[node name="Label" type="Label" parent="Panel/SlotGrid/Slot1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 
 [node name="Slot2" type="Panel" parent="Panel/SlotGrid"]
 custom_minimum_size = Vector2(18, 18)
@@ -202,6 +249,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
 
 [node name="Label" type="Label" parent="Panel/SlotGrid/Slot2"]
 layout_mode = 0
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 <<<<<<< Updated upstream:scenes/game/main_menu.tscn
 offset_left = 0.25
 offset_top = -28.25
@@ -214,15 +262,23 @@ text = "Music Volume"
 offset_right = 40.0
 offset_bottom = 23.0
 >>>>>>> Stashed changes:Scenes/MainMenu.tscn
+=======
+offset_right = 40.0
+offset_bottom = 23.0
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 
 [node name="Slot3" type="Panel" parent="Panel/SlotGrid"]
 custom_minimum_size = Vector2(18, 18)
 layout_mode = 2
 <<<<<<< Updated upstream:scenes/game/main_menu.tscn
+<<<<<<< Updated upstream:scenes/game/main_menu.tscn
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
 theme_override_fonts/font = ExtResource("3_16onh")
 text = "Fullscreen"
 script = ExtResource("6_8um5k")
+=======
+theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
+>>>>>>> Stashed changes:Scenes/MainMenu.tscn
 =======
 theme_override_styles/panel = SubResource("StyleBoxTexture_n0pvb")
 >>>>>>> Stashed changes:Scenes/MainMenu.tscn
