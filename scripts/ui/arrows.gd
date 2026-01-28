@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var input_length : int = 3
 @export var input_string : TextEdit
@@ -104,7 +104,7 @@ func fail():
 	input_string.set_text("Times Up!!")
 	$Sprite2D.set_texture(failure)
 	await get_tree().create_timer(3).timeout
-	queue_free()
+	get_tree().reload_current_scene()
 
 #Process for when index reaches end of array. Prints text and resets the scene after 3 seconds
 var cleared = false
@@ -119,7 +119,7 @@ func clear():
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value)
 		)
 		await get_tree().create_timer(3).timeout
-		start_minigame()
+		get_tree().reload_current_scene()
 		
 		
 

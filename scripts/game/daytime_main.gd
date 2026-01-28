@@ -39,6 +39,7 @@ func _process(delta: float) -> void:
 	if fishReady && Input.is_action_just_pressed("ui_accept"):
 		fishReady = false
 		bobberInWater = false
+		bobberActive = false
 		if fishingMinigameScene:
 			var minigame = fishingMinigameScene.instantiate()
 			add_child(minigame)

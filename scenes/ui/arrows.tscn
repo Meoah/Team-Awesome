@@ -48,7 +48,7 @@ correct_inputs = Array[String](["Left", "Left", "Left", "Up", "Right", "Down"])
 time = 3.0
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
-[node name="Arrows" type="Node2D" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
+[node name="Arrows" type="Node" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 script = ExtResource("1_0iavb")
 input_length = 6
 input_string = NodePath("TextEdit")
@@ -60,22 +60,24 @@ success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
 
 [node name="TextEdit" type="TextEdit" parent="."]
-offset_left = -343.0
-offset_top = -300.0
-offset_right = 343.0
-offset_bottom = -98.0
+offset_left = 297.0
+offset_top = 60.0
+offset_right = 983.0
+offset_bottom = 262.0
 script = ExtResource("2_n3w4c")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-4.9999695, 120.00001)
+position = Vector2(635, 479.99994)
 scale = Vector2(0.6746573, 0.6708732)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -262.0
-offset_right = 271.0
-offset_bottom = 27.0
+offset_left = 378.0
+offset_top = 360.0
+offset_right = 911.0
+offset_bottom = 387.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
