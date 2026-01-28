@@ -1,6 +1,6 @@
 extends TextEdit
 
-@onready var arrows: Node2D = $".."
+@onready var arrows: Node = $".."
 
 
 

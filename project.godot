@@ -22,6 +22,7 @@ buses/default_bus_layout=""
 [autoload]
 
 Inventory="*res://scripts/ui/inventory.gd"
+player_data="*res://scripts/system/player_data.gd"
 
 [display]
 
