@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyaxs1jdloena"]
+
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="1_c24ra"]
+
+[node name="Slot" type="Node2D"]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("1_c24ra")
