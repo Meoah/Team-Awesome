@@ -5,22 +5,29 @@ extends Node2D
 #TODO Make these their own class and animate from their own scripts
 @export var MC : Sprite2D
 @export var Bobber : RigidBody2D
+@export var Score : Label
 
 var timeSinceCast : float = 0.0
 var bobberActive : bool = false
 var bobberInWater : bool = false
 var fishReady : bool = false
 var fishTimer : float = 0.0
+var boatTimer : float = 0.0
+
+var MCOriginY : float = 0.0
 
 #Placeholder
 var bobTime : float = 0.0
 var bobOriginY : float = 0.0
 
 func _ready() -> void:
+	Score.text = "Score: " + str(player_data.get_score())
+	MCOriginY = MC.global_position.y
 	fishTimer = randf() * 5
 
 func _process(delta: float) -> void:
 	timeSinceCast += delta
+	boatTimer += delta
 	if Input.is_action_just_pressed("ui_accept") && !bobberActive:
 		bobberActive = true
 		Bobber.set_freeze_enabled(false)
@@ -43,6 +50,8 @@ func _process(delta: float) -> void:
 		if fishingMinigameScene:
 			var minigame = fishingMinigameScene.instantiate()
 			add_child(minigame)
+			
+	MC.global_position.y = MCOriginY + sin(boatTimer * 4.0) * 2.0
 
 
 func _on_water_body_entered(body: Node2D) -> void:
