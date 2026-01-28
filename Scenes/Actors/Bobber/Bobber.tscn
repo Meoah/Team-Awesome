@@ -7,11 +7,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pntiq"]
 size = Vector2(39, 24)
 
-[node name="RigidBody2D" type="RigidBody2D"]
+[node name="Bobber" type="RigidBody2D"]
 physics_material_override = SubResource("PhysicsMaterial_pntiq")
 freeze = true
 
-[node name="Bobber" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -19.000008)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("1_pntiq")

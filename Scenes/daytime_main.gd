@@ -11,15 +11,18 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_accept"):
-		if !bobberActive:
-			bobberActive = true
-			Bobber.set_freeze_enabled(false)
-			Bobber.global_position = MC.global_position
-			Bobber.apply_impulse(Vector2(500,-500))
+	if Input.is_action_just_pressed("ui_accept") && !bobberActive:
+		bobberActive = true
+		Bobber.freeze = false
+		Bobber.global_position = MC.global_position
+		Bobber.apply_impulse(Vector2(500,-500), Vector2.ZERO)
 
 
 func _on_water_body_entered(body: Node2D) -> void:
 	if body == Bobber:
-		body.set_linear_velocity(Vector2(0,0))
-		body.set_freeze_enabled(true)
+		call_deferred("_bobber_on_water")
+
+func _bobber_on_water() -> void:
+	Bobber.linear_velocity = Vector2.ZERO
+	Bobber.angular_velocity = 0.0
+	Bobber.freeze = true
