@@ -11,13 +11,17 @@ config_version=5
 [application]
 
 config/name="TeamAwesome"
-run/main_scene="uid://dfgqsnhiac5hx"
+run/main_scene="uid://bs6fqe1euvjxa"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
-Inventory="*res://Inventory/Inventory.gd"
+Inventory="*res://scripts/ui/inventory.gd"
 
 [display]
 
@@ -28,7 +32,9 @@ window/stretch/mode="canvas_items"
 [file_customization]
 
 folder_colors={
-"res://assets/": "pink"
+"res://assets/": "green",
+"res://scenes/": "yellow",
+"res://scripts/": "orange"
 }
 
 [input]
