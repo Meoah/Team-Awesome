@@ -53,11 +53,16 @@ func _process(delta: float) -> void:
 		bobberInWater = false
 		bobberActive = false
 		Indicator.global_position = Vector2(-100,-100)
+		$FISH.play("FISH!") #Plays FISH! Animation
+		await get_tree().create_timer(1).timeout
 		if fishingMinigameScene:
 			var minigame = fishingMinigameScene.instantiate()
 			add_child(minigame)
 			
 	MC.global_position.y = MCOriginY + sin(boatTimer * 4.0) * 2.0
+
+
+
 
 
 func _on_water_body_entered(body: Node2D) -> void:
@@ -71,3 +76,8 @@ func _bobber_on_water() -> void:
 	Bobber.set_linear_velocity(Vector2.ZERO)
 	bobOriginY = Bobber.global_position.y
 	Bobber.set_freeze_enabled(true)
+
+
+func _on_fish_animation_finished(_anim_name: StringName) -> void:
+			$FISH.stop(true)
+			$FISH.seek(0)
