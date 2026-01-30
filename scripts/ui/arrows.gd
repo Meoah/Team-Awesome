@@ -21,7 +21,7 @@ var caught = 0
 
 
 func start_minigame():
-	$Sprite2D.texture = null #Clears out the Image loaded
+	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
 	current_fish.intialize() # Prepares the array of correct inputs
 	correct_inputs = current_fish.current_inputs # Loads the array of correct Inputs
@@ -36,6 +36,7 @@ func start_minigame():
 	timer.set_paused(false)
 	progress_bar.max_value = current_fish.time
 	input_index = 0
+	spawn_arrows()
 func end_minigame():
 	current_fish = null
 	
@@ -80,11 +81,11 @@ func _input(_event : InputEvent):
 				print("cool")
 				input_index = input_index + 1 #Advances in the string index
 				text_render()
-				$Sprite2D.set_texture(success)
+				$Reaction.set_texture(success)
 				print(input_array)
 			else:
 				print("Lame!")
-				$Sprite2D.set_texture(failure)
+				$Reaction.set_texture(failure)
 			clear()
 
 
@@ -102,7 +103,7 @@ func _physics_process(_delta):
 func fail():
 	cleared = true
 	input_string.set_text("Times Up!!")
-	$Sprite2D.set_texture(failure)
+	$Reaction.set_texture(failure)
 	await get_tree().create_timer(3).timeout
 	get_tree().reload_current_scene()
 
@@ -113,7 +114,7 @@ func clear():
 		print("Caught:" + str(caught))
 		caught += 1
 		cleared = true
-		$Sprite2D.texture = current_fish.image
+		$Reaction.texture = current_fish.image
 		input_index = 0
 		print(current_fish.name)
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value))
@@ -126,3 +127,32 @@ func clear():
 
 func _on_timer_timeout() -> void:
 	fail() # Replace with function body.
+	
+	
+	
+	
+	
+	
+
+func frame() -> int:
+	var direction = 0
+	if input_array[0] == "Left":
+		direction = 0
+	elif input_array[0] == "Up":
+		direction = 1
+	elif input_array[0] == "Right":
+		direction = 2
+	elif input_array[0] == "Down":
+		direction = 3 
+	return direction
+
+
+@export var Animated : AnimatedSprite2D
+func spawn_arrows():
+	for i in input_array.size():
+		var node_to_copy = $ArrowSprite
+		var copy = node_to_copy.duplicate()
+		copy.duplicate()
+		add_child(copy)
+		copy.position = Vector2(i * 100, 200)
+		$ArrowSprite.set_frame(frame())
