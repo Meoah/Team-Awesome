@@ -10,12 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ctjwpsmkyxdxs" path="res://assets/textures/fish/doodle_fish/Fish05.png" id="7_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="8_20txf"]
 [ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
-[ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="10_qdfjh"]
-[ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="11_xp8ps"]
 [ext_resource type="Texture2D" uid="uid://bqy8a400kryy0" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
-[ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="12_mx6gi"]
-[ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="13_8ksox"]
-[ext_resource type="Script" uid="uid://chymghsucyl7j" path="res://scenes/ui/arrow_sprite.gd" id="16_mx6gi"]
 
 [sub_resource type="Resource" id="Resource_y6h51"]
 script = ExtResource("2_sopvo")
@@ -65,6 +60,42 @@ correct_inputs = Array[String](["Right", "Left", "Left", "Left", "Up", "Down"])
 time = 2.25
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_epdnh"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8gc6"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp8ps"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdfjh"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mx6gi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epdnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8gc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xp8ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdfjh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Arrows" type="Node" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar", "Animated")]
 script = ExtResource("1_0iavb")
 input_length = 6
@@ -75,13 +106,7 @@ timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
-arrow_direction = Dictionary[String, Texture2D]({
-"Down": ExtResource("12_mx6gi"),
-"Left": ExtResource("10_qdfjh"),
-"Right": ExtResource("13_8ksox"),
-"Up": ExtResource("11_xp8ps")
-})
-Animated = NodePath("")
+Animated = NodePath("ArrowSprite")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
@@ -106,9 +131,10 @@ offset_bottom = 387.0
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
 
-[node name="ArrowSprite" type="Sprite2D" parent="."]
-position = Vector2(235, -198)
-texture = ExtResource("11_ybko8")
-script = ExtResource("16_mx6gi")
+[node name="ArrowSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(359, -159)
+sprite_frames = SubResource("SpriteFrames_mx6gi")
+
+[node name="Arrow" type="Sprite2D" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

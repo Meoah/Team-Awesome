@@ -9,7 +9,7 @@ extends Node
 @export var success : Texture2D
 @export var failure : Texture2D
 
-
+@export var arrow_direction : Dictionary[String, Texture2D]
 
 var input_array : Array[String]
 var player_inputs = "0"
@@ -18,7 +18,7 @@ var current_fish : FishResource
 var input_index = 0
 var progress : float
 var caught = 0
-
+var sprite_array : Array[ArrowSprite]
 
 func start_minigame():
 	$Reaction.texture = null #Clears out the Image loaded
@@ -83,9 +83,15 @@ func _input(_event : InputEvent):
 				text_render()
 				$Reaction.set_texture(success)
 				print(input_array)
+				var current_sprite : ArrowSprite = sprite_array.pop_front()
+				if current_sprite:
+					current_sprite.correct()
 			else:
 				print("Lame!")
 				$Reaction.set_texture(failure)
+				var incorrect_sprite: ArrowSprite = sprite_array[0]
+				if incorrect_sprite:
+					incorrect_sprite.incorrect()
 			clear()
 
 
@@ -127,32 +133,17 @@ func clear():
 
 func _on_timer_timeout() -> void:
 	fail() # Replace with function body.
-	
-	
-	
-	
-	
-	
-
-func frame() -> int:
-	var direction = 0
-	if input_array[0] == "Left":
-		direction = 0
-	elif input_array[0] == "Up":
-		direction = 1
-	elif input_array[0] == "Right":
-		direction = 2
-	elif input_array[0] == "Down":
-		direction = 3 
-	return direction
-
 
 @export var Animated : AnimatedSprite2D
 func spawn_arrows():
-	for i in input_array.size():
+	sprite_array = []
+	var count : float =3.5
+	print(arrow_direction)
+	for i in input_array:
+		count += 1
 		var node_to_copy = $ArrowSprite
 		var copy = node_to_copy.duplicate()
-		copy.duplicate()
+		copy.texture = arrow_direction[i]
 		add_child(copy)
-		copy.position = Vector2(i * 100, 200)
-		$ArrowSprite.set_frame(frame())
+		sprite_array.append(copy)
+		copy.position = Vector2(count * 100, 200)

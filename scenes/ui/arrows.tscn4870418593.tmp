@@ -107,7 +107,7 @@ offset_bottom = 387.0
 one_shot = true
 
 [node name="ArrowSprite" type="Sprite2D" parent="."]
-position = Vector2(235, -198)
+position = Vector2(253, 69)
 texture = ExtResource("11_ybko8")
 script = ExtResource("16_mx6gi")
 
