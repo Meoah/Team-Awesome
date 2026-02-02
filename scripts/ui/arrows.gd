@@ -125,8 +125,9 @@ func _on_timer_timeout() -> void:
 
 #Fail Script
 func fail():
-	for i in sprite_array:
-		i.erase()
+	if variant:
+		for i in sprite_array:
+			i.erase()
 	timer.set_paused(true)
 	input_string.set_text("Times Up!!")
 	$Reaction.set_texture(failure)
