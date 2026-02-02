@@ -92,6 +92,9 @@ func _input(_event : InputEvent):
 				var incorrect_sprite: ArrowSprite = sprite_array[0]
 				if incorrect_sprite:
 					incorrect_sprite.incorrect()
+				set_process_input(false)
+				await get_tree().create_timer(0.3).timeout
+				set_process_input(true)
 			clear()
 
 
