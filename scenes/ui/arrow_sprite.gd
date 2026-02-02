@@ -11,9 +11,9 @@ func correct():
 
 func shake():
 	var tween = get_tree().create_tween()
-	tween.tween_property(self, "position", Vector2(position.x -10,position.y), 0.1)
-	tween.tween_property(self, "position", Vector2(position.x +20,position.y), 0.1)
-	tween.tween_property(self, "position", Vector2(position.x -10,position.y), 0.1)
+	tween.tween_property(self, "position", Vector2(position.x -10,position.y), 0.05)
+	tween.tween_property(self, "position", Vector2(position.x +20,position.y), 0.05)
+	tween.tween_property(self, "position", Vector2(position.x -10,position.y), 0.05)
 
 
 func incorrect():
@@ -23,4 +23,4 @@ func incorrect():
 	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
 	
 func erase():
-	visible = false
+	queue_free()

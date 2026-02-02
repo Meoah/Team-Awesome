@@ -22,6 +22,8 @@ var sprite_array : Array[ArrowSprite]
 
 var variant : bool 
 
+
+#Protoype for making variants. If fish is variant, makes arrows gold and fails on incorrect input
 func make_variant():
 	if randi_range(0,5) > 2:
 		variant = true
@@ -38,8 +40,6 @@ func start_minigame():
 	input_array = current_fish.current_inputs
 	display_text = correct_inputs.duplicate(true)
 	print(current_fish.name) #Debug
-	print(current_fish.correct_inputs) #Debug
-	print(current_fish.current_inputs) #Debug
 	cleared = false
 	timer.start(current_fish.time)
 	#text_render()
@@ -47,18 +47,17 @@ func start_minigame():
 	progress_bar.max_value = current_fish.time
 	input_index = 0
 	spawn_arrows()
+
 func end_minigame():
 	current_fish = null
 	
 
 #Initialize Script
 func _ready() -> void:
-	
 	start_minigame()
-	
 
-#Displays the list of inputs
 
+#Displays the list of inputs for debug
 var output = ""
 var display_text : Array[String]
 func text_render():
@@ -88,26 +87,30 @@ func _input(_event : InputEvent):
 	if input_index <= input_array.size() and cleared == false:
 		if Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("Down") or Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("Left") :
 			if player_inputs == input_array[input_index]:
-				print("cool")
-				input_index = input_index + 1 #Advances in the string index
-				#text_render()
-				$Reaction.set_texture(success)
-				print(input_array)
-				var current_sprite : ArrowSprite = sprite_array.pop_front()
-				if current_sprite:
-					current_sprite.correct()
+				correct_input()
 			else:
-				print("Lame!")
-				$Reaction.set_texture(failure)
-				var incorrect_sprite: ArrowSprite = sprite_array[0]
-				if variant:
-					fail()
-				if incorrect_sprite:
-					incorrect_sprite.incorrect()
-				set_process_input(false)
-				await get_tree().create_timer(0.3).timeout
-				set_process_input(true)
-			clear()
+				incorrect_input()
+			win()
+
+func correct_input():
+		print("cool")
+		input_index = input_index + 1 #Advances in the string index
+		#text_render()
+		$Reaction.set_texture(success)
+		var current_sprite : ArrowSprite = sprite_array.pop_front()
+		if current_sprite:
+			current_sprite.correct()
+
+func incorrect_input():
+	print("Lame!")
+	$Reaction.set_texture(failure)
+	var incorrect_sprite: ArrowSprite = sprite_array[0]
+	incorrect_sprite.incorrect()
+	if variant:
+		fail()
+	set_process_input(false)
+	await get_tree().create_timer(0.3).timeout
+	set_process_input(true)
 
 
 #Countdowns the progress bar
@@ -116,26 +119,26 @@ func _physics_process(_delta):
 	if cleared:
 		timer.set_paused(true)
 	pass
+#Time runout
+func _on_timer_timeout() -> void:
+	fail() # Replace with function body.
 
-	
-
-
-
+#Fail Script
 func fail():
-	if sprite_array:
-		var incorrect_sprite: ArrowSprite = sprite_array.pop_front()
-		for item in sprite_array:
-			incorrect_sprite = sprite_array.pop_front()
-			incorrect_sprite.erase()
-	cleared = true
+	for i in sprite_array:
+		i.erase()
+	timer.set_paused(true)
 	input_string.set_text("Times Up!!")
 	$Reaction.set_texture(failure)
+	for item in sprite_array:
+		$ArrowSprite.erase()
+	cleared = true
 	await get_tree().create_timer(3).timeout
 	get_tree().reload_current_scene()
 
-#Process for when index reaches end of array. Prints text and resets the scene after 3 seconds
+#Win Script. Prints fish data and resets the scene after 3 seconds
 var cleared = false
-func clear():
+func win():
 	if input_index == input_array.size() :
 		print("Caught:" + str(caught))
 		caught += 1
@@ -147,19 +150,14 @@ func clear():
 		player_data.add_score(current_fish.value)
 		await get_tree().create_timer(3).timeout
 		get_tree().reload_current_scene()
-		
-		
 
 
-func _on_timer_timeout() -> void:
-	fail() # Replace with function body.
 
-@export var Animated : AnimatedSprite2D
+#Displays Arrow graphics
 func spawn_arrows():
 	sprite_array = []
 	var count : int =0
 	var measurement : int = 0
-	print(arrow_direction)
 	for i in input_array:
 		if variant:
 			$ArrowSprite.modulate = Color.GOLD
