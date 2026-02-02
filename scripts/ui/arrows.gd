@@ -20,7 +20,17 @@ var progress : float
 var caught = 0
 var sprite_array : Array[ArrowSprite]
 
+var variant : bool 
+
+func make_variant():
+	if randi_range(0,5) > 2:
+		variant = true
+
+
+
+
 func start_minigame():
+	make_variant()
 	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
 	current_fish.intialize() # Prepares the array of correct inputs
@@ -32,7 +42,7 @@ func start_minigame():
 	print(current_fish.current_inputs) #Debug
 	cleared = false
 	timer.start(current_fish.time)
-	text_render()
+	#text_render()
 	timer.set_paused(false)
 	progress_bar.max_value = current_fish.time
 	input_index = 0
@@ -80,7 +90,7 @@ func _input(_event : InputEvent):
 			if player_inputs == input_array[input_index]:
 				print("cool")
 				input_index = input_index + 1 #Advances in the string index
-				text_render()
+				#text_render()
 				$Reaction.set_texture(success)
 				print(input_array)
 				var current_sprite : ArrowSprite = sprite_array.pop_front()
@@ -90,6 +100,8 @@ func _input(_event : InputEvent):
 				print("Lame!")
 				$Reaction.set_texture(failure)
 				var incorrect_sprite: ArrowSprite = sprite_array[0]
+				if variant:
+					fail()
 				if incorrect_sprite:
 					incorrect_sprite.incorrect()
 				set_process_input(false)
@@ -110,6 +122,11 @@ func _physics_process(_delta):
 
 
 func fail():
+	if sprite_array:
+		var incorrect_sprite: ArrowSprite = sprite_array.pop_front()
+		for item in sprite_array:
+			incorrect_sprite = sprite_array.pop_front()
+			incorrect_sprite.erase()
 	cleared = true
 	input_string.set_text("Times Up!!")
 	$Reaction.set_texture(failure)
@@ -140,13 +157,18 @@ func _on_timer_timeout() -> void:
 @export var Animated : AnimatedSprite2D
 func spawn_arrows():
 	sprite_array = []
-	var count : float =3.5
+	var count : int =0
+	var measurement : int = 0
 	print(arrow_direction)
 	for i in input_array:
+		if variant:
+			$ArrowSprite.modulate = Color.GOLD
 		count += 1
 		var node_to_copy = $ArrowSprite
 		var copy = node_to_copy.duplicate()
 		copy.texture = arrow_direction[i]
 		add_child(copy)
 		sprite_array.append(copy)
-		copy.position = Vector2(count * 100, 200)
+		copy.position = Vector2($ArrowOrigin.position.x +(count * 130), $ArrowOrigin.position.y)
+		measurement += 200
+	$ArrowLoader.position = Vector2($ArrowOrigin.position.x - measurement, $ArrowOrigin.position.y)

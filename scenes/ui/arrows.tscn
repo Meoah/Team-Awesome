@@ -110,4 +110,10 @@ position = Vector2(235, -198)
 texture = ExtResource("11_ybko8")
 script = ExtResource("16_mx6gi")
 
+[node name="ArrowOrigin" type="Marker2D" parent="."]
+position = Vector2(362, 150)
+
+[node name="ArrowLoader" type="Marker2D" parent="."]
+gizmo_extents = 19.2
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

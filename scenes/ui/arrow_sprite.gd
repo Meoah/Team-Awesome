@@ -21,3 +21,6 @@ func incorrect():
 	tween.tween_property(self, "modulate", Color.RED, 0.1)
 	shake()
 	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
+	
+func erase():
+	visible = false
