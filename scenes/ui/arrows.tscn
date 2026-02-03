@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=22 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/arrows_display.gd" id="2_n3w4c"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ctjwpsmkyxdxs" path="res://assets/textures/fish/doodle_fish/Fish05.png" id="7_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="8_20txf"]
 [ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
+[ext_resource type="Texture2D" uid="uid://biahjfifu84x8" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
 
 [sub_resource type="Resource" id="Resource_y6h51"]
 script = ExtResource("2_sopvo")
@@ -26,7 +27,7 @@ name = "Rainbow Eel"
 image = ExtResource("4_ybko8")
 value = 1500
 weight = 600
-correct_inputs = Array[String](["Left", "Up", "Right", "Down", "Down", "Down"])
+correct_inputs = Array[String](["Down", "Left", "Up", "Right", "Down", "Down"])
 time = 2.5
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
@@ -55,20 +56,57 @@ name = "Shroomle"
 image = ExtResource("7_qdfjh")
 value = 1000
 weight = 500
-correct_inputs = Array[String](["Left", "Left", "Left", "Up", "Right", "Down"])
+correct_inputs = Array[String](["Right", "Left", "Left", "Left", "Up", "Down"])
 time = 2.25
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
-[node name="Arrows" type="Node" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_epdnh"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8gc6"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xp8ps"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qdfjh"]
+atlas = ExtResource("11_ybko8")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mx6gi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_epdnh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8gc6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xp8ps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qdfjh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Arrows" type="Node" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar", "Animated")]
 script = ExtResource("1_0iavb")
 input_length = 6
 input_string = NodePath("TextEdit")
-reaction = NodePath("Sprite2D")
+reaction = NodePath("Reaction")
 potential_fish = Array[ExtResource("2_sopvo")]([SubResource("Resource_y6h51"), SubResource("Resource_phdib"), SubResource("Resource_m0i64"), SubResource("Resource_ybko8"), SubResource("Resource_epdnh")])
 timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
+Animated = NodePath("ArrowSprite")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
@@ -80,7 +118,7 @@ offset_right = 983.0
 offset_bottom = 262.0
 script = ExtResource("2_n3w4c")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Reaction" type="Sprite2D" parent="."]
 position = Vector2(635, 479.99994)
 scale = Vector2(0.6746573, 0.6708732)
 
@@ -92,5 +130,11 @@ offset_bottom = 387.0
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
+
+[node name="ArrowSprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(359, -159)
+sprite_frames = SubResource("SpriteFrames_mx6gi")
+
+[node name="Arrow" type="Sprite2D" parent="."]
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
