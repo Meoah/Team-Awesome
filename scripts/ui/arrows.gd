@@ -67,9 +67,8 @@ func end_minigame():
 func _ready() -> void:
 	start_minigame()
 
-
+var random_index = randi_range(0, input_array.size() - 1)
 func evilize():
-	var random_index = randi_range(0, input_array.size() - 1)
 	#input_array = ["Left","Left","Right"]
 	if input_array[random_index] == "Left":
 		input_array[random_index]= "Right"
@@ -188,6 +187,8 @@ func spawn_arrows():
 			$ArrowSprite.modulate = Color.GOLD
 		elif varied_evil:
 			evilize()
+			if input_array[random_index] == i:
+				$ArrowSprite.modulate = Color.RED
 		count += 1
 		var node_to_copy = $ArrowSprite
 		var copy = node_to_copy.duplicate()
