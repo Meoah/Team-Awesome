@@ -8,6 +8,7 @@ extends Node
 @export var progress_bar : ProgressBar
 @export var success : Texture2D
 @export var failure : Texture2D
+@export var variants : Array[String]
 
 @export var arrow_direction : Dictionary[String, Texture2D]
 
@@ -20,19 +21,28 @@ var progress : float
 var caught = 0
 var sprite_array : Array[ArrowSprite]
 
-var variant : bool 
 
+var variant 
+var chosen_variant : String
+var varied_gold : bool = false
+var varied_evil : bool = false
 
 #Protoype for making variants. If fish is variant, makes arrows gold and fails on incorrect input
-func make_variant():
-	if randi_range(0,5) > 2:
-		variant = true
+func choose_variant():
+	chosen_variant = variants.pick_random()
 
-
+func apply_variant():
+	if chosen_variant =="Gold":
+		varied_gold = true
+	elif chosen_variant == "Evil":
+		varied_evil = true
+		evilize()
+		
 
 
 func start_minigame():
-	make_variant()
+	choose_variant()
+	apply_variant()
 	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
 	current_fish.intialize() # Prepares the array of correct inputs
@@ -41,6 +51,8 @@ func start_minigame():
 	display_text = correct_inputs.duplicate(true)
 	print(current_fish.name) #Debug
 	cleared = false
+	if varied_evil:
+		evilize()
 	timer.start(current_fish.time)
 	#text_render()
 	timer.set_paused(false)
@@ -56,6 +68,17 @@ func end_minigame():
 func _ready() -> void:
 	start_minigame()
 
+func evilize():
+	var random_index = randi_range(0, input_array.size() - 1)
+	if input_array[random_index] == "Left":
+		input_array[random_index]= "Right"
+	elif input_array[random_index] == "Up":
+		input_array[random_index]= "Down"
+	elif input_array[random_index] == "Right":
+		input_array[random_index]= "Left"
+	elif input_array[random_index] == "Down":
+		input_array[random_index]= "Up"
+		
 
 #Displays the list of inputs for debug
 var output = ""
@@ -106,7 +129,7 @@ func incorrect_input():
 	$Reaction.set_texture(failure)
 	var incorrect_sprite: ArrowSprite = sprite_array[0]
 	incorrect_sprite.incorrect()
-	if variant:
+	if varied_gold:
 		fail()
 	set_process_input(false)
 	await get_tree().create_timer(0.3).timeout
@@ -125,7 +148,7 @@ func _on_timer_timeout() -> void:
 
 #Fail Script
 func fail():
-	if variant:
+	if varied_gold:
 		for i in sprite_array:
 			i.erase()
 	timer.set_paused(true)
@@ -160,8 +183,11 @@ func spawn_arrows():
 	var count : int =0
 	var measurement : int = 0
 	for i in input_array:
-		if variant:
+		if varied_gold:
 			$ArrowSprite.modulate = Color.GOLD
+		elif varied_evil:
+			$ArrowSprite.evilize()
+			evilize()
 		count += 1
 		var node_to_copy = $ArrowSprite
 		var copy = node_to_copy.duplicate()
@@ -170,4 +196,5 @@ func spawn_arrows():
 		sprite_array.append(copy)
 		copy.position = Vector2($ArrowOrigin.position.x +(count * 130), $ArrowOrigin.position.y)
 		measurement += 200
+	print(input_array)
 	$ArrowLoader.position = Vector2($ArrowOrigin.position.x - measurement, $ArrowOrigin.position.y)

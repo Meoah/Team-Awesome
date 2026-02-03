@@ -23,8 +23,11 @@ func incorrect():
 	tween.tween_property(self, "modulate", Color.WHITE, 0.3)
 	
 func erase():
-	var tween = get_tree().create_tween()
-	tween.parallel().tween_property(self, "skew", 89.9 , 0.4)
-	tween.tween_property(self, "modualte", Color(1.0, 0.58, 0.58, 0.212) , 1)
+	var tween = get_tree().create_tween()  
+	tween.parallel().tween_property(self, "skew", deg_to_rad(90),0.1)
 	await  get_tree().create_timer(0.5).timeout
 	queue_free()
+	
+	
+func evilize():
+	modulate = Color(1.0, 0.0, 0.0, 1.0)
