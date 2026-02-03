@@ -75,7 +75,7 @@ timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
-variants = Array[String](["Evil", "Evil"])
+variants = Array[String](["Evil"])
 arrow_direction = Dictionary[String, Texture2D]({
 "Down": ExtResource("12_mx6gi"),
 "Left": ExtResource("10_qdfjh"),

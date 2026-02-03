@@ -36,7 +36,6 @@ func apply_variant():
 		varied_gold = true
 	elif chosen_variant == "Evil":
 		varied_evil = true
-		evilize()
 		
 
 
@@ -68,8 +67,10 @@ func end_minigame():
 func _ready() -> void:
 	start_minigame()
 
+
 func evilize():
 	var random_index = randi_range(0, input_array.size() - 1)
+	#input_array = ["Left","Left","Right"]
 	if input_array[random_index] == "Left":
 		input_array[random_index]= "Right"
 	elif input_array[random_index] == "Up":
@@ -186,7 +187,6 @@ func spawn_arrows():
 		if varied_gold:
 			$ArrowSprite.modulate = Color.GOLD
 		elif varied_evil:
-			$ArrowSprite.evilize()
 			evilize()
 		count += 1
 		var node_to_copy = $ArrowSprite
