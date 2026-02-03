@@ -1,15 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=16 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
-[ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://assets/textures/ui/panel_grey_dark.png" id="2_bto60"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
+[ext_resource type="Texture2D" uid="uid://dylf5rrqe6bh1" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
+[ext_resource type="Texture2D" uid="uid://v6txl6dvukk5" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
 [ext_resource type="AudioStream" uid="uid://d0uy7uecr3cvv" path="res://assets/audio/bgm/1-01 Introduction.mp3" id="4_fpthd"]
+[ext_resource type="Texture2D" uid="uid://dxgpb3qp4tll" path="res://assets/textures/ui/Exit_Button.png" id="5_1f7y1"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/ui/audio_volume.gd" id="5_df05h"]
 [ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/ui/fullscreen_control.gd" id="6_8um5k"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e6quo"]
-texture = ExtResource("2_bto60")
-modulate_color = Color(0.7162962, 0.7162962, 0.7162962, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16onh"]
+bg_color = Color(0.2901961, 0.3647059, 0.43137255, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kenku"]
 bg_color = Color(0, 0.5019608, 0.5019608, 1)
@@ -62,7 +63,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_e6quo")
+theme_override_styles/panel = SubResource("StyleBoxFlat_16onh")
 
 [node name="MainButtons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -71,75 +72,50 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -114.25
-offset_top = -76.0
-offset_right = 114.25
-offset_bottom = 76.0
+offset_left = -330.0
+offset_top = -178.0
+offset_right = 330.0
+offset_bottom = 278.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="StartButton" type="Button" parent="MainButtons"]
+[node name="PlayButton" type="TextureButton" parent="MainButtons"]
+custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
-theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_colors/font_hover_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_16onh")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_kenku")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_e6quo")
-theme_override_styles/hover = SubResource("StyleBoxFlat_onc8m")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
-text = "Start Game
-"
+size_flags_horizontal = 4
+texture_normal = ExtResource("4_bto60")
 
-[node name="SettingsButton" type="Button" parent="MainButtons"]
+[node name="OptionsButton" type="TextureButton" parent="MainButtons"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
-theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_colors/font_hover_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("3_16onh")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_kenku")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_e6quo")
-theme_override_styles/hover = SubResource("StyleBoxFlat_onc8m")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
-text = "Settings
-"
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("4_6hh85")
 
-[node name="ExitButton" type="Button" parent="MainButtons"]
+[node name="ExitButton" type="TextureButton" parent="MainButtons"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.46247053, 0.792735, 0.36279032, 1)
-theme_override_colors/font_pressed_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_colors/font_hover_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("3_16onh")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxFlat_kenku")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_e6quo")
-theme_override_styles/hover = SubResource("StyleBoxFlat_onc8m")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_onc8m")
-text = "Exit
-"
+size_flags_horizontal = 4
+size_flags_vertical = 8
+texture_normal = ExtResource("5_1f7y1")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.514
-anchor_top = 0.446
-anchor_right = 0.514
-anchor_bottom = 0.446
-offset_left = -209.62799
-offset_top = -175.008
-offset_right = 177.37201
-offset_bottom = 124.492004
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -357.0
+offset_top = -390.0
+offset_right = 440.0
+offset_bottom = 281.653
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_colors/font_color = Color(0.79018086, 0.6306613, 0.51011544, 0.90588236)
 theme_override_colors/font_shadow_color = Color(0.0105956, 0.0105956, 0.0105956, 0.5764706)
 theme_override_constants/shadow_offset_y = 10
 theme_override_fonts/font = ExtResource("3_16onh")
-theme_override_font_sizes/font_size = 60
+theme_override_font_sizes/font_size = 120
 text = "Arrow Fishing
 "
 
@@ -238,8 +214,8 @@ theme_override_fonts/font = ExtResource("3_16onh")
 text = "Fullscreen"
 script = ExtResource("6_8um5k")
 
-[connection signal="pressed" from="MainButtons/StartButton" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MainButtons/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MainButtons/PlayButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MainButtons/OptionsButton" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MainButtons/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="Settings/BackButton" to="." method="_on_backbutton_pressed"]
 [connection signal="value_changed" from="Settings/VBoxContainer/AudioControl" to="Settings/VBoxContainer/AudioControl" method="_on_value_changed"]
