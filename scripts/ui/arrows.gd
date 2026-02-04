@@ -1,36 +1,35 @@
 extends Node
 
-@export var input_length : int = 3
-@export var input_string : TextEdit
-@export var reaction : Sprite2D
-@export var potential_fish : Array[FishResource]
-@export var timer : Timer
-@export var progress_bar : ProgressBar
-@export var success : Texture2D
-@export var failure : Texture2D
-@export var variants : Array[String]
+@export var input_string : TextEdit #Accessing TextEdit box
+@export var reaction : Sprite2D #Accessing Sprite2D for reaction image
+@export var potential_fish : Array[FishResource] #Creating possible fish
+@export var timer : Timer #Accessing Timer for the countdown
+@export var progress_bar : ProgressBar #Accessing ProgressBar for the countdown bar
+@export var success : Texture2D #Success Image
+@export var failure : Texture2D #Fail Image
+@export var variants : Array[String] #Creating Variants for Fishes
 
-@export var arrow_direction : Dictionary[String, Texture2D]
+@export var arrow_direction : Dictionary[String, Texture2D] #Loads Arrow Direction Sprites
 
-var input_array : Array[String]
-var player_inputs = "0"
-var correct_inputs = "0"
-var current_fish : FishResource
-var input_index = 0
-var progress : float
-var caught = 0
-var sprite_array : Array[ArrowSprite]
+var input_array : Array[String] #Holds the correct sequence of inputs per fish
+var player_inputs = "0" #Holds the current player input
+var correct_inputs = "0" #Holds the current correct input
+var current_fish : FishResource #Holds the current fish in play
+var input_index = 0 #Holds the index for the current input in the input array
+var progress : float 
+var caught = 0 #Holds ammount of fish caught
+var sprite_array : Array[ArrowSprite] #Accessing the ArrowSprite Class
 
 
-var variant 
-var chosen_variant : String
-var varied_gold : bool = false
-var varied_evil : bool = false
+var variant #Sets up current fish variant
+var chosen_variant : String #Holds the current variant
+var varied_gold : bool = false #Gold Variant
+var varied_evil : bool = false #Evil Variant
 
 #Protoype for making variants. If fish is variant, makes arrows gold and fails on incorrect input
 func choose_variant():
 	chosen_variant = variants.pick_random()
-
+#Applies Variant
 func apply_variant():
 	if chosen_variant =="Gold":
 		varied_gold = true
@@ -38,7 +37,7 @@ func apply_variant():
 		varied_evil = true
 		
 
-
+#On Ready
 func start_minigame():
 	choose_variant()
 	apply_variant()
@@ -67,6 +66,7 @@ func end_minigame():
 func _ready() -> void:
 	start_minigame()
 
+#Evil Variant script. Work in Progress
 var random_index = randi_range(0, input_array.size() - 1)
 func evilize():
 	#input_array = ["Left","Left","Right"]
@@ -114,7 +114,7 @@ func _input(_event : InputEvent):
 			else:
 				incorrect_input()
 			win()
-
+#On correct Input
 func correct_input():
 		print("cool")
 		input_index = input_index + 1 #Advances in the string index
@@ -123,7 +123,7 @@ func correct_input():
 		var current_sprite : ArrowSprite = sprite_array.pop_front()
 		if current_sprite:
 			current_sprite.correct()
-
+#On incorrect Input
 func incorrect_input():
 	print("Lame!")
 	$Reaction.set_texture(failure)

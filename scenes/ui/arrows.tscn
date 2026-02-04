@@ -67,7 +67,6 @@ metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
 [node name="Arrows" type="Node" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 script = ExtResource("1_0iavb")
-input_length = 6
 input_string = NodePath("TextEdit")
 reaction = NodePath("Reaction")
 potential_fish = Array[ExtResource("2_sopvo")]([SubResource("Resource_y6h51"), SubResource("Resource_phdib"), SubResource("Resource_m0i64"), SubResource("Resource_ybko8"), SubResource("Resource_epdnh")])
