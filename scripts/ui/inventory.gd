@@ -1,31 +1,31 @@
 extends Node
 
-#List of fish names and the position in the array index:
-const FISH_NAMES: = [
-	"Sunfish", #id 0
-	"Tuna", # id 1
-	"Minnow", # id 2
-	"Bluetang", #id 3
-	"Pompano", #id 4
-]
+#Dictionary: key is FishData resource
 
-#Player's inventory: Fish IDs
-var inventory: Array[int] = []
+#How many of a fish a player has
+var fish_counts: ={}
 
-#Add fish by id number
-func add_fish(id: int) -> void:
-	inventory.append(id)
+#add fish to inventory
+func add_fish(fish: FishData, amount: int = 1) -> void:
+	if fish_counts.has(fish):
+		fish_counts[fish] += amount
+	else:
+		fish_counts[fish] = amount
 
-#Remove fish by id number
-func remove_fish(id: int) -> void:
-	inventory.erase(id)
+#Remove fish from inventory
+func remove_fish(fish: FishData, amount: int = 1) -> void:
+	if not fish_counts.has(fish):
+		return
+	fish_counts[fish] -= amount
+	if fish_counts[fish] <= 0:
+		fish_counts.erase(fish)
 
 #Check if the player has at least one of a fish
-func has_fish(id: int) -> bool:
-	return id in inventory
+func has_fish(fish: FishData) -> bool:
+	return fish_counts.has(fish) and fish_counts[fish] > 0
 
-#Turn fish id into the fish's name
-func get_fish_name(id: int) -> String:
-	if id >= 0 and id < FISH_NAMES.size():
-		return FISH_NAMES[id]
-	return "Unknown Fish"
+#How many of this fish does player have
+func get_fish_count(fish: FishData) -> int:
+	if fish_counts.has(fish):
+		return fish_counts[fish]
+	return 0
