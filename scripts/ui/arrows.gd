@@ -29,28 +29,32 @@ var varied_evil : bool = false #Evil Variant
 #Protoype for making variants. If fish is variant, makes arrows gold and fails on incorrect input
 func choose_variant():
 	chosen_variant = variants.pick_random()
+	
+var random_index : int
+
 #Applies Variant
 func apply_variant():
 	if chosen_variant =="Gold":
 		varied_gold = true
 	elif chosen_variant == "Evil":
 		varied_evil = true
+		random_index = randi_range(1, input_array.size()-1)
+		print(random_index)
+		
 		
 
 #On Ready
 func start_minigame():
 	choose_variant()
-	apply_variant()
 	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
 	current_fish.intialize() # Prepares the array of correct inputs
 	correct_inputs = current_fish.current_inputs # Loads the array of correct Inputs
 	input_array = current_fish.current_inputs
+	apply_variant()
 	display_text = correct_inputs.duplicate(true)
 	print(current_fish.name) #Debug
 	cleared = false
-	if varied_evil:
-		evilize()
 	timer.start(current_fish.time)
 	#text_render()
 	timer.set_paused(false)
@@ -59,6 +63,7 @@ func start_minigame():
 	spawn_arrows()
 
 func end_minigame():
+	
 	current_fish = null
 	
 
@@ -67,9 +72,7 @@ func _ready() -> void:
 	start_minigame()
 
 #Evil Variant script. Work in Progress
-var random_index = randi_range(0, input_array.size() - 1)
 func evilize():
-	#input_array = ["Left","Left","Right"]
 	if input_array[random_index] == "Left":
 		input_array[random_index]= "Right"
 	elif input_array[random_index] == "Up":
@@ -116,7 +119,6 @@ func _input(_event : InputEvent):
 			win()
 #On correct Input
 func correct_input():
-		print("cool")
 		input_index = input_index + 1 #Advances in the string index
 		#text_render()
 		$Reaction.set_texture(success)
@@ -125,7 +127,6 @@ func correct_input():
 			current_sprite.correct()
 #On incorrect Input
 func incorrect_input():
-	print("Lame!")
 	$Reaction.set_texture(failure)
 	var incorrect_sprite: ArrowSprite = sprite_array[0]
 	incorrect_sprite.incorrect()
@@ -189,8 +190,6 @@ func spawn_arrows():
 			$ArrowSprite.modulate = Color.GOLD
 		elif varied_evil:
 			evilize()
-			if input_array[random_index] == i:
-				$ArrowSprite.modulate = Color.RED
 		count += 1
 		var node_to_copy = $ArrowSprite
 		var copy = node_to_copy.duplicate()
@@ -200,4 +199,6 @@ func spawn_arrows():
 		copy.position = Vector2($ArrowOrigin.position.x +(count * 130), $ArrowOrigin.position.y)
 		measurement += 200
 	print(input_array)
+	var evil : ArrowSprite = sprite_array[random_index]
+	evil.evilize()
 	$ArrowLoader.position = Vector2($ArrowOrigin.position.x - measurement, $ArrowOrigin.position.y)
