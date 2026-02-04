@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="FishData" load_steps=3 format=3 uid="uid://4g6bcbg4xyqd"]
+
+[ext_resource type="Texture2D" uid="uid://ciytcol0qrkmt" path="res://assets/textures/fish/doodle_fish/Fish04.png" id="1_3yw5x"]
+[ext_resource type="Script" uid="uid://hawtjwmqqseb" path="res://scripts/util/FishData.gd" id="1_4gde3"]
+
+[resource]
+script = ExtResource("1_4gde3")
+display_name = "Fish03"
+fish_price = 3
+icon = ExtResource("1_3yw5x")
+metadata/_custom_type_script = "uid://hawtjwmqqseb"

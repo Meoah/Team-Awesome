@@ -1,0 +1,103 @@
+[gd_scene load_steps=8 format=3 uid="uid://yvxxbukkwo6m"]
+
+[ext_resource type="Texture2D" uid="uid://cwkwalyu450bw" path="res://assets/textures/ui/Filler_Shop_BG2.png" id="1_a0t8v"]
+[ext_resource type="Script" uid="uid://fkm8rjtl2qav" path="res://scripts/game/inventory_shop.gd" id="1_p0da1"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_7jlnl"]
+[ext_resource type="Texture2D" uid="uid://bowp4xp3b2o8q" path="res://assets/textures/ui/button_brown.png" id="3_7jlnl"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p0da1"]
+texture = ExtResource("1_a0t8v")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cde6c"]
+texture = ExtResource("3_7jlnl")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_of57g"]
+texture = ExtResource("3_7jlnl")
+
+[node name="InventoryShop" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_p0da1")
+
+[node name="ShopPanel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_p0da1")
+
+[node name="Label" type="Label" parent="ShopPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -74.5
+offset_top = -123.0
+offset_right = 74.5
+offset_bottom = -77.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.28359714, 0.36124036, 0.28353342, 1)
+theme_override_fonts/font = ExtResource("2_7jlnl")
+theme_override_font_sizes/font_size = 64
+text = "Arrow Fishing Shop"
+
+[node name="FishListContainer" type="VBoxContainer" parent="ShopPanel"]
+layout_mode = 0
+offset_left = 204.0
+offset_top = 331.0
+offset_right = 472.0
+offset_bottom = 616.0
+
+[node name="Label" type="Label" parent="ShopPanel/FishListContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28235295, 0.36078432, 0.28235295, 1)
+theme_override_fonts/font = ExtResource("2_7jlnl")
+theme_override_font_sizes/font_size = 50
+text = "Fish:"
+
+[node name="FishPriceContainer" type="VBoxContainer" parent="ShopPanel"]
+layout_mode = 0
+offset_left = 829.0
+offset_top = 323.0
+offset_right = 993.0
+offset_bottom = 616.0
+
+[node name="Label" type="Label" parent="ShopPanel/FishPriceContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.28235295, 0.36078432, 0.28235295, 1)
+theme_override_fonts/font = ExtResource("2_7jlnl")
+theme_override_font_sizes/font_size = 50
+text = "Price:"
+
+[node name="BuyButton" type="Button" parent="ShopPanel"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 630.0
+offset_right = 164.0
+offset_bottom = 711.0
+theme_override_colors/font_color = Color(0.1764706, 0.23137255, 0.1764706, 1)
+theme_override_fonts/font = ExtResource("2_7jlnl")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxTexture_cde6c")
+text = "Sell"
+
+[node name="CloseButton" type="Button" parent="ShopPanel"]
+layout_mode = 0
+offset_left = 1208.0
+offset_top = 635.0
+offset_right = 1272.0
+offset_bottom = 707.0
+theme_override_colors/font_color = Color(0.28235295, 0.36078432, 0.28235295, 1)
+theme_override_fonts/font = ExtResource("2_7jlnl")
+theme_override_font_sizes/font_size = 40
+theme_override_styles/normal = SubResource("StyleBoxTexture_of57g")
+text = "X"
