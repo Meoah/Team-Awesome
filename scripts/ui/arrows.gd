@@ -182,6 +182,7 @@ func win():
 		elif varied_evil:
 			current_value = current_fish.value * 1.5
 		elif varied_obscured:
+			smoke_anim()
 			current_value = current_fish.value * 1.75
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
 		player_data.add_score(current_fish.value)
@@ -190,6 +191,7 @@ func win():
 
 func smoke_anim():
 	var tween = get_tree().create_tween()
+	tween.tween_property($Smoke, "Scale", Vector2(3,3), 0.5)
 
 
 
