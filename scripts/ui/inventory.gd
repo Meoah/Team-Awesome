@@ -3,7 +3,7 @@ extends Node
 #Dictionary: key is FishData resource
 
 #How many of a fish a player has
-var fish_counts: ={}
+var fish_counts: Dictionary = {}
 
 #add fish to inventory
 func add_fish(fish: FishData, amount: int = 1) -> void:
@@ -29,3 +29,7 @@ func get_fish_count(fish: FishData) -> int:
 	if fish_counts.has(fish):
 		return fish_counts[fish]
 	return 0
+
+#Getting a list of all fish types the player has
+func get_fish_list() -> Array:
+	return fish_counts.keys()
