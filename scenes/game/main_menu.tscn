@@ -14,13 +14,14 @@
 [ext_resource type="Texture2D" uid="uid://2wer6ur45n82" path="res://assets/textures/ui/MusicVolume_Button.png" id="11_nsdtn"]
 [ext_resource type="Texture2D" uid="uid://dkyx8of0ikxer" path="res://assets/textures/ui/Fullscreen_Button.png" id="12_4oldi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16onh"]
-bg_color = Color(0.22267213, 0.1360487, 0.06799795, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4oldi"]
+bg_color = Color(0.65882355, 0.5568628, 0.5058824, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1f7y1"]
 texture = ExtResource("6_6hh85")
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oldi"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_648uh"]
+expand_margin_left = 323.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nsdtn"]
 texture = ExtResource("8_efcww")
@@ -54,10 +55,13 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -3.0
+offset_left = -8.0
+offset_top = -1.0
+offset_right = 3.0
+offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_16onh")
+theme_override_styles/panel = SubResource("StyleBoxFlat_4oldi")
 
 [node name="MainButtons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -126,13 +130,13 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -272.5
+offset_left = -276.0
 offset_top = -120.0
 offset_right = 272.5
 offset_bottom = 284.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4oldi")
+theme_override_styles/panel = SubResource("StyleBoxTexture_648uh")
 
 [node name="Label" type="Label" parent="Settings"]
 layout_mode = 1
