@@ -38,13 +38,14 @@ func apply_variant():
 		varied_gold = true
 	elif chosen_variant == "Evil":
 		varied_evil = true
-		random_index = randi_range(1, input_array.size()-1)
+		random_index = randi_range(0, input_array.size()-1)
 		print(random_index)
 		
 		
 
 #On Ready
 func start_minigame():
+	
 	choose_variant()
 	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
@@ -63,7 +64,8 @@ func start_minigame():
 	spawn_arrows()
 
 func end_minigame():
-	
+	varied_evil = false
+	varied_gold = false
 	current_fish = null
 	
 
@@ -72,16 +74,17 @@ func _ready() -> void:
 	start_minigame()
 
 #Evil Variant script. Work in Progress
+var evil_array : Array[String]
 func evilize():
-	if input_array[random_index] == "Left":
-		input_array[random_index]= "Right"
-	elif input_array[random_index] == "Up":
-		input_array[random_index]= "Down"
-	elif input_array[random_index] == "Right":
-		input_array[random_index]= "Left"
-	elif input_array[random_index] == "Down":
-		input_array[random_index]= "Up"
-		
+	evil_array = display_text.duplicate()
+	if display_text[random_index] == "Left":
+		evil_array[random_index]= "Right"
+	elif display_text[random_index] == "Up":
+		evil_array[random_index]= "Down"
+	elif display_text[random_index] == "Right":
+		evil_array[random_index]= "Left"
+	elif display_text[random_index] == "Down":
+		evil_array[random_index]= "Up"
 
 #Displays the list of inputs for debug
 var output = ""
@@ -185,11 +188,14 @@ func spawn_arrows():
 	sprite_array = []
 	var count : int =0
 	var measurement : int = 0
-	for i in input_array:
+	var spawn_string : Array[String]
+	spawn_string = display_text
+	if varied_evil:
+		evilize()
+		spawn_string = evil_array.duplicate()
+	for i in spawn_string:
 		if varied_gold:
 			$ArrowSprite.modulate = Color.GOLD
-		elif varied_evil:
-			evilize()
 		count += 1
 		var node_to_copy = $ArrowSprite
 		var copy = node_to_copy.duplicate()
@@ -199,6 +205,7 @@ func spawn_arrows():
 		copy.position = Vector2($ArrowOrigin.position.x +(count * 130), $ArrowOrigin.position.y)
 		measurement += 200
 	print(input_array)
-	var evil : ArrowSprite = sprite_array[random_index]
-	evil.evilize()
+	if varied_evil:
+		var evil : ArrowSprite = sprite_array[random_index]
+		evil.evilize()
 	$ArrowLoader.position = Vector2($ArrowOrigin.position.x - measurement, $ArrowOrigin.position.y)
