@@ -19,18 +19,19 @@ var input_index = 0 #Holds the index for the current input in the input array
 var progress : float 
 var caught = 0 #Holds ammount of fish caught
 var sprite_array : Array[ArrowSprite] #Accessing the ArrowSprite Class
-
+var current_value = 0
 
 var variant #Sets up current fish variant
 var chosen_variant : String #Holds the current variant
 var varied_gold : bool = false #Gold Variant
 var varied_evil : bool = false #Evil Variant
-
+var varied_obscured : bool = false #Obscured Variant
 #Protoype for making variants. If fish is variant, makes arrows gold and fails on incorrect input
 func choose_variant():
 	chosen_variant = variants.pick_random()
-	
+	apply_variant()
 var random_index : int
+
 
 #Applies Variant
 func apply_variant():
@@ -40,24 +41,25 @@ func apply_variant():
 		varied_evil = true
 		random_index = randi_range(0, input_array.size()-1)
 		print(random_index)
+	elif  chosen_variant == "Obscured":
+		varied_obscured = true
+	
 		
 		
 
 #On Ready
 func start_minigame():
-	
 	choose_variant()
 	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
 	current_fish.intialize() # Prepares the array of correct inputs
+	current_value = current_fish.value
 	correct_inputs = current_fish.current_inputs # Loads the array of correct Inputs
 	input_array = current_fish.current_inputs
-	apply_variant()
 	display_text = correct_inputs.duplicate(true)
 	print(current_fish.name) #Debug
 	cleared = false
 	timer.start(current_fish.time)
-	#text_render()
 	timer.set_paused(false)
 	progress_bar.max_value = current_fish.time
 	input_index = 0
@@ -66,6 +68,7 @@ func start_minigame():
 func end_minigame():
 	varied_evil = false
 	varied_gold = false
+	varied_obscured = false
 	current_fish = null
 	
 
@@ -175,11 +178,18 @@ func win():
 		input_index = 0
 		print(current_fish.name)
 		if varied_gold: #If fish is gold double its value, Current bug where double value persist
-			current_fish.value *= 2
-		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_fish.value))
+			current_value = current_fish.value * 2
+		elif varied_evil:
+			current_value = current_fish.value * 1.5
+		elif varied_obscured:
+			current_value = current_fish.value * 1.75
+		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
 		player_data.add_score(current_fish.value)
 		await get_tree().create_timer(3).timeout
 		get_tree().reload_current_scene()
+
+func smoke_anim():
+	var tween = get_tree().create_tween()
 
 
 
@@ -193,6 +203,7 @@ func spawn_arrows():
 	if varied_evil:
 		evilize()
 		spawn_string = evil_array.duplicate()
+	# For loop that spawns arrows
 	for i in spawn_string:
 		if varied_gold:
 			$ArrowSprite.modulate = Color.GOLD
@@ -208,4 +219,7 @@ func spawn_arrows():
 	if varied_evil:
 		var evil : ArrowSprite = sprite_array[random_index]
 		evil.evilize()
+	elif varied_obscured:
+		random_index = randi_range(0, input_array.size()-1)
+		$Smoke.position = sprite_array[random_index].position
 	$ArrowLoader.position = Vector2($ArrowOrigin.position.x - measurement, $ArrowOrigin.position.y)
