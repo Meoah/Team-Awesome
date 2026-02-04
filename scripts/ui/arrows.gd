@@ -222,5 +222,5 @@ func spawn_arrows():
 		evil.evilize()
 	elif varied_obscured:
 		random_index = randi_range(0, input_array.size()-1)
-		$Smoke.position = sprite_array[random_index].global_position
+		$Smoke.global_position = sprite_array[random_index].global_position
 		print(random_index)
