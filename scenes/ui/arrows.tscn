@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=25 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/arrows_display.gd" id="2_n3w4c"]
@@ -12,11 +12,13 @@
 [ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
 [ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="10_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="11_xp8ps"]
-[ext_resource type="Texture2D" uid="uid://bqy8a400kryy0" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
+[ext_resource type="Texture2D" uid="uid://biahjfifu84x8" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
 [ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="12_mx6gi"]
 [ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="13_8ksox"]
 [ext_resource type="Script" uid="uid://chymghsucyl7j" path="res://scenes/ui/arrow_sprite.gd" id="16_mx6gi"]
-[ext_resource type="Texture2D" uid="uid://ca30ev300gndn" path="res://assets/textures/ui/Arrows/effects/smoke.png" id="17_8ksox"]
+[ext_resource type="Texture2D" uid="uid://botd11s563y1p" path="res://assets/textures/ui/Arrows/effects/smoke.png" id="17_8ksox"]
+[ext_resource type="Script" uid="uid://bfh11uixb171m" path="res://scenes/ui/smoke.gd" id="18_63o2f"]
+[ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scenes/ui/texture_rect.gd" id="19_dleu3"]
 
 [sub_resource type="Resource" id="Resource_y6h51"]
 script = ExtResource("2_sopvo")
@@ -75,7 +77,7 @@ timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
-variants = Array[String](["Evil", "Gold", "Obscured", "None"])
+variants = Array[String](["Obscured", "Gold", "Gold", "Gold"])
 arrow_direction = Dictionary[String, Texture2D]({
 "Down": ExtResource("12_mx6gi"),
 "Left": ExtResource("10_qdfjh"),
@@ -114,6 +116,7 @@ gizmo_extents = 19.2
 
 [node name="ArrowSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+visible = false
 position = Vector2(263, -88)
 texture = ExtResource("11_ybko8")
 script = ExtResource("16_mx6gi")
@@ -124,12 +127,12 @@ light_mask = 512
 visibility_layer = 512
 z_index = 2
 z_as_relative = false
-position = Vector2(90.00001, -202.00002)
-scale = Vector2(0.29940444, 0.29940444)
+position = Vector2(134, -102)
+scale = Vector2(0.44252267, 0.44252267)
 texture = ExtResource("17_8ksox")
+script = ExtResource("18_63o2f")
 
 [node name="Control" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,22 +141,22 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
-visible = false
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -20.0
-offset_top = 154.0
+offset_top = -233.0
 offset_right = 20.0
-offset_bottom = 194.0
+offset_bottom = -193.0
 grow_horizontal = 2
-theme_override_constants/separation = 200
+grow_vertical = 2
 alignment = 1
 
 [node name="TextureRect" type="TextureRect" parent="Control/HBoxContainer"]
-visible = false
 layout_mode = 2
-texture = ExtResource("11_ybko8")
+script = ExtResource("19_dleu3")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

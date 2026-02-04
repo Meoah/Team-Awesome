@@ -18,7 +18,7 @@ var current_fish : FishResource #Holds the current fish in play
 var input_index = 0 #Holds the index for the current input in the input array
 var progress : float 
 var caught = 0 #Holds ammount of fish caught
-var sprite_array : Array[ArrowSprite] #Accessing the ArrowSprite Class
+var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
 var current_value = 0
 
 var variant #Sets up current fish variant
@@ -128,13 +128,17 @@ func correct_input():
 		input_index = input_index + 1 #Advances in the string index
 		#text_render()
 		$Reaction.set_texture(success)
-		var current_sprite : ArrowSprite = sprite_array.pop_front()
+		var current_sprite : ArrowTexture = sprite_array.pop_front()
+		var smoke : smoke_sprite = $Smoke
+		if varied_obscured:
+			if input_index == random_index +1:
+				smoke.smoke_anim()
 		if current_sprite:
 			current_sprite.correct()
 #On incorrect Input
 func incorrect_input():
 	$Reaction.set_texture(failure)
-	var incorrect_sprite: ArrowSprite = sprite_array[0]
+	var incorrect_sprite: ArrowTexture = sprite_array[0]
 	incorrect_sprite.incorrect()
 	if varied_gold:
 		fail()
@@ -182,16 +186,11 @@ func win():
 		elif varied_evil:
 			current_value = current_fish.value * 1.5
 		elif varied_obscured:
-			smoke_anim()
 			current_value = current_fish.value * 1.75
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
 		player_data.add_score(current_fish.value)
 		await get_tree().create_timer(3).timeout
 		get_tree().reload_current_scene()
-
-func smoke_anim():
-	var tween = get_tree().create_tween()
-	tween.tween_property($Smoke, "Scale", Vector2(3,3), 0.5)
 
 
 
@@ -208,20 +207,20 @@ func spawn_arrows():
 	# For loop that spawns arrows
 	for i in spawn_string:
 		if varied_gold:
-			$ArrowSprite.modulate = Color.GOLD
+			$Control/HBoxContainer/TextureRect.modulate = Color.GOLD
 		count += 1
-		var node_to_copy = $ArrowSprite
+		var node_to_copy = $Control/HBoxContainer/TextureRect
 		var copy = node_to_copy.duplicate()
 		copy.texture = arrow_direction[i]
-		add_child(copy)
+		$Control/HBoxContainer.add_child(copy)
 		sprite_array.append(copy)
-		copy.position = Vector2($ArrowOrigin.position.x +(count * 130), $ArrowOrigin.position.y)
+		#copy.position = Vector2($Control/HBoxContainer.position.x +(count * 130), $Control/HBoxContainer.position.y)
 		measurement += 200
 	print(input_array)
 	if varied_evil:
-		var evil : ArrowSprite = sprite_array[random_index]
+		var evil : ArrowTexture = sprite_array[random_index]
 		evil.evilize()
 	elif varied_obscured:
 		random_index = randi_range(0, input_array.size()-1)
-		$Smoke.position = sprite_array[random_index].position
-	$ArrowLoader.position = Vector2($ArrowOrigin.position.x - measurement, $ArrowOrigin.position.y)
+		$Smoke.position = sprite_array[random_index].global_position
+		print(random_index)
