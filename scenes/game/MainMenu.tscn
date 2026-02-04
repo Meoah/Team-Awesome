@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://l85sf1pl7i3t"]
 
 [ext_resource type="Script" uid="uid://b00g45l37d66e" path="res://scripts/ui/inventory_ui.gd" id="1_8saeu"]
-[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="2_ghw46"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_df05h"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/Inventory_Images/panel_grey.png" id="2_ghw46"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/Inventory_Images/panel_brown_damaged_dark.png" id="3_df05h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6gduq"]
 texture = ExtResource("2_ghw46")
