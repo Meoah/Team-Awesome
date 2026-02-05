@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="TeamAwesome"
+config/name="ArrowFishing"
 run/main_scene="uid://bs6fqe1euvjxa"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -23,6 +23,7 @@ buses/default_bus_layout=""
 
 Inventory="*res://scripts/ui/inventory.gd"
 player_data="*res://scripts/system/player_data.gd"
+GameManager="*res://scenes/game_manager.tscn"
 
 [display]
 

@@ -1,0 +1,56 @@
+[gd_scene load_steps=3 format=3 uid="uid://cdkbsqrirtj57"]
+
+[ext_resource type="Script" uid="uid://lx5ecq1uhafl" path="res://scripts/ui/pop_ups/generic_popup.gd" id="1_xhbn7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xhbn7"]
+font_size = 32
+
+[node name="GenericPopup" type="Control"]
+top_level = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xhbn7")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.35
+anchor_right = 0.7
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.60996395, 0.42451394, 0.2680214, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.5
+offset_top = -22.5
+offset_right = 113.5
+offset_bottom = 22.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Generic Popup"
+label_settings = SubResource("LabelSettings_xhbn7")
+
+[node name="Exit" type="Button" parent="ColorRect"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -18.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "X"
+
+[connection signal="pressed" from="ColorRect/Exit" to="." method="_on_exit_pressed"]
