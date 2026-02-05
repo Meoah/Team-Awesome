@@ -51,18 +51,10 @@ func get_current_state() -> State : return state_machine.current_state
 func get_scene_container() -> Control : return scene_root
 
 ## Requests by other systems. Returns false if invalid transition
-func request_play() -> bool:
-	var success : bool = state_machine.transition_to(play_state)
-	return success
-func request_pause() -> bool:
-	var success : bool = state_machine.transition_to(pause_state)
-	return success
-func request_unpause() -> bool:
-	var success : bool = state_machine.transition_to(play_state)
-	return success
-func request_main_menu() -> bool:
-	var success : bool = state_machine.transition_to(main_menu_state)
-	return success
+func request_play() -> bool : return state_machine.transition_to(play_state) == OK
+func request_pause() -> bool : return state_machine.transition_to(pause_state) == OK
+func request_unpause() -> bool : return state_machine.transition_to(play_state) == OK
+func request_main_menu() -> bool : return state_machine.transition_to(main_menu_state) == OK
 
 # Clears any popups left in queue.
 func clear_popup_queue() -> void:

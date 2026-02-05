@@ -44,7 +44,7 @@ func set_params(_params: Dictionary = {}) -> void:
 	
 	_on_set_params()
 
-## Bit flag confirmation functions
+## Bit flag confirmation functions.
 func is_will_pause() -> bool:
 	return flags & POPUP_FLAG.WILL_PAUSE
 func is_dismiss_on_escape() -> bool:
@@ -52,7 +52,7 @@ func is_dismiss_on_escape() -> bool:
 func is_dismiss_on_click_out() -> bool:
 	return flags & POPUP_FLAG.DISMISS_ON_CLICK_OUT
 
-## Functions to be overwriten by child
+## Functions to be overwriten by child.
 func _on_set_params() -> void : pass
 func _on_init() -> void : pass
 func _on_ready() -> void : pass
