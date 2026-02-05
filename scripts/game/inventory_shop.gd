@@ -10,7 +10,7 @@ var FISH04 = preload("res://assets/textures/fish/doodle_fish/Fish04.tres")
 
 var ALL_FISH := [FISH01, FISH02, FISH03, FISH04]
 
-#Finds FishGrid Container
+#Finds FishGrid Container to put icons
 @onready var fish_grid = $FishIconPanel/FishFrid
 
 func _ready() -> void:
@@ -24,14 +24,31 @@ func _show_fish_icons() -> void:
 	#clear out any icons
 	for child in fish_grid.get_children():
 		child.queue_free()
+		
 	#Create an icon and add it to the grid
 	for fish in ALL_FISH:
 		if fish.icon == null:
 			continue
+			
+		var slot := VBoxContainer.new()
+		slot.alignment = BoxContainer.ALIGNMENT_CENTER
+		slot.custom_minimum_size = Vector2(80, 100)
+		
 		var icon_rect := TextureRect.new()
+		
+		#create clickable icon
+		var icon_button := TextureButton.new()
+		icon_button.texture_normal = fish.icon
+		icon_button.expand_icon = true
 		icon_rect.texture = fish.icon
-	
-
+		icon_rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		icon_rect.custom_minimum_size = Vector2(64,64)
+		#Click button sells the fish
+		icon_button.pressed.connect(func():
+			sell_fish(fish)
+			_show_fish_icons()
+			)
+		fish_grid.add_child(icon_rect)
 func sell_fish(fish: FishData) -> void:
 	if not Inventory.has_fish(fish):
 		print("Player does not have any ", fish.display_name)
