@@ -21,7 +21,6 @@ func _on_start_pressed():
 
 
 func _on_settings_pressed():
-	print("Settings Pressed")
 	main_buttons.visible = false
 	settings.visible = true
 	
