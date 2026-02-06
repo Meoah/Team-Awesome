@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://c4g7xtu4dc0po"]
 
-[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://Graphics/MCPlaceholder.png" id="1_2fv12"]
+[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/MCPlaceholder.png" id="1_2fv12"]
 
 [node name="McPlaceholder" type="Sprite2D"]
 texture = ExtResource("1_2fv12")
