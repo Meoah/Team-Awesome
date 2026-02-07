@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbglpr386ufui"]
+
+[ext_resource type="Script" uid="uid://coi7pn1tt7wob" path="res://scripts/ui/inventory_pop_up.gd" id="1_wi076"]
+
+[node name="InventoryPopUP" type="PopupPanel"]
+oversampling_override = 1.0
+size = Vector2i(300, 100)
+visible = true
+script = ExtResource("1_wi076")
+
+[node name="Inventory" type="Label" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 96.0
+text = "Inventory"
+
+[node name="FishListContainer" type="VBoxContainer" parent="."]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 296.0
+offset_bottom = 96.0

@@ -5,6 +5,7 @@ class_name PopupLibrary
 const _BLOCKER = preload("res://scenes/ui/pop_ups/blocker.tscn")
 const _GENERIC = preload("res://scenes/ui/pop_ups/generic_popup.tscn")
 const _PAUSE = preload("res://scenes/ui/pop_ups/pause_popup.tscn")
+const _ARROWUI = preload("res://scenes/ui/arrows.tscn")
 
 # Returns a popup with desired parameters if requested.
 static func create_popup(popup_type: int, params: Dictionary = {}) -> BasePopup:
@@ -13,6 +14,8 @@ static func create_popup(popup_type: int, params: Dictionary = {}) -> BasePopup:
 	
 	# Look for the requested popup and instantiate it.
 	match popup_type:
+		BasePopup.POPUP_TYPE.ARROWUI:
+			popup = _ARROWUI.instantiate()
 		BasePopup.POPUP_TYPE.PAUSE: #TODO Pause Menu. This is here for demonstration purposes.
 			popup = _PAUSE.instantiate()
 		_: # Default

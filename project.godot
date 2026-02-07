@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ArrowFishing"
-run/main_scene="uid://bs6fqe1euvjxa"
+run/main_scene="uid://cse3lh8hmmmvr"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
