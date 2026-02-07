@@ -1,4 +1,5 @@
-extends Node
+extends BasePopup
+class_name ArrowUIPopup
 
 @export var input_string : TextEdit #Accessing TextEdit box
 @export var reaction : Sprite2D #Accessing Sprite2D for reaction image
@@ -147,12 +148,14 @@ func incorrect_input():
 	set_process_input(true)
 
 
+
 #Countdowns the progress bar
-func _physics_process(_delta):
+func _process(_delta):
 	progress_bar.value = timer.time_left
+	$ProgressBar/Label.set_text("%.2f s" % timer.time_left)
 	if cleared:
 		timer.set_paused(true)
-	pass
+
 #Time runout
 func _on_timer_timeout() -> void:
 	fail() # Replace with function body.

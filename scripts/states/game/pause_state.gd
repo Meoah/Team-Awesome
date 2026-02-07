@@ -12,8 +12,7 @@ func _init(parent : StateMachine) -> void:
 func enter(previous_state: State, data: Dictionary = {}) -> void:
 	super.enter(previous_state, data)
 	signal_paused.emit()
-	
-	Engine.time_scale = 0.0
+	GameManager.get_tree().paused = true
 
 func exit(_next_state : State) -> void:
-	Engine.time_scale = 1.0
+	GameManager.get_tree().paused = false

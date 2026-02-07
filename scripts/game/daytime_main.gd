@@ -56,13 +56,9 @@ func _process(delta: float) -> void:
 		$FISH.play("FISH!") #Plays FISH! Animation
 		await get_tree().create_timer(1).timeout
 		if fishingMinigameScene:
-			var minigame = fishingMinigameScene.instantiate()
-			add_child(minigame)
+			GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.ARROWUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
 			
 	MC.global_position.y = MCOriginY + sin(boatTimer * 4.0) * 2.0
-
-
-
 
 
 func _on_water_body_entered(body: Node2D) -> void:

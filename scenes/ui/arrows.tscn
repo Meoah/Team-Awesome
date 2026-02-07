@@ -68,7 +68,10 @@ correct_inputs = Array[String](["Right", "Left", "Left", "Left", "Up", "Down"])
 time = 2.25
 metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
 
-[node name="Arrows" type="Node" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
+[node name="Arrows" type="Control" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_0iavb")
 input_string = NodePath("TextEdit")
 reaction = NodePath("Reaction")
@@ -85,14 +88,13 @@ arrow_direction = Dictionary[String, Texture2D]({
 "Up": ExtResource("11_xp8ps")
 })
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
-
 [node name="TextEdit" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = 297.0
 offset_top = 60.0
 offset_right = 983.0
 offset_bottom = 262.0
+editable = false
 script = ExtResource("2_n3w4c")
 
 [node name="Reaction" type="Sprite2D" parent="."]
@@ -100,19 +102,26 @@ position = Vector2(635, 479.99994)
 scale = Vector2(0.6746573, 0.6708732)
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
+layout_mode = 0
 offset_left = 378.0
 offset_top = 360.0
 offset_right = 911.0
 offset_bottom = 387.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "5.0 s"
+horizontal_alignment = 1
 
 [node name="Timer" type="Timer" parent="."]
+process_mode = 3
 one_shot = true
-
-[node name="ArrowOrigin" type="Marker2D" parent="."]
-position = Vector2(306, 159)
-
-[node name="ArrowLoader" type="Marker2D" parent="."]
-gizmo_extents = 19.2
 
 [node name="ArrowSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
@@ -133,7 +142,7 @@ texture = ExtResource("17_8ksox")
 script = ExtResource("18_63o2f")
 
 [node name="Control" type="Control" parent="."]
-layout_mode = 3
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
