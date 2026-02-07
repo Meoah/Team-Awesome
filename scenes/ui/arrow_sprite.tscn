@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://d3ws1cm3wid84"]
+
+[ext_resource type="Texture2D" uid="uid://biahjfifu84x8" path="res://assets/textures/ui/Arrows/Arrows.png" id="1_4kwyt"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpjwi"]
+atlas = ExtResource("1_4kwyt")
+region = Rect2(0, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_al0ka"]
+atlas = ExtResource("1_4kwyt")
+region = Rect2(100, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kqdec"]
+atlas = ExtResource("1_4kwyt")
+region = Rect2(300, 0, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sngsu"]
+atlas = ExtResource("1_4kwyt")
+region = Rect2(200, 0, 100, 100)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_doxnq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpjwi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_al0ka")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kqdec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sngsu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="ArrowSprite" type="Node2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_doxnq")
