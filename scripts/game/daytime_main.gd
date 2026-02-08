@@ -7,7 +7,7 @@ extends Node2D
 @export var bobber_scene : PackedScene
 @export var info : Label #Temp
 @export var Indicator : Sprite2D
-@export var nighttime_scene : PackedScene
+
 
 var timeSinceCast : float = 0.0
 var bobberActive : bool = false
@@ -29,7 +29,7 @@ func _ready() -> void:
 	fishTimer = randf() * 5
 	bobber = bobber_scene.instantiate()
 	
-	if player_data.get_day() == 1:
+	if player_data.get_day() == 1 && player_data.get_week() == 1:
 		player_data._add_bait("generic", 5)
 
 func _process(delta: float) -> void:
@@ -102,7 +102,7 @@ func is_can_fish() -> bool:
 	return false
 
 func _end_day() -> void:
-	GameManager.change_scene_deferred(nighttime_scene)
+	GameManager.change_scene_deferred(GameManager.nighttime_scene)
 
 func _on_water_body_entered(body: Node2D) -> void:
 	if body == bobber && !bobberInWater:

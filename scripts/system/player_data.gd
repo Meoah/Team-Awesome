@@ -36,12 +36,17 @@ func _set_money(money : float) -> void : player_money = money
 func get_money() -> float : return player_money
 func _add_money(money : float) -> void : player_money += money
 func _reset_money() -> void : player_money = 0.0
+func spend_money(cost : float) -> bool:
+	if cost > player_money:
+		return false
+	player_money -= cost
+	return true
 
 ## Week and day methods. Five days in a week.
 func _set_day(input_day : int) -> void : day = input_day
 func _next_day() -> void : day += 1
 func get_day() -> int : return ((day - 1) % 5) + 1
-func get_week() -> int : return (day / 5) + 1
+func get_week() -> int : return ((day - 1) / 5) + 1
 func _reset_day() -> void : day = 1
 
 ## Fish inventory methods.

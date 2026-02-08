@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
 [ext_resource type="Texture2D" uid="uid://l57dxqeycwpg" path="res://assets/textures/vfx/exclaim.png" id="5_ovvot"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
+[ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 
 [sub_resource type="Animation" id="Animation_qc6n8"]
@@ -110,11 +111,6 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
 size = Vector2(1280, 89)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ovom5"]
-font_size = 32
-outline_size = 4
-outline_color = Color(0, 0, 0, 1)
-
 [node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "info", "Indicator")]
 script = ExtResource("1_2jsv6")
 fishingMinigameScene = ExtResource("2_kebv3")
@@ -167,7 +163,7 @@ offset_left = 13.0
 offset_right = 105.0
 offset_bottom = 23.0
 text = "placeholder"
-label_settings = SubResource("LabelSettings_ovom5")
+label_settings = ExtResource("10_3kam8")
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = 3
