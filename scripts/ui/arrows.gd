@@ -172,7 +172,7 @@ func fail():
 		$ArrowSprite.erase()
 	cleared = true
 	await get_tree().create_timer(3).timeout
-	get_tree().reload_current_scene()
+	GameManager.popup_queue.dismiss_popup()
 
 #Win Script. Prints fish data and resets the scene after 3 seconds
 var cleared = false
@@ -193,7 +193,7 @@ func win():
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
 		player_data.add_score(current_fish.value)
 		await get_tree().create_timer(3).timeout
-		get_tree().reload_current_scene()
+		queue_free()
 
 
 

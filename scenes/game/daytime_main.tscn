@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=15 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -110,11 +110,16 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
 size = Vector2(1280, 89)
 
-[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "Bobber", "info", "Indicator")]
+[sub_resource type="LabelSettings" id="LabelSettings_ovom5"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "info", "Indicator")]
 script = ExtResource("1_2jsv6")
 fishingMinigameScene = ExtResource("2_kebv3")
 MC = NodePath("MainCharacter")
-Bobber = NodePath("Bobber")
+bobber_scene = ExtResource("3_6j7wl")
 info = NodePath("Info")
 Indicator = NodePath("Indicator")
 
@@ -129,8 +134,6 @@ scale = Vector2(0.15348448, 0.15348448)
 [node name="Indicator" type="Sprite2D" parent="."]
 position = Vector2(0, -50)
 texture = ExtResource("5_ovvot")
-
-[node name="Bobber" parent="." instance=ExtResource("3_6j7wl")]
 
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {
@@ -164,6 +167,22 @@ offset_left = 13.0
 offset_right = 105.0
 offset_bottom = 23.0
 text = "placeholder"
+label_settings = SubResource("LabelSettings_ovom5")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1066.0
+offset_top = 621.0
+offset_right = 1272.0
+offset_bottom = 711.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "End Day"
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
