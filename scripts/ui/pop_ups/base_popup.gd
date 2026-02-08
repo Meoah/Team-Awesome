@@ -6,7 +6,8 @@ enum POPUP_TYPE{
 	GENERIC,
 	PAUSE,
 	ARROWUI,
-	HUD
+	HUD,
+	INVENTORY
 }
 
 # Flags used to determine popup behavior.

@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dyaxs1jdloena"]
 
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/Inventory_Images/panel_brown_damaged_dark.png" id="1_c24ra"]
+[ext_resource type="Texture2D" uid="uid://c1xhmd7qvvqcl" path="res://assets/textures/ui/Inventory_Images/panel_brown_damaged_dark.png" id="1_c24ra"]
 
 [node name="Slot" type="Node2D"]
 

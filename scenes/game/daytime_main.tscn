@@ -2,13 +2,13 @@
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
+[ext_resource type="PackedScene" uid="uid://dptqmpmoflqxv" path="res://scenes/ui/inventory_ui.tscn" id="2_crqjc"]
 [ext_resource type="PackedScene" uid="uid://bbklku0slqk5d" path="res://scenes/ui/arrows.tscn" id="2_kebv3"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
-[ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
-[ext_resource type="Texture2D" uid="uid://dd3ee7km1o5o3" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
-[ext_resource type="Texture2D" uid="uid://cv2ycg3ht86i6" path="res://assets/textures/vfx/exclaim.png" id="5_ovvot"]
+[ext_resource type="Texture2D" uid="uid://daix6uusqocwr" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
+[ext_resource type="Texture2D" uid="uid://c7pelxeyw0oxs" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
+[ext_resource type="Texture2D" uid="uid://chpjagp0h54g6" path="res://assets/textures/vfx/exclaim.png" id="5_ovvot"]
 [ext_resource type="Texture2D" uid="uid://wxrv0tflaark" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
-[ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://cdwgpkev7q3be" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 
 [sub_resource type="Animation" id="Animation_qc6n8"]
@@ -111,12 +111,12 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
 size = Vector2(1280, 89)
 
-[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "info", "Indicator")]
+[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "Bobber", "Score", "Indicator")]
 script = ExtResource("1_2jsv6")
 fishingMinigameScene = ExtResource("2_kebv3")
 MC = NodePath("MainCharacter")
-bobber_scene = ExtResource("3_6j7wl")
-info = NodePath("Info")
+Bobber = NodePath("Bobber")
+Score = NodePath("Score")
 Indicator = NodePath("Indicator")
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -130,6 +130,8 @@ scale = Vector2(0.15348448, 0.15348448)
 [node name="Indicator" type="Sprite2D" parent="."]
 position = Vector2(0, -50)
 texture = ExtResource("5_ovvot")
+
+[node name="Bobber" parent="." instance=ExtResource("3_6j7wl")]
 
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {
@@ -148,6 +150,8 @@ position = Vector2(200, -200)
 scale = Vector2(3, 3)
 texture = ExtResource("10_nw8sa")
 
+[node name="Inventory_UI" parent="." instance=ExtResource("2_crqjc")]
+
 [node name="Water" type="Area2D" parent="."]
 position = Vector2(640, 360)
 
@@ -158,27 +162,10 @@ shape = SubResource("RectangleShape2D_6j7wl")
 [node name="Sprite2D" type="Sprite2D" parent="Water"]
 texture = ExtResource("5_8rhjh")
 
-[node name="Info" type="Label" parent="."]
-offset_left = 13.0
-offset_right = 105.0
+[node name="Score" type="Label" parent="."]
+offset_right = 40.0
 offset_bottom = 23.0
 text = "placeholder"
-label_settings = ExtResource("10_3kam8")
-
-[node name="Button" type="Button" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1066.0
-offset_top = 621.0
-offset_right = 1272.0
-offset_bottom = 711.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "End Day"
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
