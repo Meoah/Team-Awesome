@@ -3,7 +3,11 @@ class_name PlayerData
 
 var playerScore : float = 0.0
 #Attaches inventory to player data
-var inventory : Array = [] 
+var fish_inventory : Array = []
+var bait_inventory : Dictionary = {
+	"generic" = 0,
+	"special" = 0
+}
 
 func set_score(score : float) -> void:
 	playerScore = score
