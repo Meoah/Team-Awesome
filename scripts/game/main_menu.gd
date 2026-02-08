@@ -4,7 +4,7 @@ extends Control
 @onready var settings = $Settings
 @onready var gameStart
 
-@export_file  ("*.tscn") var start_scene_path: String 
+@export var daytime_scene : PackedScene
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	main_buttons.visible = true
@@ -17,7 +17,8 @@ func _process(_delta):
 
 
 func _on_start_pressed():
-	get_tree().change_scene_to_file(start_scene_path) #starts game
+	if GameManager.request_play():
+		GameManager.change_scene_deferred(daytime_scene)
 
 
 func _on_settings_pressed():

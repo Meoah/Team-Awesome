@@ -1,18 +1,19 @@
-[gd_scene load_steps=23 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=24 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
+[ext_resource type="PackedScene" uid="uid://4wis367byvft" path="res://scenes/game/daytime_main.tscn" id="2_73xsm"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
-[ext_resource type="Texture2D" uid="uid://dylf5rrqe6bh1" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
-[ext_resource type="Texture2D" uid="uid://v6txl6dvukk5" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
+[ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
+[ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
 [ext_resource type="AudioStream" uid="uid://bwq4tyjgoxrm0" path="res://assets/audio/bgm/1-01 Introduction.mp3" id="4_fpthd"]
-[ext_resource type="Texture2D" uid="uid://dxgpb3qp4tll" path="res://assets/textures/ui/Exit_Button.png" id="5_1f7y1"]
+[ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="5_1f7y1"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/ui/audio_volume.gd" id="5_df05h"]
-[ext_resource type="Texture2D" uid="uid://dw1w6ahlv5d5u" path="res://assets/textures/ui/Mock_Title.png" id="6_6hh85"]
+[ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="6_6hh85"]
 [ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/ui/fullscreen_control.gd" id="6_8um5k"]
-[ext_resource type="Texture2D" uid="uid://cdtrnvfx7a3s4" path="res://assets/textures/ui/Back_Button2.png" id="8_1f7y1"]
-[ext_resource type="Texture2D" uid="uid://cyqmepf4g26us" path="res://assets/textures/ui/Settings_Button.png" id="8_efcww"]
-[ext_resource type="Texture2D" uid="uid://dpwqywrutgwbm" path="res://assets/textures/ui/MusicVolume_Button.png" id="11_nsdtn"]
-[ext_resource type="Texture2D" uid="uid://dtx8hp5a3da3y" path="res://assets/textures/ui/Fullscreen_Button.png" id="12_4oldi"]
+[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="8_1f7y1"]
+[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/Settings_Button.png" id="8_efcww"]
+[ext_resource type="Texture2D" uid="uid://2wer6ur45n82" path="res://assets/textures/ui/MusicVolume_Button.png" id="11_nsdtn"]
+[ext_resource type="Texture2D" uid="uid://dkyx8of0ikxer" path="res://assets/textures/ui/Fullscreen_Button.png" id="12_4oldi"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16onh"]
 bg_color = Color(0.22267213, 0.1360487, 0.06799795, 1)
@@ -48,7 +49,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fpthd")
-start_scene_path = "uid://4wis367byvft"
+daytime_scene = ExtResource("2_73xsm")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
