@@ -18,9 +18,9 @@ var current_upgrades : int = 0
 
 # Bit flag system for upgrades.
 enum UPGRADE_FLAG{
-	ROD1 = 0 << 0,
-	ROD2 = 0 << 1,
-	ROD3 = 0 << 2
+	ROD1 = 1 << 0,
+	ROD2 = 1 << 1,
+	ROD3 = 1 << 2
 }
 
 # Resets everything to default values.
@@ -28,7 +28,7 @@ func _reset_all() -> void:
 	_reset_money()
 	_reset_day()
 	_reset_fish_inventory()
-	_reset_fish_inventory()
+	_reset_bait_inventory()
 	_reset_upgrades()
 
 ## Money methods
@@ -40,8 +40,8 @@ func _reset_money() -> void : player_money = 0.0
 ## Week and day methods. Five days in a week.
 func _set_day(input_day : int) -> void : day = input_day
 func _next_day() -> void : day += 1
-func get_day() -> int : return (day % 5) + 1
-func get_week() -> int : return day / 5
+func get_day() -> int : return ((day - 1) % 5) + 1
+func get_week() -> int : return (day / 5) + 1
 func _reset_day() -> void : day = 1
 
 ## Fish inventory methods.
@@ -65,7 +65,7 @@ func _remove_fish_at_index(index : int) -> void:
 ## Bait inventory methods.
 func _set_bait_inventory(bait_inv : Dictionary) -> void : for each in bait_inventory : if each in bait_inv : bait_inventory[each] = bait_inv[each]
 func get_bait_inventory() -> Dictionary : return bait_inventory
-func _add_bait(bait : String) -> void : if bait in bait_inventory : bait_inventory[bait] += 1
+func _add_bait(bait : String, quantity : int = 1) -> void : if bait in bait_inventory : bait_inventory[bait] += quantity
 func _reset_bait_inventory() -> void : for each in bait_inventory : bait_inventory[each] = 0
 
 # Attempts to use a bait. Returns false if either invalid bait or bait count is at 0.
