@@ -44,6 +44,7 @@ func _process(delta: float) -> void:
 		bobber.apply_impulse(Vector2(500,-500))
 		add_child(bobber)
 		move_child(bobber, 3)
+		player_data.use_bait("generic")
 		bobberActive = true
 	
 	#Placeholder bobber animation
@@ -57,12 +58,12 @@ func _process(delta: float) -> void:
 		bobber.set_freeze_enabled(false)
 		
 	if fishReady && Input.is_action_just_pressed("ui_accept"):
-		fishReady = false
-		bobberInWater = false
-		bobberActive = false
 		Indicator.global_position = Vector2(-100,-100)
 		$FISH.play("FISH!") #Plays FISH! Animation
 		await $FISH.animation_finished
+		fishReady = false
+		bobberInWater = false
+		bobberActive = false
 		bobber.queue_free()
 		bobber = bobber_scene.instantiate()
 		if fishingMinigameScene:

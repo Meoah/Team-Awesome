@@ -191,17 +191,15 @@ func win():
 		elif varied_obscured:
 			current_value = current_fish.value * 1.75
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
-		player_data.add_score(current_fish.value)
+		player_data._add_money(current_fish.value)
 		await get_tree().create_timer(3).timeout
-		queue_free()
+		GameManager.popup_queue.dismiss_popup()
 
 
 
 #Displays Arrow graphics
 func spawn_arrows():
 	sprite_array = []
-	var count : int =0
-	var measurement : int = 0
 	var spawn_string : Array[String]
 	spawn_string = display_text
 	if varied_evil:
@@ -211,14 +209,12 @@ func spawn_arrows():
 	for i in spawn_string:
 		if varied_gold:
 			$Control/HBoxContainer/TextureRect.modulate = Color.GOLD
-		count += 1
 		var node_to_copy = $Control/HBoxContainer/TextureRect
 		var copy = node_to_copy.duplicate()
 		copy.texture = arrow_direction[i]
 		$Control/HBoxContainer.add_child(copy)
 		sprite_array.append(copy)
 		#copy.position = Vector2($Control/HBoxContainer.position.x +(count * 130), $Control/HBoxContainer.position.y)
-		measurement += 200
 	print(input_array)
 	if varied_evil:
 		var evil : ArrowTexture = sprite_array[random_index]
