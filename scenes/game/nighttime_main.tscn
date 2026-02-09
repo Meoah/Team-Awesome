@@ -25,6 +25,13 @@ offset_bottom = 385.0
 text = "Buy Bait x10
 Cost: $15"
 
+[node name="Scavenge" type="Button" parent="."]
+offset_left = 894.0
+offset_top = 269.0
+offset_right = 1144.0
+offset_bottom = 384.0
+text = "Scavange for bait"
+
 [node name="Sleep" type="Button" parent="."]
 offset_left = 905.0
 offset_top = 520.0
@@ -89,5 +96,6 @@ offset_bottom = 643.0
 text = "oh."
 
 [connection signal="pressed" from="BuyBait" to="." method="_on_buy_bait_pressed"]
+[connection signal="pressed" from="Scavenge" to="." method="_on_scavenge_pressed"]
 [connection signal="pressed" from="Sleep" to="." method="_on_sleep_pressed"]
 [connection signal="pressed" from="Control/ded" to="." method="_on_ded_pressed"]

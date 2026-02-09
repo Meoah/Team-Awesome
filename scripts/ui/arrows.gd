@@ -191,7 +191,7 @@ func win():
 		elif varied_obscured:
 			current_value = current_fish.value * 1.75
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
-		player_data._add_money(current_fish.value)
+		player_data._add_money(current_value)
 		await get_tree().create_timer(3).timeout
 		GameManager.popup_queue.dismiss_popup()
 

@@ -5,11 +5,11 @@
 [ext_resource type="PackedScene" uid="uid://bbklku0slqk5d" path="res://scenes/ui/arrows.tscn" id="2_kebv3"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
 [ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
-[ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
-[ext_resource type="Texture2D" uid="uid://l57dxqeycwpg" path="res://assets/textures/vfx/exclaim.png" id="5_ovvot"]
-[ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
+[ext_resource type="Texture2D" uid="uid://dd3ee7km1o5o3" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
+[ext_resource type="Texture2D" uid="uid://cv2ycg3ht86i6" path="res://assets/textures/vfx/exclaim.png" id="5_ovvot"]
+[ext_resource type="Texture2D" uid="uid://wxrv0tflaark" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
-[ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
+[ext_resource type="Texture2D" uid="uid://cdwgpkev7q3be" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 
 [sub_resource type="Animation" id="Animation_qc6n8"]
 resource_name = "FISH!"

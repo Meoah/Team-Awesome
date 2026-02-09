@@ -39,12 +39,11 @@ func _process(delta: float) -> void:
 	_update_info()
 	
 	
-	if Input.is_action_just_pressed("ui_accept") && !bobberActive:
+	if Input.is_action_just_pressed("ui_accept") && !bobberActive && player_data.use_bait("generic"):
 		bobber.global_position = MC.global_position + Vector2(0,-50)
 		bobber.apply_impulse(Vector2(500,-500))
 		add_child(bobber)
 		move_child(bobber, 3)
-		player_data.use_bait("generic")
 		bobberActive = true
 	
 	#Placeholder bobber animation

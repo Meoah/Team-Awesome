@@ -2,6 +2,8 @@ extends Node2D
 
 @export var info : Label
 
+var scavange : int = 0
+
 func _on_buy_bait_pressed() -> void:
 	if player_data.spend_money(15.0):
 		player_data._add_bait("generic", 10)
@@ -16,6 +18,7 @@ func _on_sleep_pressed() -> void:
 	GameManager.change_scene_deferred(GameManager.daytime_scene)
 
 func _ready() -> void:
+	scavange = 0
 	if player_data.get_day() == 5:
 		$Sleep.text = "Pay rent or die"
 
@@ -49,3 +52,11 @@ func _update_info() -> void:
 func _on_ded_pressed():
 	player_data._reset_all()
 	GameManager.request_main_menu()
+
+
+func _on_scavenge_pressed() -> void:
+	if scavange < 3:
+		scavange += 1
+		player_data._add_bait("generic", 1)
+		if scavange >= 3:
+			$Scavenge.visible = false
