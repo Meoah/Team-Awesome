@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
 [ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
-[ext_resource type="AudioStream" uid="uid://d0uy7uecr3cvv" path="res://assets/audio/bgm/1-01 Introduction.mp3" id="4_fpthd"]
+[ext_resource type="AudioStream" uid="uid://qyofiem2smof" path="res://assets/audio/bgm/1-01 Introduction.mp3" id="4_fpthd"]
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="5_1f7y1"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/ui/audio_volume.gd" id="5_df05h"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="6_6hh85"]

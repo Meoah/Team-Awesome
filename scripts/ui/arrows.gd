@@ -10,17 +10,30 @@ class_name ArrowUIPopup
 @export var failure : Texture2D #Fail Image
 @export var variants : Array[String] #Creating Variants for Fishes
 
+
 @export var arrow_direction : Dictionary[String, Texture2D] #Loads Arrow Direction Sprites
+
+const fishdata = "res://scripts/util/fish_data.gd"
 
 var input_array : Array[String] #Holds the correct sequence of inputs per fish
 var player_inputs = "0" #Holds the current player input
-var correct_inputs = "0" #Holds the current correct input
 var current_fish : FishResource #Holds the current fish in play
 var input_index = 0 #Holds the index for the current input in the input array
-var progress : float 
+#var progress : float 
 var caught = 0 #Holds ammount of fish caught
 var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
+
+
+
+#Fish Data
+var current_name = ""
+var fish_image = ""
+var current_weight = ""
+var correct_inputs : Array
 var current_value = 0
+var time : float = 0
+
+
 
 var variant #Sets up current fish variant
 var chosen_variant : String #Holds the current variant
@@ -48,8 +61,36 @@ func apply_variant():
 		
 		
 
+var chosen_fish : Dictionary
+func pick_fish():
+	var keys_array :Array = FishData.fish_id.keys()
+	var random_fish = keys_array.pick_random()
+	chosen_fish = FishData.fish_id[str(random_fish)]
+	print(chosen_fish["name"])
+	
+
+func apply_data():
+	current_name = chosen_fish["name"]
+	fish_image = chosen_fish["image"]
+	current_weight = chosen_fish["weight"]
+	correct_inputs = chosen_fish["inputs"]
+	current_value = chosen_fish["value"]
+	time = chosen_fish["time"]
+	
+func debug():
+	print(current_name)
+	print(fish_image)
+	print(current_weight)
+	print(correct_inputs)
+	print(current_value)
+	print(time)
+
 #On Ready
 func start_minigame():
+	
+	pick_fish()
+	apply_data()
+	debug()
 	choose_variant()
 	$Reaction.texture = null #Clears out the Image loaded
 	current_fish = potential_fish.pick_random() # Picks a random fish 
