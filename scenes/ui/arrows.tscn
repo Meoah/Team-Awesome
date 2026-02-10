@@ -1,13 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=14 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/arrows_display.gd" id="2_n3w4c"]
-[ext_resource type="Script" uid="uid://mc3jtnmgq6ns" path="res://scripts/util/fish_resource.gd" id="2_sopvo"]
-[ext_resource type="Texture2D" uid="uid://cpst1ndwcnxi4" path="res://assets/textures/fish/doodle_fish/Fish01.png" id="3_kpqud"]
-[ext_resource type="Texture2D" uid="uid://c0dvy2lhpyudo" path="res://assets/textures/fish/doodle_fish/Fish04.png" id="4_ybko8"]
-[ext_resource type="Texture2D" uid="uid://qml8xjkf36nl" path="res://assets/textures/fish/doodle_fish/Fish02.png" id="5_epdnh"]
-[ext_resource type="Texture2D" uid="uid://csitptpdnqsny" path="res://assets/textures/fish/doodle_fish/Fish03.png" id="6_w8gc6"]
-[ext_resource type="Texture2D" uid="uid://cdkl0hxv7d5hr" path="res://assets/textures/fish/doodle_fish/Fish05.png" id="7_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="8_20txf"]
 [ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
 [ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="10_qdfjh"]
@@ -20,49 +14,6 @@
 [ext_resource type="Script" uid="uid://bfh11uixb171m" path="res://scenes/ui/smoke.gd" id="18_63o2f"]
 [ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scenes/ui/texture_rect.gd" id="19_dleu3"]
 
-[sub_resource type="Resource" id="Resource_y6h51"]
-script = ExtResource("2_sopvo")
-name = "Bug Eyed Fish"
-image = ExtResource("3_kpqud")
-weight = 5
-time = 5.0
-metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
-
-[sub_resource type="Resource" id="Resource_phdib"]
-script = ExtResource("2_sopvo")
-name = "Rainbow Eel"
-image = ExtResource("4_ybko8")
-weight = 600
-correct_inputs = Array[String](["Down", "Left", "Up", "Right", "Down", "Down"])
-time = 2.0
-metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
-
-[sub_resource type="Resource" id="Resource_m0i64"]
-script = ExtResource("2_sopvo")
-name = "Trash"
-image = ExtResource("5_epdnh")
-correct_inputs = Array[String](["Up", "Up", "Right"])
-time = 2.0
-metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
-
-[sub_resource type="Resource" id="Resource_ybko8"]
-script = ExtResource("2_sopvo")
-name = "Pink Fish"
-image = ExtResource("6_w8gc6")
-weight = 2
-correct_inputs = Array[String](["Left", "Right", "Left", "Right"])
-time = 8.0
-metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
-
-[sub_resource type="Resource" id="Resource_epdnh"]
-script = ExtResource("2_sopvo")
-name = "Shroomle"
-image = ExtResource("7_qdfjh")
-weight = 500
-correct_inputs = Array[String](["Right", "Left", "Left", "Left", "Up", "Down"])
-time = 5.0
-metadata/_custom_type_script = "uid://mc3jtnmgq6ns"
-
 [node name="Arrows" type="Control" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 process_mode = 3
 layout_mode = 3
@@ -74,7 +25,6 @@ grow_vertical = 2
 script = ExtResource("1_0iavb")
 input_string = NodePath("TextEdit")
 reaction = NodePath("Reaction")
-potential_fish = Array[ExtResource("2_sopvo")]([SubResource("Resource_y6h51"), SubResource("Resource_phdib"), SubResource("Resource_m0i64"), SubResource("Resource_ybko8"), SubResource("Resource_epdnh")])
 timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")

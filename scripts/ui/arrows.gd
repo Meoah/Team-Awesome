@@ -3,44 +3,56 @@ class_name ArrowUIPopup
 
 @export var input_string : TextEdit #Accessing TextEdit box
 @export var reaction : Sprite2D #Accessing Sprite2D for reaction image
-@export var potential_fish : Array[FishResource] #Creating possible fish
 @export var timer : Timer #Accessing Timer for the countdown
 @export var progress_bar : ProgressBar #Accessing ProgressBar for the countdown bar
 @export var success : Texture2D #Success Image
 @export var failure : Texture2D #Fail Image
 @export var variants : Array[String] #Creating Variants for Fishes
 
-
 @export var arrow_direction : Dictionary[String, Texture2D] #Loads Arrow Direction Sprites
 
 const fishdata = "res://scripts/util/fish_data.gd"
 
-var input_array : Array[String] #Holds the correct sequence of inputs per fish
+var input_array : Array #Holds the correct sequence of inputs per fish
 var player_inputs = "0" #Holds the current player input
-var current_fish : FishResource #Holds the current fish in play
-var input_index = 0 #Holds the index for the current input in the input array
-#var progress : float 
-var caught = 0 #Holds ammount of fish caught
+var input_index = 0 #Holds the index for the current input in the input array#Holds ammount of fish caught
 var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
 
 
 
 #Fish Data
 var current_name = ""
-var fish_image = ""
+var current_image 
 var current_weight = ""
 var correct_inputs : Array
 var current_value = 0
 var time : float = 0
 
+var chosen_fish : Dictionary
+func pick_fish():
+	var keys_array :Array = FishData.fish_id.keys()
+	var random_fish = keys_array.pick_random()
+	chosen_fish = FishData.fish_id[str(random_fish)]
+	print(chosen_fish["name"])
+
+func apply_data():
+	current_name = chosen_fish["name"]
+	current_image = chosen_fish["image"]
+	current_weight = chosen_fish["weight"]
+	correct_inputs = chosen_fish["inputs"]
+	current_value = chosen_fish["value"]
+	time = chosen_fish["time"]
 
 
+
+
+#Variants 
 var variant #Sets up current fish variant
 var chosen_variant : String #Holds the current variant
 var varied_gold : bool = false #Gold Variant
 var varied_evil : bool = false #Evil Variant
 var varied_obscured : bool = false #Obscured Variant
-#Protoype for making variants. If fish is variant, makes arrows gold and fails on incorrect input
+
 func choose_variant():
 	chosen_variant = variants.pick_random()
 	apply_variant()
@@ -57,69 +69,10 @@ func apply_variant():
 		print(random_index)
 	elif  chosen_variant == "Obscured":
 		varied_obscured = true
-	
-		
-		
 
-var chosen_fish : Dictionary
-func pick_fish():
-	var keys_array :Array = FishData.fish_id.keys()
-	var random_fish = keys_array.pick_random()
-	chosen_fish = FishData.fish_id[str(random_fish)]
-	print(chosen_fish["name"])
-	
-
-func apply_data():
-	current_name = chosen_fish["name"]
-	fish_image = chosen_fish["image"]
-	current_weight = chosen_fish["weight"]
-	correct_inputs = chosen_fish["inputs"]
-	current_value = chosen_fish["value"]
-	time = chosen_fish["time"]
-	
-func debug():
-	print(current_name)
-	print(fish_image)
-	print(current_weight)
-	print(correct_inputs)
-	print(current_value)
-	print(time)
-
-#On Ready
-func start_minigame():
-	
-	pick_fish()
-	apply_data()
-	debug()
-	choose_variant()
-	$Reaction.texture = null #Clears out the Image loaded
-	current_fish = potential_fish.pick_random() # Picks a random fish 
-	current_fish.intialize() # Prepares the array of correct inputs
-	current_value = current_fish.value
-	correct_inputs = current_fish.current_inputs # Loads the array of correct Inputs
-	input_array = current_fish.current_inputs
-	display_text = correct_inputs.duplicate(true)
-	print(current_fish.name) #Debug
-	cleared = false
-	timer.start(current_fish.time)
-	timer.set_paused(false)
-	progress_bar.max_value = current_fish.time
-	input_index = 0
-	spawn_arrows()
-
-func end_minigame():
-	varied_evil = false
-	varied_gold = false
-	varied_obscured = false
-	current_fish = null
-	
-
-#Initialize Script
-func _ready() -> void:
-	start_minigame()
 
 #Evil Variant script. Work in Progress
-var evil_array : Array[String]
+var evil_array : Array
 func evilize():
 	evil_array = display_text.duplicate()
 	if display_text[random_index] == "Left":
@@ -131,9 +84,35 @@ func evilize():
 	elif display_text[random_index] == "Down":
 		evil_array[random_index]= "Up"
 
+
+
+#On Ready
+func start_minigame():
+	pick_fish()
+	apply_data()
+	choose_variant()
+	input_array = correct_inputs
+	display_text = correct_inputs.duplicate(true)
+	timer.start(time)
+	timer.set_paused(false)
+	progress_bar.max_value = time
+	input_index = 0
+	spawn_arrows()
+
+func end_minigame():
+	varied_evil = false
+	varied_gold = false
+	varied_obscured = false
+
+#Initialize Script
+func _ready() -> void:
+	start_minigame()
+
+
+
 #Displays the list of inputs for debug
 var output = ""
-var display_text : Array[String]
+var display_text : Array
 func text_render():
 	if not input_index == input_array.size() :
 		output = ""
@@ -165,6 +144,9 @@ func _input(_event : InputEvent):
 			else:
 				incorrect_input()
 			win()
+
+
+
 #On correct Input
 func correct_input():
 		input_index = input_index + 1 #Advances in the string index
@@ -219,19 +201,18 @@ func fail():
 var cleared = false
 func win():
 	if input_index == input_array.size() :
-		print("Caught:" + str(caught))
-		caught += 1
 		cleared = true
-		$Reaction.texture = current_fish.image
+		var fish_image = load(current_image)
+		$Reaction.texture = fish_image
 		input_index = 0
-		print(current_fish.name)
+		
 		if varied_gold: #If fish is gold double its value, Current bug where double value persist
-			current_value = current_fish.value * 2
+			current_value = current_value * 2
 		elif varied_evil:
-			current_value = current_fish.value * 1.5
+			current_value = current_value * 1.5
 		elif varied_obscured:
-			current_value = current_fish.value * 1.75
-		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
+			current_value = current_value * 1.75
+		input_string.set_text(current_name + "\n Weight: " + str(current_weight) + "\n Value: " + str(current_value))
 		player_data._add_money(current_value)
 		await get_tree().create_timer(3).timeout
 		GameManager.popup_queue.dismiss_popup()
@@ -241,7 +222,7 @@ func win():
 #Displays Arrow graphics
 func spawn_arrows():
 	sprite_array = []
-	var spawn_string : Array[String]
+	var spawn_string : Array
 	spawn_string = display_text
 	if varied_evil:
 		evilize()

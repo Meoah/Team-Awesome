@@ -10,7 +10,7 @@ const bug_eyed_fish : Dictionary = {
 	"image" : "res://assets/textures/fish/doodle_fish/Fish01.png",
 	"weight" : "5",
 	"inputs" : ["Left","Right","Up","Down"],
-	"value" : "3",
+	"value" : 3.0,
 	"time" : 5
 }
 
@@ -20,16 +20,16 @@ const rainbow_eel : Dictionary = {
 	"image" : "res://assets/textures/fish/doodle_fish/Fish04.png",
 	"weight" : "10",
 	"inputs" : ["Down", "Left", "Up", "Right","Down","Down"],
-	"value" : "7",
+	"value" : 7.0,
 	"time" : 3.5
 }
 
 const trash : Dictionary = {
-	"name" : ["Trash","Garbage","Boot","Suitcase","Tin Can"],
+	"name" : "Trash",
 	"image" : "res://assets/textures/fish/doodle_fish/Fish02.png",
 	"weight" : "2",
 	"inputs" : ["Up","Up","Right"],
-	"value" : "-3",
+	"value" : -2.0,
 	"time" : 4
 }
 
@@ -38,7 +38,7 @@ const pink_fish : Dictionary = {
 	"image" : "res://assets/textures/fish/doodle_fish/Fish03.png",
 	"weight" : "2",
 	"inputs" : ["Left","Right","Left","Right"],
-	"value" : "4",
+	"value" : 4.0,
 	"time" : 3
 }
 
@@ -47,7 +47,7 @@ const shroomle : Dictionary = {
 	"image" : "res://assets/textures/fish/doodle_fish/Fish05.png",
 	"weight" : "5",
 	"inputs" : ["Left","Right","Up","Down","Up"],
-	"value" : "10",
+	"value" : 10.0,
 	"time" : 5
 }
 
