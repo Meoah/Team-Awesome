@@ -1,8 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=17 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
-[ext_resource type="PackedScene" uid="uid://bbklku0slqk5d" path="res://scenes/ui/arrows.tscn" id="2_kebv3"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
 [ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
@@ -111,10 +110,17 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6j7wl"]
 size = Vector2(1280, 89)
 
-[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("MC", "info", "Indicator")]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovom5"]
+size = Vector2(50, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3kam8"]
+size = Vector2(50, 720)
+
+[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("jeremy_node", "info", "Indicator")]
 script = ExtResource("1_2jsv6")
-fishingMinigameScene = ExtResource("2_kebv3")
-MC = NodePath("MainCharacter")
+jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
 info = NodePath("Info")
 Indicator = NodePath("Indicator")
@@ -123,9 +129,10 @@ Indicator = NodePath("Indicator")
 position = Vector2(640, 360)
 texture = ExtResource("3_nw5db")
 
-[node name="MainCharacter" parent="." instance=ExtResource("1_oxlu7")]
+[node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
 position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
+collision_mask = 2
 
 [node name="Indicator" type="Sprite2D" parent="."]
 position = Vector2(0, -50)
@@ -152,11 +159,24 @@ texture = ExtResource("10_nw8sa")
 position = Vector2(640, 360)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Water"]
+visible = false
 position = Vector2(-0.875, 292.5)
 shape = SubResource("RectangleShape2D_6j7wl")
 
 [node name="Sprite2D" type="Sprite2D" parent="Water"]
 texture = ExtResource("5_8rhjh")
+
+[node name="Boundaries" type="StaticBody2D" parent="."]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_ovom5")
+
+[node name="LeftCollision" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(-25, 360)
+shape = SubResource("RectangleShape2D_ovom5")
+
+[node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(640, 360)
+shape = SubResource("RectangleShape2D_3kam8")
 
 [node name="Info" type="Label" parent="."]
 offset_left = 13.0
@@ -178,6 +198,10 @@ offset_bottom = 711.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Day"
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_enabled = true
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]

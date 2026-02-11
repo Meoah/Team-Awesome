@@ -1,6 +1,28 @@
-[gd_scene load_steps=2 format=3 uid="uid://c4g7xtu4dc0po"]
+[gd_scene load_steps=6 format=3 uid="uid://c4g7xtu4dc0po"]
 
-[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/MCPlaceholder.png" id="1_2fv12"]
+[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/jeremy/MCPlaceholder.png" id="1_2fv12"]
+[ext_resource type="Script" uid="uid://vc01sgmlolgc" path="res://scripts/actors/main_character.gd" id="1_mo88p"]
+[ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="2_5ovje"]
+[ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/jeremy/arrow.png" id="4_w0brd"]
 
-[node name="McPlaceholder" type="Sprite2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w0brd"]
+size = Vector2(800, 800)
+
+[node name="Jeremy" type="CharacterBody2D" node_paths=PackedStringArray("arrow_sprite", "boat_sprite")]
+script = ExtResource("1_mo88p")
+bobber_scene = ExtResource("2_5ovje")
+arrow_sprite = NodePath("Arrow")
+boat_sprite = NodePath("BoatSprite")
+
+[node name="BoatSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_2fv12")
+
+[node name="Arrow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.39215687)
+position = Vector2(1000, 0)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("4_w0brd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -400)
+shape = SubResource("RectangleShape2D_w0brd")

@@ -1,13 +1,11 @@
 extends Node2D
+class_name DaytimeMain
 
-@export var fishingMinigameScene : PackedScene
-
-#TODO Make these their own class and animate from their own scripts
-@export var MC : Sprite2D
+## Node exports
+@export var jeremy_node : MainCharacter
 @export var bobber_scene : PackedScene
 @export var info : Label #Temp
 @export var Indicator : Sprite2D
-
 
 var timeSinceCast : float = 0.0
 var bobberActive : bool = false
@@ -16,7 +14,7 @@ var fishReady : bool = false
 var fishTimer : float = 0.0
 var boatTimer : float = 0.0
 
-var MCOriginY : float = 0.0
+var jeremyOriginY : float = 0.0
 
 #Placeholder
 var bobTime : float = 0.0
@@ -25,7 +23,7 @@ var bobber : RigidBody2D
 
 func _ready() -> void:
 	_update_info()
-	MCOriginY = MC.global_position.y
+	jeremyOriginY = jeremy_node.global_position.y
 	fishTimer = randf() * 5
 	bobber = bobber_scene.instantiate()
 	
@@ -40,16 +38,11 @@ func _process(delta: float) -> void:
 	
 	
 	if Input.is_action_just_pressed("ui_accept") && !bobberActive && player_data.use_bait("generic"):
-		bobber.global_position = MC.global_position + Vector2(0,-50)
+		bobber.global_position = jeremy_node.global_position + Vector2(0,-50)
 		bobber.apply_impulse(Vector2(500,-500))
 		add_child(bobber)
 		move_child(bobber, 3)
 		bobberActive = true
-	
-	#Placeholder bobber animation
-	if bobberActive && bobber.is_freeze_enabled():
-		bobTime += delta
-		bobber.global_position.y = bobOriginY + sin(bobTime * 5.0) * 2.5
 		
 	if bobberInWater && timeSinceCast >= fishTimer && !fishReady:
 		fishReady = true
@@ -65,11 +58,10 @@ func _process(delta: float) -> void:
 		bobberActive = false
 		bobber.queue_free()
 		bobber = bobber_scene.instantiate()
-		if fishingMinigameScene:
-			GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.ARROWUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
+		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.ARROWUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
 		
 			
-	MC.global_position.y = MCOriginY + sin(boatTimer * 4.0) * 2.0
+	jeremy_node.global_position.y = jeremyOriginY + sin(boatTimer * 4.0) * 2.0
 
 #TODO move this elsewhere
 func calculate_rent() -> float:
