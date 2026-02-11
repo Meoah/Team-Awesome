@@ -5,17 +5,14 @@ class_name MainCharacter
 @export var bobber_scene : PackedScene
 @export var arrow_sprite : Sprite2D
 @export var boat_sprite : Sprite2D
-
 # Arrow
 var arrow_distance : float = 0.0
 var cast_strength : float = 500.0
 var cast_angle : float = 20.0
 var angle_speed : float = 120.0
-
 # Bobber
 var active_bobber_count : int = 0
 var bobber_limit : int = 1
-
 # Movement
 enum InputFlags{
 	MOVE_LEFT  = 1 << 0,
@@ -25,27 +22,35 @@ enum InputFlags{
 }
 var input_flags : int = 0
 var move_speed : float = 200.0
-
 # Bobbing
-var bob_amplitude : float = 2.0
-var bob_speed : float = 4.0
+var bob_amplitude : float = 40.0
+var bob_speed : float = 8.0
 var bob_timer : float = 0.0
+# Parent Nodes
+var daytime_main : DaytimeMain
+var nighttime_main : NighttimeMain
 
 func _ready() -> void:
 	arrow_distance = arrow_sprite.position.length()
 	_update_arrow()
 
 func _input(event: InputEvent) -> void:
-	#TODO statemachine
-	
+	# Arrow Keys
 	if event.is_action_pressed("left"):		_set_flag(InputFlags.MOVE_LEFT, true)
 	if event.is_action_released("left"):	_set_flag(InputFlags.MOVE_LEFT, false)
 	if event.is_action_pressed("right"):	_set_flag(InputFlags.MOVE_RIGHT, true)
-	if event.is_action_released("right")	:_set_flag(InputFlags.MOVE_RIGHT, false)
+	if event.is_action_released("right"):	_set_flag(InputFlags.MOVE_RIGHT, false)
 	if event.is_action_pressed("up"):		_set_flag(InputFlags.AIM_UP, true)
 	if event.is_action_released("up"):		_set_flag(InputFlags.AIM_UP, false)
 	if event.is_action_pressed("down"):		_set_flag(InputFlags.AIM_DOWN, true)
 	if event.is_action_released("down"):	_set_flag(InputFlags.AIM_DOWN, false)
+	
+	# Casting
+	if event.is_action_pressed("ui_accept"): pass
+		
+
+func _process(delta: float) -> void:
+	pass
 
 func _physics_process(delta: float) -> void:
 	_movement()

@@ -14,8 +14,6 @@ var fishReady : bool = false
 var fishTimer : float = 0.0
 var boatTimer : float = 0.0
 
-var jeremyOriginY : float = 0.0
-
 #Placeholder
 var bobTime : float = 0.0
 var bobOriginY : float = 0.0
@@ -23,12 +21,12 @@ var bobber : RigidBody2D
 
 func _ready() -> void:
 	_update_info()
-	jeremyOriginY = jeremy_node.global_position.y
 	fishTimer = randf() * 5
 	bobber = bobber_scene.instantiate()
 	
 	if player_data.get_day() == 1 && player_data.get_week() == 1:
 		player_data._add_bait("generic", 5)
+		
 
 func _process(delta: float) -> void:
 	timeSinceCast += delta
@@ -59,9 +57,6 @@ func _process(delta: float) -> void:
 		bobber.queue_free()
 		bobber = bobber_scene.instantiate()
 		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.ARROWUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
-		
-			
-	jeremy_node.global_position.y = jeremyOriginY + sin(boatTimer * 4.0) * 2.0
 
 #TODO move this elsewhere
 func calculate_rent() -> float:

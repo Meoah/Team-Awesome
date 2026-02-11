@@ -26,3 +26,10 @@ texture = ExtResource("4_w0brd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -400)
 shape = SubResource("RectangleShape2D_w0brd")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_left = -500.0
+offset_right = 500.0
+offset_bottom = 100.0
+rotation = -1.5707964
+show_percentage = false

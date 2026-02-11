@@ -30,13 +30,16 @@ func _setup_state_machine() -> void:
 	# Valid transitions.
 	var transitions : Dictionary = {
 		MainMenuState.STATE_NAME : [
-			PlayState.STATE_NAME],
+			PlayState.STATE_NAME
+			],
 		PlayState.STATE_NAME : [
 			MainMenuState.STATE_NAME,
-			PauseState.STATE_NAME],
+			PauseState.STATE_NAME
+			],
 		PauseState.STATE_NAME : [
 			MainMenuState.STATE_NAME,
-			PlayState.STATE_NAME],
+			PlayState.STATE_NAME
+			]
 	}
 	
 	# Initializes state machine with name and valid transitions.

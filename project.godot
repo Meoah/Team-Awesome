@@ -24,6 +24,7 @@ buses/default_bus_layout=""
 Inventory="*res://scripts/ui/inventory.gd"
 player_data="*res://scripts/system/player_data.gd"
 GameManager="*res://scenes/game_manager.tscn"
+PlayManager="*res://scripts/managers/play_manager.gd"
 
 [debug]
 
