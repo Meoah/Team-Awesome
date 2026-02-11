@@ -175,7 +175,7 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 script = ExtResource("5_df05h")
-audio_bus_name = "Music"
+audio_bus_name = "Master"
 
 [node name="Label" type="Label" parent="Settings/AudioControl"]
 layout_mode = 0
