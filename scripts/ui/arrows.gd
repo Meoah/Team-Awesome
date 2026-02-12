@@ -108,17 +108,17 @@ func text_render():
 #On Key Press: Checks if Key Press is the same as the current correct input 
 func _input(_event : InputEvent):
 	
-	if Input.is_action_just_pressed("Up"):
+	if Input.is_action_just_pressed("up"):
 		player_inputs = "Up"
-	if Input.is_action_just_pressed("Down"):
+	if Input.is_action_just_pressed("down"):
 		player_inputs = "Down"
-	if Input.is_action_just_pressed("Left"):
+	if Input.is_action_just_pressed("left"):
 		player_inputs = "Left"
-	if Input.is_action_just_pressed("Right"):
+	if Input.is_action_just_pressed("right"):
 		player_inputs = "Right"
 	
 	if input_index <= input_array.size() and cleared == false:
-		if Input.is_action_just_pressed("Up") or Input.is_action_just_pressed("Down") or Input.is_action_just_pressed("Right") or Input.is_action_just_pressed("Left") :
+		if Input.is_action_just_pressed("up") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left") :
 			if player_inputs == input_array[input_index]:
 				correct_input()
 			else:
@@ -172,6 +172,9 @@ func fail():
 		$ArrowSprite.erase()
 	cleared = true
 	await get_tree().create_timer(3).timeout
+	PlayManager.request_catching_state()
+	# Stuff you want to happen between catching and idle, such as a fail animation. Note that we're paused
+	PlayManager.request_idle_day_state()
 	GameManager.popup_queue.dismiss_popup()
 
 #Win Script. Prints fish data and resets the scene after 3 seconds
@@ -193,6 +196,9 @@ func win():
 		input_string.set_text(current_fish.name + "\n Weight: " + str(current_fish.weight) + "\n Value: " + str(current_value))
 		player_data._add_money(current_value)
 		await get_tree().create_timer(3).timeout
+		PlayManager.request_catching_state()
+		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
+		PlayManager.request_idle_day_state()
 		GameManager.popup_queue.dismiss_popup()
 
 

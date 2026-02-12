@@ -1,4 +1,5 @@
 extends Node2D
+class_name NighttimeMain
 
 @export var info : Label
 
@@ -11,11 +12,12 @@ func _on_buy_bait_pressed() -> void:
 func _on_sleep_pressed() -> void:
 	if player_data.get_day() == 5:
 		if !player_data.spend_money(calculate_rent()):
+			PlayManager.request_dead_state()
 			$Control.visible = true
 			return
-	
-	player_data._next_day()
-	GameManager.change_scene_deferred(GameManager.daytime_scene)
+	if PlayManager.request_idle_day_state():
+		player_data._next_day()
+		GameManager.change_scene_deferred(GameManager.daytime_scene)
 
 func _ready() -> void:
 	scavange = 0
