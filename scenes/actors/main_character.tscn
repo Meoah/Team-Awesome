@@ -29,6 +29,7 @@ position = Vector2(0, -400)
 shape = SubResource("RectangleShape2D_w0brd")
 
 [node name="PowerBar" type="ProgressBar" parent="."]
+visible = false
 modulate = Color(1, 0, 0, 1)
 offset_left = -400.0
 offset_right = 600.0
