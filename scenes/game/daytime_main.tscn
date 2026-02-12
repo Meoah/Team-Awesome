@@ -1,11 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=16 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
 [ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
-[ext_resource type="Texture2D" uid="uid://l57dxqeycwpg" path="res://assets/textures/vfx/exclaim.png" id="5_ovvot"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
@@ -118,12 +117,11 @@ size = Vector2(50, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kam8"]
 size = Vector2(50, 720)
 
-[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("jeremy_node", "info", "Indicator")]
+[node name="DaytimeMain" type="Node2D" node_paths=PackedStringArray("jeremy_node", "info")]
 script = ExtResource("1_2jsv6")
 jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
 info = NodePath("Info")
-Indicator = NodePath("Indicator")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -133,10 +131,6 @@ texture = ExtResource("3_nw5db")
 position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
 collision_mask = 2
-
-[node name="Indicator" type="Sprite2D" parent="."]
-position = Vector2(0, -50)
-texture = ExtResource("5_ovvot")
 
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {

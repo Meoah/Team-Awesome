@@ -1,9 +1,9 @@
 extends State
 class_name CastingState
 
-const STATE_NAME : String = "CASTING_DAY_STATE"
+const STATE_NAME : String = "CASTING_STATE"
 
-signal signal_casting_day
+signal signal_casting
 
 func _init(parent: StateMachine) -> void:
 	state_name = STATE_NAME
@@ -11,7 +11,7 @@ func _init(parent: StateMachine) -> void:
 
 func enter(previous_state: State, data: Dictionary = {}) -> void:
 	super.enter(previous_state, data)
-	signal_casting_day.emit()
+	signal_casting.emit()
 
 func exit(next_state: State) -> void:
 	super.exit(next_state)

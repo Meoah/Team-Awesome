@@ -8,11 +8,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0brd"]
 size = Vector2(800, 800)
 
-[node name="Jeremy" type="CharacterBody2D" node_paths=PackedStringArray("arrow_sprite", "boat_sprite")]
+[node name="Jeremy" type="CharacterBody2D" node_paths=PackedStringArray("arrow_sprite", "boat_sprite", "power_bar")]
 script = ExtResource("1_mo88p")
 bobber_scene = ExtResource("2_5ovje")
 arrow_sprite = NodePath("Arrow")
 boat_sprite = NodePath("BoatSprite")
+power_bar = NodePath("PowerBar")
 
 [node name="BoatSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_2fv12")
@@ -27,9 +28,11 @@ texture = ExtResource("4_w0brd")
 position = Vector2(0, -400)
 shape = SubResource("RectangleShape2D_w0brd")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_left = -500.0
-offset_right = 500.0
+[node name="PowerBar" type="ProgressBar" parent="."]
+modulate = Color(1, 0, 0, 1)
+offset_left = -400.0
+offset_right = 600.0
 offset_bottom = 100.0
 rotation = -1.5707964
+value = 50.0
 show_percentage = false
