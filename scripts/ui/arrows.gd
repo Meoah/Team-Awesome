@@ -32,7 +32,7 @@ var chosen_fish : Dictionary
 func pick_fish():
 	var keys_array :Array = FishData.fish_id.keys()
 	var random_fish = keys_array.pick_random()
-	chosen_fish = FishData.fish_id[str(random_fish)]
+	chosen_fish = FishData.fish_id[random_fish]
 	print(chosen_fish["name"])
 
 func apply_data():

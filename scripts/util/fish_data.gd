@@ -51,10 +51,32 @@ const shroomle : Dictionary = {
 	"time" : 5
 }
 
+const linxooo : Dictionary = {
+	"name" : "Linxooo",
+	"image" : "res://assets/textures/fish/wip_fish/Linxooo.png",
+	"weight" : "5",
+	"inputs" : ["Right","Up","Down","Right","Right"],
+	"value" : 10.0,
+	"time" : 5
+}
+
+const honey_glazed_skeleton : Dictionary = {
+	"name" : "Honey Glazed Skeleton",
+	"image" : "res://assets/textures/fish/wip_fish/Honey Glazed Skeleton.png",
+	"weight" : "2",
+	"inputs" : ["Up", "Up", "Down", "Down", "Left","Right","Left","Right"],
+	"value" : 15.0,
+	"time" : 6
+}
+
+
 const fish_id : Dictionary = {
-	"01" : bug_eyed_fish,
-	"02" : rainbow_eel,
-	"03" : trash,
-	"04" : pink_fish,
-	"05" : shroomle
+	1 : bug_eyed_fish,
+	2 : rainbow_eel,
+	3 : trash,
+	4 : pink_fish,
+	5 : shroomle,
+	6 : linxooo,
+	7 : honey_glazed_skeleton
+	
 }

@@ -9,10 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://detae0k1hqy8r" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
 [ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="12_mx6gi"]
 [ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="13_8ksox"]
-[ext_resource type="Script" uid="uid://chymghsucyl7j" path="res://scenes/ui/arrow_sprite.gd" id="16_mx6gi"]
+[ext_resource type="Script" uid="uid://chymghsucyl7j" path="res://scripts/ui/arrow_sprite.gd" id="16_mx6gi"]
 [ext_resource type="Texture2D" uid="uid://dxi6bkh21mpoh" path="res://assets/textures/ui/Arrows/effects/smoke.png" id="17_8ksox"]
-[ext_resource type="Script" uid="uid://bfh11uixb171m" path="res://scenes/ui/smoke.gd" id="18_63o2f"]
-[ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scenes/ui/texture_rect.gd" id="19_dleu3"]
+[ext_resource type="Script" uid="uid://bfh11uixb171m" path="res://scripts/ui/pop_ups/smoke.gd" id="18_63o2f"]
+[ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="19_dleu3"]
 
 [node name="Arrows" type="Control" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 process_mode = 3
