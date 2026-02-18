@@ -15,9 +15,11 @@ func _on_sleep_pressed() -> void:
 			PlayManager.request_dead_state()
 			$Control.visible = true
 			return
-	if PlayManager.request_idle_day_state():
-		player_data._next_day()
-		GameManager.change_scene_deferred(GameManager.daytime_scene)
+	if PlayManager.request_sleeping_state():
+		print("Sleepin")
+		if PlayManager.request_idle_day_state():
+			player_data._next_day()
+			GameManager.change_scene_deferred(GameManager.daytime_scene)
 
 func _ready() -> void:
 	scavange = 0
