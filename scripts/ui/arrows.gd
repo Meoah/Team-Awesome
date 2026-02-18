@@ -21,18 +21,18 @@ var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
 
 
 #Fish Data
-var current_name = ""
-var current_image 
-var current_weight = ""
+var current_name : String = ""
+var current_image : NodePath
+var current_weight : float = 0
 var correct_inputs : Array
-var current_value = 0
+var current_value : float = 0
 var time : float = 0
 
 var chosen_fish : Dictionary
 func pick_fish():
-	var keys_array :Array = FishData.fish_id.keys()
+	var keys_array :Array = FishData.FISH_ID.keys()
 	var random_fish = keys_array.pick_random()
-	chosen_fish = FishData.fish_id[random_fish]
+	chosen_fish = FishData.FISH_ID[random_fish]
 	print(chosen_fish["name"])
 
 func apply_data():
@@ -216,7 +216,7 @@ func win():
 		elif varied_obscured:
 			current_value = current_value * 1.75
 		input_string.set_text(current_name + "\n Weight: " + str(current_weight) + "\n Value: " + str(current_value))
-		player_data._add_money(current_value)
+		SystemData._add_money(current_value)
 		await get_tree().create_timer(3).timeout
 		PlayManager.request_catching_state()
 		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused

@@ -1,20 +1,20 @@
 extends Node
-class_name PlayerData
 
-# TODO Rename to systemdata later, pain in the ass to do it mid production
-# TODO Change to autoload with its own class
-
-## PlayerData 
+## SystemData
 ##	Holds all the game variables to be used by every other script.
 
+# Variables
 var player_money : float = 0.0
 var day : int = 1
-var fish_inventory : Array[String] = [] #TODO must be changed to Array[int] when ID system is done
+var fish_inventory : Dictionary = {} # {fish_id : int = count : int}
 var bait_inventory : Dictionary = {
 	"generic" = 0,
 	"special" = 0
 }
 var current_upgrades : int = 0
+
+# Signals
+signal inventory_updated
 
 # Bit flag system for upgrades.
 enum UPGRADE_FLAG{
@@ -27,7 +27,7 @@ enum UPGRADE_FLAG{
 func _reset_all() -> void:
 	_reset_money()
 	_reset_day()
-	_reset_fish_inventory()
+	_clear_fish_inventory()
 	_reset_bait_inventory()
 	_reset_upgrades()
 
@@ -50,22 +50,49 @@ func get_week() -> int : return ((day - 1) / 5) + 1
 func _reset_day() -> void : day = 1
 
 ## Fish inventory methods.
-#TODO Change system to accomidate a fish ID system instead
-func _set_fish_inventory(inv : Array[String]) -> void : fish_inventory = inv
-func get_fish_inventory() -> Array : return fish_inventory
-func _add_fish(fish : FishResource) -> void : fish_inventory.append(fish.name)
-func _reset_fish_inventory() -> void : fish_inventory = []
+func _set_fish_inventory(inv : Dictionary) -> void : fish_inventory = inv
+func get_all_fish() -> Dictionary : return fish_inventory
+# Add fish to inventory
+func _add_fish(fish_id: int, amount: int = 1) -> void:
+	if fish_inventory.has(fish_id):
+		fish_inventory[fish_id] += amount
+	else:
+		fish_inventory[fish_id] = amount
+	inventory_updated.emit()
 
-# Removes a specific fish by ID.
-func _remove_fish(fish : String) -> void:
-	if fish_inventory.has(fish):
-		var found_fish : int = fish_inventory.find(fish)
-		print("Removed fish: ", fish_inventory.pop_at(found_fish))
+# Remove specified fish from inventory. Defaults to one quantity.
+func _remove_fish(fish_id: int, amount: int = 1) -> void:
+	if not has_fish(fish_id):
+		return
+	fish_inventory[fish_id] -= amount
+	#Make sure there are no negative numbers
+	if fish_inventory[fish_id] <= 0:
+		fish_inventory.erase(fish_id)
+	inventory_updated.emit()
 
-# Removes fish at specific index value.
-func _remove_fish_at_index(index : int) -> void:
-	if fish_inventory.size() > index:
-		print("Removed fish: ", fish_inventory.pop_at(index))
+# Check if the player has at least the specified amount of a fish. Defaults to checking for one.
+func has_fish(fish_id: int, amount: int = 1) -> bool:
+	return fish_inventory.has(fish_id) and fish_inventory[fish_id] >= amount
+
+# Returns how many of this fish the players has.
+func get_fish_count(fish_id: int) -> int:
+	if fish_inventory.has(fish_id):
+		return fish_inventory[fish_id]
+	return 0
+
+# Returns the total inventory value.
+func get_total_inventory_value() -> float:
+	var total : float = 0
+	for fish in fish_inventory.keys():
+		var stack_value = fish.fish_price * fish_inventory[fish]
+		total += stack_value
+	return total
+
+# Resets inventory to null.
+func _clear_fish_inventory() -> void:
+	fish_inventory.clear()
+	inventory_updated.emit()
+
 
 ## Bait inventory methods.
 func _set_bait_inventory(bait_inv : Dictionary) -> void : for each in bait_inventory : if each in bait_inv : bait_inventory[each] = bait_inv[each]

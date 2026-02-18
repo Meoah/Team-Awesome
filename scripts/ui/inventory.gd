@@ -5,11 +5,11 @@ signal inventory_updated
 var inventory_contents: Dictionary = {}
 
 #add fish to inventory
-func add_fish(fish: Inventory_FishData, amount: int = 1) -> void:
-	if inventory_contents.has(fish):
-		inventory_contents[fish] += amount
+func add_fish(fish_id: int, amount: int = 1) -> void:
+	if inventory_contents.has(fish_id):
+		inventory_contents[fish_id] += amount
 	else:
-		inventory_contents[fish] = amount
+		inventory_contents[fish_id] = amount
 	
 	inventory_updated.emit()
 	
