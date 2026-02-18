@@ -13,7 +13,7 @@ outline_color = Color(0, 0, 0, 1)
 script = ExtResource("1_53syt")
 info = NodePath("Info")
 
-[node name="MainCharacter" parent="." instance=ExtResource("2_s2grh")]
+[node name="Jeremy" parent="." instance=ExtResource("2_s2grh")]
 position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
 

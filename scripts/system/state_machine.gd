@@ -11,6 +11,9 @@ func _init(name : String, transition_map: Dictionary) -> void:
 	state_machine_name = name
 	transitions = transition_map
 
+# Getter.
+func get_current_state() -> String : return current_state.state_name
+
 # Only returns true if the transition is valid.
 func can_transition_to(new_state_name : String) -> bool:
 	if current_state == null : return true # Always allow initial state.

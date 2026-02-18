@@ -23,6 +23,7 @@ func _ready() -> void:
 		print("Current scene is default, freeing it.")
 		default.queue_free()
 	
+	
 	_setup_state_machine()
 
 # Initializes state machine.
@@ -30,13 +31,16 @@ func _setup_state_machine() -> void:
 	# Valid transitions.
 	var transitions : Dictionary = {
 		MainMenuState.STATE_NAME : [
-			PlayState.STATE_NAME],
+			PlayState.STATE_NAME
+			],
 		PlayState.STATE_NAME : [
 			MainMenuState.STATE_NAME,
-			PauseState.STATE_NAME],
+			PauseState.STATE_NAME
+			],
 		PauseState.STATE_NAME : [
 			MainMenuState.STATE_NAME,
-			PlayState.STATE_NAME],
+			PlayState.STATE_NAME
+			]
 	}
 	
 	# Initializes state machine with name and valid transitions.
@@ -55,6 +59,7 @@ func get_current_state() -> State : return state_machine.current_state
 func get_scene_container() -> Control : return scene_root
 
 ## Requests by other systems. Returns false if invalid transition
+# TODO Might have a bug later with unpause and main menu. We'll see.
 func request_play() -> bool : return state_machine.transition_to(play_state) == OK
 func request_pause() -> bool : return state_machine.transition_to(pause_state) == OK
 func request_unpause() -> bool : return state_machine.transition_to(play_state) == OK

@@ -2,7 +2,7 @@ extends RefCounted
 class_name State
 
 # State Data
-var state_name : String
+var state_name : String = "INITIAL_STATE"
 var _parent : StateMachine
 
 func _init(parent: StateMachine) -> void:

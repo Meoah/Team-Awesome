@@ -1,10 +1,34 @@
-[gd_scene load_steps=2 format=3 uid="uid://dyaxs1jdloena"]
+[gd_scene load_steps=4 format=3 uid="uid://dyaxs1jdloena"]
 
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="1_c24ra"]
+[ext_resource type="Script" uid="uid://cqsqbytqafa34" path="res://scenes/ui/slot.gd" id="1_jkamp"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_sad2q"]
 
-[node name="Slot" type="Node2D"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sad2q"]
+bg_color = Color(0.07058824, 0.21960784, 0.105882354, 0.5019608)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 128.0
-offset_bottom = 128.0
-texture = ExtResource("1_c24ra")
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(64, 64)
+theme_override_styles/panel = SubResource("StyleBoxFlat_sad2q")
+script = ExtResource("1_jkamp")
+
+[node name="Icon" type="TextureRect" parent="."]
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CountLabel" type="Label" parent="Icon"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_sad2q")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyaxfdsfosdd3"
-path="res://.godot/imported/MCPlaceholder.png-8b5ca8013a3ebd909d90c8873c487608.ctex"
+uid="uid://s547mvojrov2"
+path="res://.godot/imported/bobber.png-a7275d85bb91097fb5dac2684ba66fbc.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/MCPlaceholder.png"
-dest_files=["res://.godot/imported/MCPlaceholder.png-8b5ca8013a3ebd909d90c8873c487608.ctex"]
+source_file="res://assets/textures/jeremy/bobber.png"
+dest_files=["res://.godot/imported/bobber.png-a7275d85bb91097fb5dac2684ba66fbc.ctex"]
 
 [params]
 

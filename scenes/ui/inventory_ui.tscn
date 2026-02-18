@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://himmnj7djqgt"]
+
+[ext_resource type="Script" uid="uid://cyund0hdccn2m" path="res://scenes/ui/Inventory_UI.gd" id="1_5v8q7"]
+[ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/slot.tscn" id="2_gf3dx"]
+
+[node name="Inventory_UI" type="CanvasLayer"]
+
+[node name="GridContainer" type="GridContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -639.0
+offset_right = 639.0
+offset_bottom = 143.0
+grow_horizontal = 2
+theme_override_constants/h_separation = 5
+theme_override_constants/v_separation = 10
+columns = 20
+script = ExtResource("1_5v8q7")
+slot = ExtResource("2_gf3dx")
