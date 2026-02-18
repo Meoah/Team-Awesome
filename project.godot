@@ -21,7 +21,6 @@ buses/default_bus_layout=""
 
 [autoload]
 
-Inventory="*res://scripts/ui/inventory.gd"
 SystemData="*res://scripts/system/system_data.gd"
 GameManager="*res://scenes/game_manager.tscn"
 PlayManager="*res://scripts/managers/play_manager.gd"

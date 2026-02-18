@@ -5,8 +5,7 @@ class_name BasePopup
 enum POPUP_TYPE{
 	GENERIC,
 	PAUSE,
-	ARROWUI,
-	HUD
+	MINIGAMEUI
 }
 
 # Flags used to determine popup behavior.

@@ -53,7 +53,7 @@ func _end_day() -> void:
 func _play_minigame() -> void:
 	$FISH.play("FISH!") #Plays FISH! Animation
 	await $FISH.animation_finished
-	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.ARROWUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
+	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAMEUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
 
 func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.stop(true)

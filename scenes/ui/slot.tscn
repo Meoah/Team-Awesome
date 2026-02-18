@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dyaxs1jdloena"]
 
-[ext_resource type="Script" uid="uid://cqsqbytqafa34" path="res://scenes/ui/slot.gd" id="1_jkamp"]
+[ext_resource type="Script" uid="uid://cqsqbytqafa34" path="res://scripts/ui/hud/inventory/slot.gd" id="1_jkamp"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_sad2q"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sad2q"]

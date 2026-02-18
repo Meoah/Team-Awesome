@@ -1,5 +1,5 @@
 extends BasePopup
-class_name ArrowUIPopup
+class_name MinigameUIPopup
 
 @export var input_string : TextEdit #Accessing TextEdit box
 @export var reaction : Sprite2D #Accessing Sprite2D for reaction image
