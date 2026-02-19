@@ -5,6 +5,7 @@ extends Node
 
 # Variables
 var player_money : float = 0.0
+var delayed_money : float = 0.0
 var day : int = 1
 var fish_inventory : Dictionary = {} # {fish_id : int = count : int}
 var bait_inventory : Dictionary = {
@@ -34,13 +35,24 @@ func _reset_all() -> void:
 ## Money methods
 func _set_money(money : float) -> void : player_money = money
 func get_money() -> float : return player_money
+func get_waiting_money() -> float : return delayed_money
 func _add_money(money : float) -> void : player_money += money
-func _reset_money() -> void : player_money = 0.0
+func _add_money_delay(money : float) -> void : delayed_money += money
+func _reset_money() -> void:
+	player_money = 0.0
+	delayed_money = 0.0
+
+# Attempts to spend money. Returns false if not enough.
 func spend_money(cost : float) -> bool:
 	if cost > player_money:
 		return false
 	player_money -= cost
 	return true
+
+# Moves all delayed_money to player_money.
+func _transfer_money() -> void:
+	player_money += delayed_money
+	delayed_money = 0.0
 
 ## Week and day methods. Five days in a week.
 func _set_day(input_day : int) -> void : day = input_day
@@ -80,11 +92,15 @@ func get_fish_count(fish_id: int) -> int:
 		return fish_inventory[fish_id]
 	return 0
 
-# Returns the total inventory value.
+# Returns the total inventory value. 
+# TODO: While this works, we might not need this, as we have modifiers to money gain, it 
+#		is currently easier to just put in the modified money directly after catching it.
+#		However, there is a case to be made to use this for counting specifically base values.
+#		Either use the base values for something or delete this function later.
 func get_total_inventory_value() -> float:
 	var total : float = 0
 	for fish in fish_inventory.keys():
-		var stack_value = fish.fish_price * fish_inventory[fish]
+		var stack_value = FishData.FISH_ID[fish]["value"] * fish_inventory[fish]
 		total += stack_value
 	return total
 

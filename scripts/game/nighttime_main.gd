@@ -23,6 +23,7 @@ func _on_sleep_pressed() -> void:
 
 func _ready() -> void:
 	scavange = 0
+	_sell_all_fish()
 	if SystemData.get_day() == 5:
 		$Sleep.text = "Pay rent or die"
 
@@ -52,6 +53,9 @@ func _update_info() -> void:
 	
 	info.text = info_string
 
+func _sell_all_fish() -> void:
+	SystemData._transfer_money()
+	SystemData._clear_fish_inventory()
 
 func _on_ded_pressed():
 	SystemData._reset_all()

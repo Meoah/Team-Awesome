@@ -217,6 +217,7 @@ func win():
 		elif varied_obscured:
 			current_value = current_value * 1.75
 		input_string.set_text(current_name + "\n Weight: " + str(current_weight) + "\n Value: " + str(current_value))
+		SystemData._add_money_delay(current_value)
 		SystemData._add_fish(chosen_fish_id)
 		await get_tree().create_timer(3).timeout
 		PlayManager.request_catching_state()
