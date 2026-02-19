@@ -5,7 +5,7 @@ extends GridContainer
 
 func _ready():
 	#Connects to inventory siganal
-	Inventory.inventory_updated.connect(refresh_ui)
+	SystemData.inventory_updated.connect(refresh_ui)
 	refresh_ui()
 
 func refresh_ui():
@@ -14,7 +14,7 @@ func refresh_ui():
 	for child in get_children():
 		child.queue_free()
 	
-	var contents = Inventory.get_all_fish()
+	var contents = SystemData.get_all_fish()
 	
 	for fish in contents.keys():
 		var amount = contents[fish]

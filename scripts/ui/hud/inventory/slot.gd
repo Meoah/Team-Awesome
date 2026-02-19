@@ -3,8 +3,9 @@ extends PanelContainer
 @onready var icon_rect = $Icon
 @onready var count_label = $Icon/CountLabel
 
-func set_slot(fish_data: Inventory_FishData, amount: int):
-	icon_rect.texture = fish_data.icon
+func set_slot(fish_id: int, amount: int):
+	var fish = FishData.FISH_ID[fish_id]
+	icon_rect.texture = load(fish["image"])
 	
 	#Only show count if count is > 1
 	if amount > 1:
@@ -12,4 +13,3 @@ func set_slot(fish_data: Inventory_FishData, amount: int):
 		count_label.show()
 	else:
 		count_label.hide()
-		

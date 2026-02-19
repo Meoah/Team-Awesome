@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=17 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
+[ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/inventory_ui.tscn" id="9_ovom5"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 
@@ -121,7 +122,7 @@ size = Vector2(50, 720)
 script = ExtResource("1_2jsv6")
 jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
-info = NodePath("Info")
+info = NodePath("HUD/Info")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -172,31 +173,44 @@ shape = SubResource("RectangleShape2D_ovom5")
 position = Vector2(640, 360)
 shape = SubResource("RectangleShape2D_3kam8")
 
-[node name="Info" type="Label" parent="."]
-offset_left = 13.0
-offset_right = 105.0
-offset_bottom = 23.0
-text = "placeholder"
-label_settings = ExtResource("10_3kam8")
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(640, 360)
+position_smoothing_enabled = true
 
-[node name="Button" type="Button" parent="."]
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="HUD"]
+layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1066.0
-offset_top = 621.0
-offset_right = 1272.0
-offset_bottom = 711.0
+offset_left = 1026.0
+offset_top = 581.0
+offset_right = 1232.0
+offset_bottom = 671.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Day"
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(640, 360)
-position_smoothing_enabled = true
+[node name="Info" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 70.0
+offset_right = 187.0
+offset_bottom = 115.0
+text = "placeholder"
+label_settings = ExtResource("10_3kam8")
+
+[node name="Inventory_UI" parent="HUD" instance=ExtResource("9_ovom5")]
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
