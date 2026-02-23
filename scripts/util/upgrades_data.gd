@@ -1,10 +1,6 @@
 class_name UpgradesData
 
 
-
-
-
-
 # Table of Contents. Each upgrade is split into a category. Refer to category and item ID to access data.
 
 const UPGRADES_EXOTIC : Dictionary = {
@@ -33,7 +29,7 @@ const UPGRADES_LURES : Dictionary = {
 #	"type" : String [Rod, Reel, Lure, Exotic]
 #	"cost" : float
 #	"description" : String
-# Anything other parameter is optional and can be used for speciality fish.
+# Anything other parameter is optional and can be used for speciality upgrades.
 
 
 
