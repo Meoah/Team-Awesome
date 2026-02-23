@@ -49,6 +49,8 @@ func _ready() -> void:
 	if PlayManager.get_state_machine() : _bind_signals()
 
 func _bind_signals() -> void:
+	PlayManager.idle_day_state.signal_idle_day.connect(_reset_flags)
+	PlayManager.idle_night_state.signal_idle_night.connect(_reset_flags)
 	PlayManager.casting_state.signal_casting.connect(_on_casting_state)
 	PlayManager.waiting_state.signal_waiting.connect(_on_waiting_state)
 
@@ -89,6 +91,10 @@ func _physics_process(delta: float) -> void:
 func _notification(what: int) -> void:
 	# Resets movement flags to 0 if window loses focus.
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT : input_flags = 0
+
+# Resets the flags back to 0.
+func _reset_flags() -> void:
+	input_flags = 0
 
 # Transitions to casting state, then continously charge while action held.
 func _cast_handler(delta : float) -> void:
