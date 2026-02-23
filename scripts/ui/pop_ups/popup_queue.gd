@@ -115,11 +115,13 @@ func _on_before_dismiss(popup: BasePopup) -> void:
 
 # Dismisses the popup.
 func _dismiss(popup: BasePopup) -> void:
+	var blocker_opacity : float = 0.0
 	_queue.erase(popup.name) # Remove the popup from the self tracker.
 	
 	# Moves next popup in line to front if exists
 	if(_queue.size() > 0):
 		var next_popup: BasePopup = _queue.values().back()
+		blocker_opacity = next_popup.bg_opacity
 		self.move_child(next_popup, -1)
 		self.move_child(_blocker, -2)
 	
@@ -128,6 +130,7 @@ func _dismiss(popup: BasePopup) -> void:
 	if(_queue.size() <= 0):
 		self.visible = false # If there are no more popups in the tracker, hide the queue itself.
 	
+	_set_blocker_alpha(blocker_opacity, popup)
 	_on_after_dismiss(popup)
 
 # Allows running of functions after the dismissal.
