@@ -69,6 +69,10 @@ func request_main_menu() -> bool : return state_machine.transition_to(main_menu_
 func clear_popup_queue() -> void:
 	popup_queue.clear_queue()
 
+# Dismisses the top popup. If a name is specified, dismisses that popup.
+func dismiss_popup(popup_name : String = "") -> void:
+	popup_queue.dismiss_popup(popup_name)
+
 # Waits one frame to let allow signals to finalize.
 func change_scene_deferred(scene : PackedScene) -> void:
 	await get_tree().process_frame

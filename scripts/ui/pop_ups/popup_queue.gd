@@ -134,4 +134,17 @@ func _dismiss(popup: BasePopup) -> void:
 func _on_after_dismiss(popup: BasePopup) -> void:
 	popup.on_after_dismiss() # TODO Unsure if await is required here.
 	popup.queue_free() # Placed here at the very end to ensure the function finishes its procedure before freeing.
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		# Allows escape to dismiss popup.
+		if event.keycode == KEY_ESCAPE and event.is_released():
+			if _queue.size() == 0 : return
+			
+			# Checks if state needs to be set back from pause.
+			var popup: BasePopup = _queue.values().back()
+			var current_state = GameManager.get_current_state()
+			
+			# Pause only happens after all the DISMISS_ON_ESCAPE are down.
+			if popup && (popup.is_dismiss_on_escape()) : GameManager.dismiss_popup()
+			elif current_state == GameManager.play_state : GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)

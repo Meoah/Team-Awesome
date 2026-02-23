@@ -69,6 +69,7 @@ func _on_button_pressed():
 
 func _on_debug_pressed() -> void:
 	var popup_parameters = {
-		"dialogue_id" = 0
+		"dialogue_id" = 0,
+		"flags" = BasePopup.POPUP_FLAG.DISMISS_ON_ESCAPE
 	}
 	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)
