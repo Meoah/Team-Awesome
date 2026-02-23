@@ -13,7 +13,13 @@ const FISH_ID : Dictionary = {
 	4 : PINK_FISH,
 	5 : SHROOMLE,
 	6 : LINXOOO,
-	7 : HONEY_GLAZED_SKELETON
+	7 : HONEY_GLAZED_SKELETON,
+	8 : DOODLE_BIRD,
+	9 : DOODLE_BIRD_RARE,
+	10 : LONG_FISH,
+	11 : FIH,
+	12 : CATFISH,
+	13 : DEFAULT_CUBE,
 }
 
 ## Fish data
@@ -87,4 +93,58 @@ const HONEY_GLAZED_SKELETON : Dictionary = {
 	"inputs" : ["Up", "Up", "Down", "Down", "Left","Right","Left","Right"],
 	"value" : 15.0,
 	"time" : 6.0
+}
+
+const DOODLE_BIRD : Dictionary = {
+	"name" : "Doodle Bird",
+	"image" : NodePath("res://assets/textures/fish/wip_fish/FuckassBird.png"),
+	"weight" : 2.0,
+	"inputs" : ["Left","Left","Right","Right","Down","Down"],
+	"value" : 4.0,
+	"time" : 3.0
+}
+
+const DOODLE_BIRD_RARE : Dictionary = {
+	"name" : "Doodle Bird (Rare)",
+	"image" : NodePath("res://assets/textures/fish/wip_fish/FuckassBird(Rare).png"),
+	"weight" : 3.0,
+	"inputs" : ["Left","Right","Left","Right","Right","Down","Up","Down"],
+	"value" : 15.0,
+	"time" : 4.0
+}
+
+const LONG_FISH : Dictionary = {
+	"name" : "Long Fish",
+	"image" : NodePath("res://assets/textures/fish/wip_fish/LongFish.png"),
+	"weight" : 5.0,
+	"inputs" : ["Right","Right","Right","Right","Right","Right","Right","Right"],
+	"value" : 10.0,
+	"time" : 4.0
+}
+
+const CATFISH : Dictionary = {
+	"name" : "Catfish",
+	"image" : NodePath("res://assets/textures/fish/wip_fish/Catfish.png"),
+	"weight" : 4.0,
+	"inputs" : ["Left", "Right", "Left", "Up", "Up","Up"],
+	"value" : 7.0,
+	"time" : 3.5
+}
+
+const FIH : Dictionary = {
+	"name" : "Fih",
+	"image" : NodePath("res://assets/textures/fish/wip_fish/Fih.png"),
+	"weight" : 2.0,
+	"inputs" : ["Right","Up","Left","Down","Right","Up","Left","Down",],
+	"value" : 6.0,
+	"time" : 3.4
+}
+
+const DEFAULT_CUBE : Dictionary = {
+	"name" : "Default Blender Cube",
+	"image" : NodePath("res://assets/textures/fish/wip_fish/BlenderCube.png"),
+	"weight" : 10.0,
+	"inputs" : ["Left","Right","Up","Down","Left","Right","Up","Down"],
+	"value" : 15.0,
+	"time" : 5.0
 }
