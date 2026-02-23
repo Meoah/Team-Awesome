@@ -50,6 +50,7 @@ func _show(popup: BasePopup) -> void:
 	
 	self.visible = true # Forces the popup queue itself to be visible if it wasn't already.
 	popup.visible = true # Finally show the popup.
+	_set_blocker_alpha(popup.bg_opacity, popup) # Sets the blocker.
 	_on_after_show(popup)
 
 # Allows running of functions after the initial show.
@@ -61,6 +62,29 @@ func _on_after_show(popup: BasePopup) -> void:
 		GameManager.request_pause()
 		_number_paused += 1
 
+# Sets the blocker's alpha with respect to parameters.
+func _set_blocker_alpha(alpha : float, popup : BasePopup) -> void:
+	# Checks parameters.
+	var will_pause : bool = popup.is_will_pause()
+	var do_not_tween : bool = popup.fast_up
+	
+	# Checks the alpha of the blocker.
+	var current_alpha : float = _blocker.get_current_alpha()
+	
+	# Determines if we're starting or ending a blocker.
+	var is_beg_queue : bool = current_alpha == 0
+	var is_end_queue : bool = alpha == 0
+	
+	# If nothing to do, return.
+	if current_alpha == alpha : return
+	
+	# Determine if we will use a fading tween.
+	var use_tween = false
+	if is_end_queue || (is_beg_queue && !will_pause) : use_tween = true
+	if do_not_tween : use_tween = false
+	
+	# Actual setting of the blocker.
+	_blocker.set_alpha(alpha, use_tween)
 
 ## Procedure: Dismiss Popup
 # Optional argument if we want a specific popup removed by name. Otherwise, it removes the top-most popup from the stack.
