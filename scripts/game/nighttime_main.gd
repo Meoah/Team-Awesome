@@ -1,7 +1,13 @@
-extends Node2D
+extends Control
 class_name NighttimeMain
 
 @export var info : Label
+@export var jeremy_node : MainCharacter
+@export var house_node : Area2D
+@export var shop_node : Area2D
+
+@export var shop_ui : Control
+@export var sleep_ui : Control
 
 var scavange : int = 0
 
@@ -26,9 +32,17 @@ func _ready() -> void:
 	_sell_all_fish()
 	if SystemData.get_day() == 5:
 		$Sleep.text = "Pay rent or die"
+	jeremy_node.player_interact.connect(_interaction)
 
 func _process(_delta) -> void:
 	_update_info()
+
+func _interaction() -> void:
+	if shop_node.overlaps_body(jeremy_node):
+		if shop_ui.visible : shop_ui.visible = false
+		else : shop_ui.visible = true
+	if house_node.overlaps_body(jeremy_node):
+		sleep_ui.visible = true
 
 #TODO move this elsewhere
 func calculate_rent() -> float:

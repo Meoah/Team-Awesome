@@ -35,6 +35,8 @@ var bar_direction : float = 1.0
 # Parent Nodes
 var daytime_node : DaytimeMain
 var nighttime_node : NighttimeMain
+# Signals
+signal player_interact
 
 func _ready() -> void:
 	# Initializes arrow sprite.
@@ -68,6 +70,7 @@ func _input(event: InputEvent) -> void:
 	# Action
 	if event.is_action_pressed("action"):
 		_set_flag(InputFlags.ACTION, true)
+		player_interact.emit()
 		if bobber_hook:
 			if PlayManager.request_reeling_state():
 				_clear_bobbers()

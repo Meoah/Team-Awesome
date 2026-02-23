@@ -9,6 +9,7 @@
 size = Vector2(800, 800)
 
 [node name="Jeremy" type="CharacterBody2D" node_paths=PackedStringArray("arrow_sprite", "boat_sprite", "power_bar")]
+collision_mask = 2
 script = ExtResource("1_mo88p")
 bobber_scene = ExtResource("2_5ovje")
 arrow_sprite = NodePath("Arrow")
