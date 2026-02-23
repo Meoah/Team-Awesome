@@ -77,6 +77,9 @@ const SHROOMLE : Dictionary = {
 	"time" : 5.0
 }
 
+
+#TODO Below is fish with temp art. Filepath should be updated when art it finalized
+
 const LINXOOO : Dictionary = {
 	"name" : "Linxooo",
 	"image" : NodePath("res://assets/textures/fish/wip_fish/Linxooo.png"),
