@@ -5,7 +5,11 @@ class_name BasePopup
 enum POPUP_TYPE{
 	GENERIC,
 	PAUSE,
-	MINIGAMEUI
+	MINIGAMEUI,
+	DIALOGUE,
+	SHOP, #TODO
+	COMPENDIUM, #TODO
+	SETTINGS #TODO
 }
 
 # Flags used to determine popup behavior.
@@ -19,6 +23,8 @@ enum POPUP_FLAG{
 var type : int = POPUP_TYPE.GENERIC
 var flags : int = 0
 var bg_opacity : float = Blocker.DEFAULT_ALPHA
+var fast_down: bool = false
+var fast_up: bool = false
 var params: Dictionary = {}
 
 func _init() -> void:
@@ -26,6 +32,8 @@ func _init() -> void:
 	type = POPUP_TYPE.GENERIC
 	flags = 0
 	bg_opacity = Blocker.DEFAULT_ALPHA
+	fast_down = false
+	fast_up = false
 	params = {}
 	
 	_on_init()
@@ -37,6 +45,10 @@ func _ready() -> void:
 func set_params(_params: Dictionary = {}) -> void:
 	self.params = _params.duplicate()
 	
+	if self.params.has("fast_down"):
+		fast_down = self.params["fast_down"]
+	if self.params.has("fast_up"):
+		fast_up = self.params["fast_up"]
 	if self.params.has("bg_opacity"):
 		bg_opacity = self.params["bg_opacity"]
 	if self.params.has("flags"):

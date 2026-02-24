@@ -50,6 +50,7 @@ func _show(popup: BasePopup) -> void:
 	
 	self.visible = true # Forces the popup queue itself to be visible if it wasn't already.
 	popup.visible = true # Finally show the popup.
+	_set_blocker_alpha(popup.bg_opacity, popup) # Sets the blocker.
 	_on_after_show(popup)
 
 # Allows running of functions after the initial show.
@@ -61,6 +62,29 @@ func _on_after_show(popup: BasePopup) -> void:
 		GameManager.request_pause()
 		_number_paused += 1
 
+# Sets the blocker's alpha with respect to parameters.
+func _set_blocker_alpha(alpha : float, popup : BasePopup) -> void:
+	# Checks parameters.
+	var will_pause : bool = popup.is_will_pause()
+	var do_not_tween : bool = popup.fast_up
+	
+	# Checks the alpha of the blocker.
+	var current_alpha : float = _blocker.get_current_alpha()
+	
+	# Determines if we're starting or ending a blocker.
+	var is_beg_queue : bool = current_alpha == 0
+	var is_end_queue : bool = alpha == 0
+	
+	# If nothing to do, return.
+	if current_alpha == alpha : return
+	
+	# Determine if we will use a fading tween.
+	var use_tween = false
+	if is_end_queue || (is_beg_queue && !will_pause) : use_tween = true
+	if do_not_tween : use_tween = false
+	
+	# Actual setting of the blocker.
+	_blocker.set_alpha(alpha, use_tween)
 
 ## Procedure: Dismiss Popup
 # Optional argument if we want a specific popup removed by name. Otherwise, it removes the top-most popup from the stack.
@@ -91,11 +115,13 @@ func _on_before_dismiss(popup: BasePopup) -> void:
 
 # Dismisses the popup.
 func _dismiss(popup: BasePopup) -> void:
+	var blocker_opacity : float = 0.0
 	_queue.erase(popup.name) # Remove the popup from the self tracker.
 	
 	# Moves next popup in line to front if exists
 	if(_queue.size() > 0):
 		var next_popup: BasePopup = _queue.values().back()
+		blocker_opacity = next_popup.bg_opacity
 		self.move_child(next_popup, -1)
 		self.move_child(_blocker, -2)
 	
@@ -104,10 +130,24 @@ func _dismiss(popup: BasePopup) -> void:
 	if(_queue.size() <= 0):
 		self.visible = false # If there are no more popups in the tracker, hide the queue itself.
 	
+	_set_blocker_alpha(blocker_opacity, popup)
 	_on_after_dismiss(popup)
 
 # Allows running of functions after the dismissal.
 func _on_after_dismiss(popup: BasePopup) -> void:
 	popup.on_after_dismiss() # TODO Unsure if await is required here.
 	popup.queue_free() # Placed here at the very end to ensure the function finishes its procedure before freeing.
-	
+
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		# Allows escape to dismiss popup.
+		if event.keycode == KEY_ESCAPE and event.is_released():
+			if _queue.size() == 0 : return
+			
+			# Checks if state needs to be set back from pause.
+			var popup: BasePopup = _queue.values().back()
+			var current_state = GameManager.get_current_state()
+			
+			# Pause only happens after all the DISMISS_ON_ESCAPE are down.
+			if popup && (popup.is_dismiss_on_escape()) : GameManager.dismiss_popup()
+			elif current_state == GameManager.play_state : GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)

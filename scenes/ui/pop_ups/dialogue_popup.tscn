@@ -1,0 +1,286 @@
+[gd_scene load_steps=16 format=3 uid="uid://cwo1dpi7dssjg"]
+
+[ext_resource type="Script" uid="uid://bv0ieg1ihbpof" path="res://scripts/ui/pop_ups/dialogue_popup.gd" id="1_jhcxe"]
+[ext_resource type="Texture2D" uid="uid://bfm2wj2amel5w" path="res://assets/textures/ui/dialogue/character_portraits/mobboss.png" id="2_qpbe1"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="3_qpbe1"]
+[ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/jeremy/arrow.png" id="4_piijg"]
+[ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://assets/textures/ui/panel_grey_dark.png" id="4_qpbe1"]
+
+[sub_resource type="FontFile" id="FontFile_qpbe1"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_piijg"]
+default_font = SubResource("FontFile_qpbe1")
+default_font_size = 24
+
+[sub_resource type="Animation" id="Animation_jqb3i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ContinueArrow:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.99215686, 1, 0.78431374)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ContinueArrow:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(856, 140)]
+}
+
+[sub_resource type="Animation" id="Animation_gfr62"]
+resource_name = "continue_arrow"
+length = 6.000004
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ContinueArrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4.5, 5.99),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(855, 140), Vector2(840, 140), Vector2(855, 140), Vector2(840, 140), Vector2(855, 140)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ContinueArrow:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.99, 2.99, 4.0000033, 5.0000033, 6.010007),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0.99215686, 1, 0), Color(1, 0.99215686, 1, 0.7921569), Color(1, 0.99215686, 1, 0), Color(1, 0.99215686, 1, 0.7921569), Color(1, 0.99215686, 1, 0), Color(1, 0.99215686, 1, 0.7921569), Color(1, 0.99215686, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_arc3p"]
+_data = {
+&"RESET": SubResource("Animation_jqb3i"),
+&"continue_arrow": SubResource("Animation_gfr62")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_piijg"]
+font_size = 24
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="FontFile" id="FontFile_piijg"]
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/24/0/ascent = 0.0
+cache/0/24/0/descent = 0.0
+cache/0/24/0/underline_position = 0.0
+cache/0/24/0/underline_thickness = 0.0
+cache/0/24/0/scale = 1.0
+
+[sub_resource type="Theme" id="Theme_a0ly1"]
+default_font = SubResource("FontFile_piijg")
+default_font_size = 24
+
+[sub_resource type="Animation" id="Animation_a0ly1"]
+resource_name = "startup"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("DialogueBox:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jqb3i"]
+_data = {
+&"startup": SubResource("Animation_a0ly1")
+}
+
+[node name="DialoguePopup" type="Control" node_paths=PackedStringArray("speaker_label", "speaker_nine_slice", "speaker_margin", "speaker_image", "content_margin", "continue_arrow", "content", "option_a", "option_b")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_jhcxe")
+speaker_label = NodePath("DialogueBox/SpeakerName/MarginContainer/Label")
+speaker_nine_slice = NodePath("DialogueBox/SpeakerName")
+speaker_margin = NodePath("DialogueBox/SpeakerName/MarginContainer")
+speaker_image = NodePath("SpeakerImage")
+content_margin = NodePath("DialogueBox/Content/MarginContainer")
+continue_arrow = NodePath("DialogueBox/Content/ContinueArrow")
+content = NodePath("DialogueBox/Content/MarginContainer/Text")
+option_a = NodePath("DialogueBox/HBoxContainer/OptionA")
+option_b = NodePath("DialogueBox/HBoxContainer/OptionB")
+
+[node name="SpeakerImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.7
+anchor_top = 0.3
+anchor_right = 0.99
+anchor_bottom = 0.98
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_qpbe1")
+expand_mode = 5
+flip_h = true
+
+[node name="DialogueBox" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="Content" type="NinePatchRect" parent="DialogueBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.7
+anchor_right = 0.85
+anchor_bottom = 0.95
+texture = ExtResource("3_qpbe1")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueBox/Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="Text" type="RichTextLabel" parent="DialogueBox/Content/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_piijg")
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
+[node name="ContinueArrow" type="TextureRect" parent="DialogueBox/Content"]
+visible = false
+modulate = Color(1, 0.99215686, 1, 0.78431374)
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+texture = ExtResource("4_piijg")
+expand_mode = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueBox/Content/ContinueArrow"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_arc3p")
+}
+autoplay = "continue_arrow"
+
+[node name="SpeakerName" type="NinePatchRect" parent="DialogueBox"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.175
+anchor_top = 0.675
+anchor_right = 0.175
+anchor_bottom = 0.675
+offset_right = 32.0
+offset_bottom = 32.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("4_qpbe1")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="DialogueBox/SpeakerName"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 20
+
+[node name="Label" type="Label" parent="DialogueBox/SpeakerName/MarginContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_piijg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="DialogueBox"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.25
+anchor_top = 0.925
+anchor_right = 0.75
+anchor_bottom = 0.98
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="OptionA" type="Button" parent="DialogueBox/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+theme = SubResource("Theme_a0ly1")
+text = "Option A"
+
+[node name="OptionB" type="Button" parent="DialogueBox/HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+theme = SubResource("Theme_a0ly1")
+text = "Option B"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_jqb3i")
+}

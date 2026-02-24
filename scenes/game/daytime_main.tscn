@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=18 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/inventory_ui.tscn" id="9_ovom5"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
+[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
 
 [sub_resource type="Animation" id="Animation_qc6n8"]
 resource_name = "FISH!"
@@ -131,7 +132,6 @@ texture = ExtResource("3_nw5db")
 [node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
 position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
-collision_mask = 2
 
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {
@@ -175,7 +175,18 @@ shape = SubResource("RectangleShape2D_3kam8")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
+limit_left = 0
+limit_top = 0
+limit_right = 1280
+limit_bottom = 720
 position_smoothing_enabled = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = true
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("10_qc6n8")]
+visible = false
 
 [node name="HUD" type="Control" parent="."]
 layout_mode = 3
@@ -192,25 +203,47 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 1026.0
-offset_top = 581.0
-offset_right = 1232.0
-offset_bottom = 671.0
+offset_left = 1060.0
+offset_top = 582.0
+offset_right = 1208.0
+offset_bottom = 666.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Day"
 
 [node name="Info" type="Label" parent="HUD"]
-layout_mode = 0
-offset_left = 4.0
-offset_top = 70.0
-offset_right = 187.0
-offset_bottom = 115.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = 310.0
+offset_right = 205.0
+offset_bottom = 355.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "placeholder"
 label_settings = ExtResource("10_3kam8")
 
 [node name="Inventory_UI" parent="HUD" instance=ExtResource("9_ovom5")]
 
+[node name="debug" type="Button" parent="HUD"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1056.0
+offset_top = 462.0
+offset_right = 1219.0
+offset_bottom = 548.0
+grow_horizontal = 0
+grow_vertical = 2
+focus_mode = 0
+text = "debug"
+
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="body_entered" from="Water" to="." method="_on_water_body_entered"]
 [connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HUD/debug" to="." method="_on_debug_pressed"]

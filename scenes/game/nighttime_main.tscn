@@ -1,23 +1,117 @@
-[gd_scene load_steps=5 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=13 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/nighttime_main.gd" id="1_53syt"]
+[ext_resource type="Texture2D" uid="uid://coivg44ivnbvf" path="res://assets/textures/ui/Filler_Shop_BG2.png" id="2_pdcg8"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="2_s2grh"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_i5ojq"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="3_s2grh"]
+[ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_pk35q"]
+[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="7_pk35q"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_s2grh"]
-font_size = 64
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pk35q"]
+size = Vector2(268, 292)
 
-[node name="NighttimeMain" type="Node2D" node_paths=PackedStringArray("info")]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fmtj"]
+size = Vector2(268, 292)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s2grh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pdcg8"]
+size = Vector2(50, 720)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i5ojq"]
+size = Vector2(50, 720)
+
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info", "jeremy_node", "house_node", "shop_node", "shop_ui", "sleep_ui")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_53syt")
 info = NodePath("Info")
+jeremy_node = NodePath("Jeremy")
+house_node = NodePath("House")
+shop_node = NodePath("Shop")
+shop_ui = NodePath("ShopUI")
+sleep_ui = NodePath("Sleep")
+
+[node name="BackgroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_pdcg8")
+
+[node name="GroundTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.875
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("3_i5ojq")
+expand_mode = 1
+
+[node name="House" type="Area2D" parent="."]
+position = Vector2(308, 469)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="House"]
+scale = Vector2(0.48211092, 2.3275862)
+texture = ExtResource("4_pk35q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="House"]
+position = Vector2(-2, 15)
+shape = SubResource("RectangleShape2D_pk35q")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="Shop" type="Area2D" parent="."]
+position = Vector2(951, 465)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Shop"]
+scale = Vector2(0.48211092, 2.3275862)
+texture = ExtResource("4_pk35q")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop"]
+position = Vector2(-2, 15)
+shape = SubResource("RectangleShape2D_1fmtj")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="Jeremy" parent="." instance=ExtResource("2_s2grh")]
 position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
 
-[node name="BuyBait" type="Button" parent="."]
+[node name="Sleep" type="Button" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 147.0
+offset_top = 287.0
+offset_right = 461.0
+offset_bottom = 410.0
+text = "Go to bed"
+
+[node name="Info" type="Label" parent="."]
+layout_mode = 0
+offset_left = 13.0
+offset_right = 251.0
+offset_bottom = 171.0
+text = "info"
+label_settings = ExtResource("3_s2grh")
+
+[node name="ShopUI" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BuyBait" type="Button" parent="ShopUI"]
+layout_mode = 0
 offset_left = 577.0
 offset_top = 270.0
 offset_right = 827.0
@@ -25,77 +119,30 @@ offset_bottom = 385.0
 text = "Buy Bait x10
 Cost: $15"
 
-[node name="Scavenge" type="Button" parent="."]
+[node name="Scavenge" type="Button" parent="ShopUI"]
+layout_mode = 0
 offset_left = 894.0
 offset_top = 269.0
 offset_right = 1144.0
 offset_bottom = 384.0
 text = "Scavange for bait"
 
-[node name="Sleep" type="Button" parent="."]
-offset_left = 905.0
-offset_top = 520.0
-offset_right = 1219.0
-offset_bottom = 643.0
-text = "Go to bed"
-
-[node name="Info" type="Label" parent="."]
-offset_left = 13.0
-offset_right = 251.0
-offset_bottom = 171.0
-text = "info"
-label_settings = ExtResource("3_s2grh")
-
-[node name="Control" type="Control" parent="."]
+[node name="GameOver" parent="." instance=ExtResource("7_pk35q")]
 visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="ColorRect" parent="Control"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.55896664, 0, 0.02380879, 1)
 
-[node name="Label" type="Label" parent="Control/TextureRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "YOU FAILED TO PAY RENT
+[node name="Boundaries" type="StaticBody2D" parent="."]
+collision_layer = 2
+physics_material_override = SubResource("PhysicsMaterial_s2grh")
 
-THE TOAD MOB GOT YOU
+[node name="LeftCollision" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(-25, 360)
+shape = SubResource("RectangleShape2D_pdcg8")
 
-YOU DIED"
-label_settings = SubResource("LabelSettings_s2grh")
-horizontal_alignment = 1
+[node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
+position = Vector2(1305, 360)
+shape = SubResource("RectangleShape2D_i5ojq")
 
-[node name="ded" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 905.0
-offset_top = 520.0
-offset_right = 1219.0
-offset_bottom = 643.0
-text = "oh."
-
-[connection signal="pressed" from="BuyBait" to="." method="_on_buy_bait_pressed"]
-[connection signal="pressed" from="Scavenge" to="." method="_on_scavenge_pressed"]
 [connection signal="pressed" from="Sleep" to="." method="_on_sleep_pressed"]
-[connection signal="pressed" from="Control/ded" to="." method="_on_ded_pressed"]
+[connection signal="pressed" from="ShopUI/BuyBait" to="." method="_on_buy_bait_pressed"]
+[connection signal="pressed" from="ShopUI/Scavenge" to="." method="_on_scavenge_pressed"]

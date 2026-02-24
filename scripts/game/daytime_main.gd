@@ -53,7 +53,11 @@ func _end_day() -> void:
 func _play_minigame() -> void:
 	$FISH.play("FISH!") #Plays FISH! Animation
 	await $FISH.animation_finished
-	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAMEUI, {"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE})
+	
+	var popup_parameters = {
+		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE
+	}
+	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAMEUI, popup_parameters)
 
 func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.stop(true)
@@ -61,3 +65,12 @@ func _on_fish_animation_finished(_anim_name: StringName) -> void:
 
 func _on_button_pressed():
 	_end_day()
+
+
+func _on_debug_pressed() -> void:
+	var popup_parameters = {
+		"dialogue_id" = 0,
+		"flags" = BasePopup.POPUP_FLAG.DISMISS_ON_ESCAPE
+	}
+	if PlayManager.request_dialogue_day_state():
+		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)

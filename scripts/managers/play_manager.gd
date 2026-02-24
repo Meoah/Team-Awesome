@@ -54,12 +54,14 @@ func _setup_state_machine() -> void:
 			IdleNightState.STATE_NAME
 		],
 		DialogueDayState.STATE_NAME : [
-			IdleDayState.STATE_NAME
+			IdleDayState.STATE_NAME,
+			DeadState.STATE_NAME
 		],
 		MovingDayState.STATE_NAME : [
 			IdleNightState.STATE_NAME,
 			DialogueDayState.STATE_NAME,
-			CastingState.STATE_NAME
+			CastingState.STATE_NAME,
+			DeadState.STATE_NAME
 		],
 		CastingState.STATE_NAME : [
 			IdleDayState.STATE_NAME,
@@ -80,19 +82,23 @@ func _setup_state_machine() -> void:
 			DialogueNightState.STATE_NAME,
 			MovingNightState.STATE_NAME,
 			ShoppingState.STATE_NAME,
-			SleepingState.STATE_NAME
+			SleepingState.STATE_NAME,
+			DeadState.STATE_NAME
 		],
 		DialogueNightState.STATE_NAME : [
 			IdleNightState.STATE_NAME,
-			ShoppingState.STATE_NAME
+			ShoppingState.STATE_NAME,
+			DeadState.STATE_NAME
 		],
 		MovingNightState.STATE_NAME : [
 			IdleNightState.STATE_NAME,
 			DialogueNightState.STATE_NAME,
-			ShoppingState.STATE_NAME
+			ShoppingState.STATE_NAME,
+			DeadState.STATE_NAME
 		],
 		ShoppingState.STATE_NAME : [
 			IdleNightState.STATE_NAME,
+			DeadState.STATE_NAME
 		],
 		SleepingState.STATE_NAME : [
 			IdleDayState.STATE_NAME,
