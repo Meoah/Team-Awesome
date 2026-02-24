@@ -1,25 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://cwo1dpi7dssjg"]
+[gd_scene load_steps=15 format=3 uid="uid://cwo1dpi7dssjg"]
 
 [ext_resource type="Script" uid="uid://bv0ieg1ihbpof" path="res://scripts/ui/pop_ups/dialogue_popup.gd" id="1_jhcxe"]
 [ext_resource type="Texture2D" uid="uid://bfm2wj2amel5w" path="res://assets/textures/ui/dialogue/character_portraits/mobboss.png" id="2_qpbe1"]
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="3_qpbe1"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_a0ly1"]
 [ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/jeremy/arrow.png" id="4_piijg"]
 [ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://assets/textures/ui/panel_grey_dark.png" id="4_qpbe1"]
 
-[sub_resource type="FontFile" id="FontFile_qpbe1"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/24/0/ascent = 0.0
-cache/0/24/0/descent = 0.0
-cache/0/24/0/underline_position = 0.0
-cache/0/24/0/underline_thickness = 0.0
-cache/0/24/0/scale = 1.0
-
 [sub_resource type="Theme" id="Theme_piijg"]
-default_font = SubResource("FontFile_qpbe1")
+default_font = ExtResource("4_a0ly1")
 default_font_size = 24
 
 [sub_resource type="Animation" id="Animation_jqb3i"]
@@ -85,24 +74,13 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_piijg"]
+font = ExtResource("4_a0ly1")
 font_size = 24
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="FontFile" id="FontFile_piijg"]
-cache/0/16/0/ascent = 0.0
-cache/0/16/0/descent = 0.0
-cache/0/16/0/underline_position = 0.0
-cache/0/16/0/underline_thickness = 0.0
-cache/0/16/0/scale = 1.0
-cache/0/24/0/ascent = 0.0
-cache/0/24/0/descent = 0.0
-cache/0/24/0/underline_position = 0.0
-cache/0/24/0/underline_thickness = 0.0
-cache/0/24/0/scale = 1.0
-
 [sub_resource type="Theme" id="Theme_a0ly1"]
-default_font = SubResource("FontFile_piijg")
+default_font = ExtResource("4_a0ly1")
 default_font_size = 24
 
 [sub_resource type="Animation" id="Animation_a0ly1"]
