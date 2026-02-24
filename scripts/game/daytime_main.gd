@@ -72,4 +72,5 @@ func _on_debug_pressed() -> void:
 		"dialogue_id" = 0,
 		"flags" = BasePopup.POPUP_FLAG.DISMISS_ON_ESCAPE
 	}
-	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)
+	if PlayManager.request_dialogue_day_state():
+		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)

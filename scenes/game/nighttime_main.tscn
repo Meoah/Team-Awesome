@@ -6,17 +6,13 @@
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_i5ojq"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="3_s2grh"]
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_pk35q"]
+[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="7_pk35q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk35q"]
 size = Vector2(268, 292)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fmtj"]
 size = Vector2(268, 292)
-
-[sub_resource type="LabelSettings" id="LabelSettings_s2grh"]
-font_size = 64
-outline_size = 8
-outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s2grh"]
 
@@ -131,54 +127,9 @@ offset_right = 1144.0
 offset_bottom = 384.0
 text = "Scavange for bait"
 
-[node name="Control" type="Control" parent="."]
+[node name="GameOver" parent="." instance=ExtResource("7_pk35q")]
 visible = false
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 1280.0
-offset_bottom = 720.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TextureRect" type="ColorRect" parent="Control"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.55896664, 0, 0.02380879, 1)
-
-[node name="Label" type="Label" parent="Control/TextureRect"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = -11.5
-offset_right = 20.0
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "YOU FAILED TO PAY RENT
-
-THE TOAD MOB GOT YOU
-
-YOU DIED"
-label_settings = SubResource("LabelSettings_s2grh")
-horizontal_alignment = 1
-
-[node name="ded" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 905.0
-offset_top = 520.0
-offset_right = 1219.0
-offset_bottom = 643.0
-text = "oh."
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -195,4 +146,3 @@ shape = SubResource("RectangleShape2D_i5ojq")
 [connection signal="pressed" from="Sleep" to="." method="_on_sleep_pressed"]
 [connection signal="pressed" from="ShopUI/BuyBait" to="." method="_on_buy_bait_pressed"]
 [connection signal="pressed" from="ShopUI/Scavenge" to="." method="_on_scavenge_pressed"]
-[connection signal="pressed" from="Control/ded" to="." method="_on_ded_pressed"]

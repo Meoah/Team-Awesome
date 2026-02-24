@@ -18,8 +18,7 @@ func _on_buy_bait_pressed() -> void:
 func _on_sleep_pressed() -> void:
 	if SystemData.get_day() == 5:
 		if !SystemData.spend_money(calculate_rent()):
-			PlayManager.request_dead_state()
-			$Control.visible = true
+			SignalBus.player_dies.emit()
 			return
 	if PlayManager.request_sleeping_state():
 		print("Sleepin")
@@ -71,14 +70,9 @@ func _sell_all_fish() -> void:
 	SystemData._transfer_money()
 	SystemData._clear_fish_inventory()
 
-func _on_ded_pressed():
-	SystemData._reset_all()
-	GameManager.request_main_menu()
-
-
 func _on_scavenge_pressed() -> void:
 	if scavange < 3:
 		scavange += 1
 		SystemData._add_bait("generic", 1)
 		if scavange >= 3:
-			$Scavenge.visible = false
+			$ShopUI/Scavenge.visible = false
