@@ -1,11 +1,14 @@
 class_name DialoguePopup
 extends BasePopup
 
+# TODO Multiple options
+
 ## Node Exports
 @export var speaker_label : Label
 @export var speaker_nine_slice : NinePatchRect
 @export var speaker_margin : MarginContainer
-@export var speaker_image : TextureRect
+@export var speaker_image_l : TextureRect
+@export var speaker_image_r : TextureRect
 @export var content_margin : MarginContainer
 @export var continue_arrow : TextureRect
 @export var content : RichTextLabel
@@ -62,7 +65,7 @@ func _dialogue() -> void:
 	
 	# Name and image
 	_set_speaker(current_section.get(DialogueData.KEY_NAME, ""))
-	_set_image(current_section.get(DialogueData.KEY_IMAGE, ""))
+	_set_images(current_section.get(DialogueData.KEY_IMAGE_L, ""), current_section.get(DialogueData.KEY_IMAGE_R, ""))
 	
 	# Content
 	_set_content(current_section.get(DialogueData.KEY_TEXT, ""))
@@ -76,7 +79,6 @@ func _set_dialogue_parameters(parameters : Array = []) -> void:
 # Sets the speaker name if it exists.
 func _set_speaker(speaker_name : String = "") -> void:
 	# If no speaker name, turns off the speaker nameplate altogether.
-	print(speaker_name)
 	if !speaker_name: 
 		speaker_nine_slice.visible = false
 		content_margin.add_theme_constant_override("margin_top", 24)
@@ -94,10 +96,12 @@ func _set_speaker(speaker_name : String = "") -> void:
 	speaker_nine_slice.custom_minimum_size.x = label_width + pad_width
 
 # Changes the texture of the character portrait on the right.
-func _set_image(image_path : NodePath = "") -> void:
-	# Sets the texture if there is one.
-	if !image_path : speaker_image.texture = null
-	else: speaker_image.texture = load(image_path)
+func _set_images(image_path_l : NodePath = "", image_path_r : NodePath = "") -> void:
+	# Sets the textures if there is one.
+	if !image_path_l : speaker_image_l.texture = null
+	else: speaker_image_l.texture = load(image_path_l)
+	if !image_path_r : speaker_image_r.texture = null
+	else: speaker_image_r.texture = load(image_path_r)
 
 # Preps the content window.
 var is_typing : bool = false
@@ -135,7 +139,7 @@ var goto : int = 0
 var option_a_goto : int = 0
 var option_b_goto : int = 0
 func _wait_player_input() -> void:
-	if DialogueData.PARAMETER_ON_EXIT not in current_section_parameters:
+	if DialogueData.PARAMETER_SIGNAL_ON_EXIT not in current_section_parameters:
 		_emit_section_signals()
 	
 	var option_a_text = current_section.get(DialogueData.KEY_OPTION_A, "")
@@ -195,9 +199,8 @@ func _emit_section_signals() -> void:
 
 # Dismisses the popup after waiting one frame.
 func _exit() -> void:
-	if DialogueData.PARAMETER_ON_EXIT in current_section_parameters:
+	if DialogueData.PARAMETER_SIGNAL_ON_EXIT in current_section_parameters:
 		_emit_section_signals()
-	_emit_section_signals()
 	await get_tree().process_frame
 	GameManager.popup_queue.dismiss_popup()
 
