@@ -30,7 +30,10 @@ func _ready() -> void:
 	_sell_all_fish()
 	if SystemData.get_day() == 5:
 		$Sleep.text = "Pay rent or die"
+		
+	# Bind Signals
 	jeremy_node.player_interact.connect(_interaction)
+	SignalBus.start_bait_shop.connect(_start_bait_shop)
 
 func _process(_delta) -> void:
 	_update_info()
@@ -69,6 +72,13 @@ func _sell_all_fish() -> void:
 	SystemData._clear_fish_inventory()
 
 func _bait_shop() -> void:
+	var popup_parameters = {
+		"dialogue_id" = 0002,
+	}
+	if PlayManager.request_dialogue_night_state():
+		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)
+
+func _start_bait_shop() -> void:
 	var popup_parameters = {
 		"dialogue_id" = 0002,
 	}
