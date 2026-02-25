@@ -32,6 +32,9 @@ func _on_ready() -> void:
 	
 	# Start
 	_dialogue()
+	# Wait one physics frame before allowing input to be read.
+	await get_tree().physics_frame
+	read_inputs = true
 
 func _reset_variables() -> void:
 	continue_arrow.visible = false
@@ -210,8 +213,9 @@ func on_after_dismiss() -> void:
 	if PlayManager.get_current_state() is DialogueDayState : PlayManager.request_idle_day_state()
 	if PlayManager.get_current_state() is DialogueNightState : PlayManager.request_idle_night_state()
 
+var read_inputs : bool = false
 func _input(event : InputEvent) -> void:
-	if event.is_echo() : return
+	if event.is_echo() || !read_inputs : return
 	
 	if event.is_action_pressed("action"):
 		_request_advance()

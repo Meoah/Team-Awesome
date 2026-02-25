@@ -16,7 +16,7 @@ var sleeping_state : SleepingState
 var dead_state : DeadState
 # State Machine
 var state_machine : StateMachine
-# Valid movement states
+# Valid movement states TODO make const
 var movement_states : Dictionary = {
 	IdleDayState.STATE_NAME : true,
 	MovingDayState.STATE_NAME : true,
@@ -38,6 +38,12 @@ var daytime_states : Dictionary = {
 	WaitingState.STATE_NAME : true,
 	ReelingState.STATE_NAME : true,
 	CatchingState.STATE_NAME : true,
+}
+# Nighttime states
+# Dialogue states
+var dialogue_states : Dictionary = {
+	DialogueDayState.STATE_NAME : true,
+	DialogueNightState.STATE_NAME : true
 }
 
 func _ready() -> void:
@@ -154,3 +160,4 @@ func request_dead_state() -> bool : return state_machine.transition_to(dead_stat
 func is_movement_allowed() -> bool : return movement_states.has(state_machine.current_state.state_name)
 func is_aiming() -> bool : return aiming_states.has(state_machine.current_state.state_name)
 func is_daytime() -> bool : return daytime_states.has(state_machine.current_state.state_name)
+func is_dialogue() -> bool : return dialogue_states.has(state_machine.current_state.state_name)

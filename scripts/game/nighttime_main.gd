@@ -3,10 +3,9 @@ class_name NighttimeMain
 
 @export var info : Label
 @export var jeremy_node : MainCharacter
-@export var house_node : Area2D
-@export var shop_node : Area2D
+@export var house_trigger : Area2D
+@export var shop_trigger : Area2D
 
-@export var shop_ui : Control
 @export var sleep_ui : Control
 
 var scavange : int = 0
@@ -37,10 +36,9 @@ func _process(_delta) -> void:
 	_update_info()
 
 func _interaction() -> void:
-	if shop_node.overlaps_body(jeremy_node):
-		if shop_ui.visible : shop_ui.visible = false
-		else : shop_ui.visible = true
-	if house_node.overlaps_body(jeremy_node):
+	if shop_trigger.overlaps_body(jeremy_node):
+		_bait_shop()
+	if house_trigger.overlaps_body(jeremy_node):
 		sleep_ui.visible = true
 
 #TODO move this elsewhere
@@ -70,9 +68,9 @@ func _sell_all_fish() -> void:
 	SystemData._transfer_money()
 	SystemData._clear_fish_inventory()
 
-func _on_scavenge_pressed() -> void:
-	if scavange < 3:
-		scavange += 1
-		SystemData._add_bait("generic", 1)
-		if scavange >= 3:
-			$ShopUI/Scavenge.visible = false
+func _bait_shop() -> void:
+	var popup_parameters = {
+		"dialogue_id" = 0002,
+	}
+	if PlayManager.request_dialogue_night_state():
+		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)

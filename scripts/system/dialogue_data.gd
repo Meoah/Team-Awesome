@@ -3,6 +3,7 @@ class_name DialogueData
 ## Names
 const NAME_MOB_BOSS = "Mob Boss"
 const NAME_MAIN_CHARACTER = "Jeremy"
+const NAME_BAIT_VENDOR = "Barry"
 
 ## Image Paths
 const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/mobboss.png")
@@ -14,7 +15,8 @@ static func get_dialogue(id : int) -> Dictionary : return DIALOGUE_ID.get(id, {}
 # Table of Contents. When refrencing dialogue, use the ID accociated to locate the data.
 const DIALOGUE_ID : Dictionary[int,Dictionary] = {
 	0000 : DEBUG_EXAMPLE,
-	0001 : INTRO
+	0001 : INTRO,
+	0002 : BAIT_SHOP,
 }
 
 ## Dialogue data
@@ -55,6 +57,10 @@ const PARAMETER_SIGNAL_ON_EXIT : String = "signal_on_exit"
 # Signal will attempt to emit these as signals from SignalBus
 
 const DEBUG_EXAMPLE : Dictionary = {
+	0000 : {
+		KEY_RETURN : true,
+		KEY_TEXT : "If you're seeing THIS at all, something really broke."
+	},
 	0001 : {
 		KEY_TEXT : "If you're seeing this and not trying to debug, something has gone wrong."
 	},
@@ -95,5 +101,19 @@ const INTRO : Dictionary = {
 	0001 : {
 		KEY_NAME : NAME_MOB_BOSS,
 		KEY_TEXT : "Yo kid, where's my money?"
+	},
+}
+
+const BAIT_SHOP : Dictionary = {
+	0000 : {
+		KEY_RETURN : true,
+		KEY_TEXT : "If you're seeing THIS at all, something really broke."
+	},
+	0001 : {
+		KEY_NAME : NAME_BAIT_VENDOR,
+		KEY_TEXT : "Hello there, do you want some shoppins?",
+		KEY_RETURN : true,
+		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
+		KEY_SIGNAL : ["start_bait_shop"]
 	},
 }

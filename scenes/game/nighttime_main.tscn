@@ -22,7 +22,7 @@ size = Vector2(50, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5ojq"]
 size = Vector2(50, 720)
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info", "jeremy_node", "house_node", "shop_node", "shop_ui", "sleep_ui")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info", "jeremy_node", "house_trigger", "shop_trigger", "sleep_ui")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -32,9 +32,8 @@ grow_vertical = 2
 script = ExtResource("1_53syt")
 info = NodePath("Info")
 jeremy_node = NodePath("Jeremy")
-house_node = NodePath("House")
-shop_node = NodePath("Shop")
-shop_ui = NodePath("ShopUI")
+house_trigger = NodePath("House")
+shop_trigger = NodePath("Shop")
 sleep_ui = NodePath("Sleep")
 
 [node name="BackgroundTexture" type="TextureRect" parent="."]
@@ -104,29 +103,6 @@ offset_bottom = 171.0
 text = "info"
 label_settings = ExtResource("3_s2grh")
 
-[node name="ShopUI" type="Control" parent="."]
-visible = false
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="BuyBait" type="Button" parent="ShopUI"]
-layout_mode = 0
-offset_left = 577.0
-offset_top = 270.0
-offset_right = 827.0
-offset_bottom = 385.0
-text = "Buy Bait x10
-Cost: $15"
-
-[node name="Scavenge" type="Button" parent="ShopUI"]
-layout_mode = 0
-offset_left = 894.0
-offset_top = 269.0
-offset_right = 1144.0
-offset_bottom = 384.0
-text = "Scavange for bait"
-
 [node name="GameOver" parent="." instance=ExtResource("7_pk35q")]
 visible = false
 layout_mode = 1
@@ -144,5 +120,3 @@ position = Vector2(1305, 360)
 shape = SubResource("RectangleShape2D_i5ojq")
 
 [connection signal="pressed" from="Sleep" to="." method="_on_sleep_pressed"]
-[connection signal="pressed" from="ShopUI/BuyBait" to="." method="_on_buy_bait_pressed"]
-[connection signal="pressed" from="ShopUI/Scavenge" to="." method="_on_scavenge_pressed"]
