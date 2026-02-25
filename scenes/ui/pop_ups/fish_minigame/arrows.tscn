@@ -1,18 +1,88 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=30 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
 [ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="8_20txf"]
+[ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://scenes/ui/pop_ups/fish_minigame/sparks.gdshader" id="9_pp4l4"]
 [ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
 [ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="10_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="11_xp8ps"]
 [ext_resource type="Texture2D" uid="uid://b4347mim6kpsw" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
 [ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="12_mx6gi"]
 [ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="13_8ksox"]
+[ext_resource type="AudioStream" uid="uid://by0a2yhtb1xx2" path="res://assets/audio/sfx/arrows_sfx/CorrectInput.wav" id="14_6t01a"]
+[ext_resource type="AudioStream" uid="uid://c2qsxm7f6l4bf" path="res://assets/audio/sfx/arrows_sfx/Weapon Bullet Shell 7MM Dropping On Cement 04.wav" id="14_qp0nd"]
+[ext_resource type="AudioStream" uid="uid://ciwgbjh144uqc" path="res://assets/audio/sfx/arrows_sfx/StarterShot.wav" id="15_qp0nd"]
 [ext_resource type="Script" uid="uid://c2w7qb8xpm6jn" path="res://scripts/ui/fish_minigame/arrow_sprite.gd" id="16_mx6gi"]
+[ext_resource type="AudioStream" uid="uid://cw4v1vxvdvah7" path="res://assets/audio/sfx/arrows_sfx/timer/FuseLit.wav" id="17_02m58"]
 [ext_resource type="Texture2D" uid="uid://b608g2qbl8yxd" path="res://assets/textures/ui/Arrows/effects/smoke.png" id="17_8ksox"]
 [ext_resource type="Script" uid="uid://bfh11uixb171m" path="res://scripts/ui/pop_ups/smoke.gd" id="18_63o2f"]
+[ext_resource type="AudioStream" uid="uid://derys0a2u4qbx" path="res://assets/audio/sfx/arrows_sfx/timer/FuseBurndown.wav" id="18_pp4l4"]
+[ext_resource type="AudioStream" uid="uid://by2ugocktfwqy" path="res://assets/audio/sfx/arrows_sfx/timer/FuseExtinguish.wav" id="19_47pa4"]
 [ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="19_dleu3"]
+[ext_resource type="AudioStream" uid="uid://bgu7ybmy0tneo" path="res://assets/audio/sfx/arrows_sfx/Gold_Fail.wav" id="21_47pa4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp4l4"]
+bg_color = Color(0.8635442, 0.49697268, 3.85046e-07, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_47pa4"]
+bg_color = Color(0.8847695, 0.4799639, 0.0048436862, 1)
+corner_radius_top_left = 120
+corner_radius_top_right = 120
+corner_radius_bottom_right = 120
+corner_radius_bottom_left = 120
+
+[sub_resource type="Theme" id="Theme_np22p"]
+/styles/gwub = SubResource("StyleBoxFlat_pp4l4")
+ProgressBar/styles/fill = SubResource("StyleBoxFlat_47pa4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_47pa4"]
+shader = ExtResource("9_pp4l4")
+shader_parameter/speed = 1.0
+shader_parameter/pixelSize = 0.015
+shader_parameter/alpha = 0.95
+shader_parameter/flickerStrength = 0.15
+shader_parameter/toColor = Color(0.0016764245, 0.0012604409, 0.000417689, 1)
+shader_parameter/fromColor = Color(0.9, 0.2, 0.1, 1)
+shader_parameter/hueShift = 0.0
+shader_parameter/saturationFactor = 0.9770000464075
+shader_parameter/particleCount = 76.69000288277499
+shader_parameter/brightness = 0.00110000004497
+shader_parameter/fireShift = 0.5
+shader_parameter/fireShiftFrequency = 10.0
+shader_parameter/size = Vector2(0.11, 1.03)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 50.0
+shader_parameter/sparkSize = 0.00250000011875
+shader_parameter/sparkSpeed = 2.65000012261512
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 5.0
+shader_parameter/smokeSize = 0.0010000000475
+shader_parameter/smokeDrift = 0.2
+shader_parameter/smokeColor = Color(5.0780603e-05, 5.0780603e-05, 5.0780603e-05, 1)
+shader_parameter/windForce = 0.5
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.5)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_np22p"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qp0nd"]
+random_volume_offset_db = 6.0
+streams_count = 1
+stream_0/stream = ExtResource("14_6t01a")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vc0bb"]
+random_pitch = 1.15
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("14_qp0nd")
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_np22p"]
+loop = false
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("17_02m58")
+stream_1 = ExtResource("18_pp4l4")
 
 [node name="Arrows" type="Control" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 process_mode = 3
@@ -29,7 +99,7 @@ timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
-variants = Array[String](["Obscured", "Evil", "Gold", "None"])
+variants = Array[String](["Gold", "Evil", "Gold", "None"])
 arrow_direction = Dictionary[String, Texture2D]({
 "Down": ExtResource("12_mx6gi"),
 "Left": ExtResource("10_qdfjh"),
@@ -56,6 +126,7 @@ offset_left = 378.0
 offset_top = 360.0
 offset_right = 911.0
 offset_bottom = 387.0
+theme = SubResource("Theme_np22p")
 show_percentage = false
 
 [node name="Label" type="Label" parent="ProgressBar"]
@@ -67,6 +138,18 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "5.0 s"
 horizontal_alignment = 1
+
+[node name="Start" type="Marker2D" parent="ProgressBar"]
+position = Vector2(532, 0)
+
+[node name="End" type="Marker2D" parent="ProgressBar"]
+
+[node name="Sparks" type="Sprite2D" parent="ProgressBar"]
+material = SubResource("ShaderMaterial_47pa4")
+position = Vector2(533, 1.0000076)
+scale = Vector2(258.43506, 258.43506)
+texture = SubResource("CanvasTexture_np22p")
+offset = Vector2(0, -0.23)
 
 [node name="Timer" type="Timer" parent="."]
 process_mode = 3
@@ -117,5 +200,30 @@ alignment = 1
 process_mode = 3
 layout_mode = 2
 script = ExtResource("19_dleu3")
+
+[node name="InputSfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_qp0nd")
+volume_db = -9.0
+
+[node name="InputSfx2" type="AudioStreamPlayer" parent="InputSfx"]
+stream = SubResource("AudioStreamRandomizer_vc0bb")
+volume_db = -6.0
+
+[node name="StarterShot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_qp0nd")
+volume_db = -9.0
+
+[node name="TimerSfx" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamPlaylist_np22p")
+volume_db = -9.0
+
+[node name="TimerEndSfx" type="AudioStreamPlayer" parent="TimerSfx"]
+stream = ExtResource("19_47pa4")
+volume_db = -9.0
+bus = &"SFX"
+
+[node name="GoldFail" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_47pa4")
+volume_db = -6.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
