@@ -1,5 +1,5 @@
-class_name DialoguePopup
 extends BasePopup
+class_name DialoguePopup
 
 # TODO Multiple options
 

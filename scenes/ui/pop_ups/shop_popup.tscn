@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://byyulsrldui6y"]
+
+[ext_resource type="Script" uid="uid://c2kg33k74ht3c" path="res://scripts/ui/pop_ups/shop_popup.gd" id="1_pnp85"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="2_a5p4q"]
+[ext_resource type="PackedScene" uid="uid://bk1bcrfoh1bco" path="res://scenes/ui/pop_ups/shop/card.tscn" id="2_g8bmi"]
+[ext_resource type="Script" uid="uid://16uhp5idqag" path="res://scripts/ui/pop_ups/shop/card_stage.gd" id="4_ikwgw"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="5_862jk"]
+
+[sub_resource type="Theme" id="Theme_5ag0i"]
+default_font = ExtResource("5_862jk")
+
+[node name="ShopPopup" type="Control" node_paths=PackedStringArray("card_stage")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_pnp85")
+card_stage = NodePath("Screen/VBoxContainer/Cards/NinePatchRect/MarginContainer/CardStage")
+card_scene = ExtResource("2_g8bmi")
+
+[node name="Screen" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 80
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 80
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Screen"]
+layout_mode = 2
+
+[node name="Cards" type="MarginContainer" parent="Screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Screen/VBoxContainer/Cards"]
+layout_mode = 2
+texture = ExtResource("2_a5p4q")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Screen/VBoxContainer/Cards/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="CardStage" type="Control" parent="Screen/VBoxContainer/Cards/NinePatchRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 25.0
+script = ExtResource("4_ikwgw")
+
+[node name="Options" type="MarginContainer" parent="Screen/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Screen/VBoxContainer/Options"]
+layout_mode = 2
+alignment = 1
+
+[node name="Back" type="Button" parent="Screen/VBoxContainer/Options/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+focus_mode = 0
+theme = SubResource("Theme_5ag0i")
+text = "Back
+"
+
+[node name="Bait" type="Button" parent="Screen/VBoxContainer/Options/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+focus_mode = 0
+theme = SubResource("Theme_5ag0i")
+text = "Buy Regular Bait
+($15 for 10)"
+
+[node name="Reroll" type="Button" parent="Screen/VBoxContainer/Options/HBoxContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+focus_mode = 0
+theme = SubResource("Theme_5ag0i")
+text = "Reroll"
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_right = 150.0
+offset_bottom = 80.0
+text = "debug"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
