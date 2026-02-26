@@ -22,7 +22,7 @@ size = Vector2(50, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5ojq"]
 size = Vector2(50, 720)
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info", "jeremy_node", "house_node", "shop_node", "shop_ui", "sleep_ui")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -31,11 +31,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_53syt")
 info = NodePath("Info")
-jeremy_node = NodePath("Jeremy")
-house_node = NodePath("House")
-shop_node = NodePath("Shop")
-shop_ui = NodePath("ShopUI")
-sleep_ui = NodePath("Sleep")
 
 [node name="BackgroundTexture" type="TextureRect" parent="."]
 layout_mode = 1
