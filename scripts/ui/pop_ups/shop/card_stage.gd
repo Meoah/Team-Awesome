@@ -33,7 +33,10 @@ func _ready() -> void:
 	_update_layout()
 
 func _input(event : InputEvent) -> void:
-	if event is InputEventMouseMotion : _update_mouse_hover()
+	if event is InputEventMouseMotion:
+		_update_mouse_hover()
+		# If a card is hovered, call for the tooltip to be moved.
+		if hovered != null : GameManager.get_tooltip_layer()._update_tooltip_position(get_global_mouse_position())
 
 # Main function to add a card.
 func _add_card(incoming_card : Card) -> void:
@@ -48,10 +51,11 @@ func _refresh_layout() -> void:
 # Refreshes the cards by scanning each child for valid cards.
 func _refresh_cards() -> void:
 	cards.clear()
-	for valid_card : Card in get_children():
-		cards.append(valid_card)
-		# Ensures the card has the correct mouse filter settings.
-		valid_card.mouse_filter = Control.MOUSE_FILTER_STOP
+	for child in get_children():
+		if child is Card:
+			cards.append(child)
+			# Ensures the card has the correct mouse filter settings.
+			child.mouse_filter = Control.MOUSE_FILTER_STOP
 
 # Action taken when mouse moves on the screen.
 func _update_mouse_hover() -> void:
@@ -73,27 +77,56 @@ func _update_mouse_hover() -> void:
 		if hovered != null : _set_hover(null)
 		return
 	
-	# Subdivide the available space by the cards present. Assign those as valid bounds.
-	var centers: Array[float] = []
-	centers.resize(base_x.size())
-	for index : int in range(base_x.size()):
-		centers[index] = base_x[index] + CARD_SIZE.x * 0.5
+	# Decide which hover method to use.
+	var desired_step : float = CARD_SIZE.x + GAP_SIZE
+	var fills_entire_space : bool = (base_step < desired_step)
+	var hovered_card : Card = null
 	
-	# Identify which card the mouse is within the bounds for.
-	var hovered_card_index : int = 0
-	for index : int in range(centers.size() - 1):
-		var mid : float = (centers[index] + centers[index + 1]) * 0.5
-		if mouse_local_position.x >= mid:
-			hovered_card_index = index + 1
+	# If the entire space is being used, allow mouse passthrough when scanning through cards.
+	if fills_entire_space:
+		# Subdivide the available space by the cards present. Assign those as valid bounds.
+		var centers: Array[float] = []
+		centers.resize(base_x.size())
+		for index : int in range(base_x.size()):
+			centers[index] = base_x[index] + CARD_SIZE.x * 0.5
+		
+		# Identify which card the mouse is within the bounds for.
+		var hovered_card_index : int = 0
+		for index : int in range(centers.size() - 1):
+			var mid : float = (centers[index] + centers[index + 1]) * 0.5
+			if mouse_local_position.x >= mid:
+				hovered_card_index = index + 1
+		
+		hovered_card = cards[hovered_card_index]
+		if hovered_card != hovered : _set_hover(hovered_card)
+		return
+
+	# If it doesn't fill the entire space, only hover over the card when mouse is actually over a card.
+	var highest_z_index : int = -1
 	
-	# Once hovered card is determined, if it isn't already the hovered card, set it.
-	var hovered_card : Card = cards[hovered_card_index]
+	for current_card : Card in cards:
+		if !current_card.visible : continue
+		
+		if current_card.get_global_rect().has_point(mouse_global_position):
+			if current_card.z_index >= highest_z_index:
+				hovered_card = current_card
+				highest_z_index = current_card.z_index
+	
 	if hovered_card != hovered : _set_hover(hovered_card)
 
 # Sets the hovered card.
 func _set_hover(incoming_card : Card) -> void:
+	if hovered == incoming_card : return
 	hovered = incoming_card
+	
+	# Shows tooltip on cursor if hovered over.
+	if hovered == null : GameManager.get_tooltip_layer()._hide_tooltip()
+	else : GameManager.get_tooltip_layer()._show_tooltip(get_global_mouse_position(), _get_hover_tooltip_text(hovered))
+	
 	_update_layout()
+
+func _get_hover_tooltip_text(incoming_card : Card) -> String:
+	return incoming_card.name
 
 # Main updater
 func _update_layout() -> void:
@@ -129,7 +162,7 @@ func _update_layout() -> void:
 	for index : int in range(number_of_cards):
 		# Set the current card to manipulate and reset its size and pivot.
 		var current_card : Card = cards[index]
-		current_card.size = CARD_SIZE
+		current_card.custom_minimum_size = CARD_SIZE
 		current_card.pivot_offset = current_card.size * 0.5
 		
 		# Check if the card if hovered. If so, set the scale to HOVER_SCALE.
@@ -165,7 +198,7 @@ func _update_layout() -> void:
 			y -= HOVER_LIFT_SIZE + added_height * HOVER_LIFT_SCALE
 		
 		# Ensures the hovered card is the highest on the z axis.
-		current_card.z_index = (1000 if is_hovered else index)
+		current_card.z_index = (100 if is_hovered else index)
 		
 		# Once all calculations are done, send to the animator.
 		_animate_card(current_card, Vector2(x, y), target_scale)

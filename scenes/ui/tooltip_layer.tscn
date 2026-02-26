@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://6k5qd37wt7aa"]
+
+[ext_resource type="Script" uid="uid://cpcgm03b1g8xn" path="res://scenes/tooltip.gd" id="1_gc7l6"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="2_scnmh"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jdad8"]
+
+[node name="TooltipLayer" type="Control" node_paths=PackedStringArray("tooltip_panel", "tooltip_label")]
+z_index = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gc7l6")
+tooltip_panel = NodePath("Tooltip")
+tooltip_label = NodePath("Tooltip/MarginContainer/Label")
+
+[node name="Tooltip" type="PanelContainer" parent="."]
+layout_mode = 1
+offset_right = 41.0
+offset_bottom = 63.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_jdad8")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Tooltip"]
+layout_mode = 2
+texture = ExtResource("2_scnmh")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Tooltip"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="Label" parent="Tooltip/MarginContainer"]
+layout_mode = 2

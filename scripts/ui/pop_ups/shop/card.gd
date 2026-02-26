@@ -1,9 +1,14 @@
 extends Control
 class_name Card
 
-signal hovered(card: Control)
-signal unhovered(card: Control)
+@export var card_name : Label
 
 func _ready() -> void:
-	mouse_entered.connect(func(): hovered.emit(self))
-	mouse_exited.connect(func(): unhovered.emit(self))
+	tooltip_text = "Card Info Here"
+	pass
+
+func _make_custom_tooltip(for_text: String) -> Object:
+	var label := Label.new()
+	label.text = for_text
+	label.add_theme_color_override("font_color", Color.YELLOW)
+	return label

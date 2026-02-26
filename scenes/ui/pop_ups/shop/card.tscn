@@ -8,13 +8,14 @@
 [sub_resource type="LabelSettings" id="LabelSettings_p5rlq"]
 font = ExtResource("4_al21x")
 
-[node name="Card" type="Control"]
+[node name="Card" type="Control" node_paths=PackedStringArray("card_name")]
 custom_minimum_size = Vector2(225, 300)
 layout_mode = 3
 anchor_right = 0.17600001
 anchor_bottom = 0.40100002
 offset_right = -0.28001404
 script = ExtResource("1_bcowh")
+card_name = NodePath("CardFront/MarginContainer/VBoxContainer/Details/MarginContainer/Label")
 
 [node name="CardFront" type="NinePatchRect" parent="."]
 layout_mode = 1
