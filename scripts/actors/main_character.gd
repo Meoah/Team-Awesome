@@ -56,7 +56,10 @@ func _bind_signals() -> void:
 	PlayManager.casting_state.signal_casting.connect(_on_casting_state)
 	PlayManager.waiting_state.signal_waiting.connect(_on_waiting_state)
 
-func _input(event: InputEvent) -> void:
+
+func _input(event : InputEvent) -> void:
+	if event.is_echo() : return
+	
 	# Arrow Keys
 	if event.is_action_pressed("left"):		_set_flag(InputFlags.MOVE_LEFT, true)
 	if event.is_action_released("left"):	_set_flag(InputFlags.MOVE_LEFT, false)
@@ -70,11 +73,6 @@ func _input(event: InputEvent) -> void:
 	# Action
 	if event.is_action_pressed("action"):
 		_set_flag(InputFlags.ACTION, true)
-		player_interact.emit()
-		if bobber_hook:
-			if PlayManager.request_reeling_state():
-				_clear_bobbers()
-				if daytime_node : daytime_node._play_minigame()
 	if event.is_action_released("action"):	_set_flag(InputFlags.ACTION, false)
 	
 	#TODO cancel button?
@@ -88,6 +86,7 @@ func _physics_process(delta: float) -> void:
 	if PlayManager.is_aiming() : _aiming(delta)
 	else : arrow_sprite.visible = false
 	if PlayManager.is_daytime() : _water_bob(delta)
+	if !PlayManager.is_dialogue() : _action()
 	
 	move_and_slide()
 
@@ -111,6 +110,7 @@ func _cast_handler(delta : float) -> void:
 			_throw_bobber()
 			PlayManager.request_waiting_state()
 
+# Charges the power bar.
 func _charging(delta : float) -> void:
 	time_held += delta
 	
@@ -174,6 +174,15 @@ func _water_bob(delta : float) -> void:
 	bob_timer += delta
 	var bob : float = sin(bob_timer) * bob_amplitude
 	boat_sprite.position.y = bob
+
+# Action handler.
+func _action() -> void:
+	if !(input_flags & InputFlags.ACTION) : return
+	player_interact.emit()
+	if bobber_hook:
+		if PlayManager.request_reeling_state():
+			_clear_bobbers()
+			if daytime_node : daytime_node._play_minigame()
 
 # Aiming handler
 func _aiming(delta) -> void:

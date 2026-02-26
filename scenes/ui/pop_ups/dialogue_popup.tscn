@@ -103,7 +103,7 @@ _data = {
 &"startup": SubResource("Animation_a0ly1")
 }
 
-[node name="DialoguePopup" type="Control" node_paths=PackedStringArray("speaker_label", "speaker_nine_slice", "speaker_margin", "speaker_image", "content_margin", "continue_arrow", "content", "option_a", "option_b")]
+[node name="DialoguePopup" type="Control" node_paths=PackedStringArray("speaker_label", "speaker_nine_slice", "speaker_margin", "speaker_image_l", "speaker_image_r", "content_margin", "continue_arrow", "content", "option_a", "option_b")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -115,22 +115,48 @@ script = ExtResource("1_jhcxe")
 speaker_label = NodePath("DialogueBox/SpeakerName/MarginContainer/Label")
 speaker_nine_slice = NodePath("DialogueBox/SpeakerName")
 speaker_margin = NodePath("DialogueBox/SpeakerName/MarginContainer")
-speaker_image = NodePath("SpeakerImage")
+speaker_image_l = NodePath("MarginContainer/SpeakerImageLeft")
+speaker_image_r = NodePath("MarginContainer2/SpeakerImageRight")
 content_margin = NodePath("DialogueBox/Content/MarginContainer")
 continue_arrow = NodePath("DialogueBox/Content/ContinueArrow")
 content = NodePath("DialogueBox/Content/MarginContainer/Text")
-option_a = NodePath("DialogueBox/HBoxContainer/OptionA")
-option_b = NodePath("DialogueBox/HBoxContainer/OptionB")
+option_a = NodePath("DialogueBox/VBoxContainer/OptionA")
+option_b = NodePath("DialogueBox/VBoxContainer/OptionB")
 
-[node name="SpeakerImage" type="TextureRect" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.7
-anchor_top = 0.3
-anchor_right = 0.99
-anchor_bottom = 0.98
-grow_horizontal = 0
-grow_vertical = 0
+anchor_top = 0.2
+anchor_right = 0.4
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="SpeakerImageLeft" type="TextureRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_qpbe1")
+expand_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6
+anchor_top = 0.2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="SpeakerImageRight" type="TextureRect" parent="MarginContainer2"]
+layout_mode = 2
 texture = ExtResource("2_qpbe1")
 expand_mode = 5
 flip_h = true
@@ -232,28 +258,24 @@ theme_override_constants/margin_right = 20
 layout_mode = 2
 label_settings = SubResource("LabelSettings_piijg")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="DialogueBox"]
+[node name="VBoxContainer" type="VBoxContainer" parent="DialogueBox"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.25
-anchor_top = 0.925
-anchor_right = 0.75
-anchor_bottom = 0.98
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.6
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 
-[node name="OptionA" type="Button" parent="DialogueBox/HBoxContainer"]
-visible = false
+[node name="OptionA" type="Button" parent="DialogueBox/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
 focus_mode = 0
 theme = SubResource("Theme_a0ly1")
 text = "Option A"
 
-[node name="OptionB" type="Button" parent="DialogueBox/HBoxContainer"]
-visible = false
+[node name="OptionB" type="Button" parent="DialogueBox/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 6
 focus_mode = 0
 theme = SubResource("Theme_a0ly1")
 text = "Option B"

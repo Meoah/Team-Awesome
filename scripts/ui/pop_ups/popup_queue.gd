@@ -150,4 +150,5 @@ func _input(event: InputEvent) -> void:
 			
 			# Pause only happens after all the DISMISS_ON_ESCAPE are down.
 			if popup && (popup.is_dismiss_on_escape()) : GameManager.dismiss_popup()
-			elif current_state == GameManager.play_state : GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
+			# TODO Pause menu
+			#elif current_state == GameManager.play_state : GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
