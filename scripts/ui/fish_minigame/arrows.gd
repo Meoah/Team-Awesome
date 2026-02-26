@@ -239,6 +239,7 @@ func win():
 		input_index = 0
 		$TimerSfx.stop()
 		$TimerSfx/TimerEndSfx.play()
+		$FishCaughtSfx.play()
 		$ProgressBar/Sparks.hide()
 		if varied_gold: #If fish is gold double its value, Current bug where double value persist
 			current_value = current_value * 2
