@@ -80,7 +80,8 @@ func _bait_shop() -> void:
 
 func _start_bait_shop() -> void:
 	var popup_parameters = {
-		"dialogue_id" = 0002,
+		
 	}
-	if PlayManager.request_dialogue_night_state():
-		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)
+	GameManager.clear_popup_queue()
+	if PlayManager.request_shopping_state():
+		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.SHOP, popup_parameters)
