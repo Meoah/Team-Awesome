@@ -17,7 +17,6 @@ func _on_button_pressed() -> void:
 	for each in range(10):
 		card_stage._add_card(prep_card())
 
-
 func _on_back_pressed() -> void:
 	PlayManager.request_idle_night_state()
 	GameManager.dismiss_popup()

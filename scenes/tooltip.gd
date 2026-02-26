@@ -2,7 +2,7 @@ extends Control
 class_name TooltipLayer
 
 @export var tooltip_panel : Control
-@export var tooltip_label : Label
+@export var tooltip_label : RichTextLabel
 
 const TOOLTIP_OFFSET : Vector2 = Vector2(18, 18)
 const SCREEN_MARGIN : Vector2 = Vector2(8, 8)

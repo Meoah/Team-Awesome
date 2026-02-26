@@ -6,7 +6,7 @@ class_name CardStage
 const CARD_SIZE : Vector2 = Vector2(225, 300)
 
 const GAP_SIZE : float = 16.0
-const SIDE_PADDING : float = 24.0
+const SIDE_PADDING : float = 4.0
 
 const HOVER_SCALE : float = 1.08
 const HOVER_PUSH_SIZE : float = 16.0
@@ -62,7 +62,7 @@ func _update_mouse_hover() -> void:
 	# Abort if no cards.
 	if cards.is_empty() : return
 	
-	# Find where the mouse is, then check if it's in the stage area, if not abort.
+	## Find where the mouse is, then check if it's in the stage area, if not abort.
 	var mouse_global_position : Vector2 = get_global_mouse_position()
 	if !get_global_rect().has_point(mouse_global_position):
 		if hovered != null : _set_hover(null)
@@ -70,12 +70,6 @@ func _update_mouse_hover() -> void:
 	
 	# If base cache isn't ready, abort.
 	if base_x.is_empty() || base_x.size() != cards.size() : return
-	
-	# Check if mouse is within the vertical bounds of any card, if not abort.
-	var mouse_local_position : Vector2 = get_local_mouse_position()
-	if mouse_local_position.y < base_y or mouse_local_position.y > base_y + CARD_SIZE.y:
-		if hovered != null : _set_hover(null)
-		return
 	
 	# Decide which hover method to use.
 	var desired_step : float = CARD_SIZE.x + GAP_SIZE
@@ -91,6 +85,7 @@ func _update_mouse_hover() -> void:
 			centers[index] = base_x[index] + CARD_SIZE.x * 0.5
 		
 		# Identify which card the mouse is within the bounds for.
+		var mouse_local_position : Vector2 = get_local_mouse_position()
 		var hovered_card_index : int = 0
 		for index : int in range(centers.size() - 1):
 			var mid : float = (centers[index] + centers[index + 1]) * 0.5
@@ -104,14 +99,34 @@ func _update_mouse_hover() -> void:
 	# If it doesn't fill the entire space, only hover over the card when mouse is actually over a card.
 	var highest_z_index : int = -1
 	
-	for current_card : Card in cards:
+	for index : int in range(cards.size()):
+		# Select the current card, if it's not visible, ignore it.
+		var current_card : Card = cards[index]
 		if !current_card.visible : continue
 		
-		if current_card.get_global_rect().has_point(mouse_global_position):
-			if current_card.z_index >= highest_z_index:
+		# Determines if the mouse is within the bounds.
+		var is_hit : bool = false
+		
+		# If it's visually within the bounds, it's a hit.
+		if current_card.get_global_rect().has_point(mouse_global_position) : is_hit = true
+		
+		# Check if the mouse is within the previous bounds of the card prehover.
+		if !is_hit and current_card == hovered:
+			# Find the dimensions of where the card would be if unhovered.
+			var stage_global_origin : Vector2 = get_global_transform().origin
+			var base_position_global : Vector2 = stage_global_origin + Vector2(base_x[index], base_y)
+			var base_rect_global : Rect2 = Rect2(base_position_global, CARD_SIZE)
+			
+			# If the mouse is within these bounds, it's a hit.
+			if base_rect_global.has_point(mouse_global_position) : is_hit = true
+		
+		# Confirm the card as the hovered card.
+		if is_hit:
+			if hovered_card == null or current_card.z_index >= highest_z_index:
 				hovered_card = current_card
 				highest_z_index = current_card.z_index
 	
+	# Sets the hover.
 	if hovered_card != hovered : _set_hover(hovered_card)
 
 # Sets the hovered card.

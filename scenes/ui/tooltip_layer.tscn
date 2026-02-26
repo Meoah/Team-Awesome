@@ -39,5 +39,8 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="Tooltip/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="Tooltip/MarginContainer"]
 layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0

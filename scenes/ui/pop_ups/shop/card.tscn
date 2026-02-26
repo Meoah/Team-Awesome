@@ -1,21 +1,19 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk1bcrfoh1bco"]
+[gd_scene load_steps=4 format=3 uid="uid://bk1bcrfoh1bco"]
 
 [ext_resource type="Script" uid="uid://b5ys5a180o8lv" path="res://scripts/ui/pop_ups/shop/card.gd" id="1_bcowh"]
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="1_gi68q"]
 [ext_resource type="Texture2D" uid="uid://dy1o3elvpuw8v" path="res://assets/textures/bait/placeholder_bait.png" id="3_d84nm"]
-[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_al21x"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_p5rlq"]
-font = ExtResource("4_al21x")
-
-[node name="Card" type="Control" node_paths=PackedStringArray("card_name")]
+[node name="Card" type="Control" node_paths=PackedStringArray("card_name_label", "cost_panel", "cost_label")]
 custom_minimum_size = Vector2(225, 300)
 layout_mode = 3
 anchor_right = 0.17600001
 anchor_bottom = 0.40100002
 offset_right = -0.28001404
 script = ExtResource("1_bcowh")
-card_name = NodePath("CardFront/MarginContainer/VBoxContainer/Details/MarginContainer/Label")
+card_name_label = NodePath("CardFront/MarginContainer/VBoxContainer/Details/MarginContainer/Label")
+cost_panel = NodePath("Cost")
+cost_label = NodePath("Cost/MarginContainer/Label")
 
 [node name="CardFront" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -42,10 +40,6 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
-
-[node name="Label" type="Label" parent="CardFront/MarginContainer"]
-layout_mode = 2
-horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CardFront/MarginContainer"]
 layout_mode = 2
@@ -117,13 +111,13 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="Label" type="Label" parent="CardFront/MarginContainer/VBoxContainer/Details/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="CardFront/MarginContainer/VBoxContainer/Details/MarginContainer"]
 layout_mode = 2
-text = "Placeholder
-Text"
-label_settings = SubResource("LabelSettings_p5rlq")
+bbcode_enabled = true
+text = "Invalid
+Card"
+autowrap_mode = 0
 horizontal_alignment = 1
-clip_text = true
 
 [node name="Cost" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -152,9 +146,11 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="Label" type="Label" parent="Cost/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="Cost/MarginContainer"]
 layout_mode = 2
-text = "$ 100.00"
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
 horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
