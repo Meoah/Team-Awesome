@@ -53,7 +53,6 @@ func _end_day() -> void:
 func _play_minigame() -> void:
 	$FISH.play("FISH!") #Plays FISH! Animation
 	await $FISH.animation_finished
-	
 	var popup_parameters = {
 		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE
 	}

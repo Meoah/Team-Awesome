@@ -94,16 +94,19 @@ func start_minigame():
 	choose_variant()
 	input_array = correct_inputs
 	display_text = correct_inputs.duplicate(true)
-	timer.start(time)
-	timer.set_paused(false)
+	timer_seqeunce()
 	progress_bar.max_value = time
 	input_index = 0
 	spawn_arrows()
+
+	
+	
 
 func end_minigame():
 	varied_evil = false
 	varied_gold = false
 	varied_obscured = false
+	
 
 #Initialize Script
 func _ready() -> void:
@@ -153,6 +156,8 @@ func correct_input():
 		input_index = input_index + 1 #Advances in the string index
 		#text_render()
 		$Reaction.set_texture(success)
+		$InputSfx.play()
+		$InputSfx/InputSfx2.play()
 		var current_sprite : ArrowTexture = sprite_array.pop_front()
 		var smoke : smoke_sprite = $Smoke
 		if varied_obscured:
@@ -160,6 +165,27 @@ func correct_input():
 				smoke.smoke_anim()
 		if current_sprite:
 			current_sprite.correct()
+			
+
+
+func sparks():
+	var tween = create_tween()
+	if not cleared:
+		tween.tween_property($ProgressBar/Sparks, "position", $ProgressBar/End.position, time )
+	if cleared:
+		tween.pause()
+
+
+func timer_seqeunce():
+	timer.start(time)
+	timer.set_paused(false)
+	$StarterShot.play()
+	$TimerSfx.play()
+	$ProgressBar/Sparks.position = $ProgressBar/Start.position
+	sparks()
+	
+
+
 #On incorrect Input
 func incorrect_input():
 	$Reaction.set_texture(failure)
@@ -187,6 +213,8 @@ func _on_timer_timeout() -> void:
 #Fail Script
 func fail():
 	if varied_gold:
+		$GoldFail.play()
+		$ProgressBar/Sparks.hide()
 		for i in sprite_array:
 			i.erase()
 	timer.set_paused(true)
@@ -209,7 +237,10 @@ func win():
 		var fish_image = load(current_image)
 		$Reaction.texture = fish_image
 		input_index = 0
-		
+		$TimerSfx.stop()
+		$TimerSfx/TimerEndSfx.play()
+		$FishCaughtSfx.play()
+		$ProgressBar/Sparks.hide()
 		if varied_gold: #If fish is gold double its value, Current bug where double value persist
 			current_value = current_value * 2
 		elif varied_evil:
