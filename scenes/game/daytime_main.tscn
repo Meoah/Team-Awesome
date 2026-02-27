@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=18 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -6,10 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
-[ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/inventory_ui.tscn" id="9_ovom5"]
-[ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
+[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud_placeholder.tscn" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
-[ext_resource type="PackedScene" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
+[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
 [ext_resource type="AudioStream" uid="uid://e1cxs7j2ew6u" path="res://assets/audio/bgm/dump/waiting_for_bite.wav" id="11_nw8sa"]
 
 [sub_resource type="Animation" id="Animation_qc6n8"]
@@ -120,13 +119,12 @@ size = Vector2(50, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kam8"]
 size = Vector2(50, 720)
 
-[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "info")]
+[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2jsv6")
 jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
-info = NodePath("HUD/Info")
 
 [node name="Background" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -191,46 +189,11 @@ follow_viewport_enabled = true
 [node name="GameOver" parent="CanvasLayer" instance=ExtResource("10_qc6n8")]
 visible = false
 
-[node name="HUD" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_nw8sa")
+autoplay = true
 
-[node name="Button" type="Button" parent="HUD"]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1060.0
-offset_top = 582.0
-offset_right = 1208.0
-offset_bottom = 666.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "End Day"
-
-[node name="Info" type="Label" parent="HUD"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 56.0
-offset_top = 311.0
-offset_right = 239.0
-offset_bottom = 356.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "placeholder"
-label_settings = ExtResource("10_3kam8")
-
-[node name="Inventory_UI" parent="HUD" instance=ExtResource("9_ovom5")]
-
-[node name="debug" type="Button" parent="HUD"]
+[node name="debug" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -246,10 +209,23 @@ grow_vertical = 2
 focus_mode = 0
 text = "test dialogue"
 
-[node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_nw8sa")
-autoplay = true
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1060.0
+offset_top = 582.0
+offset_right = 1208.0
+offset_bottom = 666.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "End Day"
+
+[node name="HudPlaceholder" parent="." instance=ExtResource("10_3kam8")]
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
-[connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="HUD/debug" to="." method="_on_debug_pressed"]
+[connection signal="pressed" from="debug" to="." method="_on_debug_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -1,7 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://6k5qd37wt7aa"]
+[gd_scene load_steps=6 format=3 uid="uid://6k5qd37wt7aa"]
 
 [ext_resource type="Script" uid="uid://cpcgm03b1g8xn" path="res://scripts/ui/tooltip.gd" id="1_gc7l6"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_scnmh"]
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="2_scnmh"]
+
+[sub_resource type="Theme" id="Theme_bd7w1"]
+default_font = ExtResource("1_scnmh")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jdad8"]
 
@@ -14,6 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_bd7w1")
 script = ExtResource("1_gc7l6")
 tooltip_panel = NodePath("Tooltip")
 tooltip_label = NodePath("Tooltip/MarginContainer/Label")

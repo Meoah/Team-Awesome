@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjoxd6e64nw52"]
+
+[ext_resource type="Script" uid="uid://2nxtmw0faxey" path="res://scenes/ui/hud_placeholder.gd" id="1_fn0ug"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_4nuvw"]
+[ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/inventory_ui.tscn" id="2_fn0ug"]
+[ext_resource type="Texture2D" uid="uid://mrwdcjhpn1jb" path="res://assets/textures/ui/panel_grey_dark.png" id="3_4nuvw"]
+
+[sub_resource type="Theme" id="Theme_24s27"]
+default_font = ExtResource("2_4nuvw")
+default_font_size = 18
+
+[node name="HudPlaceholder" type="CanvasLayer" node_paths=PackedStringArray("general_info", "bait_info")]
+script = ExtResource("1_fn0ug")
+general_info = NodePath("HudBounds/MarginContainer/HBoxContainer/GeneralInfo")
+bait_info = NodePath("HudBounds/MarginContainer/HBoxContainer/BaitCount")
+
+[node name="HudBounds" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 0.2
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_24s27")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="HudBounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4nuvw")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="HudBounds"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HudBounds/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Spacer" type="Control" parent="HudBounds/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="GeneralInfo" type="RichTextLabel" parent="HudBounds/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Money: $99.99
+Rent: $99.99
+Week: 1
+Day: 1"
+scroll_active = false
+
+[node name="BaitCount" type="RichTextLabel" parent="HudBounds/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+bbcode_enabled = true
+text = "Bait"
+scroll_active = false
+
+[node name="Inventory_UI" parent="HudBounds/MarginContainer" instance=ExtResource("2_fn0ug")]
+layer = 2

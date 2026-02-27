@@ -1,7 +1,6 @@
 extends Control
 class_name NighttimeMain
 
-@export var info : Label
 @export var jeremy_node : MainCharacter
 @export var house_trigger : Area2D
 @export var bucket_trigger : Area2D
@@ -34,8 +33,6 @@ func _ready() -> void:
 	SignalBus.start_bait_shop.connect(_start_bait_shop)
 	SignalBus.shop_closed.connect(_save_shop_data)
 
-func _process(_delta) -> void:
-	_update_info()
 
 func _interaction() -> void:
 	if house_trigger.overlaps_body(jeremy_node) : _sleep()
@@ -52,21 +49,6 @@ func calculate_rent() -> float:
 	
 	var rent : float = base * pow(growth, SystemData.get_week() - 1)
 	return rent
-
-#TODO delete this when hud is functional
-func _update_info() -> void:
-	var info_string : String = ""
-	var bait_inv : Dictionary = SystemData.get_bait_inventory()
-	
-	info_string += "Money: $%.2f\n" % SystemData.get_money()
-	info_string += "Rent: $%.2f\n" % calculate_rent()
-	info_string += "Week: %d\n" % SystemData.get_week()
-	info_string += "Day: %d\n" % SystemData.get_day()
-	info_string += "\nBait count\n-------------\n"
-	for each in bait_inv:
-		info_string += "%s: %d\n" % [each, bait_inv[each]]
-	
-	info.text = info_string
 
 func _sell_all_fish() -> void:
 	SystemData._transfer_money()
