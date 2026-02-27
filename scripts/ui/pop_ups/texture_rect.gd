@@ -30,5 +30,7 @@ func erase(): #Animation for erasing
 	tween.parallel().tween_property(self, "visible", false,0.1)
 	
 	
+	
+	
 func evilize(): #Turns arrow red for Evil Variant. Work in Progress
 	modulate = Color(1.0, 0.0, 0.0, 1.0)

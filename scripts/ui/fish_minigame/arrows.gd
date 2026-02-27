@@ -70,6 +70,7 @@ func apply_variant():
 		print(random_index)
 	elif  chosen_variant == "Obscured":
 		varied_obscured = true
+		dissipation = 1
 
 
 #Evil Variant script. Work in Progress
@@ -95,6 +96,8 @@ func start_minigame():
 	input_array = correct_inputs
 	display_text = correct_inputs.duplicate(true)
 	timer_seqeunce()
+	await timer_seqeunce()
+	$BGM.play()
 	progress_bar.max_value = time
 	input_index = 0
 	spawn_arrows()
@@ -196,8 +199,10 @@ func incorrect_input():
 	set_process_input(false)
 	await get_tree().create_timer(0.3).timeout
 	set_process_input(true)
-
-
+	if varied_obscured:
+		$Smoke.material.set_shader_parameter("alpha", dissipation)
+		dissipation -= 0.25
+var dissipation : float = 1
 
 #Countdowns the progress bar
 func _process(_delta):
@@ -282,5 +287,5 @@ func spawn_arrows():
 		evil.evilize()
 	elif varied_obscured:
 		random_index = randi_range(0, input_array.size()-1)
-		$Smoke.global_position = sprite_array[random_index].global_position
 		print(random_index)
+		$Smoke.position = sprite_array[random_index].global_position
