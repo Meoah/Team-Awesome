@@ -1,8 +1,6 @@
 extends Control
 class_name CardStage
 
-# TODO Selecting cards
-
 const CARD_SIZE : Vector2 = Vector2(225, 300)
 
 const GAP_SIZE : float = 16.0
@@ -16,7 +14,7 @@ const ANIMATION_TIME : float = 0.12
 const FAN_STRENGTH : float = 0.35
 
 var cards : Array[Card] = []
-var hovered : Control = null
+var hovered : Card = null
 var tweens : Dictionary = {}
 
 var base_x: Array[float] = []
@@ -36,7 +34,15 @@ func _input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		_update_mouse_hover()
 		# If a card is hovered, call for the tooltip to be moved.
-		if hovered != null : GameManager.get_tooltip_layer()._update_tooltip_position(get_global_mouse_position())
+		if hovered : GameManager.get_tooltip_layer()._update_tooltip_position(get_global_mouse_position())
+	if event is InputEventMouseButton and event.pressed:
+		if hovered and is_instance_valid(hovered):
+			var purchased_card : Card = hovered
+			_set_hover(null)
+			purchased_card._card_purchased()
+			# Wait until it actually exits, then refresh.
+			purchased_card.tree_exited.connect(_refresh_layout, CONNECT_ONE_SHOT)
+			purchased_card.queue_free()
 
 # Main function to add a card.
 func _add_card(incoming_card : Card) -> void:
@@ -59,6 +65,9 @@ func _refresh_cards() -> void:
 
 # Action taken when mouse moves on the screen.
 func _update_mouse_hover() -> void:
+	# If hovered card was freed, clear it.
+	if hovered != null and !is_instance_valid(hovered) : _set_hover(null)
+	
 	# Abort if no cards.
 	if cards.is_empty() : return
 	
@@ -102,6 +111,7 @@ func _update_mouse_hover() -> void:
 	for index : int in range(cards.size()):
 		# Select the current card, if it's not visible, ignore it.
 		var current_card : Card = cards[index]
+		if !is_instance_valid(current_card) : continue
 		if !current_card.visible : continue
 		
 		# Determines if the mouse is within the bounds.
@@ -141,7 +151,7 @@ func _set_hover(incoming_card : Card) -> void:
 	_update_layout()
 
 func _get_hover_tooltip_text(incoming_card : Card) -> String:
-	return incoming_card.name
+	return incoming_card.card_description
 
 # Main updater
 func _update_layout() -> void:

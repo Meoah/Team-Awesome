@@ -15,6 +15,11 @@ func _ready() -> void:
 
 # Sets the text then attempts to set the tooltip to the target location.
 func _show_tooltip(target_global_position : Vector2, incoming_text : String) -> void:
+	# Abort if there's no text to be shown.
+	if !incoming_text:
+		_hide_tooltip()
+		return
+	
 	tooltip_label.text = incoming_text
 	tooltip_panel.visible = true
 	_set_tooltip_position(target_global_position)
