@@ -12,40 +12,35 @@ var card_description : String = ""
 var item_type : String = ""
 var item_id : int = 0
 
-signal card_purchased(purchased_card_info : Dictionary)
-
-const PURCHASED_ITEM_TYPE : String = "item_type"
-
-var purchased_card_info : Dictionary = {}
-
 func _ready() -> void:
-	_set_parameters(ItemData.get_data(item_type, item_id))
 	_refresh_all()
 
 func _set_item(incoming_type : String, incoming_id : int) -> void:
 	item_type = incoming_type
 	item_id = incoming_id
+	_set_parameters(ItemData.get_data(item_type, item_id))
 
 func _set_parameters(data : Dictionary = {}) -> void:
-	if data.has(ItemData.KEY_NAME) : card_name = data.get(ItemData.KEY_NAME)
-	if data.has(ItemData.KEY_IMAGE) : card_image = data.get(ItemData.KEY_IMAGE)
-	if data.has(ItemData.KEY_TYPE) : card_type = data.get(ItemData.KEY_TYPE)
+	card_name = data.get(ItemData.KEY_NAME, card_name)
+	card_image = data.get(ItemData.KEY_IMAGE, card_image)
+	card_type = data.get(ItemData.KEY_TYPE, card_type)
+	card_description = data.get(ItemData.KEY_DESCRIPTION, card_description)
 	if data.has(ItemData.KEY_QUANTITY_MIN) || data.has(ItemData.KEY_QUANTITY_MAX) : _set_quantity(data)
 	if data.has(ItemData.KEY_COST) : _set_cost(data)
-	if data.has(ItemData.KEY_DESCRIPTION) : card_description = data.get(ItemData.KEY_DESCRIPTION)
+	
 	_refresh_all()
 
 # Sets the quantity of the item.
 func _set_quantity(data : Dictionary) -> void:
 	# Finds the minimum and maximum allowed values.
-	var quantity_min : int = 1
-	var quantity_max : int = 1
-	if data.has(ItemData.KEY_QUANTITY_MIN) : quantity_min = data.get(ItemData.KEY_QUANTITY_MIN)
-	if data.has(ItemData.KEY_QUANTITY_MAX) : quantity_max = data.get(ItemData.KEY_QUANTITY_MAX)
+	var quantity_min : int = data.get(ItemData.KEY_QUANTITY_MIN, 1)
+	var quantity_max : int = data.get(ItemData.KEY_QUANTITY_MAX, 1)
 	
-	# If maximum is ever smaller than minimum, take minimum. However, if minimum is below 1, set it to 1 anyways.
-	if quantity_max <= quantity_min : card_quantity = quantity_min
-	if quantity_min < 1 : card_quantity = 1
+	# Minimum must be at least 1
+	quantity_min = max(1, quantity_min)
+	
+	# Maximum cannot be smaller than minimum
+	quantity_max = max(quantity_min, quantity_max)
 	
 	# Randomly choose between the minimum and maximum and set that as the quantity.
 	card_quantity = randi_range(quantity_min, quantity_max)
@@ -53,17 +48,19 @@ func _set_quantity(data : Dictionary) -> void:
 # Sets the cost of the item.
 func _set_cost(data : Dictionary) -> void:
 	# Since cost type only matters if there exists a cost, set it here.
-	if data.has(ItemData.KEY_COST_TYPE) : card_cost_type = data.get(ItemData.KEY_COST_TYPE)
+	card_cost_type = data.get(ItemData.KEY_COST_TYPE, card_cost_type)
 	
-	# Determines the cost factor, which must be between 0 and 1.
-	var cost_factor : float = 0.9
-	if data.has(ItemData.KEY_COST_FACTOR) : cost_factor = data.get(ItemData.KEY_COST_FACTOR)
-	cost_factor = clamp(cost_factor, 0.0, 1.0) - 1.0
+	# Gets the base cost.
+	var base_cost : float = data.get(ItemData.KEY_COST, 0.0)
 	
-	# Randomizes the cost according to +/- the factor by a percentage.
-	card_cost = data.get(ItemData.KEY_COST)
-	cost_factor = randf_range((1.0 - cost_factor), (1.0 + cost_factor))
-	card_cost *= cost_factor
+	# Stability (0..1) into variance.
+	var stability : float = float(data.get(ItemData.KEY_COST_STABILITY, 0.9))
+	stability = clamp(stability, 0.0, 1.0)
+	var variance : float = 1.0 - stability
+	
+	# Randomizes the cost according to +/- the variance by a percentage.
+	var multiplier : float = randf_range(1.0 - variance, 1.0 + variance)
+	card_cost = base_cost * multiplier
 	
 	# Finally, multiply the cost by the quantity.
 	card_cost *= card_quantity
@@ -128,5 +125,55 @@ func _refresh_cost() -> void:
 	card_cost_label.text = final_cost_string
 
 # Handles what happens when item is purchased.
+const PURCHASED_ITEM_CATEGORY : String = "item_category"
+const PURCHASED_ITEM_ID : String = "item_id"
+const PURCHASED_ITEM_QUANTITY : String = "item_quantity"
 func _card_purchased() -> void:
-	card_purchased.emit(purchased_card_info)
+	var purchased_card_info : Dictionary = {
+		PURCHASED_ITEM_CATEGORY : item_type,
+		PURCHASED_ITEM_ID : item_id,
+		PURCHASED_ITEM_QUANTITY : card_quantity
+	}
+	
+	SignalBus.card_purchased.emit(purchased_card_info)
+
+# TODO Make the card play a failure animation.
+func _failed_purchase() -> void:
+	pass
+
+# Saves the current data.
+const SAVED_ITEM_CATEGORY : String = "item_category"
+const SAVED_ITEM_ID : String = "item_id"
+const SAVED_ITEM_NAME : String = "card_name"
+const SAVED_ITEM_IMAGE : String = "card_image"
+const SAVED_ITEM_TYPE : String = "card_type"
+const SAVED_ITEM_COST : String = "card_cost"
+const SAVED_ITEM_COST_TYPE : String = "card_cost_type"
+const SAVED_ITEM_QUANTITY : String = "card_quantity"
+const SAVED_ITEM_DESCRIPTION : String = "card_description"
+func _package_save_data() -> Dictionary:
+	return {
+		SAVED_ITEM_CATEGORY : item_type,
+		SAVED_ITEM_ID : item_id,
+		SAVED_ITEM_NAME : card_name,
+		SAVED_ITEM_IMAGE : card_image,
+		SAVED_ITEM_TYPE : card_type,
+		SAVED_ITEM_DESCRIPTION : card_description,
+		SAVED_ITEM_COST : card_cost,
+		SAVED_ITEM_COST_TYPE : card_cost_type,
+		SAVED_ITEM_QUANTITY : card_quantity,
+	}
+
+# Loads the saved parameters.
+func _reload_parameters(save_data : Dictionary = {}) -> void:
+	item_type = save_data.get(SAVED_ITEM_CATEGORY, item_type)
+	item_id = save_data.get(SAVED_ITEM_ID, item_id)
+	card_name = save_data.get(SAVED_ITEM_NAME, card_name)
+	card_image = save_data.get(SAVED_ITEM_IMAGE, card_image)
+	card_type = save_data.get(SAVED_ITEM_TYPE, card_type)
+	card_description = save_data.get(SAVED_ITEM_DESCRIPTION, card_description)
+	card_cost_type = save_data.get(SAVED_ITEM_COST_TYPE, card_cost_type)
+	card_cost = save_data.get(SAVED_ITEM_COST, card_cost)
+	card_quantity = save_data.get(SAVED_ITEM_QUANTITY, card_quantity)
+	
+	_refresh_all()

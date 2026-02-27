@@ -11,7 +11,7 @@ func _ready() -> void:
 	_update_info()
 	
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1:
-		SystemData._add_bait("generic", 5)
+		SystemData._add_bait("Generic Bait", 5)
 
 func _process(_delta: float) -> void:
 	#TODO Don't leave this here, figure out when to update later

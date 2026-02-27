@@ -31,22 +31,33 @@ func _ready() -> void:
 	_update_layout()
 
 func _input(event : InputEvent) -> void:
+	# Hover detection.
 	if event is InputEventMouseMotion:
 		_update_mouse_hover()
 		# If a card is hovered, call for the tooltip to be moved.
 		if hovered : GameManager.get_tooltip_layer()._update_tooltip_position(get_global_mouse_position())
+	
+	# Detects if a player is attempting to purchase a card.
 	if event is InputEventMouseButton and event.pressed:
 		if hovered and is_instance_valid(hovered):
-			var purchased_card : Card = hovered
-			_set_hover(null)
-			purchased_card._card_purchased()
-			# Wait until it actually exits, then refresh.
-			purchased_card.tree_exited.connect(_refresh_layout, CONNECT_ONE_SHOT)
-			purchased_card.queue_free()
+			if SystemData.spend_money(hovered.card_cost):
+				var purchased_card : Card = hovered
+				_set_hover(null)
+				purchased_card._card_purchased()
+				# Wait until it actually exits, then refresh.
+				purchased_card.tree_exited.connect(_refresh_layout, CONNECT_ONE_SHOT)
+				purchased_card.queue_free()
+			else:
+				hovered._failed_purchase()
 
 # Main function to add a card.
 func _add_card(incoming_card : Card) -> void:
 	add_child(incoming_card)
+	_refresh_layout()
+
+# Adds cards in a batch.
+func _add_cards(incoming_cards : Array[Card]) -> void:
+	for each_card in incoming_cards : add_child(each_card)
 	_refresh_layout()
 
 # Refreshes the board.
@@ -59,6 +70,8 @@ func _refresh_cards() -> void:
 	cards.clear()
 	for child in get_children():
 		if child is Card:
+			# Ignore cards that are on the way out.
+			if child.is_queued_for_deletion(): continue
 			cards.append(child)
 			# Ensures the card has the correct mouse filter settings.
 			child.mouse_filter = Control.MOUSE_FILTER_STOP
@@ -241,3 +254,38 @@ func _animate_card(incoming_card : Card, target_position : Vector2, target_scale
 	tweens[incoming_card] = new_tween
 	new_tween.tween_property(incoming_card, "position", target_position, ANIMATION_TIME)
 	new_tween.parallel().tween_property(incoming_card, "scale", target_scale, ANIMATION_TIME)
+
+func save_current_cards() -> Array[Dictionary]:
+	var save_data : Array[Dictionary] = []
+	for each_card in cards:
+		var card_save_data : Dictionary = each_card._package_save_data()
+		save_data.append(card_save_data)
+	return save_data
+
+# Clears all cards from the stage.
+signal cards_cleared
+func _clear_cards() -> void:
+	# Reset hover
+	_set_hover(null)
+	
+	# Stop all tweens.
+	for tween in tweens.values():
+		if tween and tween.is_running():
+			tween.kill()
+	tweens.clear()
+	
+	# Kill each card.
+	for each_card in cards:
+		if is_instance_valid(each_card):
+			each_card.queue_free()
+	
+	# Clears saved values.
+	cards.clear()
+	base_x.clear()
+	
+	# Waits one frame to ensure everything gets done.
+	await get_tree().process_frame
+	
+	# Refresh and signal that the clear is finished.
+	_refresh_layout()
+	cards_cleared.emit()

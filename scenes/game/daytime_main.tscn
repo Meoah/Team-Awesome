@@ -218,10 +218,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 22.0
-offset_top = 310.0
-offset_right = 205.0
-offset_bottom = 355.0
+offset_left = 56.0
+offset_top = 311.0
+offset_right = 239.0
+offset_bottom = 356.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "placeholder"
@@ -243,7 +243,7 @@ offset_bottom = 548.0
 grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
-text = "debug"
+text = "test dialogue"
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]

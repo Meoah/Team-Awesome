@@ -65,7 +65,7 @@ const KEY_IMAGE : String = "image"
 const KEY_TYPE : String = "type"
 const KEY_COST : String = "cost"
 const KEY_COST_TYPE : String = "cost_type"
-const KEY_COST_FACTOR : String = "cost_factor"
+const KEY_COST_STABILITY : String = "cost_stability"
 const KEY_DESCRIPTION : String = "description"
 const KEY_QUANTITY_MIN : String = "quantity_min"
 const KEY_QUANTITY_MAX : String = "quantity_max"
@@ -173,7 +173,7 @@ const GENERIC_BAIT_BUNDLE : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 1.0,
-	KEY_COST_FACTOR : 0.7,
+	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 10,
 	KEY_DESCRIPTION : "As generic as it comes."
@@ -184,7 +184,7 @@ const MAGIC_BAIT : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/bait/placeholder_bait.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 50.0,
-	KEY_COST_FACTOR : 0.7,
+	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 2,
 	KEY_DESCRIPTION : "[font_size=8]This may or may not be a scam.[/font_size]\nThis is [color=red]DEFINITELY[/color] worth it."
