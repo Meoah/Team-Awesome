@@ -8,10 +8,7 @@ var player_money : float = 0.0
 var delayed_money : float = 0.0
 var day : int = 1
 var fish_inventory : Dictionary = {} # {fish_id : int = count : int}
-var bait_inventory : Dictionary = {
-	"generic" = 0,
-	"special" = 0
-}
+var bait_inventory : Dictionary = {}
 var current_upgrades : int = 0
 
 # Signals
@@ -113,8 +110,12 @@ func _clear_fish_inventory() -> void:
 ## Bait inventory methods.
 func _set_bait_inventory(bait_inv : Dictionary) -> void : for each in bait_inventory : if each in bait_inv : bait_inventory[each] = bait_inv[each]
 func get_bait_inventory() -> Dictionary : return bait_inventory
-func _add_bait(bait : String, quantity : int = 1) -> void : if bait in bait_inventory : bait_inventory[bait] += quantity
 func _reset_bait_inventory() -> void : for each in bait_inventory : bait_inventory[each] = 0
+
+# Adds bait into inventory.
+func _add_bait(bait : String, quantity : int = 1) -> void:
+	if bait_inventory.has(bait) : bait_inventory[bait] += quantity
+	else : bait_inventory.set(bait, quantity)
 
 # Attempts to use a bait. Returns false if either invalid bait or bait count is at 0.
 func use_bait(bait : String) -> bool:

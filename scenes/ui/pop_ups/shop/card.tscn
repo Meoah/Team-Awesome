@@ -1,20 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bk1bcrfoh1bco"]
+[gd_scene load_steps=5 format=3 uid="uid://bk1bcrfoh1bco"]
 
 [ext_resource type="Script" uid="uid://b5ys5a180o8lv" path="res://scripts/ui/pop_ups/shop/card.gd" id="1_bcowh"]
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="1_gi68q"]
-[ext_resource type="Texture2D" uid="uid://dy1o3elvpuw8v" path="res://assets/textures/bait/placeholder_bait.png" id="3_d84nm"]
-[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_al21x"]
+[ext_resource type="Texture2D" uid="uid://dpyu65euhj5p0" path="res://assets/textures/debug/prohibited.png" id="3_ci7qd"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_p5rlq"]
-font = ExtResource("4_al21x")
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ci7qd"]
 
-[node name="Card" type="Control"]
+[node name="Card" type="Control" node_paths=PackedStringArray("card_type_panel", "card_type_label", "card_name_label", "card_image_texture_rect", "card_quantity_panel", "card_quantity_label", "card_cost_panel", "card_cost_label")]
 custom_minimum_size = Vector2(225, 300)
 layout_mode = 3
 anchor_right = 0.17600001
 anchor_bottom = 0.40100002
 offset_right = -0.28001404
 script = ExtResource("1_bcowh")
+card_type_panel = NodePath("Type")
+card_type_label = NodePath("Type/MarginContainer/Label")
+card_name_label = NodePath("CardFront/MarginContainer/VBoxContainer/Details/MarginContainer/Label")
+card_image_texture_rect = NodePath("CardFront/MarginContainer/VBoxContainer/Image/MarginContainer/CardImage")
+card_quantity_panel = NodePath("Quantity")
+card_quantity_label = NodePath("Quantity/MarginContainer/Label")
+card_cost_panel = NodePath("Cost")
+card_cost_label = NodePath("Cost/MarginContainer/Label")
 
 [node name="CardFront" type="NinePatchRect" parent="."]
 layout_mode = 1
@@ -41,10 +47,6 @@ theme_override_constants/margin_left = 24
 theme_override_constants/margin_top = 24
 theme_override_constants/margin_right = 24
 theme_override_constants/margin_bottom = 24
-
-[node name="Label" type="Label" parent="CardFront/MarginContainer"]
-layout_mode = 2
-horizontal_alignment = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CardFront/MarginContainer"]
 layout_mode = 2
@@ -80,9 +82,10 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="TextureRect" type="TextureRect" parent="CardFront/MarginContainer/VBoxContainer/Image/MarginContainer"]
+[node name="CardImage" type="TextureRect" parent="CardFront/MarginContainer/VBoxContainer/Image/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("3_d84nm")
+texture = ExtResource("3_ci7qd")
+expand_mode = 1
 stretch_mode = 5
 
 [node name="Details" type="Control" parent="CardFront/MarginContainer/VBoxContainer"]
@@ -116,23 +119,91 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 16
 
-[node name="Label" type="Label" parent="CardFront/MarginContainer/VBoxContainer/Details/MarginContainer"]
+[node name="Label" type="RichTextLabel" parent="CardFront/MarginContainer/VBoxContainer/Details/MarginContainer"]
 layout_mode = 2
-text = "Placeholder
-Text"
-label_settings = SubResource("LabelSettings_p5rlq")
+bbcode_enabled = true
+text = "Invalid
+Card"
+autowrap_mode = 0
 horizontal_alignment = 1
-clip_text = true
+vertical_alignment = 1
 
-[node name="Cost" type="NinePatchRect" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="Type" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ci7qd")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Type"]
+layout_mode = 2
+texture = ExtResource("1_gi68q")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Type"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="RichTextLabel" parent="Type/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="Quantity" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9
+anchor_top = 0.6
+anchor_right = 0.9
+anchor_bottom = 0.6
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ci7qd")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Quantity"]
+layout_mode = 2
+texture = ExtResource("1_gi68q")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Quantity"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Label" type="RichTextLabel" parent="Quantity/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0
+
+[node name="Cost" type="PanelContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.9
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_right = 32.0
-offset_bottom = 32.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ci7qd")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Cost"]
+layout_mode = 2
 texture = ExtResource("1_gi68q")
 patch_margin_left = 16
 patch_margin_top = 16
@@ -140,20 +211,14 @@ patch_margin_right = 16
 patch_margin_bottom = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="Cost"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Label" type="Label" parent="Cost/MarginContainer"]
 layout_mode = 2
-text = "$ 100.00"
-horizontal_alignment = 1
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="Label" type="RichTextLabel" parent="Cost/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+fit_content = true
+autowrap_mode = 0

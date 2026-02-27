@@ -9,7 +9,7 @@
 [sub_resource type="Theme" id="Theme_5ag0i"]
 default_font = ExtResource("5_862jk")
 
-[node name="ShopPopup" type="Control" node_paths=PackedStringArray("card_stage")]
+[node name="ShopPopup" type="Control" node_paths=PackedStringArray("card_stage", "generic_bait_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,6 +19,7 @@ grow_vertical = 2
 script = ExtResource("1_pnp85")
 card_stage = NodePath("Screen/VBoxContainer/Cards/NinePatchRect/MarginContainer/CardStage")
 card_scene = ExtResource("2_g8bmi")
+generic_bait_button = NodePath("Screen/VBoxContainer/Options/HBoxContainer/Bait")
 
 [node name="Screen" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -94,7 +95,7 @@ size_flags_horizontal = 6
 focus_mode = 0
 theme = SubResource("Theme_5ag0i")
 text = "Buy Regular Bait
-($15 for 10)"
+(Cost $15 for 10)"
 
 [node name="Reroll" type="Button" parent="Screen/VBoxContainer/Options/HBoxContainer"]
 custom_minimum_size = Vector2(150, 0)
@@ -102,7 +103,8 @@ layout_mode = 2
 size_flags_horizontal = 10
 focus_mode = 0
 theme = SubResource("Theme_5ag0i")
-text = "Reroll"
+text = "Reroll
+(Cost: $10)"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
@@ -111,4 +113,6 @@ offset_bottom = 80.0
 text = "debug"
 
 [connection signal="pressed" from="Screen/VBoxContainer/Options/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="Screen/VBoxContainer/Options/HBoxContainer/Bait" to="." method="_on_bait_pressed"]
+[connection signal="pressed" from="Screen/VBoxContainer/Options/HBoxContainer/Reroll" to="." method="_on_reroll_pressed"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

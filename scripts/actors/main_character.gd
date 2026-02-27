@@ -22,7 +22,7 @@ enum InputFlags{
 	ACTION		= 1 << 4
 }
 var input_flags : int = 0
-var move_speed : float = 200.0
+var move_speed : float = 500.0
 # Bobbing
 var bob_amplitude : float = 40.0
 var bob_speed : float = 8.0
@@ -71,8 +71,7 @@ func _input(event : InputEvent) -> void:
 	if event.is_action_released("down"):	_set_flag(InputFlags.AIM_DOWN, false)
 	
 	# Action
-	if event.is_action_pressed("action"):
-		_set_flag(InputFlags.ACTION, true)
+	if event.is_action_pressed("action"):	_set_flag(InputFlags.ACTION, true)
 	if event.is_action_released("action"):	_set_flag(InputFlags.ACTION, false)
 	
 	#TODO cancel button?
@@ -103,7 +102,7 @@ func _cast_handler(delta : float) -> void:
 	if input_flags & InputFlags.ACTION: 
 		if PlayManager.get_current_state() is CastingState:
 			_charging(delta)
-		elif SystemData.use_bait("generic"):
+		elif SystemData.use_bait("Generic Bait"):
 			PlayManager.request_casting_state()
 	else:
 		if PlayManager.get_current_state() is CastingState:
@@ -176,9 +175,15 @@ func _water_bob(delta : float) -> void:
 	boat_sprite.position.y = bob
 
 # Action handler.
+var interacted : bool = false
 func _action() -> void:
-	if !(input_flags & InputFlags.ACTION) : return
-	player_interact.emit()
+	if !(input_flags & InputFlags.ACTION):
+		interacted = false
+		return
+	
+	if !interacted:
+		player_interact.emit()
+		interacted = true
 	if bobber_hook:
 		if PlayManager.request_reeling_state():
 			_clear_bobbers()

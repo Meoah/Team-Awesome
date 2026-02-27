@@ -9,6 +9,7 @@ var state_machine : StateMachine
 # Nodes
 @export var scene_root : Control
 @export var popup_queue : PopupQueue
+@export var tooltip_layer : TooltipLayer
 # Preloading Scenes
 @export var main_menu_scene : PackedScene
 @export var daytime_scene : PackedScene
@@ -57,6 +58,7 @@ func _setup_state_machine() -> void:
 # Getters.
 func get_current_state() -> State : return state_machine.current_state
 func get_scene_container() -> Control : return scene_root
+func get_tooltip_layer() -> TooltipLayer : return tooltip_layer
 
 ## Requests by other systems. Returns false if invalid transition
 # TODO Might have a bug later with unpause and main menu. We'll see.

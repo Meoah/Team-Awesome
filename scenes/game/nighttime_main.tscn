@@ -1,18 +1,32 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=21 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/nighttime_main.gd" id="1_53syt"]
 [ext_resource type="Texture2D" uid="uid://coivg44ivnbvf" path="res://assets/textures/ui/Filler_Shop_BG2.png" id="2_pdcg8"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="2_s2grh"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_i5ojq"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="3_s2grh"]
-[ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_pk35q"]
+[ext_resource type="Texture2D" uid="uid://i3smng8yxpbe" path="res://assets/textures/debug/blue-house-md.png" id="4_y133y"]
+[ext_resource type="Texture2D" uid="uid://p0x3tf6qd2yx" path="res://assets/textures/debug/bassprofishing.png" id="5_11rnk"]
+[ext_resource type="Texture2D" uid="uid://da0at2yyqtmkh" path="res://assets/textures/debug/Peter's_Fishing_Store.png" id="6_yb8jp"]
+[ext_resource type="Texture2D" uid="uid://emps5yrliobm" path="res://assets/textures/debug/My_Event061_Tarrot_Showcase.webp" id="7_1pk0j"]
 [ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="7_pk35q"]
+[ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="8_7dbdj"]
+[ext_resource type="Script" uid="uid://bfuyuw7kfy23" path="res://scripts/game/camera/camera_follow.gd" id="9_kpww7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk35q"]
 size = Vector2(268, 292)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rrrim"]
+size = Vector2(378, 604.875)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fmtj"]
-size = Vector2(268, 292)
+size = Vector2(357, 292)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_duk8q"]
+size = Vector2(956, 843)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vpuja"]
+size = Vector2(183, 164.5)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_s2grh"]
 
@@ -22,7 +36,7 @@ size = Vector2(50, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5ojq"]
 size = Vector2(50, 720)
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info", "jeremy_node", "house_trigger", "shop_trigger", "sleep_ui")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("info", "jeremy_node", "house_trigger", "bucket_trigger", "shop_trigger", "upgrade_trigger", "tarot_trigger", "house_label", "scavange_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,82 +44,93 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_53syt")
-info = NodePath("Info")
+info = NodePath("CanvasLayer/Info")
 jeremy_node = NodePath("Jeremy")
 house_trigger = NodePath("House")
-shop_trigger = NodePath("Shop")
-sleep_ui = NodePath("Sleep")
+bucket_trigger = NodePath("BaitBucket")
+shop_trigger = NodePath("BaitShop")
+upgrade_trigger = NodePath("UpgradeShop")
+tarot_trigger = NodePath("TarotShop")
+house_label = NodePath("House/Label")
+scavange_label = NodePath("Scavange")
 
-[node name="BackgroundTexture" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BackgroundTexture" type="Sprite2D" parent="."]
+position = Vector2(1280, 357)
+scale = Vector2(2, 1)
 texture = ExtResource("2_pdcg8")
 
-[node name="GroundTexture" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_top = 0.875
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
+[node name="GroundTexture" type="Sprite2D" parent="."]
+position = Vector2(67, 698)
+scale = Vector2(300, 1)
 texture = ExtResource("3_i5ojq")
-expand_mode = 1
 
 [node name="House" type="Area2D" parent="."]
-position = Vector2(308, 469)
+position = Vector2(167, 490)
 collision_layer = 4
 
 [node name="Sprite2D" type="Sprite2D" parent="House"]
-scale = Vector2(0.48211092, 2.3275862)
-texture = ExtResource("4_pk35q")
+texture = ExtResource("4_y133y")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="House"]
-position = Vector2(-2, 15)
 shape = SubResource("RectangleShape2D_pk35q")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="Shop" type="Area2D" parent="."]
-position = Vector2(951, 465)
+[node name="Label" type="Label" parent="House"]
+offset_left = -104.0
+offset_top = 5.0
+offset_right = 109.0
+offset_bottom = 28.0
+text = "DON'T FORGET YOUR RENT"
+
+[node name="BaitBucket" type="Area2D" parent="."]
+position = Vector2(479.99997, 572)
+scale = Vector2(0.2, 0.2)
 collision_layer = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="Shop"]
-scale = Vector2(0.48211092, 2.3275862)
-texture = ExtResource("4_pk35q")
+[node name="Sprite2D" type="Sprite2D" parent="BaitBucket"]
+texture = ExtResource("8_7dbdj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Shop"]
-position = Vector2(-2, 15)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaitBucket"]
+shape = SubResource("RectangleShape2D_rrrim")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="BaitShop" type="Area2D" parent="."]
+position = Vector2(966, 488)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="BaitShop"]
+texture = ExtResource("5_11rnk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BaitShop"]
 shape = SubResource("RectangleShape2D_1fmtj")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="UpgradeShop" type="Area2D" parent="."]
+position = Vector2(1615, 510.00003)
+scale = Vector2(0.30065724, 0.30065724)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="UpgradeShop"]
+texture = ExtResource("6_yb8jp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpgradeShop"]
+shape = SubResource("RectangleShape2D_duk8q")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="TarotShop" type="Area2D" parent="."]
+position = Vector2(2188, 552)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="TarotShop"]
+texture = ExtResource("7_1pk0j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TarotShop"]
+shape = SubResource("RectangleShape2D_vpuja")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="Jeremy" parent="." instance=ExtResource("2_s2grh")]
 position = Vector2(329.00003, 583)
 scale = Vector2(0.15348448, 0.15348448)
-
-[node name="Sleep" type="Button" parent="."]
-visible = false
-layout_mode = 0
-offset_left = 147.0
-offset_top = 287.0
-offset_right = 461.0
-offset_bottom = 410.0
-text = "Go to bed"
-
-[node name="Info" type="Label" parent="."]
-layout_mode = 0
-offset_left = 13.0
-offset_right = 251.0
-offset_bottom = 171.0
-text = "info"
-label_settings = ExtResource("3_s2grh")
-
-[node name="GameOver" parent="." instance=ExtResource("7_pk35q")]
-visible = false
-layout_mode = 1
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -116,7 +141,56 @@ position = Vector2(-25, 360)
 shape = SubResource("RectangleShape2D_pdcg8")
 
 [node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
-position = Vector2(1305, 360)
+position = Vector2(2585, 357)
 shape = SubResource("RectangleShape2D_i5ojq")
 
-[connection signal="pressed" from="Sleep" to="." method="_on_sleep_pressed"]
+[node name="NightCam" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(-6, 0)
+limit_left = 0
+limit_top = 0
+limit_right = 2560
+limit_bottom = 720
+drag_horizontal_enabled = true
+script = ExtResource("9_kpww7")
+player = NodePath("../Jeremy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 825.0
+offset_top = 88.0
+offset_right = 1094.0
+offset_bottom = 240.0
+focus_mode = 0
+text = "FREE MONEY
+(debug)"
+
+[node name="Sleep" type="Button" parent="CanvasLayer"]
+visible = false
+offset_left = 147.0
+offset_top = 287.0
+offset_right = 461.0
+offset_bottom = 410.0
+text = "Go to bed"
+
+[node name="Info" type="Label" parent="CanvasLayer"]
+offset_left = 13.0
+offset_right = 251.0
+offset_bottom = 171.0
+text = "info"
+label_settings = ExtResource("3_s2grh")
+
+[node name="GameOver" parent="CanvasLayer" instance=ExtResource("7_pk35q")]
+visible = false
+
+[node name="Scavange" type="Label" parent="."]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 482.0
+offset_right = 591.0
+offset_bottom = 505.0
+text = "Scavange attempts left: 3"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sleep" to="." method="_on_sleep_pressed"]
