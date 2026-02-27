@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=19 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/inventory_ui.tscn" id="9_ovom5"]
 [ext_resource type="LabelSettings" uid="uid://bxd0b237pgfrp" path="res://daytime_main.tres" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
-[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
+[ext_resource type="PackedScene" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
+[ext_resource type="AudioStream" uid="uid://e1cxs7j2ew6u" path="res://assets/audio/bgm/dump/waiting_for_bite.wav" id="11_nw8sa"]
 
 [sub_resource type="Animation" id="Animation_qc6n8"]
 resource_name = "FISH!"
@@ -244,6 +245,10 @@ grow_horizontal = 0
 grow_vertical = 2
 focus_mode = 0
 text = "test dialogue"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_nw8sa")
+autoplay = true
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="pressed" from="HUD/Button" to="." method="_on_button_pressed"]

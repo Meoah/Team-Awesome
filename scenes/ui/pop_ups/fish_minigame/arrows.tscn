@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=33 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
@@ -14,7 +14,6 @@
 [ext_resource type="AudioStream" uid="uid://c2qsxm7f6l4bf" path="res://assets/audio/sfx/arrows_sfx/Weapon Bullet Shell 7MM Dropping On Cement 04.wav" id="14_qp0nd"]
 [ext_resource type="Script" uid="uid://c2w7qb8xpm6jn" path="res://scripts/ui/fish_minigame/arrow_sprite.gd" id="16_mx6gi"]
 [ext_resource type="AudioStream" uid="uid://cw4v1vxvdvah7" path="res://assets/audio/sfx/arrows_sfx/timer/FuseLit.wav" id="17_02m58"]
-[ext_resource type="Texture2D" uid="uid://b608g2qbl8yxd" path="res://assets/textures/ui/Arrows/effects/smoke.png" id="17_8ksox"]
 [ext_resource type="AudioStream" uid="uid://c14h2hmeo5ygn" path="res://assets/audio/sfx/arrows_sfx/StarterWhistle.wav" id="17_47pa4"]
 [ext_resource type="Script" uid="uid://bfh11uixb171m" path="res://scripts/ui/pop_ups/smoke.gd" id="18_63o2f"]
 [ext_resource type="AudioStream" uid="uid://derys0a2u4qbx" path="res://assets/audio/sfx/arrows_sfx/timer/FuseBurndown.wav" id="18_pp4l4"]
@@ -22,6 +21,7 @@
 [ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="19_dleu3"]
 [ext_resource type="AudioStream" uid="uid://bgu7ybmy0tneo" path="res://assets/audio/sfx/arrows_sfx/Gold_Fail.wav" id="21_47pa4"]
 [ext_resource type="AudioStream" uid="uid://b6vkq77wj16dl" path="res://assets/audio/sfx/arrows_sfx/FishCaught.wav" id="22_np22p"]
+[ext_resource type="AudioStream" uid="uid://c3k0do5ko4b4x" path="res://assets/audio/bgm/dump/pressing_arrows.wav" id="23_jhi3u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp4l4"]
 bg_color = Color(0.8635442, 0.49697268, 3.85046e-07, 1)
@@ -67,6 +67,36 @@ shader_parameter/posOffset = Vector2(0, -0.5)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_np22p"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_np22p"]
+shader = ExtResource("9_pp4l4")
+shader_parameter/speed = 0.10000000149012
+shader_parameter/pixelSize = 0.015
+shader_parameter/alpha = 1.0
+shader_parameter/flickerStrength = 0.1050000049875
+shader_parameter/toColor = Color(0, 0, 0, 1)
+shader_parameter/fromColor = Color(0.011764706, 0, 0, 1)
+shader_parameter/hueShift = 0.0
+shader_parameter/saturationFactor = 0.0
+shader_parameter/particleCount = 16.0
+shader_parameter/brightness = 0.00110000004497
+shader_parameter/fireShift = 0.0
+shader_parameter/fireShiftFrequency = 1.0
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 1.0
+shader_parameter/sparkSize = 0.00050000002375
+shader_parameter/sparkSpeed = 0.10000000149012
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 50.0
+shader_parameter/smokeSize = 0.012000000569999999
+shader_parameter/smokeDrift = 0.5
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.81)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_jhi3u"]
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qp0nd"]
 random_volume_offset_db = 6.0
 streams_count = 1
@@ -100,7 +130,7 @@ timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
-variants = Array[String](["Obscured", "Evil", "Gold", "None"])
+variants = Array[String](["Obscured"])
 arrow_direction = Dictionary[String, Texture2D]({
 "Down": ExtResource("12_mx6gi"),
 "Left": ExtResource("10_qdfjh"),
@@ -169,9 +199,10 @@ light_mask = 512
 visibility_layer = 512
 z_index = 2
 z_as_relative = false
-position = Vector2(134, -102)
-scale = Vector2(0.44252267, 0.44252267)
-texture = ExtResource("17_8ksox")
+material = SubResource("ShaderMaterial_np22p")
+position = Vector2(-4, -39)
+scale = Vector2(250, 250)
+texture = SubResource("CanvasTexture_jhi3u")
 script = ExtResource("18_63o2f")
 
 [node name="Control" type="Control" parent="."]
@@ -228,5 +259,8 @@ volume_db = -6.0
 [node name="FishCaughtSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_np22p")
 volume_db = 3.0
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_jhi3u")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
