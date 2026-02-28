@@ -1,6 +1,9 @@
 extends Control
 class_name DaytimeMain
 
+## Audio exports
+@export_file_path("*.wav") var default_bgm_path
+
 ## Node exports
 @export var jeremy_node : MainCharacter
 @export var bobber_scene : PackedScene
@@ -10,6 +13,11 @@ func _ready() -> void:
 	
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1:
 		SystemData._add_bait("Generic Bait", 5)
+	
+	# Binds Signals
+	PlayManager.idle_day_state.signal_idle_day.connect(_idle_state)
+	
+	AudioEngine.play_bgm(default_bgm_path)
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:
@@ -32,6 +40,9 @@ func _play_minigame() -> void:
 func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.stop(true)
 	$FISH.seek(0)
+
+func _idle_state() -> void:
+	AudioEngine.play_bgm(default_bgm_path)
 
 func _on_button_pressed():
 	_end_day()

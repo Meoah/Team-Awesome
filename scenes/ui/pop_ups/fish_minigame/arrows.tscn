@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=32 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
@@ -21,7 +21,6 @@
 [ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="19_dleu3"]
 [ext_resource type="AudioStream" uid="uid://bgu7ybmy0tneo" path="res://assets/audio/sfx/arrows_sfx/Gold_Fail.wav" id="21_47pa4"]
 [ext_resource type="AudioStream" uid="uid://b6vkq77wj16dl" path="res://assets/audio/sfx/arrows_sfx/FishCaught.wav" id="22_np22p"]
-[ext_resource type="AudioStream" uid="uid://c3k0do5ko4b4x" path="res://assets/audio/bgm/dump/pressing_arrows.wav" id="23_jhi3u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp4l4"]
 bg_color = Color(0.8635442, 0.49697268, 3.85046e-07, 1)
@@ -88,7 +87,7 @@ shader_parameter/sparkSize = 0.00050000002375
 shader_parameter/sparkSpeed = 0.10000000149012
 shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
 shader_parameter/smokeCount = 50.0
-shader_parameter/smokeSize = 0.012000000569999999
+shader_parameter/smokeSize = 0.01200000056999999
 shader_parameter/smokeDrift = 0.5
 shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
 shader_parameter/windForce = 0.0
@@ -124,6 +123,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0iavb")
+default_bgm_path = "res://assets/audio/bgm/dump/pressing_arrows.wav"
 input_string = NodePath("TextEdit")
 reaction = NodePath("Reaction")
 timer = NodePath("Timer")
@@ -259,8 +259,5 @@ volume_db = -6.0
 [node name="FishCaughtSfx" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("22_np22p")
 volume_db = 3.0
-
-[node name="BGM" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("23_jhi3u")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

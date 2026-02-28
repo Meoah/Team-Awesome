@@ -54,6 +54,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_7dbdj")
 script = ExtResource("1_53syt")
+default_bgm_path = "res://assets/audio/bgm/dump/waiting_for_night.wav"
 jeremy_node = NodePath("Jeremy")
 house_trigger = NodePath("House")
 bucket_trigger = NodePath("BaitBucket")
@@ -64,6 +65,7 @@ house_label = NodePath("House/Label")
 scavange_label = NodePath("Scavange")
 
 [node name="BackgroundTexture" type="Sprite2D" parent="."]
+modulate = Color(0.46618086, 0.4661808, 0.4661808, 1)
 position = Vector2(1280, 357)
 scale = Vector2(2, 1)
 texture = ExtResource("2_pdcg8")

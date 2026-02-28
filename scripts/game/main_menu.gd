@@ -1,5 +1,7 @@
 extends Control
 
+@export_file_path("*.wav") var bgm_path
+
 @onready var main_buttons = $MainButtons
 @onready var settings = $Settings
 @onready var gameStart
@@ -8,7 +10,7 @@ extends Control
 func _ready():
 	main_buttons.visible = true
 	settings.visible = false
-	$AudioStreamPlayer.play(65)
+	AudioEngine.play_bgm(bgm_path)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

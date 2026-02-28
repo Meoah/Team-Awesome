@@ -1,6 +1,9 @@
 extends BasePopup
 class_name MinigameUIPopup
 
+## Audio exports
+@export_file_path("*.wav") var default_bgm_path
+
 @export var input_string : TextEdit #Accessing TextEdit box
 @export var reaction : Sprite2D #Accessing Sprite2D for reaction image
 @export var timer : Timer #Accessing Timer for the countdown
@@ -97,7 +100,7 @@ func start_minigame():
 	display_text = correct_inputs.duplicate(true)
 	timer_seqeunce()
 	await timer_seqeunce()
-	$BGM.play()
+	AudioEngine.play_bgm(default_bgm_path)
 	progress_bar.max_value = time
 	input_index = 0
 	spawn_arrows()
