@@ -1,9 +1,10 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=25 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_1pk0j"]
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/nighttime_main.gd" id="1_53syt"]
 [ext_resource type="Texture2D" uid="uid://coivg44ivnbvf" path="res://assets/textures/ui/Filler_Shop_BG2.png" id="2_pdcg8"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="2_s2grh"]
+[ext_resource type="AudioStream" uid="uid://c8152424wtrat" path="res://assets/audio/bgm/dump/waiting_for_night.wav" id="3_7dbdj"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_i5ojq"]
 [ext_resource type="Texture2D" uid="uid://i3smng8yxpbe" path="res://assets/textures/debug/blue-house-md.png" id="4_y133y"]
 [ext_resource type="Texture2D" uid="uid://p0x3tf6qd2yx" path="res://assets/textures/debug/bassprofishing.png" id="5_11rnk"]
@@ -54,7 +55,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_7dbdj")
 script = ExtResource("1_53syt")
-default_bgm_path = "res://assets/audio/bgm/dump/waiting_for_night.wav"
+default_bgm = ExtResource("3_7dbdj")
 jeremy_node = NodePath("Jeremy")
 house_trigger = NodePath("House")
 bucket_trigger = NodePath("BaitBucket")

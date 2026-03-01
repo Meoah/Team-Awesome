@@ -2,8 +2,17 @@ extends BasePopup
 class_name MinigameUIPopup
 
 ## Audio exports
-@export_file_path("*.wav") var default_bgm_path
+@export_category("Audio")
+@export var default_bgm : AudioStream
+@export var sfx_round_start : AudioStream
+@export var sfx_timer_start : AudioStream
+@export var sfx_timer_end : AudioStream
+@export var sfx_success_arrow : AudioStream
+@export var sfx_success_arrow2 : AudioStream
+@export var sfx_gold_fail : AudioStream
+@export var sfx_fish_caught : AudioStream
 
+@export_category("Node Exports")
 @export var input_string : TextEdit #Accessing TextEdit box
 @export var reaction : Sprite2D #Accessing Sprite2D for reaction image
 @export var timer : Timer #Accessing Timer for the countdown
@@ -100,7 +109,7 @@ func start_minigame():
 	display_text = correct_inputs.duplicate(true)
 	timer_seqeunce()
 	await timer_seqeunce()
-	AudioEngine.play_bgm(default_bgm_path)
+	AudioEngine.play_bgm(default_bgm)
 	progress_bar.max_value = time
 	input_index = 0
 	spawn_arrows()
@@ -162,8 +171,8 @@ func correct_input():
 		input_index = input_index + 1 #Advances in the string index
 		#text_render()
 		$Reaction.set_texture(success)
-		$InputSfx.play()
-		$InputSfx/InputSfx2.play()
+		AudioEngine.play_sfx(sfx_success_arrow)
+		AudioEngine.play_sfx(sfx_success_arrow2)
 		var current_sprite : ArrowTexture = sprite_array.pop_front()
 		var smoke : smoke_sprite = $Smoke
 		if varied_obscured:
@@ -185,8 +194,8 @@ func sparks():
 func timer_seqeunce():
 	timer.start(time)
 	timer.set_paused(false)
-	$StarterShot.play()
-	$TimerSfx.play()
+	AudioEngine.play_sfx(sfx_round_start)
+	AudioEngine.play_sfx(sfx_timer_start)
 	$ProgressBar/Sparks.position = $ProgressBar/Start.position
 	sparks()
 	
@@ -221,7 +230,7 @@ func _on_timer_timeout() -> void:
 #Fail Script
 func fail():
 	if varied_gold:
-		$GoldFail.play()
+		AudioEngine.play_sfx(sfx_gold_fail)
 		$ProgressBar/Sparks.hide()
 		for i in sprite_array:
 			i.erase()
@@ -245,9 +254,9 @@ func win():
 		var fish_image = load(current_image)
 		$Reaction.texture = fish_image
 		input_index = 0
-		$TimerSfx.stop()
-		$TimerSfx/TimerEndSfx.play()
-		$FishCaughtSfx.play()
+		AudioEngine.stop_sfx_key(sfx_timer_start)
+		AudioEngine.play_sfx(sfx_timer_end)
+		AudioEngine.play_sfx(sfx_fish_caught)
 		$ProgressBar/Sparks.hide()
 		if varied_gold: #If fish is gold double its value, Current bug where double value persist
 			current_value = current_value * 2

@@ -1,7 +1,8 @@
-[gd_scene load_steps=17 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=18 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
+[ext_resource type="AudioStream" uid="uid://e1cxs7j2ew6u" path="res://assets/audio/bgm/dump/waiting_for_bite.wav" id="2_3kam8"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
 [ext_resource type="Texture2D" uid="uid://diefr1j4j4pji" path="res://assets/textures/background/FishingBGFiller.png" id="3_nw5db"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
@@ -122,7 +123,7 @@ size = Vector2(50, 720)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2jsv6")
-default_bgm_path = "res://assets/audio/bgm/dump/waiting_for_bite.wav"
+default_bgm = ExtResource("2_3kam8")
 jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
 

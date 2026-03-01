@@ -1,6 +1,7 @@
-[gd_scene load_steps=22 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=23 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
+[ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_4oldi"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
 [ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
@@ -47,7 +48,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fpthd")
-bgm_path = "res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav"
+default_bgm = ExtResource("2_4oldi")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1

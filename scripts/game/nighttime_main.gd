@@ -2,7 +2,8 @@ extends Control
 class_name NighttimeMain
 
 ## Audio exports
-@export_file_path("*.wav") var default_bgm_path
+@export_category("Audio")
+@export var default_bgm : AudioStream
 
 @export var jeremy_node : MainCharacter
 @export var house_trigger : Area2D
@@ -36,7 +37,7 @@ func _ready() -> void:
 	SignalBus.start_bait_shop.connect(_start_bait_shop)
 	SignalBus.shop_closed.connect(_save_shop_data)
 	
-	AudioEngine.play_bgm(default_bgm_path)
+	AudioEngine.play_bgm(default_bgm)
 
 func _interaction() -> void:
 	if house_trigger.overlaps_body(jeremy_node) : _sleep()

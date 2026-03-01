@@ -1,6 +1,7 @@
 extends Control
 
-@export_file_path("*.wav") var bgm_path
+@export_category("Audio")
+@export var default_bgm : AudioStream
 
 @onready var main_buttons = $MainButtons
 @onready var settings = $Settings
@@ -10,7 +11,7 @@ extends Control
 func _ready():
 	main_buttons.visible = true
 	settings.visible = false
-	AudioEngine.play_bgm(bgm_path)
+	AudioEngine.play_bgm(default_bgm)
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):

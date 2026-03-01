@@ -1,7 +1,8 @@
-[gd_scene load_steps=32 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=33 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
+[ext_resource type="AudioStream" uid="uid://c3k0do5ko4b4x" path="res://assets/audio/bgm/dump/pressing_arrows.wav" id="2_np22p"]
 [ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="8_20txf"]
 [ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://scenes/ui/pop_ups/fish_minigame/sparks.gdshader" id="9_pp4l4"]
 [ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
@@ -21,6 +22,24 @@
 [ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="19_dleu3"]
 [ext_resource type="AudioStream" uid="uid://bgu7ybmy0tneo" path="res://assets/audio/sfx/arrows_sfx/Gold_Fail.wav" id="21_47pa4"]
 [ext_resource type="AudioStream" uid="uid://b6vkq77wj16dl" path="res://assets/audio/sfx/arrows_sfx/FishCaught.wav" id="22_np22p"]
+
+[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_np22p"]
+loop = false
+fade_time = 1.0
+stream_count = 2
+stream_0 = ExtResource("17_02m58")
+stream_1 = ExtResource("18_pp4l4")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qp0nd"]
+random_volume_offset_db = 6.0
+streams_count = 1
+stream_0/stream = ExtResource("14_6t01a")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vc0bb"]
+random_pitch = 1.15
+random_volume_offset_db = 3.0
+streams_count = 1
+stream_0/stream = ExtResource("14_qp0nd")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pp4l4"]
 bg_color = Color(0.8635442, 0.49697268, 3.85046e-07, 1)
@@ -96,24 +115,6 @@ shader_parameter/posOffset = Vector2(0, -0.81)
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_jhi3u"]
 
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qp0nd"]
-random_volume_offset_db = 6.0
-streams_count = 1
-stream_0/stream = ExtResource("14_6t01a")
-
-[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_vc0bb"]
-random_pitch = 1.15
-random_volume_offset_db = 3.0
-streams_count = 1
-stream_0/stream = ExtResource("14_qp0nd")
-
-[sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_np22p"]
-loop = false
-fade_time = 1.0
-stream_count = 2
-stream_0 = ExtResource("17_02m58")
-stream_1 = ExtResource("18_pp4l4")
-
 [node name="Arrows" type="Control" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 process_mode = 3
 layout_mode = 3
@@ -123,7 +124,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0iavb")
-default_bgm_path = "res://assets/audio/bgm/dump/pressing_arrows.wav"
+default_bgm = ExtResource("2_np22p")
+sfx_round_start = ExtResource("17_47pa4")
+sfx_timer_start = SubResource("AudioStreamPlaylist_np22p")
+sfx_timer_end = ExtResource("19_47pa4")
+sfx_success_arrow = SubResource("AudioStreamRandomizer_qp0nd")
+sfx_success_arrow2 = SubResource("AudioStreamRandomizer_vc0bb")
+sfx_gold_fail = ExtResource("21_47pa4")
+sfx_fish_caught = ExtResource("22_np22p")
 input_string = NodePath("TextEdit")
 reaction = NodePath("Reaction")
 timer = NodePath("Timer")

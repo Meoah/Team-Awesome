@@ -9,4 +9,4 @@ func _ready():
 	audio_bus_id = AudioServer.get_bus_index(audio_bus_name)
 
 func _on_value_changed(_value) -> void:
-	AudioEngine.set_bgm_volume(_value)
+	AudioEngine.set_bus_volume_linear(AudioEngine.BUS_BGM, _value)
