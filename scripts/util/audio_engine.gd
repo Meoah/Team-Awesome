@@ -9,6 +9,10 @@ const SAVE_KEY_BGM : String = "bgm"
 const SAVE_KEY_SFX : String = "sfx"
 const SAVE_KEY_DIALOGUE : String = "dialogue"
 
+const META_FINISH_DETECTION : String = "finish_detection"
+const META_BASE_VOLUME : String = "base_volume_linear"
+const META_KEY : String = "sound_key"
+
 ## Volume Constants and Variables
 const BUS_MASTER : String = "Master"
 const BUS_BGM : String = "BGM"
@@ -39,14 +43,22 @@ const DEFAULT_SFX_POOL_SIZE : int = 24
 const DEFAULT_SFX_POLYPHONY : int = 4
 const DEFAULT_SFX_PITCH_JITTER : float = 0.02
 const DEFAULT_SFX_MIN_INTERVAL : float = 0.02
-const SFX_META_FINISH_DETECTION : String = "sfx_finish_detection"
-const SFX_META_BASE_VOLUME : String = "base_volume_linear"
-const SFX_META_KEY : String = "sfx_key"
 
 var sfx_players_pool : Array[AudioStreamPlayer] = []
 var sfx_active_players_by_key : Dictionary = {}
 var sfx_last_play_time_by_key : Dictionary = {}
 var sfx_rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
+## Dialogue Constants and Variables
+const DEFAULT_DIALOGUE_POOL_SIZE : int = 12
+const DEFAULT_DIALOGUE_POLYPHONY : int = 1
+const DEFAULT_DIALOGUE_PITCH_JITTER : float = 0.06
+const DEFAULT_DIALOGUE_MIN_INTERVAL : float = 0.03
+
+var dialogue_players_pool : Array[AudioStreamPlayer] = [] as Array[AudioStreamPlayer]
+var dialogue_active_players_by_key : Dictionary = {}
+var dialogue_last_play_time_by_key : Dictionary = {}
+var dialogue_rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 func _ready() -> void:
 	# TODO Pulls audio save data.
@@ -56,6 +68,7 @@ func _ready() -> void:
 	# Setup systems.
 	_setup_bgm()
 	_setup_sfx()
+	_setup_dialogue()
 	load_audio_data(audio_save_data)
 
 ## Outputs all audio-related save data.
@@ -74,6 +87,32 @@ func load_audio_data(incoming_data : Dictionary) -> void:
 	# Apply saved BGM progress if data has it, otherwise clear BGM progress.
 	if incoming_data.has(SAVE_KEY_BGM_PROGRESS) : set_bgm_progress_save_data(incoming_data[SAVE_KEY_BGM_PROGRESS])
 	else : clear_bgm_progress()
+
+## Small helper class to enable awaits.
+class FinishDetection extends RefCounted:
+	signal finished(incoming_key : String)
+	
+	var sfx_key : String = ""
+	var is_completed : bool = false
+	
+	func complete() -> void:
+		if is_completed : return
+		is_completed = true
+		finished.emit(sfx_key)
+
+## Triggers the custom finished signal.
+func _complete_audio_player(incoming_player : AudioStreamPlayer) -> void:
+	if !incoming_player : return
+	
+	if incoming_player.has_meta(META_FINISH_DETECTION):
+		var finish_detection : FinishDetection = incoming_player.get_meta(META_FINISH_DETECTION) as FinishDetection
+		if finish_detection : finish_detection.complete()
+	
+	# Disconnect to avoid double-calls on reused players.
+	if incoming_player.finished.is_connected(_on_sfx_player_finished):
+		incoming_player.finished.disconnect(_on_sfx_player_finished)
+	if incoming_player.finished.is_connected(_on_dialogue_player_finished):
+		incoming_player.finished.disconnect(_on_dialogue_player_finished)
 
 # ---- Volume Methods
 ## Attempts to set the the requested bus volume from the requested linear value between (0..1).
@@ -424,7 +463,7 @@ func play_sfx(
 	incoming_pitch_jitter : float = DEFAULT_SFX_PITCH_JITTER,
 	incoming_min_interval : float = DEFAULT_SFX_MIN_INTERVAL
 ) -> Signal:
-	var finish_detection : SFXFinishDetection = SFXFinishDetection.new()
+	var finish_detection : FinishDetection = FinishDetection.new()
 
 	# Abort if no stream.
 	if !incoming_stream:
@@ -436,7 +475,7 @@ func play_sfx(
 		if incoming_stream.resource_path != "" : incoming_sfx_key = incoming_stream.resource_path
 		else : incoming_sfx_key = "%s:%s" % [incoming_stream.get_class(), str(incoming_stream.get_instance_id())]
 	
-	# Sends the key name to SFXFinishDetection.
+	# Sends the key name to FinishDetection.
 	finish_detection.sfx_key = incoming_sfx_key
 	
 	# Disallows playing if it hasn't been long enough since the last time the key has been played.
@@ -488,9 +527,9 @@ func play_sfx(
 	else : sfx_player.pitch_scale = 1.0
 	
 	# Store volume multiplier as metadata so it can recompute on polyphony changes.
-	sfx_player.set_meta(SFX_META_KEY, incoming_sfx_key)
-	sfx_player.set_meta(SFX_META_BASE_VOLUME, clamp(incoming_volume_linear, 0.0, 1.0))
-	sfx_player.set_meta(SFX_META_FINISH_DETECTION, finish_detection)
+	sfx_player.set_meta(META_KEY, incoming_sfx_key)
+	sfx_player.set_meta(META_BASE_VOLUME, clamp(incoming_volume_linear, 0.0, 1.0))
+	sfx_player.set_meta(META_FINISH_DETECTION, finish_detection)
 	
 	# Binds the player to a cleanup function.
 	if sfx_player.finished.is_connected(_on_sfx_player_finished):
@@ -529,7 +568,7 @@ func play_sfx_path(
 	incoming_min_interval : float = DEFAULT_SFX_MIN_INTERVAL
 ) -> Signal:
 	# Sets up the detection class to enable await functionality.
-	var finish_detection : SFXFinishDetection = SFXFinishDetection.new()
+	var finish_detection : FinishDetection = FinishDetection.new()
 	
 	# Abort if path itself is empty or if the path does not point to a valid AudioStream.
 	if incoming_stream_path.is_empty():
@@ -643,30 +682,6 @@ func is_sfx_key_playing(incoming_sfx_key : String) -> bool:
 	var active_list : Array[AudioStreamPlayer] = sfx_active_players_by_key[incoming_sfx_key] as Array[AudioStreamPlayer]
 	return active_list.size() > 0
 
-## Small helper class to enable awaits.
-class SFXFinishDetection extends RefCounted:
-	signal finished(incoming_sfx_key : String)
-	
-	var sfx_key : String = ""
-	var is_completed : bool = false
-	
-	func complete() -> void:
-		if is_completed : return
-		is_completed = true
-		finished.emit(sfx_key)
-
-## Triggers the custom finished signal.
-func _complete_sfx_player(incoming_player : AudioStreamPlayer) -> void:
-	if !incoming_player : return
-	
-	if incoming_player.has_meta(SFX_META_FINISH_DETECTION):
-		var finish_detection : SFXFinishDetection = incoming_player.get_meta(SFX_META_FINISH_DETECTION) as SFXFinishDetection
-		if finish_detection : finish_detection.complete()
-	
-	# Disconnect to avoid double-calls on reused players.
-	if incoming_player.finished.is_connected(_on_sfx_player_finished):
-		incoming_player.finished.disconnect(_on_sfx_player_finished)
-
 ## Pulls an available AudioStreamPlayer from the pool, or returns null if none are free.
 func _get_sfx_player_from_pool() -> AudioStreamPlayer:
 	if sfx_players_pool.size() <= 0 : return null
@@ -677,15 +692,15 @@ func _release_sfx_player(incoming_player : AudioStreamPlayer) -> void:
 	if !incoming_player: return
 	
 	# Triggers the signal for await purposes.
-	_complete_sfx_player(incoming_player)
+	_complete_audio_player(incoming_player)
 	
 	# Resets values.
 	incoming_player.stream = null
 	incoming_player.pitch_scale = 1.0
 	incoming_player.volume_db = 0.0
-	incoming_player.set_meta(SFX_META_KEY, "")
-	incoming_player.set_meta(SFX_META_BASE_VOLUME, 1.0)
-	incoming_player.set_meta(SFX_META_FINISH_DETECTION, null)
+	incoming_player.set_meta(META_KEY, "")
+	incoming_player.set_meta(META_BASE_VOLUME, 1.0)
+	incoming_player.set_meta(META_FINISH_DETECTION, null)
 	
 	# Returns the reset player to the pool.
 	sfx_players_pool.append(incoming_player)
@@ -703,19 +718,19 @@ func _recompute_sfx_polyphony_volume(incoming_sfx_key : String) -> void:
 	var corrected_linear : float = 1.0 / sqrt(float(active_count))
 	var corrected_db : float = linear_to_db(max(0.0001, corrected_linear))
 	
-	# Checks if each player has metadata of SFX_META_BASE_VOLUME. If so, adjust accordingly.
+	# Checks if each player has metadata of META_BASE_VOLUME. If so, adjust accordingly.
 	for each_player in active_list:
 		if !each_player : continue
 		var base_linear : float = 1.0
-		if each_player.has_meta(SFX_META_BASE_VOLUME):
-			base_linear = clamp(float(each_player.get_meta(SFX_META_BASE_VOLUME)), 0.0, 1.0)
+		if each_player.has_meta(META_BASE_VOLUME):
+			base_linear = clamp(float(each_player.get_meta(META_BASE_VOLUME)), 0.0, 1.0)
 		var base_db : float = linear_to_db(max(0.0001, base_linear))
 		each_player.volume_db = base_db + corrected_db
 
 ## Cleans up on finished signal and recomputes volumes for remaining voices of that key.
 func _on_sfx_player_finished(incoming_player : AudioStreamPlayer, incoming_sfx_key : String) -> void:
 	# Triggers the custom finished signal.
-	_complete_sfx_player(incoming_player)
+	_complete_audio_player(incoming_player)
 	
 	# Checks to see if there are any other active players with the same key.
 	#	If so, recalculate their individual volumes for polyphony purposes.
@@ -729,12 +744,12 @@ func _on_sfx_player_finished(incoming_player : AudioStreamPlayer, incoming_sfx_k
 	# Returns the player to the available pool. 
 	_release_sfx_player(incoming_player)
 
-## fades a specific SFX player out, then stops + releases it.
+## Fades a specific SFX player out, then stops and releases it.
 func _stop_sfx_player_with_fade(incoming_player : AudioStreamPlayer, fade_time : float) -> void:
 	if !incoming_player: return
 	
 	# We do NOT rely on .finished here because stop() doesn't emit finished.
-	# Fade time can overlap with other fades; create a one-off tween.
+	# Fade time can overlap with other fades, so it makes a unique tween.
 	var fade_tween : Tween = create_tween()
 	fade_tween.tween_property(incoming_player, "volume_db", MIN_FADE_DB, fade_time)
 	fade_tween.tween_callback(func() -> void:
@@ -742,3 +757,180 @@ func _stop_sfx_player_with_fade(incoming_player : AudioStreamPlayer, fade_time :
 			incoming_player.stop()
 			_release_sfx_player(incoming_player)
 			)
+
+# ---- Dialogue Methods
+## Initializes the Dialogue pool and connects them to the correct bus.
+func _setup_dialogue(incoming_pool_size : int = DEFAULT_DIALOGUE_POOL_SIZE) -> void:
+	dialogue_rng.randomize()
+	dialogue_players_pool.clear()
+	dialogue_active_players_by_key.clear()
+	dialogue_last_play_time_by_key.clear()
+	
+	# Initializes each AudioStreamPlayer and assigns them to sfx_players_pool.
+	var pool_size : int = max(1, incoming_pool_size)
+	for i in range(pool_size):
+		var each_player : AudioStreamPlayer = AudioStreamPlayer.new()
+		add_child(each_player)
+		each_player.bus = BUS_DIALOGUE
+		each_player.volume_db = 0.0
+		dialogue_players_pool.append(each_player)
+
+## Attempts to play the requested audio as a SFX. Returns a signal for await usage.[br][br]
+## "incoming_stream_path" : The [AudioStream] to the requested audio track.[br]
+## "incoming_sfx_key" : Any [String] name to use as an indicator of what it is.[br]
+## "incoming_volume_linear" : An independant volume multiplier (0..1).[br]
+## "incoming_max_polyphony" : Max simultaneous players for this key, if exceeded, steals oldest player.[br]
+## "incoming_pitch_jitter" : Random pitch variance to reduce phase stacking.[br]
+## "incoming_min_interval" : Prevents multiples of the same key from playing until this variable in seconds.[br]
+## "incoming_base_pitch_scale" : The default pitch scale of the dialogue.[br]
+func play_dialogue(
+	incoming_stream : AudioStream,
+	incoming_dialogue_key : String = "",
+	incoming_volume_linear : float = 1.0,
+	incoming_max_polyphony : int = DEFAULT_DIALOGUE_POLYPHONY,
+	incoming_pitch_jitter : float = DEFAULT_DIALOGUE_PITCH_JITTER,
+	incoming_min_interval : float = DEFAULT_DIALOGUE_MIN_INTERVAL,
+	incoming_base_pitch_scale : float = 1.0
+) -> Signal:
+	# Sets up the detection class to enable await functionality.
+	var finish_detection : FinishDetection = FinishDetection.new()
+	
+	# Abort if path itself is empty or if the path does not point to a valid AudioStream.
+	if !incoming_stream:
+		finish_detection.complete()
+		return finish_detection.finished
+	
+	# If key is empty, attempt to use resource_path, otherwise fall back to "class:id"
+	if incoming_dialogue_key.is_empty():
+		if incoming_stream.resource_path != "" : incoming_dialogue_key = incoming_stream.resource_path
+		else : incoming_dialogue_key = "%s:%s" % [incoming_stream.get_class(), str(incoming_stream.get_instance_id())]
+	
+	# Sends the key name to FinishDetection.
+	finish_detection.sfx_key = incoming_dialogue_key
+	
+	# Disallows playing if it hasn't been long enough since the last time the key has been played.
+	var now_time : float = float(Time.get_ticks_msec()) * 0.001
+	if incoming_min_interval > 0.0:
+		if dialogue_last_play_time_by_key.has(incoming_dialogue_key):
+			var last_time : float = float(dialogue_last_play_time_by_key[incoming_dialogue_key])
+			if now_time - last_time < incoming_min_interval:
+				finish_detection.complete()
+				return finish_detection.finished
+	dialogue_last_play_time_by_key[incoming_dialogue_key] = now_time
+	
+	# Ensure array exists for this key.
+	if !dialogue_active_players_by_key.has(incoming_dialogue_key):
+		dialogue_active_players_by_key[incoming_dialogue_key] = [] as Array[AudioStreamPlayer]
+	
+	# Once validated, set the incoming AudioStream to the valid player.
+	var active_list : Array[AudioStreamPlayer] = dialogue_active_players_by_key[incoming_dialogue_key] as Array[AudioStreamPlayer]
+	
+	# Enforce per-key max polyphony by stealing the oldest.
+	var max_polyphony : int = max(1, incoming_max_polyphony)
+	while active_list.size() >= max_polyphony:
+		var stolen_player : AudioStreamPlayer = active_list.pop_front()
+		if stolen_player:
+			stolen_player.stop()
+			_release_dialogue_player(stolen_player)
+	
+	# Attempts to acquire an available player from dialogue_players_pool.
+	var dialogue_player : AudioStreamPlayer = _get_dialogue_player_from_pool()
+	if !dialogue_player:
+		# If there are no available players from the pool, attempt to steal from
+		#	 oldest of this key. If it still can't just abort.
+		if active_list.size() > 0:
+			var forced_player : AudioStreamPlayer = active_list.pop_front()
+			if forced_player:
+				forced_player.stop()
+				_release_dialogue_player(forced_player)
+				dialogue_player = _get_dialogue_player_from_pool()
+		if !dialogue_player:
+			finish_detection.complete()
+			return finish_detection.finished
+	
+	# Assign stream.
+	dialogue_player.stream = incoming_stream
+	
+	# Changes the pitch by incoming_pitch_jitter to reduce phase stacking.
+	dialogue_player.pitch_scale = max(0.01, incoming_base_pitch_scale)
+	if incoming_pitch_jitter > 0.0:
+		dialogue_player.pitch_scale *= 1.0 + dialogue_rng.randf_range(-incoming_pitch_jitter, incoming_pitch_jitter)
+		
+	# Store volume multiplier as metadata so it can recompute on polyphony changes.
+	dialogue_player.set_meta(META_KEY, incoming_dialogue_key)
+	dialogue_player.set_meta(META_BASE_VOLUME, clamp(incoming_volume_linear, 0.0, 1.0))
+	dialogue_player.set_meta(META_FINISH_DETECTION, finish_detection)
+	
+	# Binds the player to a cleanup function.
+	if dialogue_player.finished.is_connected(_on_dialogue_player_finished):
+		dialogue_player.finished.disconnect(_on_dialogue_player_finished)
+	dialogue_player.finished.connect(_on_dialogue_player_finished.bind(dialogue_player, incoming_dialogue_key))
+	
+	# Appends and recompute per-voice volume.
+	active_list.append(dialogue_player)
+	_recompute_dialogue_polyphony_volume(incoming_dialogue_key)
+	
+	# Once all preperations are complete, play the SFX.
+	dialogue_player.play()
+	return finish_detection.finished
+
+## Pulls an available AudioStreamPlayer from the pool, or returns null if none are free.
+func _get_dialogue_player_from_pool() -> AudioStreamPlayer:
+	if dialogue_players_pool.size() <= 0 : return null
+	return dialogue_players_pool.pop_back()
+
+## Returns an AudioStreamPlayer to the pool.
+func _release_dialogue_player(incoming_player : AudioStreamPlayer) -> void:
+	if !incoming_player: return
+	
+	# Triggers the signal for await purposes.
+	_complete_audio_player(incoming_player)
+	
+	# Resets values.
+	incoming_player.stream = null
+	incoming_player.pitch_scale = 1.0
+	incoming_player.volume_db = 0.0
+	incoming_player.set_meta(META_KEY, "")
+	incoming_player.set_meta(META_BASE_VOLUME, 1.0)
+	incoming_player.set_meta(META_FINISH_DETECTION, null)
+	
+	# Returns the reset player to the pool.
+	dialogue_players_pool.append(incoming_player)
+
+## Recomputes per-voice volume for the given key to avoid having the sound get too loud.
+func _recompute_dialogue_polyphony_volume(incoming_dialogue_key : String) -> void:
+	# Checks to see if the key exists as an active player. If not, abort.
+	if !dialogue_active_players_by_key.has(incoming_dialogue_key) : return
+	var active_list : Array[AudioStreamPlayer] = dialogue_active_players_by_key[incoming_dialogue_key] as Array[AudioStreamPlayer]
+	var active_count : int = active_list.size()
+	if active_count <= 0 : return
+	# Finds the corrected db according to how many players with the same keys are actively playing.
+	# corrected_db should be a negative, as corrected_linear should be less than 1.
+	var corrected_linear : float = 1.0 / sqrt(float(active_count))
+	var corrected_db : float = linear_to_db(max(0.0001, corrected_linear))
+	
+	# Checks if each player has metadata of META_BASE_VOLUME. If so, adjust accordingly.
+	for each_player in active_list:
+		if !each_player : continue
+		var base_linear : float = 1.0
+		if each_player.has_meta(META_BASE_VOLUME):
+			base_linear = clamp(float(each_player.get_meta(META_BASE_VOLUME)), 0.0, 1.0)
+		var base_db : float = linear_to_db(max(0.0001, base_linear))
+		each_player.volume_db = base_db + corrected_db
+
+## Cleans up on finished signal and recomputes volumes for remaining voices of that key.
+func _on_dialogue_player_finished(incoming_player : AudioStreamPlayer, incoming_dialogue_key : String) -> void:
+	# Triggers the custom finished signal.
+	_complete_audio_player(incoming_player)
+	
+	# Checks to see if there are any other active players with the same key.
+	# If so, recalculate their individual volumes for polyphony purposes.
+	# Otherwise, delete that key from the dialogue_active_players_by_key
+	if dialogue_active_players_by_key.has(incoming_dialogue_key):
+		var active_list : Array[AudioStreamPlayer] = dialogue_active_players_by_key[incoming_dialogue_key] as Array[AudioStreamPlayer]
+		active_list.erase(incoming_player)
+		if active_list.size() <= 0 : dialogue_active_players_by_key.erase(incoming_dialogue_key)
+		else : _recompute_dialogue_polyphony_volume(incoming_dialogue_key)
+	
+	# Returns the player to the available pool.
+	_release_dialogue_player(incoming_player)

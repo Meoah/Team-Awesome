@@ -1,16 +1,40 @@
 class_name DialogueData
 
 ## Names
-const NAME_MOB_BOSS = "Mob Boss"
 const NAME_MAIN_CHARACTER = "Jeremy"
+const NAME_MOB_BOSS = "Mob Boss"
 const NAME_BAIT_VENDOR = "Barry"
 
 ## Image Paths
 const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/mobboss.png")
 const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/jeremy/MCPlaceholder.png")
 
-# Getter function.
+const DEFAULT_SPEAKER_PROFILE : Dictionary = {
+	"beep_key": "dialogue_typewriter_beep",
+	"beep_volume_linear": 0.65,
+	"beep_base_pitch_scale": 1.0,
+	"beep_pitch_jitter": 0.06,
+	"beep_min_interval": 0.03,
+	"beep_chance": 0.85,
+	"beep_ignore_characters": " \n\t.,!?;:()[]{}\"'"
+}
+
+const SPEAKER_PROFILES : Dictionary = {
+	NAME_MAIN_CHARACTER: {"beep_base_pitch_scale": 1.08},
+	NAME_MOB_BOSS: {"beep_base_pitch_scale": 0.7, "beep_chance": 0.75}
+}
+
+# Getter functions.
 static func get_dialogue(id : int) -> Dictionary : return DIALOGUE_ID.get(id, {})
+static func get_profile(speaker_name : String) -> Dictionary:
+	var key_name : String = speaker_name
+	var profile : Dictionary = DEFAULT_SPEAKER_PROFILE.duplicate(true)
+	
+	if SPEAKER_PROFILES.has(key_name):
+		for each_key in SPEAKER_PROFILES[key_name].keys():
+			profile[each_key] = SPEAKER_PROFILES[key_name][each_key]
+	
+	return profile
 
 # Table of Contents. When refrencing dialogue, use the ID accociated to locate the data.
 const DIALOGUE_ID : Dictionary[int,Dictionary] = {
@@ -24,6 +48,7 @@ const KEY_NAME : String = "name"
 const KEY_TEXT : String = "text"
 const KEY_IMAGE_L : String = "image_left"
 const KEY_IMAGE_R : String = "image_right"
+const KEY_BGM : String = "bgm"
 const KEY_SFX : String = "sfx"
 const KEY_GOTO : String = "goto"
 const KEY_OPTION_A : String = "option_a"
@@ -40,6 +65,7 @@ const PARAMETER_SIGNAL_ON_EXIT : String = "signal_on_exit"
 #	KEY_NAME : USE A CONST -> String
 #	KEY_TEXT : String
 #	KEY_IMAGE : USE A CONST -> NodePath
+#	KEY_BGM : String
 #	KEY_SFX : TODO audio class????
 #	KEY_GOTO : int
 #	KEY_OPTION_A : String
@@ -66,6 +92,7 @@ const DEBUG_EXAMPLE : Dictionary = {
 	},
 	0002 : {
 		KEY_NAME : NAME_MOB_BOSS,
+		KEY_BGM : "res://assets/audio/bgm/dump/the_frog_is_talking.wav",
 		KEY_TEXT : "Yo kid, where's my money?",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
 		KEY_PARAMETERS : ["shaking", "emote_rage"]
