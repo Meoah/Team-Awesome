@@ -46,6 +46,10 @@ folder_colors={
 "res://scripts/": "orange"
 }
 
+[global_group]
+
+bobber_group="Bobbers."
+
 [input]
 
 left={
