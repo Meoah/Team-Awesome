@@ -44,7 +44,8 @@ var chosen_fish_id : int
 func pick_fish():
 	var keys_array :Array = FishData.FISH_ID.keys()
 	var random_fish = keys_array.pick_random()
-	chosen_fish_id =  randi_range(11,11)     #random_fish
+	random_fish = 21
+	chosen_fish_id =  random_fish
 	print(FishData.FISH_ID[chosen_fish_id]["name"])
 
 func apply_data():
@@ -267,6 +268,9 @@ func win():
 		input_string.set_text(current_name + "\n Weight: " + str(current_weight) + "\n Value: " + str(current_value))
 		SystemData._add_money_delay(current_value)
 		SystemData._add_fish(chosen_fish_id)
+		if chosen_fish_id == 21:
+			await get_tree().create_timer(1.5).timeout
+			$AnimatedSprite2D.play()
 		await get_tree().create_timer(3).timeout
 		PlayManager.request_catching_state()
 		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
