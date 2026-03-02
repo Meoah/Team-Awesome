@@ -44,7 +44,7 @@ var chosen_fish_id : int
 func pick_fish():
 	var keys_array :Array = FishData.FISH_ID.keys()
 	var random_fish = keys_array.pick_random()
-	chosen_fish_id = random_fish
+	chosen_fish_id =  randi_range(15,23)     #random_fish
 	print(FishData.FISH_ID[chosen_fish_id]["name"])
 
 func apply_data():
@@ -255,8 +255,8 @@ func win():
 		$Reaction.texture = fish_image
 		input_index = 0
 		AudioEngine.stop_sfx_key(sfx_timer_start)
-		AudioEngine.play_sfx(sfx_timer_end)
-		AudioEngine.play_sfx(sfx_fish_caught)
+		AudioEngine.play_sfx(sfx_timer_end,"", 0.5)
+		AudioEngine.play_sfx(sfx_fish_caught,"", 1)
 		$ProgressBar/Sparks.hide()
 		if varied_gold: #If fish is gold double its value, Current bug where double value persist
 			current_value = current_value * 2
@@ -300,4 +300,4 @@ func spawn_arrows():
 	elif varied_obscured:
 		random_index = randi_range(0, input_array.size()-1)
 		print(random_index)
-		$Smoke.position = sprite_array[random_index].global_position
+		$Smoke.global_position = sprite_array[random_index].global_position

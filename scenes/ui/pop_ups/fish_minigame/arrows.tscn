@@ -138,7 +138,7 @@ timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
 success = ExtResource("8_20txf")
 failure = ExtResource("9_rvcsd")
-variants = Array[String](["Obscured"])
+variants = Array[String](["Evil", "Gold", "None"])
 arrow_direction = Dictionary[String, Texture2D]({
 "Down": ExtResource("12_mx6gi"),
 "Left": ExtResource("10_qdfjh"),
@@ -208,7 +208,7 @@ visibility_layer = 512
 z_index = 2
 z_as_relative = false
 material = SubResource("ShaderMaterial_np22p")
-position = Vector2(-4, -39)
+position = Vector2(-4, -264)
 scale = Vector2(250, 250)
 texture = SubResource("CanvasTexture_jhi3u")
 script = ExtResource("18_63o2f")
