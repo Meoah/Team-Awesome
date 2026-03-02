@@ -30,6 +30,8 @@ func _on_ready() -> void:
 	option_a.pressed.connect(Callable(self, "_advance_dialogue").bind("a"))
 	option_b.pressed.connect(Callable(self, "_advance_dialogue").bind("b"))
 	
+	typewriter_rng.randomize()
+	
 	# Start
 	_dialogue()
 	# Wait one physics frame before allowing input to be read.
@@ -67,11 +69,18 @@ func _dialogue() -> void:
 	_set_dialogue_parameters(current_section.get(DialogueData.KEY_PARAMETERS, []))
 	
 	# Name and image
-	_set_speaker(current_section.get(DialogueData.KEY_NAME, ""))
+	if current_section.has(DialogueData.KEY_NAME):
+		var speaker_name : String = str(current_section[DialogueData.KEY_NAME])
+		_set_speaker(speaker_name)
+		_apply_typewriter_profile_from_name(speaker_name)
+	else:
+		_set_speaker("")
+		_disable_typewriter_beeps()
 	_set_images(current_section.get(DialogueData.KEY_IMAGE_L, ""), current_section.get(DialogueData.KEY_IMAGE_R, ""))
 	
 	# Content
 	_set_content(current_section.get(DialogueData.KEY_TEXT, ""))
+	_set_bgm(current_section.get(DialogueData.KEY_BGM, ""))
 	# TODO _set_SFX(current_section.get(DialogueData.KEY_SFX, ""))
 
 # Sets current parameters
@@ -122,19 +131,60 @@ func _set_content(incoming_text : String) -> void:
 	skip_requested = false
 	play_typewriter()
 
-# Plays a typewriter animation for the given text.
+## Typewriter
+var typewriter_profile : Dictionary = {}
+var typewriter_beeps_enabled : bool = false
+@export var typewriter_beep_stream : AudioStream
+var typewriter_rng : RandomNumberGenerator = RandomNumberGenerator.new()
+
 const TYPEWRITER_SPEED : float = 0.02
+# Plays a typewriter animation for the given text.
 func play_typewriter() -> void:
+	var parsed_text : String = content.get_parsed_text()
+
 	# Typing.
 	while content.visible_characters < content.get_total_character_count():
 		if skip_requested : break
 		content.visible_characters += 1
+		_play_typewriter_beep(parsed_text, content.visible_characters - 1)
 		await get_tree().create_timer(TYPEWRITER_SPEED).timeout
-		
+
 	# Ensures text is fully displayed when ending early.
 	content.visible_characters = content.get_total_character_count()
 	is_typing = false
 	_wait_player_input()
+
+func _play_typewriter_beep(parsed_text : String, visible_index : int) -> void:
+	if !typewriter_beeps_enabled : return
+	if !typewriter_beep_stream : return
+	if visible_index < 0 || visible_index >= parsed_text.length() : return
+
+	var ignore_chars : String = str(typewriter_profile.get("beep_ignore_characters", " \n\t.,!?;:()[]{}\"'"))
+	var each_char : String = parsed_text.substr(visible_index, 1)
+	if ignore_chars.contains(each_char) : return
+
+	var beep_chance : float = float(typewriter_profile.get("beep_chance", 1.0))
+	if beep_chance < 1.0 && typewriter_rng.randf() > beep_chance : return
+
+	AudioEngine.play_dialogue(
+		typewriter_beep_stream,
+		str(typewriter_profile.get("beep_key", "dialogue_typewriter_beep")),
+		float(typewriter_profile.get("beep_volume_linear", 1.0)),
+		1,
+		float(typewriter_profile.get("beep_pitch_jitter", 0.0)),
+		float(typewriter_profile.get("beep_min_interval", 0.0)),
+		float(typewriter_profile.get("beep_base_pitch_scale", 1.0))
+	)
+
+# Finds the profile if a name exists.
+func _apply_typewriter_profile_from_name(incoming_name : String) -> void:
+	typewriter_profile = DialogueData.get_profile(incoming_name)
+	typewriter_beeps_enabled = true
+
+# Disables the typewriter from using audio.
+func _disable_typewriter_beeps() -> void:
+	typewriter_profile.clear()
+	typewriter_beeps_enabled = false
 
 # Sets up the dialogue box to advance by waiting for player input.
 var waiting : bool = false
@@ -199,6 +249,10 @@ func _emit_section_signals() -> void:
 		var signal_name : String = String(each_signal)
 		if SignalBus.has_signal(signal_name) : SignalBus.emit_signal(signal_name)
 		else : push_warning("SignalBus missing signal: %s" % signal_name)
+
+func _set_bgm(incoming_path : String) -> void:
+	if !incoming_path : return
+	AudioEngine.play_bgm_path(incoming_path)
 
 # Dismisses the popup after waiting one frame.
 func _exit() -> void:
