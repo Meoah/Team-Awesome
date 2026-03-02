@@ -1,8 +1,9 @@
-[gd_scene load_steps=23 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=24 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
 [ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_4oldi"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
+[ext_resource type="Texture2D" uid="uid://rxrfbf0q112k" path="res://assets/textures/background/BackgroundSky.png" id="3_73xsm"]
 [ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="5_1f7y1"]
@@ -14,11 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://2wer6ur45n82" path="res://assets/textures/ui/MusicVolume_Button.png" id="11_nsdtn"]
 [ext_resource type="Texture2D" uid="uid://dkyx8of0ikxer" path="res://assets/textures/ui/Fullscreen_Button.png" id="12_4oldi"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_16onh"]
-bg_color = Color(0.22267213, 0.1360487, 0.06799795, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ados7"]
+texture = ExtResource("3_73xsm")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1f7y1"]
 texture = ExtResource("6_6hh85")
+modulate_color = Color(0.8819366, 0.8819366, 0.88193655, 1)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oldi"]
 
@@ -58,7 +60,7 @@ anchor_bottom = 1.0
 offset_top = -3.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_16onh")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ados7")
 
 [node name="MainButtons" type="VBoxContainer" parent="."]
 layout_mode = 1
