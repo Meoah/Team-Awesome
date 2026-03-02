@@ -44,7 +44,7 @@ var chosen_fish_id : int
 func pick_fish():
 	var keys_array :Array = FishData.FISH_ID.keys()
 	var random_fish = keys_array.pick_random()
-	chosen_fish_id =  randi_range(15,23)     #random_fish
+	chosen_fish_id =  randi_range(11,11)     #random_fish
 	print(FishData.FISH_ID[chosen_fish_id]["name"])
 
 func apply_data():

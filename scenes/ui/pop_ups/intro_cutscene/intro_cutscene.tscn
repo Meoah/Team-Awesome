@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://3f6aflexnva0"]
+
+[ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.gd" id="1_kb0hh"]
+
+[node name="IntroCutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_kb0hh")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 35.0
+offset_right = 59.0
+offset_bottom = 43.0
+scale = Vector2(19.936546, 18.176292)
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
