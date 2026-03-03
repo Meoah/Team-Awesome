@@ -118,13 +118,14 @@ _data = {
 &"RESET": SubResource("Animation_sd21a")
 }
 
-[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node")]
+[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "camera")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2jsv6")
 default_bgm = ExtResource("2_3kam8")
 jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
+camera = NodePath("DayCam")
 
 [node name="BackgroundBottom" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.75, 0.75)

@@ -2,8 +2,10 @@ extends Camera2D
 class_name DayCam
 
 @export var player : Node2D
+var is_auto : bool = true
 
 func _process(_delta : float) -> void:
+	if !is_auto : return
 	var target : Node2D = _find_target()
 	_follow_target(target)
 
