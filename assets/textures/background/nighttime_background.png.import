@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://diefr1j4j4pji"
-path="res://.godot/imported/FishingBGFiller.png-982dea30f36f7fb34a556ed1b77ccf72.ctex"
+uid="uid://dgmii41agwhfu"
+path="res://.godot/imported/nighttime_background.png-c94931361a01dc8b30d39c4ef7c78b97.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/background/FishingBGFiller.png"
-dest_files=["res://.godot/imported/FishingBGFiller.png-982dea30f36f7fb34a556ed1b77ccf72.ctex"]
+source_file="res://assets/textures/background/nighttime_background.png"
+dest_files=["res://.godot/imported/nighttime_background.png-c94931361a01dc8b30d39c4ef7c78b97.ctex"]
 
 [params]
 

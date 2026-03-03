@@ -9,7 +9,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pntiq"]
 size = Vector2(39, 24)
 
-[node name="Bobber" type="RigidBody2D" node_paths=PackedStringArray("timer", "bobber_sprite", "indicator", "progress_bar", "progress_label")]
+[node name="Bobber" type="RigidBody2D" node_paths=PackedStringArray("timer", "bobber_sprite", "indicator", "progress_bar", "progress_label") groups=["bobber_group"]]
 collision_layer = 0
 collision_mask = 0
 physics_material_override = SubResource("PhysicsMaterial_pntiq")

@@ -6,19 +6,24 @@ class_name DaytimeMain
 @export var default_bgm : AudioStream
 
 ## Node exports
+@export_category("Children Nodes")
 @export var jeremy_node : MainCharacter
 @export var bobber_scene : PackedScene
+@export var camera : Camera2D
 
 func _ready() -> void:
 	PlayManager.request_idle_day_state()
 	
-	if SystemData.get_day() == 1 && SystemData.get_week() == 1:
-		SystemData._add_bait("Generic Bait", 5)
+	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
 	
 	# Binds Signals
 	PlayManager.idle_day_state.signal_idle_day.connect(_idle_state)
 	
 	AudioEngine.play_bgm(default_bgm)
+
+func _intro_scene() -> void:
+	SystemData._add_bait("Generic Bait", 5)
+		
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:
