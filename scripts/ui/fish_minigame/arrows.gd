@@ -269,8 +269,13 @@ func win():
 		SystemData._add_money_delay(current_value)
 		SystemData._add_fish(chosen_fish_id)
 		if chosen_fish_id == 21:
-			await get_tree().create_timer(1.5).timeout
+			await get_tree().create_timer(2.5).timeout
 			$AnimatedSprite2D.play()
+			await get_tree().create_timer(0.5).timeout
+			PlayManager.request_catching_state()
+			# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
+			PlayManager.request_idle_day_state()
+			GameManager.popup_queue.dismiss_popup()
 		await get_tree().create_timer(3).timeout
 		PlayManager.request_catching_state()
 		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
