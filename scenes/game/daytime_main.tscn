@@ -7,9 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://da5g8qjy0q6u8" path="res://assets/textures/background/daytime_background_bottom.png" id="4_qc6n8"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
 [ext_resource type="Texture2D" uid="uid://b2ujo6wxupnp0" path="res://assets/textures/background/daytime_background_top.png" id="5_sd21a"]
-[ext_resource type="Script" uid="uid://kbal7ers7gbb" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
+[ext_resource type="Script" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
-[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud_placeholder.tscn" id="10_3kam8"]
+[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 [ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
 
