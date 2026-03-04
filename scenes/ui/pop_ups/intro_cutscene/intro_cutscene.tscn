@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://3f6aflexnva0"]
+[gd_scene load_steps=10 format=3 uid="uid://3f6aflexnva0"]
 
 [ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.gd" id="1_kb0hh"]
+[ext_resource type="PackedScene" uid="uid://4wis367byvft" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="2_qaqdv"]
 [ext_resource type="Texture2D" uid="uid://drsdbbci2pfyp" path="res://assets/textures/background/TreeTops.png" id="3_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://bnbbyk3i184dm" path="res://assets/textures/background/TreeLowers.png" id="4_4sr7y"]
+[ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_qnvo7"]
 
 [sub_resource type="Animation" id="Animation_qnvo7"]
 length = 0.001
@@ -22,7 +24,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_qaqdv"]
 resource_name = "intro_sequence"
-length = 30.0
+length = 8.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -46,6 +48,7 @@ _data = {
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_kb0hh")
+next_scene = ExtResource("2_4sr7y")
 
 [node name="BackgroundSkyClear" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -71,12 +74,17 @@ libraries = {
 &"": SubResource("AnimationLibrary_4sr7y")
 }
 
+[node name="PlaceholderWater" type="Sprite2D" parent="."]
+position = Vector2(640, 2357)
+texture = ExtResource("5_qnvo7")
+
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 51.0
-offset_top = 35.000004
-offset_right = 59.0
-offset_bottom = 43.000004
+offset_left = 208.0
+offset_top = 493.99994
+offset_right = 216.0
+offset_bottom = 501.99994
 scale = Vector2(19.936546, 18.176292)
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

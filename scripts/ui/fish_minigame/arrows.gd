@@ -259,7 +259,7 @@ func win():
 		AudioEngine.play_sfx(sfx_timer_end,"", 0.5)
 		AudioEngine.play_sfx(sfx_fish_caught,"", 1)
 		$ProgressBar/Sparks.hide()
-		if varied_gold: #If fish is gold double its value, Current bug where double value persist
+		if varied_gold: #If fish is gold double its value
 			current_value = current_value * 2
 		elif varied_evil:
 			current_value = current_value * 1.5

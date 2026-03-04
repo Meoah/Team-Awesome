@@ -120,7 +120,8 @@ const DEBUG_EXAMPLE : Dictionary = {
 		KEY_TEXT : "That's right kid, cough up the dough.",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
 		KEY_RETURN : true,
-		KEY_SIGNAL : ["check_rent"]
+		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
+		KEY_SIGNAL : ["run_intro"]
 	}
 }
 

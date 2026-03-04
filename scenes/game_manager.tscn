@@ -4,9 +4,9 @@
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_jdad8"]
 [ext_resource type="Script" uid="uid://bi7d58dmjstqp" path="res://scripts/ui/pop_ups/popup_queue.gd" id="2_glms7"]
 [ext_resource type="PackedScene" uid="uid://bs6fqe1euvjxa" path="res://scenes/game/main_menu.tscn" id="2_ternb"]
-[ext_resource type="PackedScene" uid="uid://4wis367byvft" path="res://scenes/game/daytime_main.tscn" id="3_q8mjp"]
 [ext_resource type="PackedScene" uid="uid://bb56yinlycgxk" path="res://scenes/ui/pop_ups/blocker.tscn" id="3_udu3i"]
 [ext_resource type="PackedScene" uid="uid://d2bt5ycjrdnix" path="res://scenes/game/nighttime_main.tscn" id="4_jdad8"]
+[ext_resource type="PackedScene" uid="uid://3f6aflexnva0" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.tscn" id="4_k4jhu"]
 [ext_resource type="PackedScene" uid="uid://6k5qd37wt7aa" path="res://scenes/ui/tooltip_layer.tscn" id="7_q8mjp"]
 
 [sub_resource type="Theme" id="Theme_k4jhu"]
@@ -29,7 +29,7 @@ scene_root = NodePath("SceneRoot")
 popup_queue = NodePath("CanvasLayer/PopupQueue")
 tooltip_layer = NodePath("CanvasLayer/TooltipLayer")
 main_menu_scene = ExtResource("2_ternb")
-daytime_scene = ExtResource("3_q8mjp")
+daytime_scene = ExtResource("4_k4jhu")
 nighttime_scene = ExtResource("4_jdad8")
 
 [node name="SceneRoot" type="Control" parent="."]
