@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b2ujo6wxupnp0"
-path="res://.godot/imported/daytime_background_top.png-aa601268cd6ecefbda45a0f36bbcac20.ctex"
+uid="uid://da5g8qjy0q6u8"
+path="res://.godot/imported/background_middle.png-133334f93b6382c4f2623fbe060aead1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/background/daytime_background_top.png"
-dest_files=["res://.godot/imported/daytime_background_top.png-aa601268cd6ecefbda45a0f36bbcac20.ctex"]
+source_file="res://assets/textures/background/background_middle.png"
+dest_files=["res://.godot/imported/background_middle.png-133334f93b6382c4f2623fbe060aead1.ctex"]
 
 [params]
 

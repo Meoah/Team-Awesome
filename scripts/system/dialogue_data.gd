@@ -11,7 +11,7 @@ const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/jeremy/MCPl
 
 const DEFAULT_SPEAKER_PROFILE : Dictionary = {
 	"beep_key": "dialogue_typewriter_beep",
-	"beep_volume_linear": 0.65,
+	"beep_volume_linear": 0.2,
 	"beep_base_pitch_scale": 1.0,
 	"beep_pitch_jitter": 0.06,
 	"beep_min_interval": 0.03,
@@ -21,7 +21,7 @@ const DEFAULT_SPEAKER_PROFILE : Dictionary = {
 
 const SPEAKER_PROFILES : Dictionary = {
 	NAME_MAIN_CHARACTER: {"beep_base_pitch_scale": 1.08},
-	NAME_MOB_BOSS: {"beep_base_pitch_scale": 0.7, "beep_chance": 0.75}
+	NAME_MOB_BOSS: {"beep_base_pitch_scale": 0.3, "beep_chance": 0.65}
 }
 
 # Getter functions.
