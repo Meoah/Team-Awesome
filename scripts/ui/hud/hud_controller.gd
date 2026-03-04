@@ -1,5 +1,5 @@
 extends Control
-class_name HUDTooltipController
+class_name HUDController
 
 func _input(event : InputEvent) -> void:
 	# Hover detection, updates the tooltip location if any part of the hud is hovered.

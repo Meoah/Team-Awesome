@@ -18,7 +18,7 @@ script = ExtResource("1_ss8kq")
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 2
 expand_mode = 1
-stretch_mode = 5
+stretch_mode = 3
 
 [node name="CountLabel" type="Label" parent="Icon"]
 layout_mode = 1
@@ -32,3 +32,4 @@ offset_top = -24.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_kwcvi")
+horizontal_alignment = 2
