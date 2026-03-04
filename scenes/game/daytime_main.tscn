@@ -219,7 +219,6 @@ follow_viewport_enabled = true
 visible = false
 
 [node name="HudPlaceholder" parent="." instance=ExtResource("10_3kam8")]
-visible = false
 
 [node name="debug" type="Button" parent="."]
 layout_mode = 1
