@@ -18,7 +18,7 @@ var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 
 func _on_sleep_pressed() -> void:
 	if SystemData.get_day() == 5:
-		if !SystemData.spend_money(calculate_rent()):
+		if !SystemData.spend_money(SystemData.calculate_rent()):
 			SignalBus.player_dies.emit()
 			return
 	if PlayManager.request_sleeping_state():
@@ -47,21 +47,13 @@ func _interaction() -> void:
 	if tarot_trigger.overlaps_body(jeremy_node) : _tarot_shop()
 
 
-#TODO move this elsewhere
-func calculate_rent() -> float:
-	var base : float = 100.0
-	var growth : float = 1.15
-	
-	var rent : float = base * pow(growth, SystemData.get_week() - 1)
-	return rent
-
 func _sell_all_fish() -> void:
 	SystemData._transfer_money()
 	SystemData._clear_fish_inventory()
 
 func _sleep() -> void:
 	if SystemData.get_day() == 5:
-		if !SystemData.spend_money(calculate_rent()):
+		if !SystemData.spend_money(SystemData.calculate_rent()):
 			SignalBus.player_dies.emit()
 			return
 	if PlayManager.request_sleeping_state():
@@ -76,10 +68,10 @@ func _bucket() -> void:
 		scavange -= 1
 		scavange_label.text = "Scavange attempts left: %d" % scavange
 		var luck = randf_range(0.0, 1.0)
-		if luck > 0.99 : SystemData._add_bait("Generic Bait", 5)
-		if luck > 0.9 : SystemData._add_bait("Generic Bait", 1)
-		if luck > 0.5 : SystemData._add_bait("Generic Bait", 1)
-		if luck > 0.2 : SystemData._add_bait("Generic Bait", 1)
+		if luck > 0.99 : SystemData._add_bait(1, 5)
+		if luck > 0.9 : SystemData._add_bait(1, 1)
+		if luck > 0.5 : SystemData._add_bait(1, 1)
+		if luck > 0.2 : SystemData._add_bait(1, 1)
 	if scavange <= 0:
 		bucket_trigger.rotation_degrees = 90
 

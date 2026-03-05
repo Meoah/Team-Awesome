@@ -1,15 +1,16 @@
-[gd_scene load_steps=19 format=3 uid="uid://4wis367byvft"]
+[gd_scene load_steps=20 format=3 uid="uid://4wis367byvft"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
 [ext_resource type="AudioStream" uid="uid://e1cxs7j2ew6u" path="res://assets/audio/bgm/dump/waiting_for_bite.wav" id="2_3kam8"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
-[ext_resource type="Texture2D" uid="uid://da5g8qjy0q6u8" path="res://assets/textures/background/daytime_background_bottom.png" id="4_qc6n8"]
+[ext_resource type="Texture2D" uid="uid://da5g8qjy0q6u8" path="res://assets/textures/background/background_middle.png" id="4_qc6n8"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
-[ext_resource type="Texture2D" uid="uid://b2ujo6wxupnp0" path="res://assets/textures/background/daytime_background_top.png" id="5_sd21a"]
-[ext_resource type="Script" uid="uid://kbal7ers7gbb" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
+[ext_resource type="Texture2D" uid="uid://b2ujo6wxupnp0" path="res://assets/textures/background/background_top.png" id="5_sd21a"]
+[ext_resource type="Texture2D" uid="uid://dgmii41agwhfu" path="res://assets/textures/background/background_bottom.png" id="6_sd21a"]
+[ext_resource type="Script" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
-[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud_placeholder.tscn" id="10_3kam8"]
+[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 [ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
 
@@ -127,27 +128,38 @@ jeremy_node = NodePath("Jeremy")
 bobber_scene = ExtResource("3_6j7wl")
 camera = NodePath("DayCam")
 
-[node name="BackgroundBottom" type="Parallax2D" parent="."]
-scroll_scale = Vector2(0.75, 0.75)
-repeat_size = Vector2(720, 0)
-repeat_times = 1000
+[node name="BackgroundTop" type="Parallax2D" parent="."]
+repeat_size = Vector2(1280, 720)
+repeat_times = 100
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundBottom"]
-position = Vector2(0, -560)
-texture = ExtResource("4_qc6n8")
-centered = false
-
-[node name="Sprite2D2" type="Sprite2D" parent="BackgroundBottom"]
+[node name="Sprite2D2" type="Sprite2D" parent="BackgroundTop"]
 position = Vector2(0, -1280)
 texture = ExtResource("5_sd21a")
 centered = false
 
-[node name="BackgroundTop" type="Parallax2D" parent="."]
+[node name="BackgroundMiddle" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.75, 0.75)
+repeat_size = Vector2(720, 0)
+repeat_times = 1000
+
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundMiddle"]
+position = Vector2(0, -1280)
+texture = ExtResource("4_qc6n8")
+centered = false
 
 [node name="BackgroundClouds" type="Parallax2D" parent="."]
 
+[node name="BackgroundBottom" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.75, 0.75)
+repeat_size = Vector2(1280, 0)
+repeat_times = 1000
+
+[node name="Sprite2D2" type="Sprite2D" parent="BackgroundBottom"]
+texture = ExtResource("6_sd21a")
+centered = false
+
 [node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(329.00003, 583)
+position = Vector2(300, 580)
 scale = Vector2(0.15348448, 0.15348448)
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
@@ -205,6 +217,8 @@ follow_viewport_enabled = true
 [node name="GameOver" parent="CanvasLayer" instance=ExtResource("10_qc6n8")]
 visible = false
 
+[node name="HudPlaceholder" parent="." instance=ExtResource("10_3kam8")]
+
 [node name="debug" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 6
@@ -235,8 +249,6 @@ offset_bottom = 666.0
 grow_horizontal = 0
 grow_vertical = 0
 text = "End Day"
-
-[node name="HudPlaceholder" parent="." instance=ExtResource("10_3kam8")]
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="pressed" from="debug" to="." method="_on_debug_pressed"]

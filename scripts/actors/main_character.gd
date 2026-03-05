@@ -102,7 +102,7 @@ func _cast_handler(delta : float) -> void:
 	if input_flags & InputFlags.ACTION: 
 		if PlayManager.get_current_state() is CastingState:
 			_charging(delta)
-		elif SystemData.use_bait("Generic Bait"):
+		elif SystemData.use_bait(SystemData.get_active_bait()):
 			PlayManager.request_casting_state()
 	else:
 		if PlayManager.get_current_state() is CastingState:

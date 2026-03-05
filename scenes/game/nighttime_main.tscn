@@ -5,15 +5,15 @@
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="2_s2grh"]
 [ext_resource type="AudioStream" uid="uid://c8152424wtrat" path="res://assets/audio/bgm/dump/waiting_for_night.wav" id="3_7dbdj"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_i5ojq"]
-[ext_resource type="Texture2D" uid="uid://dgmii41agwhfu" path="res://assets/textures/background/nighttime_background.png" id="4_7dbdj"]
+[ext_resource type="Texture2D" uid="uid://dgmii41agwhfu" path="res://assets/textures/background/background_bottom.png" id="4_7dbdj"]
 [ext_resource type="Texture2D" uid="uid://i3smng8yxpbe" path="res://assets/textures/debug/blue-house-md.png" id="4_y133y"]
 [ext_resource type="Texture2D" uid="uid://p0x3tf6qd2yx" path="res://assets/textures/debug/bassprofishing.png" id="5_11rnk"]
 [ext_resource type="Texture2D" uid="uid://da0at2yyqtmkh" path="res://assets/textures/debug/Peter's_Fishing_Store.png" id="6_yb8jp"]
 [ext_resource type="Texture2D" uid="uid://emps5yrliobm" path="res://assets/textures/debug/My_Event061_Tarrot_Showcase.webp" id="7_1pk0j"]
 [ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="7_pk35q"]
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="8_7dbdj"]
-[ext_resource type="Script" uid="uid://bfuyuw7kfy23" path="res://scripts/game/camera/night_cam.gd" id="9_kpww7"]
-[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud_placeholder.tscn" id="12_yb8jp"]
+[ext_resource type="Script" path="res://scripts/game/camera/night_cam.gd" id="9_kpww7"]
+[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="12_yb8jp"]
 
 [sub_resource type="Theme" id="Theme_7dbdj"]
 default_font = ExtResource("1_1pk0j")

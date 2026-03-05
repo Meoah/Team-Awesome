@@ -7,27 +7,27 @@ const LURE : String = "Lure"
 const BAIT : String = "Bait"
 const TAROT : String = "Tarot" # TODO working name
 
-# Returns the data according to given category and ID.
+## Returns the data according to given category and ID.
 static func get_data(category : String, id : int) -> Dictionary:
-	var source : Dictionary = get_category_dictionary(category)
+	var source : Dictionary = _get_category_dictionary(category)
 	return source.get(id, {})
 
-# Returns how many available IDs there are in an array.
+## Returns how many available IDs there are in an array.
 static func get_available_ids(category : String) -> Array[int]:
 	var list : Array[int] = []
-	var source : Dictionary = get_category_dictionary(category)
+	var source : Dictionary = _get_category_dictionary(category)
 	
 	for key in source.keys() : if key != 0 : list.append(key)
 	return list
 
-# Returns with the proper dictionary from the given string.
-static func get_category_dictionary(category : String) -> Dictionary:
+## Returns with the proper dictionary from the given string.
+static func _get_category_dictionary(category : String) -> Dictionary:
 	match category:
 		EXOTIC: return UPGRADES_EXOTIC
 		REEL:   return UPGRADES_REEL
 		ROD:    return UPGRADES_RODS
 		LURE:   return UPGRADES_LURES
-		BAIT:   return BAIT_BUNDLES
+		BAIT:   return BAIT_DATA
 		_:      return {}
 
 # Table of Contents. Each item is split into a category. Refer to category and item ID to access data.
@@ -53,9 +53,9 @@ const UPGRADES_LURES : Dictionary = {
 	
 }
 
-const BAIT_BUNDLES : Dictionary = {
+const BAIT_DATA : Dictionary = {
 	0 : DUMMY_BAIT,
-	1 : GENERIC_BAIT_BUNDLE,
+	1 : GENERIC_BAIT,
 	2 : MAGIC_BAIT,
 }
 
@@ -86,7 +86,7 @@ const KEY_SIGNAL : String = "signal"
 ## Reels
 const DUMMY_REEL : Dictionary = {
 	KEY_NAME : "Dummy Reel",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/reels/Wooden_Reel_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : REEL,
 	KEY_COST : 0.0,
 	KEY_DESCRIPTION : "You shouldnt see this... tsk tsk tsk"
@@ -111,7 +111,7 @@ const FISHTAGRAM_REEL : Dictionary = {
 ## Rods
 const DUMMY_ROD : Dictionary = {
 	KEY_NAME : "Dummy Rod",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/wooden_rod_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : ROD,
 	KEY_COST : 0.0,
 	KEY_DESCRIPTION : "Yo rod is so STUPID... they didnt even know this was an ERROR message!"
@@ -128,7 +128,7 @@ const WOODEN_ROD : Dictionary = {
 ## Lures
 const DUMMY_LURE : Dictionary = {
 	KEY_NAME : "Dummy Lure",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/lures/plastic_lure_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : LURE,
 	KEY_COST : 0.0,
 	KEY_DESCRIPTION : "You just got lured DUMMY!"
@@ -145,7 +145,7 @@ const PLASTIC_LURE : Dictionary = {
 ## Exotics
 const DUMMY_EXOTIC : Dictionary = {
 	KEY_NAME : "Dummy Exotic",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/multi_bobber.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : EXOTIC,
 	KEY_COST : 0.0,
 	KEY_DESCRIPTION : "Does nothing... exotically~"
@@ -162,13 +162,13 @@ const MULTI_BOBBER : Dictionary = {
 ## Bait Bundles
 const DUMMY_BAIT : Dictionary = {
 	KEY_NAME : "Dummy Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/worms_PNG32.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 0.0,
 	KEY_DESCRIPTION : "Get baited."
 }
 
-const GENERIC_BAIT_BUNDLE : Dictionary = {
+const GENERIC_BAIT : Dictionary = {
 	KEY_NAME : "Generic Bait",
 	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
 	KEY_TYPE : BAIT,
