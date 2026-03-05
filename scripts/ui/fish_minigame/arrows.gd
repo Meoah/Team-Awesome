@@ -46,8 +46,11 @@ func pick_fish():
 	var random_fish = keys_array.pick_random()
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	chosen_fish_id =  randi_range(15,23)     #random_fish
 =======
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 	chosen_fish_id =  random_fish

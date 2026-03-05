@@ -35,6 +35,13 @@ signal slot_left_clicked
 signal slot_left_clicked
 
 
+
+
+
+# HUD Signal
+signal slot_left_clicked
+
+
 # Intro Signals
 signal run_intro
 >>>>>>> Stashed changes
