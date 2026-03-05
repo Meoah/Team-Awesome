@@ -4,6 +4,7 @@ class_name DialogueData
 const NAME_MAIN_CHARACTER = "Jeremy"
 const NAME_MOB_BOSS = "Mob Boss"
 const NAME_BAIT_VENDOR = "Barry"
+const UNKNOWN = "Unknown"
 
 ## Image Paths
 const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/mobboss.png")
@@ -120,15 +121,55 @@ const DEBUG_EXAMPLE : Dictionary = {
 		KEY_TEXT : "That's right kid, cough up the dough.",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
 		KEY_RETURN : true,
-		KEY_SIGNAL : ["check_rent"]
+		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
+		KEY_SIGNAL : ["run_intro"]
 	}
 }
 
+
 const INTRO : Dictionary = {
 	0001 : {
-		KEY_NAME : NAME_MOB_BOSS,
-		KEY_TEXT : "Yo kid, where's my money?"
+		KEY_NAME : UNKNOWN,
+		KEY_TEXT : "*Knock Knock Knock*",
+		KEY_BGM : "res://assets/audio/bgm/Mega Man 2 Intro.mp3"
 	},
+	0002 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "Oh dear! Who's at the door?",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT
+	},
+	0003 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "Yo kid, rent is PAST DUE!",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_PARAMETERS : ["shaking", "emote_rage"]
+	},
+	0004 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "Oh uhhhh, do I pay him??",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_OPTION_A : "Yes",
+		KEY_OPTION_A_GOTO : 0006,
+		KEY_OPTION_B : "No (This is a bad idea)",
+		KEY_OPTION_B_GOTO : 0005,
+	},
+	0005 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "A wise guy I see. Time to swim with the fishes.",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_RETURN : true,
+		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
+		KEY_SIGNAL : ["player_dies"]
+	},
+	0006 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "That's right kid, cough up the dough.",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_RETURN : true,
+		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
+		KEY_SIGNAL : ["run_intro"]
+	}
 }
 
 const BAIT_SHOP : Dictionary = {

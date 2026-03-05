@@ -238,7 +238,7 @@ const NATEKEK : Dictionary = {
 	"name" : "Natekek",
 	"image" : NodePath("res://assets/textures/fish/wip_fish/21_Natekek.png"),
 	"weight" : 5.0,
-	"inputs" : ["Down","Up","Up","Down","Up"],
+	"inputs" : ["Down","Right","Up","Up","Up"],
 	"value" : 30.0,
 	"time" : 5.0
 }

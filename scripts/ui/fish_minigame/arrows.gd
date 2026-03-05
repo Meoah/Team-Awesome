@@ -44,7 +44,7 @@ var chosen_fish_id : int
 func pick_fish():
 	var keys_array :Array = FishData.FISH_ID.keys()
 	var random_fish = keys_array.pick_random()
-	chosen_fish_id =  randi_range(15,23)     #random_fish
+	chosen_fish_id =  random_fish
 	print(FishData.FISH_ID[chosen_fish_id]["name"])
 
 func apply_data():
@@ -258,7 +258,7 @@ func win():
 		AudioEngine.play_sfx(sfx_timer_end,"", 0.5)
 		AudioEngine.play_sfx(sfx_fish_caught,"", 1)
 		$ProgressBar/Sparks.hide()
-		if varied_gold: #If fish is gold double its value, Current bug where double value persist
+		if varied_gold: #If fish is gold double its value
 			current_value = current_value * 2
 		elif varied_evil:
 			current_value = current_value * 1.5
@@ -267,6 +267,14 @@ func win():
 		input_string.set_text(current_name + "\n Weight: " + str(current_weight) + "\n Value: " + str(current_value))
 		SystemData._add_money_delay(current_value)
 		SystemData._add_fish(chosen_fish_id)
+		if chosen_fish_id == 21:
+			await get_tree().create_timer(2.5).timeout
+			$AnimatedSprite2D.play()
+			await get_tree().create_timer(0.5).timeout
+			PlayManager.request_catching_state()
+			# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
+			PlayManager.request_idle_day_state()
+			GameManager.popup_queue.dismiss_popup()
 		await get_tree().create_timer(3).timeout
 		PlayManager.request_catching_state()
 		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused

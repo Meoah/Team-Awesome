@@ -1,8 +1,10 @@
 extends PanelContainer
 class_name Slot
 
+
 @onready var icon_rect = $Icon
 @onready var count_label = $Icon/CountLabel
+
 
 var saved_data : Dictionary = {}
 var saved_item_id : int = 0
@@ -25,8 +27,4 @@ func set_slot(data : Dictionary, quantity : int = 1, item_id : int = -1):
 	if image_path : icon_rect.texture = load(image_path)
 	
 	# Only show count if count is > 1.
-	if quantity > 1:
-		count_label.text = str(quantity)
-		count_label.show()
-	else:
-		count_label.hide()
+	if quantity > 1 : count_label.text = str(quantity)

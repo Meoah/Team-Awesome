@@ -9,7 +9,7 @@ default_font = ExtResource("1_scnmh")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_jdad8"]
 
-[node name="TooltipLayer" type="Control" node_paths=PackedStringArray("tooltip_panel", "tooltip_label", "inventory")]
+[node name="TooltipLayer" type="Control" node_paths=PackedStringArray("tooltip_panel", "tooltip_label")]
 z_index = 2
 layout_mode = 3
 anchors_preset = 15
@@ -22,7 +22,6 @@ theme = SubResource("Theme_bd7w1")
 script = ExtResource("1_gc7l6")
 tooltip_panel = NodePath("Tooltip")
 tooltip_label = NodePath("Tooltip/MarginContainer/Label")
-inventory = NodePath("")
 
 [node name="Tooltip" type="PanelContainer" parent="."]
 layout_mode = 1

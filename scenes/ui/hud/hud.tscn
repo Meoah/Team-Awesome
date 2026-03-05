@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://cjoxd6e64nw52"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_ax4tw"]
-[ext_resource type="Script" uid="uid://dkj7jecxesoy4" path="res://scripts/ui/hud/hud_controller.gd" id="3_4m4yb"]
+[ext_resource type="Script" uid="uid://dkj7jecxesoy4" path="res://scripts/ui/hud/hud_controller.gd" id="2_todbw"]
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="5_4m4yb"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="6_todbw"]
 [ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="7_e7gie"]
@@ -30,19 +30,19 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_swth0")
-script = ExtResource("3_4m4yb")
+script = ExtResource("2_todbw")
 fish_inventory = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory")
 bait_inventory = NodePath("Bottom/MarginContainer/Bottom/Right/BaitInventory")
 rod_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod/AspectRatioContainer/RodSlot")
 reel_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel/AspectRatioContainer2/ReelSlot")
-lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3/Lure")
-exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/Rod")
+lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3/LureSlot")
+exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/ExoticSlot")
 active_bait_slot = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer/ActiveBait")
 money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Money")
 rent_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Rent")
 fish_bucket_value_label = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishBucketValue")
-day_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer/Label")
-week_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer/Label")
+day_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer/DayLabel")
+week_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer/WeekLabel")
 
 [node name="Top" type="Control" parent="HUDController"]
 layout_mode = 2
@@ -221,7 +221,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Lure" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3" instance=ExtResource("7_e7gie")]
+[node name="LureSlot" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3" instance=ExtResource("7_e7gie")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
@@ -273,7 +273,7 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 
-[node name="Rod" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer" instance=ExtResource("7_e7gie")]
+[node name="ExoticSlot" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer" instance=ExtResource("7_e7gie")]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
@@ -398,7 +398,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "$9,999,999.99"
+text = "$0.00"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
@@ -416,7 +416,7 @@ size_flags_horizontal = 3
 mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
-text = "[color=red]$9,999,999.99"
+text = "[color=red]$100.00"
 fit_content = true
 scroll_active = false
 horizontal_alignment = 1
@@ -451,7 +451,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer"]
+[node name="DayLabel" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Day 1 / 5"
@@ -481,7 +481,7 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer"]
+[node name="WeekLabel" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Week 1"

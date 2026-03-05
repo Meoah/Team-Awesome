@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://himmnj7djqgt"]
 
-[ext_resource type="Script" uid="uid://cyund0hdccn2m" path="res://scripts/ui/hud/inventory_grid.gd" id="1_uwsu1"]
-[ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="2_87oic"]
+[ext_resource type="Script" uid="uid://cyund0hdccn2m" path="res://scripts/ui/hud/inventory_grid.gd" id="1_et1ef"]
+[ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="2_uwsu1"]
 
 [node name="InventoryGrid" type="GridContainer"]
 anchors_preset = 15
@@ -13,5 +13,5 @@ mouse_filter = 2
 theme_override_constants/h_separation = 5
 theme_override_constants/v_separation = 10
 columns = 15
-script = ExtResource("1_uwsu1")
-slot_scene = ExtResource("2_87oic")
+script = ExtResource("1_et1ef")
+slot_scene = ExtResource("2_uwsu1")
