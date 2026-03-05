@@ -27,6 +27,3 @@ func set_slot(data : Dictionary, quantity : int = 1, item_id : int = -1):
 	# Only show count if count is > 1.
 	if quantity > 1:
 		count_label.text = str(quantity)
-		count_label.show()
-	else:
-		count_label.hide()

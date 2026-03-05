@@ -22,14 +22,50 @@ func _ready() -> void:
 	AudioEngine.play_bgm(default_bgm)
 
 func _intro_scene() -> void:
+	$TutorialSequence.visible = true
 	SystemData._add_bait(1, 5)
 	SystemData.set_active_bait(1)
+
+
+	#SystemData._add_bait("Generic Bait", 5)
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:
 		if SystemData.bait_inventory[each] != 0:
 			return true
 	return false
+
+
+var current_position : int = 1
+
+const positions : Dictionary = {
+	1 : Vector2(640.0,360),
+	2 : Vector2(349,512.0),
+	3 : Vector2(349,512.0),
+	4 : Vector2(676,202.0),
+	5 : Vector2(1040,598.0),
+	6 : Vector2(640.0,360),
+
+}
+
+func advance_position():
+	$TutorialSequence.global_position = positions[current_position]
+	if current_position <= 5:
+		current_position += 1
+
+
+func _input(_event: InputEvent) -> void:
+	if Input.is_action_just_pressed("mouse_click"):
+		advance_position()
+
+
+
+
+
+
+
+
+
 
 func _end_day() -> void:
 	if PlayManager.request_idle_night_state():
