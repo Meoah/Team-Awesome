@@ -1,9 +1,13 @@
 extends PanelContainer
+<<<<<<< HEAD
 class_name Slot
+=======
+>>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 
 @onready var icon_rect = $Icon
 @onready var count_label = $Icon/CountLabel
 
+<<<<<<< HEAD
 var saved_data : Dictionary = {}
 var saved_item_id : int = 0
 
@@ -27,6 +31,15 @@ func set_slot(data : Dictionary, quantity : int = 1, item_id : int = -1):
 	# Only show count if count is > 1.
 	if quantity > 1:
 		count_label.text = str(quantity)
+=======
+func set_slot(fish_id: int, amount: int):
+	var fish = FishData.FISH_ID[fish_id]
+	icon_rect.texture = load(fish["image"])
+	
+	#Only show count if count is > 1
+	if amount > 1:
+		count_label.text = str(amount)
+>>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 		count_label.show()
 	else:
 		count_label.hide()
