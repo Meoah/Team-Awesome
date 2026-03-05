@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="5_4m4yb"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="6_todbw"]
 [ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="7_e7gie"]
-[ext_resource type="Script" uid="uid://cyund0hdccn2m" path="res://scripts/ui/hud/inventory_ui.gd" id="8_e7gie"]
+[ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/hud/inventory_grid.tscn" id="7_todbw"]
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="8_swth0"]
 
 [sub_resource type="Theme" id="Theme_swth0"]
@@ -21,19 +21,34 @@ default_font = ExtResource("2_ax4tw")
 
 [node name="HUD" type="CanvasLayer"]
 
-[node name="HUDController" type="VBoxContainer" parent="."]
+[node name="HUDController" type="VBoxContainer" parent="." node_paths=PackedStringArray("fish_inventory", "bait_inventory", "rod_slot", "reel_slot", "lure_slot", "exotic_slot", "active_bait_slot", "money_label", "rent_label", "fish_bucket_value_label", "day_label", "week_label")]
+modulate = Color(1, 1, 1, 0.8)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = SubResource("Theme_swth0")
 script = ExtResource("3_4m4yb")
+fish_inventory = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory")
+bait_inventory = NodePath("Bottom/MarginContainer/Bottom/Right/BaitInventory")
+rod_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod/AspectRatioContainer/RodSlot")
+reel_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel/AspectRatioContainer2/ReelSlot")
+lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3/Lure")
+exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/Rod")
+active_bait_slot = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer/ActiveBait")
+money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Money")
+rent_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Rent")
+fish_bucket_value_label = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishBucketValue")
+day_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer/Label")
+week_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer/Label")
 
 [node name="Top" type="Control" parent="HUDController"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.5
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HUDController/Top"]
 layout_mode = 1
@@ -48,12 +63,14 @@ theme_override_constants/margin_right = 16
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HUDController/Top/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="FishBucket" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 15.0
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket"]
 layout_mode = 1
@@ -62,6 +79,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer"]
@@ -76,6 +94,7 @@ patch_margin_bottom = 16
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -83,6 +102,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="TextureRect" type="TextureRect" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("5_4m4yb")
 expand_mode = 5
 
@@ -90,21 +110,23 @@ expand_mode = 5
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="DropdownButton" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2"]
+[node name="FishDropdown" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
+focus_mode = 0
 theme_override_font_sizes/font_size = 12
-toggle_mode = true
 text = "    V    "
 
 [node name="RodUpgradeSlots" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 25.0
+mouse_filter = 2
 
 [node name="TempRodSlots" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots"]
 layout_mode = 1
@@ -113,6 +135,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_todbw")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots"]
@@ -127,6 +150,7 @@ patch_margin_bottom = 16
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -135,19 +159,24 @@ theme_override_constants/margin_bottom = 20
 [node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
+mouse_filter = 2
 alignment = 1
 
 [node name="Slots" type="HBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Rod" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="RodSlot" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod/AspectRatioContainer" instance=ExtResource("7_e7gie")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod"]
@@ -158,15 +187,19 @@ horizontal_alignment = 1
 [node name="DividerLine" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Reel" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AspectRatioContainer2" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="ReelSlot" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel/AspectRatioContainer2" instance=ExtResource("7_e7gie")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel"]
@@ -177,18 +210,22 @@ horizontal_alignment = 1
 [node name="DividerLine2" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="VBoxContainer3" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AspectRatioContainer3" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Lure" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3" instance=ExtResource("7_e7gie")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3"]
+[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3"]
 layout_mode = 2
 text = "Lure"
 horizontal_alignment = 1
@@ -197,6 +234,7 @@ horizontal_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 10.0
+mouse_filter = 2
 
 [node name="TempExoticSlot" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear"]
 layout_mode = 1
@@ -205,6 +243,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_todbw")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot"]
@@ -219,6 +258,7 @@ patch_margin_bottom = 16
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -226,12 +266,15 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="Rod" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer" instance=ExtResource("7_e7gie")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer"]
@@ -245,6 +288,7 @@ vertical_alignment = 2
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 15.0
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait"]
 layout_mode = 1
@@ -253,6 +297,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_a660p")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer"]
@@ -267,6 +312,7 @@ patch_margin_bottom = 16
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -274,13 +320,16 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 
 [node name="ActiveBait" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer" instance=ExtResource("7_e7gie")]
+custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
 [node name="BaitName" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
@@ -294,21 +343,23 @@ clip_text = true
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 8
+mouse_filter = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 4
 
-[node name="DropdownButton" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2"]
+[node name="BaitDropdown" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2"]
 layout_mode = 2
 size_flags_vertical = 8
+focus_mode = 0
 theme_override_font_sizes/font_size = 12
-toggle_mode = true
 text = "    V    "
 
 [node name="Rent" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 20.0
+mouse_filter = 2
 
 [node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent"]
 layout_mode = 1
@@ -317,6 +368,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer"]
@@ -331,6 +383,7 @@ patch_margin_bottom = 16
 clip_contents = true
 layout_mode = 2
 size_flags_vertical = 4
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -338,9 +391,11 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Money" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "$9,999,999.99"
@@ -353,10 +408,12 @@ vertical_alignment = 1
 [node name="DividerLine" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 1)
 layout_mode = 2
+mouse_filter = 2
 
-[node name="Money2" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Rent" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[color=red]$9,999,999.99"
@@ -369,10 +426,12 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 10.0
+mouse_filter = 2
 
 [node name="Day" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day"]
@@ -386,6 +445,7 @@ patch_margin_bottom = 16
 [node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day"]
 clip_contents = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -401,6 +461,7 @@ vertical_alignment = 1
 [node name="Week" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week"]
@@ -414,6 +475,7 @@ patch_margin_bottom = 16
 [node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week"]
 clip_contents = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
@@ -431,6 +493,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 5
 size_flags_stretch_ratio = 5.0
+mouse_filter = 2
 
 [node name="TextureButton" type="TextureButton" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause"]
 layout_mode = 1
@@ -439,6 +502,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture_normal = ExtResource("6_todbw")
 ignore_texture_size = true
 stretch_mode = 0
@@ -464,6 +528,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 7.5
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="HUDController/Bottom"]
 layout_mode = 1
@@ -472,6 +537,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
@@ -479,19 +545,24 @@ theme_override_constants/margin_bottom = 16
 [node name="Bottom" type="HBoxContainer" parent="HUDController/Bottom/MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+mouse_filter = 2
 theme_override_constants/separation = 0
 
 [node name="Left" type="VBoxContainer" parent="HUDController/Bottom/MarginContainer/Bottom"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="FishInventory" type="PanelContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_swth0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory"]
 layout_mode = 2
+mouse_filter = 1
 texture = ExtResource("8_swth0")
 patch_margin_left = 16
 patch_margin_top = 16
@@ -500,41 +571,46 @@ patch_margin_bottom = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="FishGrid" type="GridContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer"]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 10
-columns = 5
-script = ExtResource("8_e7gie")
-slot = ExtResource("7_e7gie")
 
-[node name="BuffInventory" type="GridContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left"]
+[node name="FishGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer" instance=ExtResource("7_todbw")]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 2
-size_flags_stretch_ratio = 4.0
-mouse_filter = 2
-columns = 14
+grid_type = "Fish"
 
-[node name="BuffGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Left/BuffInventory" instance=ExtResource("7_e7gie")]
-custom_minimum_size = Vector2(48, 48)
+[node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishGrid" instance=ExtResource("7_e7gie")]
+layout_mode = 2
+
+[node name="FishBucketValue" type="Label" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Total Value: $99999.99"
+
+[node name="BuffGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Left" instance=ExtResource("7_todbw")]
+layout_mode = 2
+mouse_filter = 1
+grid_type = "Buff"
+
+[node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Left/BuffGrid" instance=ExtResource("7_e7gie")]
 layout_mode = 2
 
 [node name="Right" type="Control" parent="HUDController/Bottom/MarginContainer/Bottom"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="BaitInventory" type="PanelContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Right"]
+visible = false
 layout_mode = 1
 offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 3
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_swth0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory"]
@@ -547,16 +623,18 @@ patch_margin_bottom = 16
 
 [node name="MarginContainer" type="MarginContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
-[node name="FishGrid" type="GridContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer"]
+[node name="BaitGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer" instance=ExtResource("7_todbw")]
 layout_mode = 2
-mouse_filter = 2
-theme_override_constants/h_separation = 5
-theme_override_constants/v_separation = 10
-columns = 5
-script = ExtResource("8_e7gie")
-slot = ExtResource("7_e7gie")
+grid_type = "Bait"
+
+[node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer/BaitGrid" instance=ExtResource("7_e7gie")]
+layout_mode = 2
+
+[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
+[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]

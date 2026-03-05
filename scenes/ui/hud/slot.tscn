@@ -11,14 +11,14 @@ corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
 [node name="Slot" type="PanelContainer"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(32, 32)
 theme_override_styles/panel = SubResource("StyleBoxFlat_sad2q")
 script = ExtResource("1_ss8kq")
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 2
+mouse_filter = 2
 expand_mode = 1
-stretch_mode = 3
 
 [node name="CountLabel" type="Label" parent="Icon"]
 layout_mode = 1
@@ -31,5 +31,6 @@ offset_left = -40.0
 offset_top = -24.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_kwcvi")
 horizontal_alignment = 2

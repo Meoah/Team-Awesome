@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
 [ext_resource type="Texture2D" uid="uid://b2ujo6wxupnp0" path="res://assets/textures/background/background_top.png" id="5_sd21a"]
 [ext_resource type="Texture2D" uid="uid://dgmii41agwhfu" path="res://assets/textures/background/background_bottom.png" id="6_sd21a"]
-[ext_resource type="Script" uid="uid://kbal7ers7gbb" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
+[ext_resource type="Script" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
@@ -151,7 +151,6 @@ centered = false
 
 [node name="BackgroundBottom" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.75, 0.75)
-scroll_offset = Vector2(4, 4)
 repeat_size = Vector2(1280, 0)
 repeat_times = 1000
 
@@ -160,7 +159,7 @@ texture = ExtResource("6_sd21a")
 centered = false
 
 [node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(344.99997, 484.00006)
+position = Vector2(300, 580)
 scale = Vector2(0.15348448, 0.15348448)
 
 [node name="Boundaries" type="StaticBody2D" parent="."]

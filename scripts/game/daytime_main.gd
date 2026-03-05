@@ -22,8 +22,8 @@ func _ready() -> void:
 	AudioEngine.play_bgm(default_bgm)
 
 func _intro_scene() -> void:
-	SystemData._add_bait("Generic Bait", 5)
-		
+	SystemData._add_bait(1, 5)
+	SystemData.set_active_bait(1)
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:

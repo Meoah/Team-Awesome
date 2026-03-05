@@ -74,7 +74,7 @@ func _on_back_pressed() -> void:
 # Buys generic bait, always available in bait shop.
 func _on_bait_pressed() -> void:
 	if SystemData.spend_money(15.0):
-		SystemData._add_bait("Generic Bait", 10)
+		SystemData._add_bait(1, 10)
 
 func _card_purchased(card_info : Dictionary = {}) -> void:
 	var item_category : String = card_info.get(Card.PURCHASED_ITEM_CATEGORY, "")
@@ -85,9 +85,9 @@ func _card_purchased(card_info : Dictionary = {}) -> void:
 	
 	match item_category:
 		ItemData.BAIT:
-			SystemData._add_bait(item_data.get(ItemData.KEY_NAME), item_quantity)
-		[ItemData.ROD, ItemData.REEL, ItemData.LURE, ItemData.EXOTIC]:
-			pass # TODO upgrade system
+			SystemData._add_bait(item_id, item_quantity)
+		ItemData.ROD, ItemData.REEL, ItemData.LURE, ItemData.EXOTIC:
+			SystemData.set_upgrade(item_category, item_data)
 		ItemData.TAROT:
 			pass # TODO idk man
 

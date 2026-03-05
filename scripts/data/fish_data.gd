@@ -40,7 +40,7 @@ const FISH_ID : Dictionary = {
 #	"inputs" : Array
 #	"value" : float
 #	"time" : float
-# Anything other parameter is optional and can be used for speciality fish.
+# Any other parameter is optional and can be used for speciality fish.
 
 
 #1
