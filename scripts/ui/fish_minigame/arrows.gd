@@ -44,7 +44,6 @@ var chosen_fish_id : int
 func pick_fish():
 	var keys_array :Array = FishData.FISH_ID.keys()
 	var random_fish = keys_array.pick_random()
-	random_fish = 21
 	chosen_fish_id =  random_fish
 	print(FishData.FISH_ID[chosen_fish_id]["name"])
 
