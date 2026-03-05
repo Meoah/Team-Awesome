@@ -21,6 +21,20 @@ signal slot_left_clicked(clicked_slot: Slot)
 signal slot_left_clicked
 
 
+
+
+
+# HUD Signal
+signal slot_left_clicked
+
+
+
+
+
+# HUD Signal
+signal slot_left_clicked
+
+
 # Intro Signals
 signal run_intro
 >>>>>>> Stashed changes
