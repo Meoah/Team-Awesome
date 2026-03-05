@@ -1,16 +1,11 @@
-<<<<<<< HEAD
 [gd_scene load_steps=28 format=3 uid="uid://3f6aflexnva0"]
-=======
-[gd_scene load_steps=11 format=3 uid="uid://3f6aflexnva0"]
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 
 [ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.gd" id="1_kb0hh"]
-[ext_resource type="PackedScene" uid="uid://4wis367byvft" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
+[ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="2_qaqdv"]
 [ext_resource type="Texture2D" uid="uid://drsdbbci2pfyp" path="res://assets/textures/background/TreeTops.png" id="3_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://bnbbyk3i184dm" path="res://assets/textures/background/TreeLowers.png" id="4_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_qnvo7"]
-<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://cafh7ij3d6eeu" path="res://assets/textures/fish/wip_fish/Catfish.png" id="6_j6n06"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="8_twmjb"]
@@ -23,9 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="15_pob4g"]
 [ext_resource type="Texture2D" uid="uid://44cx551j0x6x" path="res://assets/textures/fish/final_fish/08_Parrotfish.png" id="16_n5cky"]
 [ext_resource type="Texture2D" uid="uid://bd0t5yjd1iq30" path="res://assets/textures/vfx/CloudLarge.png" id="17_ceebp"]
-=======
-[ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 
 [sub_resource type="Animation" id="Animation_qnvo7"]
 length = 0.001
@@ -53,7 +45,6 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
-<<<<<<< HEAD
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
@@ -117,116 +108,7 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_qaqdv"]
 resource_name = "intro_sequence"
-length = 20.0
-=======
-
-[sub_resource type="Animation" id="Animation_qaqdv"]
-resource_name = "intro_sequence"
 length = 10.5
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Camera2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-<<<<<<< HEAD
-"times": PackedFloat32Array(0, 2, 10, 12.133333),
-=======
-"times": PackedFloat32Array(0, 2, 7.4, 8.833333),
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
-"transitions": PackedFloat32Array(1, 3.2, 1, 2.219142),
-"update": 0,
-"values": [Vector2(640, 360), Vector2(640, 360), Vector2(640, 1788.3123), Vector2(640, 2361)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MockTitle:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1.2666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-<<<<<<< HEAD
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("HUDController:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 12.766666),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HUDController:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(12.666666, 13.7),
-"transitions": PackedFloat32Array(1, 1e-05),
-"update": 0,
-"values": [Vector2(-2, 1830), Vector2(-2, 2046.425)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Jeremy:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(13.733333, 15.299999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(7.366667, 11.366667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Catfish:position")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(14.333333, 14.99, 15.67),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(890.00006, 2633), Vector2(808.00006, 2546.0002), Vector2(683, 2647)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Catfish2:position")
-tracks/7/interp = 2
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(15.533334, 16.216667, 16.666666),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(683, 2647), Vector2(808.00006, 2546.0002), Vector2(890.00006, 2633)]
-}
-=======
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sr7y"]
 _data = {
@@ -234,7 +116,6 @@ _data = {
 &"intro_sequence": SubResource("Animation_qaqdv")
 }
 
-<<<<<<< HEAD
 [sub_resource type="Theme" id="Theme_m53rp"]
 default_font = ExtResource("8_twmjb")
 
@@ -252,8 +133,6 @@ _data = {
 }
 point_count = 12
 
-=======
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 [node name="IntroCutscene" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -284,7 +163,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_4sr7y")
 }
 
-<<<<<<< HEAD
 [node name="Catfish" type="Sprite2D" parent="."]
 position = Vector2(890.00006, 2633)
 scale = Vector2(0.3136349, 0.3136349)
@@ -296,8 +174,6 @@ scale = Vector2(0.3136349, 0.3136349)
 texture = ExtResource("6_j6n06")
 flip_h = true
 
-=======
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 [node name="PlaceholderWater" type="Sprite2D" parent="."]
 position = Vector2(640, 2357)
 texture = ExtResource("5_qnvo7")
@@ -307,7 +183,6 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(655, 402)
 texture = ExtResource("7_sg50k")
 
-<<<<<<< HEAD
 [node name="HUDController" type="VBoxContainer" parent="." node_paths=PackedStringArray("fish_inventory", "bait_inventory", "rod_slot", "reel_slot", "lure_slot", "exotic_slot", "active_bait_slot", "money_label", "rent_label", "fish_bucket_value_label", "day_label", "week_label")]
 modulate = Color(1, 1, 1, 0.8)
 layout_mode = 1
@@ -984,6 +859,3 @@ texture = ExtResource("17_ceebp")
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
-=======
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
