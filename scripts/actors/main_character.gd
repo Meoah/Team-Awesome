@@ -85,7 +85,6 @@ func _physics_process(delta: float) -> void:
 	else : velocity = Vector2.ZERO
 	if PlayManager.is_aiming() : _aiming(delta)
 	else : arrow_sprite.visible = false
-	if PlayManager.is_daytime() : _water_bob(delta)
 	if !PlayManager.is_dialogue() : _action()
 	
 	move_and_slide()
@@ -168,12 +167,6 @@ func _movement() -> void:
 	if input_flags & InputFlags.MOVE_LEFT : direction -= 1.0
 	if input_flags & InputFlags.MOVE_RIGHT : direction += 1.0
 	velocity = Vector2(direction * move_speed, 0)
-
-# Controls the bobbing motion
-func _water_bob(delta : float) -> void:
-	bob_timer += delta
-	var bob : float = sin(bob_timer) * bob_amplitude
-	boat_sprite.position.y = bob
 
 # Action handler.
 var interacted : bool = false
