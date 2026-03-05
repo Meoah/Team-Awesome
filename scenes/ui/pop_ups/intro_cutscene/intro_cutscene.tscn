@@ -1,31 +1,17 @@
-<<<<<<< HEAD
-[gd_scene load_steps=28 format=3 uid="uid://3f6aflexnva0"]
-=======
-[gd_scene load_steps=11 format=3 uid="uid://3f6aflexnva0"]
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
+[gd_scene load_steps=17 format=3 uid="uid://3f6aflexnva0"]
 
 [ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.gd" id="1_kb0hh"]
-[ext_resource type="PackedScene" uid="uid://4wis367byvft" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
+[ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="2_qaqdv"]
 [ext_resource type="Texture2D" uid="uid://drsdbbci2pfyp" path="res://assets/textures/background/TreeTops.png" id="3_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://bnbbyk3i184dm" path="res://assets/textures/background/TreeLowers.png" id="4_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_qnvo7"]
-<<<<<<< HEAD
 [ext_resource type="Texture2D" uid="uid://cafh7ij3d6eeu" path="res://assets/textures/fish/wip_fish/Catfish.png" id="6_j6n06"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
-[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="8_twmjb"]
-[ext_resource type="Script" uid="uid://dkj7jecxesoy4" path="res://scripts/ui/hud/hud_controller.gd" id="9_n5cky"]
-[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="10_ceebp"]
-[ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="11_j6n06"]
-[ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="12_10lx7"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="13_103oy"]
-[ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/hud/inventory_grid.tscn" id="14_kog64"]
+[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="9_10lx7"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="15_pob4g"]
 [ext_resource type="Texture2D" uid="uid://44cx551j0x6x" path="res://assets/textures/fish/final_fish/08_Parrotfish.png" id="16_n5cky"]
 [ext_resource type="Texture2D" uid="uid://bd0t5yjd1iq30" path="res://assets/textures/vfx/CloudLarge.png" id="17_ceebp"]
-=======
-[ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 
 [sub_resource type="Animation" id="Animation_qnvo7"]
 length = 0.001
@@ -53,77 +39,70 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
-<<<<<<< HEAD
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HUDController:visible")
+tracks/2/path = NodePath("Jeremy:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("HUDController:position")
+tracks/3/path = NodePath("Path2D/PathFollow2D:progress_ratio")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-2, 1830)]
+"values": [0.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Jeremy:modulate")
+tracks/4/path = NodePath("Catfish:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Vector2(890.00006, 2633)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/5/path = NodePath("HUD:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Catfish:position")
+tracks/6/path = NodePath("HUD:offset")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(890.00006, 2633)]
+"values": [Vector2(0, 1800)]
 }
 
 [sub_resource type="Animation" id="Animation_qaqdv"]
 resource_name = "intro_sequence"
 length = 20.0
-=======
-
-[sub_resource type="Animation" id="Animation_qaqdv"]
-resource_name = "intro_sequence"
-length = 10.5
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -131,11 +110,7 @@ tracks/0/path = NodePath("Camera2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-<<<<<<< HEAD
 "times": PackedFloat32Array(0, 2, 10, 12.133333),
-=======
-"times": PackedFloat32Array(0, 2, 7.4, 8.833333),
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 "transitions": PackedFloat32Array(1, 3.2, 1, 2.219142),
 "update": 0,
 "values": [Vector2(640, 360), Vector2(640, 360), Vector2(640, 1788.3123), Vector2(640, 2361)]
@@ -152,81 +127,78 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-<<<<<<< HEAD
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HUDController:visible")
+tracks/2/path = NodePath("Jeremy:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 12.766666),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("HUDController:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(12.666666, 13.7),
-"transitions": PackedFloat32Array(1, 1e-05),
-"update": 0,
-"values": [Vector2(-2, 1830), Vector2(-2, 2046.425)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Jeremy:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(13.733333, 15.299999),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(7.366667, 11.366667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Catfish:position")
-tracks/6/interp = 2
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Catfish:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(14.333333, 14.99, 15.67),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(890.00006, 2633), Vector2(808.00006, 2546.0002), Vector2(683, 2647)]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Catfish2:position")
-tracks/7/interp = 2
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Catfish2:position")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(15.533334, 16.216667, 16.666666),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(683, 2647), Vector2(808.00006, 2546.0002), Vector2(890.00006, 2633)]
 }
-=======
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HUD:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 12.766666),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HUD:offset")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(12.500001, 14.000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 1800), Vector2(0, 2000)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sr7y"]
 _data = {
@@ -234,26 +206,12 @@ _data = {
 &"intro_sequence": SubResource("Animation_qaqdv")
 }
 
-<<<<<<< HEAD
-[sub_resource type="Theme" id="Theme_m53rp"]
-default_font = ExtResource("8_twmjb")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8uweh"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7wmwd"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yv0in"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3busg"]
-
 [sub_resource type="Curve2D" id="Curve2D_ceebp"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 1620, 1140, 51.30286, 0.3401886, -51.30286, -0.3401886, 1217, 1275, 0.16896892, 27.386442, -0.16896892, -27.386442, 1083, 1216, -45.981304, 0.17555411, 45.981304, -0.17555411, 1130, 1156, -1.3142166, -27.807775, 1.3142166, 27.807775, 1201, 1212, 43.90119, 0.3862191, -43.90119, -0.3862191, 1086, 1267, 0, 0, 0, 0, 983, 1265, 0, 0, 0, 0, 699, 1287, 0, 0, 0, 0, 530, 1313, 0, 0, 0, 0, 350.01563, 1285.9734, 0, 0, 0, 0, 206, 1279, 0, 0, 0, 0, -62, 1229)
 }
 point_count = 12
 
-=======
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 [node name="IntroCutscene" type="Control"]
 layout_mode = 3
 anchors_preset = 0
@@ -284,7 +242,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_4sr7y")
 }
 
-<<<<<<< HEAD
 [node name="Catfish" type="Sprite2D" parent="."]
 position = Vector2(890.00006, 2633)
 scale = Vector2(0.3136349, 0.3136349)
@@ -296,8 +253,6 @@ scale = Vector2(0.3136349, 0.3136349)
 texture = ExtResource("6_j6n06")
 flip_h = true
 
-=======
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
 [node name="PlaceholderWater" type="Sprite2D" parent="."]
 position = Vector2(640, 2357)
 texture = ExtResource("5_qnvo7")
@@ -307,635 +262,11 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(655, 402)
 texture = ExtResource("7_sg50k")
 
-<<<<<<< HEAD
-[node name="HUDController" type="VBoxContainer" parent="." node_paths=PackedStringArray("fish_inventory", "bait_inventory", "rod_slot", "reel_slot", "lure_slot", "exotic_slot", "active_bait_slot", "money_label", "rent_label", "fish_bucket_value_label", "day_label", "week_label")]
-modulate = Color(1, 1, 1, 0.8)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -2.0
-offset_top = 1830.0
-offset_right = -2.0
-offset_bottom = 1834.0002
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme = SubResource("Theme_m53rp")
-script = ExtResource("9_n5cky")
-fish_inventory = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory")
-bait_inventory = NodePath("Bottom/MarginContainer/Bottom/Right/BaitInventory")
-rod_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod/AspectRatioContainer/RodSlot")
-reel_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel/AspectRatioContainer2/ReelSlot")
-lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3/Lure")
-exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/Rod")
-active_bait_slot = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer/ActiveBait")
-money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Money")
-rent_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Rent")
-fish_bucket_value_label = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishBucketValue")
-day_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer/Label")
-week_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer/Label")
-
-[node name="Top" type="Control" parent="HUDController"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 2.5
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 2.0
-offset_top = -35.0
-offset_right = 1282.0
-offset_bottom = 144.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
-theme_override_constants/margin_right = 16
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUDController/Top/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 2
-
-[node name="FishBucket" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 15.0
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_8uweh")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="TextureRect" type="TextureRect" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-texture = ExtResource("11_j6n06")
-expand_mode = 5
-
-[node name="MarginContainer2" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 4
-
-[node name="FishDropdown" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_vertical = 8
-focus_mode = 0
-theme_override_font_sizes/font_size = 12
-text = "    V    "
-
-[node name="RodUpgradeSlots" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 25.0
-mouse_filter = 2
-
-[node name="TempRodSlots" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_7wmwd")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-mouse_filter = 2
-alignment = 1
-
-[node name="Slots" type="HBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Rod" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="RodSlot" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod/AspectRatioContainer" instance=ExtResource("12_10lx7")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod"]
-layout_mode = 2
-text = "Rod"
-horizontal_alignment = 1
-
-[node name="DividerLine" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Reel" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="ReelSlot" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel/AspectRatioContainer2" instance=ExtResource("12_10lx7")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel"]
-layout_mode = 2
-text = "Reel"
-horizontal_alignment = 1
-
-[node name="DividerLine2" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="VBoxContainer3" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="AspectRatioContainer3" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Lure" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3" instance=ExtResource("12_10lx7")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3"]
-layout_mode = 2
-text = "Lure"
-horizontal_alignment = 1
-
-[node name="ExoticGear" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-mouse_filter = 2
-
-[node name="TempExoticSlot" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_7wmwd")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="Rod" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer" instance=ExtResource("12_10lx7")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 8
-text = "Exotic"
-horizontal_alignment = 1
-vertical_alignment = 2
-
-[node name="Bait" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 15.0
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_yv0in")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-alignment = 2
-
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-
-[node name="ActiveBait" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer" instance=ExtResource("12_10lx7")]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-
-[node name="BaitName" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Generic Bait"
-horizontal_alignment = 1
-vertical_alignment = 2
-clip_text = true
-
-[node name="MarginContainer2" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 8
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 4
-
-[node name="BaitDropdown" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2"]
-layout_mode = 2
-size_flags_vertical = 8
-focus_mode = 0
-theme_override_font_sizes/font_size = 12
-text = "    V    "
-
-[node name="Rent" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 20.0
-mouse_filter = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_8uweh")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer"]
-clip_contents = true
-layout_mode = 2
-size_flags_vertical = 4
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer"]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Money" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "$9,999,999.99"
-fit_content = true
-scroll_active = false
-autowrap_mode = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DividerLine" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(1, 1)
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Rent" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-theme_override_font_sizes/normal_font_size = 32
-bbcode_enabled = true
-text = "[color=red]$9,999,999.99"
-fit_content = true
-scroll_active = false
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="WeekDay" type="VBoxContainer" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 10.0
-mouse_filter = 2
-
-[node name="Day" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_8uweh")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day"]
-clip_contents = true
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Day 1 / 5"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Week" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_8uweh")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week"]
-clip_contents = true
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "Week 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Pause" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 5
-size_flags_stretch_ratio = 5.0
-mouse_filter = 2
-
-[node name="TextureButton" type="TextureButton" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture_normal = ExtResource("13_103oy")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -23.5
-offset_top = -11.5
-offset_right = 23.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "Pause"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Bottom" type="Control" parent="HUDController"]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 7.5
-mouse_filter = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Bottom"]
+[node name="HUD" parent="." instance=ExtResource("9_10lx7")]
 visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -430.0
-offset_top = 26.0
-offset_right = -366.0
-offset_bottom = 74.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_right = 16
-theme_override_constants/margin_bottom = 16
-
-[node name="Bottom" type="HBoxContainer" parent="HUDController/Bottom/MarginContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-mouse_filter = 2
-theme_override_constants/separation = 0
-
-[node name="Left" type="VBoxContainer" parent="HUDController/Bottom/MarginContainer/Bottom"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="FishInventory" type="PanelContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left"]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 0
-mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_3busg")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory"]
-layout_mode = 2
-mouse_filter = 1
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer"]
-layout_mode = 2
-
-[node name="FishGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer" instance=ExtResource("14_kog64")]
-layout_mode = 2
-grid_type = "Fish"
-
-[node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishGrid" instance=ExtResource("12_10lx7")]
-layout_mode = 2
-
-[node name="FishBucketValue" type="Label" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Total Value: $99999.99"
-
-[node name="BuffGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Left" instance=ExtResource("14_kog64")]
-layout_mode = 2
-mouse_filter = 1
-grid_type = "Buff"
-
-[node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Left/BuffGrid" instance=ExtResource("12_10lx7")]
-layout_mode = 2
-
-[node name="Right" type="Control" parent="HUDController/Bottom/MarginContainer/Bottom"]
-layout_mode = 2
-size_flags_horizontal = 3
-mouse_filter = 2
-
-[node name="BaitInventory" type="PanelContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Right"]
-visible = false
-layout_mode = 1
-offset_right = 40.0
-offset_bottom = 40.0
-size_flags_horizontal = 3
-mouse_filter = 1
-theme_override_styles/panel = SubResource("StyleBoxTexture_3busg")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory"]
-layout_mode = 2
-texture = ExtResource("10_ceebp")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
-
-[node name="MarginContainer" type="MarginContainer" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory"]
-layout_mode = 2
-mouse_filter = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="BaitGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer" instance=ExtResource("14_kog64")]
-layout_mode = 2
-grid_type = "Bait"
-
-[node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer/BaitGrid" instance=ExtResource("12_10lx7")]
-layout_mode = 2
+offset = Vector2(0, 1800)
+transform = Transform2D(1, 0, 0, 1, 0, 1800)
+follow_viewport_enabled = true
 
 [node name="Jeremy" parent="." instance=ExtResource("15_pob4g")]
 position = Vector2(300, 2582.0002)
@@ -982,8 +313,3 @@ scale = Vector2(1, 0.33750015)
 texture = ExtResource("17_ceebp")
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
-[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
-[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
-=======
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8

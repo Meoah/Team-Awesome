@@ -31,10 +31,6 @@ offset_left = -40.0
 offset_top = -24.0
 grow_horizontal = 0
 grow_vertical = 0
-<<<<<<< HEAD
 theme_override_constants/outline_size = 2
 theme_override_fonts/font = ExtResource("2_kwcvi")
 horizontal_alignment = 2
-=======
-theme_override_fonts/font = ExtResource("2_kwcvi")
->>>>>>> 69fa1fb8799a8313aef9dcb175195a758598b0b8
