@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=20 format=3 uid="uid://b856gwtwh1bno"]
 
-[ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
+[ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
 [ext_resource type="AudioStream" uid="uid://e1cxs7j2ew6u" path="res://assets/audio/bgm/dump/waiting_for_bite.wav" id="2_3kam8"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
@@ -12,8 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
-[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
-[ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/ui/pop_ups/tutorial_sequence/tutorial_sequence.tscn" id="14_i6nw5"]
+[ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/game/cutscenes/tutorial_sequence.tscn" id="14_i6nw5"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
 
@@ -211,13 +210,6 @@ drag_vertical_enabled = true
 script = ExtResource("8_3kam8")
 player = NodePath("../Jeremy")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-follow_viewport_enabled = true
-
-[node name="GameOver" parent="CanvasLayer" instance=ExtResource("10_qc6n8")]
-visible = false
-
 [node name="HUD" parent="." instance=ExtResource("10_3kam8")]
 
 [node name="debug" type="Button" parent="."]
@@ -263,8 +255,6 @@ offset_left = 640.0
 offset_top = 360.0
 offset_right = 640.0
 offset_bottom = 360.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="pressed" from="debug" to="." method="_on_debug_pressed"]

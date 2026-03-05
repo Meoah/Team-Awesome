@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://buum3xnaqnv5x"]
 
-[ext_resource type="Script" uid="uid://cbt7mkm6nlf1s" path="res://scripts/ui/game_over.gd" id="1_hfhxj"]
+[ext_resource type="Script" uid="uid://cbt7mkm6nlf1s" path="res://scripts/game/main/game_over.gd" id="1_xdcsw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s2grh"]
 font_size = 64
@@ -14,7 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_hfhxj")
+script = ExtResource("1_xdcsw")
 
 [node name="TextureRect" type="ColorRect" parent="."]
 layout_mode = 1

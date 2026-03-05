@@ -55,6 +55,7 @@ func _bind_signals() -> void:
 	PlayManager.idle_night_state.signal_idle_night.connect(_reset_flags)
 	PlayManager.casting_state.signal_casting.connect(_on_casting_state)
 	PlayManager.waiting_state.signal_waiting.connect(_on_waiting_state)
+	SignalBus.player_dies.connect(_die)
 
 
 func _input(event : InputEvent) -> void:
@@ -242,3 +243,7 @@ func _on_casting_state() -> void:
 # Hide power bar on WaitingState
 func _on_waiting_state() -> void:
 	power_bar.visible = false
+
+# Sends player to death scene.
+func _die() -> void:
+	if PlayManager.request_dead_state() : GameManager.change_scene_deferred(GameManager.death_scene)

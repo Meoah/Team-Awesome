@@ -1,31 +1,31 @@
 [gd_scene load_steps=25 format=3 uid="uid://bs6fqe1euvjxa"]
 
-[ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main_menu.gd" id="1_fpthd"]
-[ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_4oldi"]
-[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_16onh"]
-[ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="3_21mov"]
-[ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="4_6hh85"]
-[ext_resource type="Texture2D" uid="uid://bd0t5yjd1iq30" path="res://assets/textures/vfx/CloudLarge.png" id="4_ados7"]
-[ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="4_bto60"]
-[ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="5_1f7y1"]
-[ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="5_df05h"]
-[ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="6_6hh85"]
-[ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="6_8um5k"]
-[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="8_1f7y1"]
-[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/Settings_Button.png" id="8_efcww"]
-[ext_resource type="Texture2D" uid="uid://2wer6ur45n82" path="res://assets/textures/ui/MusicVolume_Button.png" id="11_nsdtn"]
-[ext_resource type="Texture2D" uid="uid://dkyx8of0ikxer" path="res://assets/textures/ui/Fullscreen_Button.png" id="12_4oldi"]
+[ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
+[ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_pnn6m"]
+[ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="3_4kdnx"]
+[ext_resource type="Texture2D" uid="uid://bd0t5yjd1iq30" path="res://assets/textures/vfx/CloudLarge.png" id="4_gbwl8"]
+[ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="5_t5foa"]
+[ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="6_87tfw"]
+[ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="7_hh21g"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="8_pavj3"]
+[ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="9_d7yyt"]
+[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/Settings_Button.png" id="10_26lib"]
+[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="11_2jgrx"]
+[ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="12_e8tmt"]
+[ext_resource type="Texture2D" uid="uid://2wer6ur45n82" path="res://assets/textures/ui/MusicVolume_Button.png" id="13_yi70e"]
+[ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="14_8pxsd"]
+[ext_resource type="Texture2D" uid="uid://dkyx8of0ikxer" path="res://assets/textures/ui/Fullscreen_Button.png" id="15_7fwnw"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_648uh"]
-texture = ExtResource("3_21mov")
+texture = ExtResource("3_4kdnx")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1f7y1"]
-texture = ExtResource("6_6hh85")
+texture = ExtResource("9_d7yyt")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oldi"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nsdtn"]
-texture = ExtResource("8_efcww")
+texture = ExtResource("10_26lib")
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_8saeu"]
 thickness = 6
@@ -35,12 +35,12 @@ color = Color(0.92941177, 0.7882353, 0.6862745, 1)
 thickness = 6
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4oldi"]
-texture = ExtResource("11_nsdtn")
+texture = ExtResource("13_yi70e")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73xsm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21mov"]
-texture = ExtResource("12_4oldi")
+texture = ExtResource("15_7fwnw")
 
 [node name="Main_Menu" type="Control"]
 layout_mode = 3
@@ -49,8 +49,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_fpthd")
-default_bgm = ExtResource("2_4oldi")
+script = ExtResource("1_hff0s")
+default_bgm = ExtResource("2_pnn6m")
 
 [node name="Background" type="Panel" parent="."]
 layout_mode = 1
@@ -71,13 +71,13 @@ repeat_times = 6
 [node name="CloudLarge" type="Sprite2D" parent="Parallax2D2"]
 position = Vector2(580, 356.25027)
 scale = Vector2(1, 0.5625)
-texture = ExtResource("4_ados7")
+texture = ExtResource("4_gbwl8")
 
 [node name="CloudLarge2" type="Sprite2D" parent="Parallax2D2"]
 position = Vector2(580, 423.4379)
 rotation = 3.1415927
 scale = Vector2(1, 0.33750015)
-texture = ExtResource("4_ados7")
+texture = ExtResource("4_gbwl8")
 
 [node name="Parallax2D" type="Parallax2D" parent="."]
 scroll_offset = Vector2(-5.465, 0)
@@ -87,7 +87,7 @@ repeat_times = 5
 
 [node name="CloudLarge" type="Sprite2D" parent="Parallax2D"]
 position = Vector2(617, 663)
-texture = ExtResource("4_ados7")
+texture = ExtResource("4_gbwl8")
 
 [node name="MainButtons" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -108,19 +108,19 @@ theme_override_constants/separation = 10
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 size_flags_horizontal = 4
-texture_normal = ExtResource("4_bto60")
+texture_normal = ExtResource("5_t5foa")
 
 [node name="OptionsButton" type="TextureButton" parent="MainButtons"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-texture_normal = ExtResource("4_6hh85")
+texture_normal = ExtResource("6_87tfw")
 
 [node name="ExitButton" type="TextureButton" parent="MainButtons"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
-texture_normal = ExtResource("5_1f7y1")
+texture_normal = ExtResource("7_hh21g")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -138,7 +138,7 @@ grow_vertical = 2
 theme_override_colors/font_color = Color(0.79018086, 0.6306613, 0.51011544, 0.90588236)
 theme_override_colors/font_shadow_color = Color(0.0105956, 0.0105956, 0.0105956, 0.5764706)
 theme_override_constants/shadow_offset_y = 10
-theme_override_fonts/font = ExtResource("3_16onh")
+theme_override_fonts/font = ExtResource("8_pavj3")
 theme_override_font_sizes/font_size = 120
 theme_override_styles/normal = SubResource("StyleBoxTexture_1f7y1")
 text = "
@@ -173,7 +173,7 @@ offset_bottom = -96.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("3_16onh")
+theme_override_fonts/font = ExtResource("8_pavj3")
 theme_override_font_sizes/font_size = 30
 theme_override_styles/normal = SubResource("StyleBoxTexture_nsdtn")
 horizontal_alignment = 1
@@ -185,7 +185,7 @@ offset_top = 350.0
 offset_right = 1444.5
 offset_bottom = 858.0
 scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("8_1f7y1")
+texture_normal = ExtResource("11_2jgrx")
 
 [node name="AudioControl" type="HSlider" parent="Settings"]
 layout_mode = 0
@@ -199,7 +199,7 @@ theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
 max_value = 1.0
 step = 0.05
 value = 1.0
-script = ExtResource("5_df05h")
+script = ExtResource("12_e8tmt")
 audio_bus_name = "Master"
 
 [node name="Label" type="Label" parent="Settings/AudioControl"]
@@ -209,7 +209,7 @@ offset_top = -64.0
 offset_right = 195.0
 offset_bottom = -15.0
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("3_16onh")
+theme_override_fonts/font = ExtResource("8_pavj3")
 theme_override_styles/normal = SubResource("StyleBoxTexture_4oldi")
 
 [node name="Fullscreen_Control" type="CheckButton" parent="Settings"]
@@ -219,9 +219,9 @@ offset_top = 229.0
 offset_right = 442.5
 offset_bottom = 326.0
 theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("3_16onh")
+theme_override_fonts/font = ExtResource("8_pavj3")
 theme_override_styles/normal = SubResource("StyleBoxTexture_73xsm")
-script = ExtResource("6_8um5k")
+script = ExtResource("14_8pxsd")
 
 [node name="Label" type="Label" parent="Settings/Fullscreen_Control"]
 layout_mode = 0

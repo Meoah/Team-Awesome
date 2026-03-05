@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://3f6aflexnva0"]
 
-[ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.gd" id="1_kb0hh"]
-[ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
+[ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scripts/game/cutscenes/intro_cutscene.gd" id="1_kb0hh"]
+[ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/main/daytime_main.tscn" id="2_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="2_qaqdv"]
 [ext_resource type="Texture2D" uid="uid://drsdbbci2pfyp" path="res://assets/textures/background/TreeTops.png" id="3_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://bnbbyk3i184dm" path="res://assets/textures/background/TreeLowers.png" id="4_4sr7y"]
