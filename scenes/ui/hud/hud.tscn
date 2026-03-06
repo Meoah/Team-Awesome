@@ -24,7 +24,7 @@ default_font = ExtResource("2_ax4tw")
 script = ExtResource("1_e7gie")
 blocker = NodePath("Blocker")
 
-[node name="HUDController" type="VBoxContainer" parent="." node_paths=PackedStringArray("fish_inventory", "bait_inventory", "rod_slot", "reel_slot", "lure_slot", "exotic_slot", "active_bait_slot", "money_label", "rent_label", "fish_bucket_value_label", "day_label", "week_label")]
+[node name="HUDController" type="VBoxContainer" parent="." node_paths=PackedStringArray("fish_inventory", "bait_inventory", "rod_slot", "reel_slot", "lure_slot", "exotic_slot", "active_bait_slot", "active_bait_label", "money_label", "rent_label", "fish_bucket_value_label", "day_label", "week_label")]
 modulate = Color(1, 1, 1, 0.8)
 anchors_preset = 15
 anchor_right = 1.0
@@ -41,6 +41,7 @@ reel_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodS
 lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3/AspectRatioContainer3/LureSlot")
 exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/ExoticSlot")
 active_bait_slot = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer/ActiveBait")
+active_bait_label = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/BaitName")
 money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Money")
 rent_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Rent")
 fish_bucket_value_label = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishBucketValue")
@@ -335,12 +336,13 @@ mouse_filter = 2
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 
-[node name="BaitName" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="BaitName" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+bbcode_enabled = true
 text = "Generic Bait"
+fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 2
-clip_text = true
 
 [node name="MarginContainer2" type="MarginContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer"]
 clip_contents = true

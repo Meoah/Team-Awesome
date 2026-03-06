@@ -7,7 +7,7 @@ extends Node
 var player_money : float = 0.0
 var delayed_money : float = 0.0
 var day : int = 1
-var active_bait : int = 0
+var active_bait : int = -1
 var fish_inventory : Dictionary = {} # {fish_id : int = count : int}
 var bait_inventory : Dictionary = {} # {bait_id : int = count : int}
 var buff_inventory : Dictionary = {} # {buff_id : int = duration : int}

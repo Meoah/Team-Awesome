@@ -29,7 +29,7 @@ length = 1.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DayCam/FISH/FISH 01:position")
+tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,7 +41,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DayCam/FISH/FISH 02:position")
+tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -53,7 +53,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DayCam/FISH/FISH 01:modulate")
+tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -65,7 +65,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("DayCam/FISH/FISH 02:modulate")
+tracks/3/path = NodePath("FISH/CanvasLayer/FISH 02:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -80,7 +80,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("DayCam/FISH/FISH 01:position")
+tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,7 +92,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("DayCam/FISH/FISH 02:position")
+tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -104,7 +104,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("DayCam/FISH/FISH 01:modulate")
+tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -191,6 +191,24 @@ z_index = 5
 texture = ExtResource("5_8rhjh")
 centered = false
 
+[node name="FISH" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i6nw5")
+}
+movie_quit_on_finish = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="FISH"]
+
+[node name="FISH 01" type="Sprite2D" parent="FISH/CanvasLayer"]
+position = Vector2(-200, -200)
+scale = Vector2(3, 3)
+texture = ExtResource("9_3kam8")
+
+[node name="FISH 02" type="Sprite2D" parent="FISH/CanvasLayer"]
+position = Vector2(-200, -200)
+scale = Vector2(3, 3)
+texture = ExtResource("10_nw8sa")
+
 [node name="DayCam" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(640, 360)
 limit_left = 0
@@ -200,24 +218,6 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 script = ExtResource("8_3kam8")
 player = NodePath("../Jeremy")
-
-[node name="FISH" type="AnimationPlayer" parent="DayCam"]
-root_node = NodePath("../..")
-libraries = {
-&"": SubResource("AnimationLibrary_i6nw5")
-}
-movie_quit_on_finish = true
-
-[node name="FISH 01" type="Sprite2D" parent="DayCam/FISH"]
-position = Vector2(-200, -200)
-scale = Vector2(3, 3)
-texture = ExtResource("9_3kam8")
-
-[node name="FISH 02" type="Sprite2D" parent="DayCam/FISH"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(-200, -200)
-scale = Vector2(3, 3)
-texture = ExtResource("10_nw8sa")
 
 [node name="HUD" parent="." instance=ExtResource("10_3kam8")]
 
@@ -236,5 +236,5 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "End Day"
 
-[connection signal="animation_finished" from="DayCam/FISH" to="." method="_on_fish_animation_finished"]
+[connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

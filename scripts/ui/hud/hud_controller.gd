@@ -9,6 +9,7 @@ class_name HUDController
 @export var lure_slot : Slot
 @export var exotic_slot : Slot
 @export var active_bait_slot : Slot
+@export var active_bait_label : RichTextLabel
 @export var money_label : RichTextLabel
 @export var rent_label : RichTextLabel
 @export var fish_bucket_value_label : Label
@@ -64,9 +65,9 @@ func _tooltip(hovered : Control, tooltip_layer : TooltipLayer) -> void:
 
 ## Refreshes each module.
 func _refresh_ui() -> void:
-	# Forces the fadeout to reset.
-	_set_hovered_state()
-	_set_unhovered_state()
+	# Forces the fadeout to reset. TODO: Do we want this?
+	#_set_hovered_state()
+	#_set_unhovered_state()
 	
 	_update_equipment()
 	_update_active_bait()
@@ -89,6 +90,7 @@ func _update_active_bait() -> void:
 	var active_bait_data : Dictionary = ItemData.get_data(ItemData.BAIT, active_bait)
 	
 	active_bait_slot.set_slot(active_bait_data, active_bait_quantity)
+	active_bait_label.text = active_bait_data.get(ItemData.KEY_NAME, "Nothing")
 
 ## Sets current money and rent.
 func _update_money() -> void:
