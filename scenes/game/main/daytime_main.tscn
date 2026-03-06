@@ -1,6 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=23 format=3 uid="uid://b856gwtwh1bno"]
 
-[ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/daytime_main.gd" id="1_2jsv6"]
+[ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
 [ext_resource type="AudioStream" uid="uid://e1cxs7j2ew6u" path="res://assets/audio/bgm/dump/waiting_for_bite.wav" id="2_3kam8"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="3_6j7wl"]
@@ -9,11 +9,15 @@
 [ext_resource type="Texture2D" uid="uid://b2ujo6wxupnp0" path="res://assets/textures/background/background_top.png" id="5_sd21a"]
 [ext_resource type="Texture2D" uid="uid://dgmii41agwhfu" path="res://assets/textures/background/background_bottom.png" id="6_sd21a"]
 [ext_resource type="Script" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
+[ext_resource type="Texture2D" uid="uid://bkbsok460ot6f" path="res://assets/textures/background/PlaceholderDock.png" id="8_uwg24"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
+[ext_resource type="Texture2D" uid="uid://4i2j3bsn3hw5" path="res://assets/textures/debug/ExitSign.png" id="9_fhkke"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
 [ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
-[ext_resource type="PackedScene" uid="uid://buum3xnaqnv5x" path="res://scenes/game/game_over.tscn" id="10_qc6n8"]
-[ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/ui/pop_ups/tutorial_sequence/tutorial_sequence.tscn" id="14_i6nw5"]
+[ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/game/cutscenes/tutorial_sequence.tscn" id="14_i6nw5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
+size = Vector2(10, 100)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
 
@@ -29,7 +33,7 @@ length = 1.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("FISH/FISH 01:position")
+tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -41,7 +45,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FISH/FISH 02:position")
+tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -53,7 +57,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("FISH/FISH 01:modulate")
+tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
 tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -65,7 +69,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("FISH/FISH 02:modulate")
+tracks/3/path = NodePath("FISH/CanvasLayer/FISH 02:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -80,7 +84,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("FISH/FISH 01:position")
+tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -92,7 +96,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FISH/FISH 02:position")
+tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -104,7 +108,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("FISH/FISH 01:modulate")
+tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -120,21 +124,23 @@ _data = {
 &"RESET": SubResource("Animation_sd21a")
 }
 
-[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "camera")]
+[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "hud", "camera")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2jsv6")
 default_bgm = ExtResource("2_3kam8")
 jeremy_node = NodePath("Jeremy")
-bobber_scene = ExtResource("3_6j7wl")
+hud = NodePath("HUD")
 camera = NodePath("DayCam")
+bobber_scene = ExtResource("3_6j7wl")
+tutorial_scene = ExtResource("14_i6nw5")
 
 [node name="BackgroundTop" type="Parallax2D" parent="."]
 repeat_size = Vector2(1280, 720)
 repeat_times = 100
 
 [node name="Sprite2D2" type="Sprite2D" parent="BackgroundTop"]
-position = Vector2(0, -1280)
+position = Vector2(0, -2000)
 texture = ExtResource("5_sd21a")
 centered = false
 
@@ -155,13 +161,31 @@ scroll_scale = Vector2(0.75, 0.75)
 repeat_size = Vector2(1280, 0)
 repeat_times = 1000
 
-[node name="Sprite2D2" type="Sprite2D" parent="BackgroundBottom"]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundBottom"]
 texture = ExtResource("6_sd21a")
 centered = false
 
 [node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(300, 580)
+position = Vector2(-100, 475)
 scale = Vector2(0.15348448, 0.15348448)
+
+[node name="ExitSign" type="Area2D" parent="."]
+position = Vector2(0, 400)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="ExitSign"]
+modulate = Color(1, 1, 1, 0.5)
+position = Vector2(66, -27.00001)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("9_fhkke")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSign"]
+shape = SubResource("RectangleShape2D_f86r6")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="Dock" type="Sprite2D" parent="."]
+position = Vector2(451, 484)
+texture = ExtResource("8_uwg24")
 
 [node name="Boundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
@@ -181,6 +205,7 @@ autoscroll = Vector2(-20, 0)
 repeat_times = 1000
 
 [node name="Sprite2D" type="Sprite2D" parent="Water"]
+z_index = 5
 texture = ExtResource("5_8rhjh")
 centered = false
 
@@ -190,13 +215,14 @@ libraries = {
 }
 movie_quit_on_finish = true
 
-[node name="FISH 01" type="Sprite2D" parent="FISH"]
+[node name="CanvasLayer" type="CanvasLayer" parent="FISH"]
+
+[node name="FISH 01" type="Sprite2D" parent="FISH/CanvasLayer"]
 position = Vector2(-200, -200)
 scale = Vector2(3, 3)
 texture = ExtResource("9_3kam8")
 
-[node name="FISH 02" type="Sprite2D" parent="FISH"]
-modulate = Color(1, 1, 1, 0)
+[node name="FISH 02" type="Sprite2D" parent="FISH/CanvasLayer"]
 position = Vector2(-200, -200)
 scale = Vector2(3, 3)
 texture = ExtResource("10_nw8sa")
@@ -211,61 +237,8 @@ drag_vertical_enabled = true
 script = ExtResource("8_3kam8")
 player = NodePath("../Jeremy")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 0
-follow_viewport_enabled = true
-
-[node name="GameOver" parent="CanvasLayer" instance=ExtResource("10_qc6n8")]
-visible = false
-
 [node name="HUD" parent="." instance=ExtResource("10_3kam8")]
 
-[node name="debug" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 1056.0
-offset_top = 462.0
-offset_right = 1219.0
-offset_bottom = 548.0
-grow_horizontal = 0
-grow_vertical = 2
-focus_mode = 0
-text = "test dialogue"
-
-[node name="Button" type="Button" parent="."]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1060.0
-offset_top = 582.0
-offset_right = 1208.0
-offset_bottom = 666.0
-grow_horizontal = 0
-grow_vertical = 0
-text = "End Day"
-
-[node name="TutorialSequence" parent="." instance=ExtResource("14_i6nw5")]
-visible = false
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = 640.0
-offset_top = 360.0
-offset_right = 640.0
-offset_bottom = 360.0
-grow_horizontal = 2
-grow_vertical = 2
-
+[connection signal="area_entered" from="ExitSign" to="." method="_on_exit_sign_area_entered"]
+[connection signal="body_entered" from="ExitSign" to="." method="_on_exit_sign_body_entered"]
 [connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
-[connection signal="pressed" from="debug" to="." method="_on_debug_pressed"]
-[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

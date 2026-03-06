@@ -44,8 +44,7 @@ func _interaction() -> void:
 	if bucket_trigger.overlaps_body(jeremy_node) : _bucket()
 	if shop_trigger.overlaps_body(jeremy_node) : _bait_shop()
 	if upgrade_trigger.overlaps_body(jeremy_node) : _upgrade_shop()
-	if tarot_trigger.overlaps_body(jeremy_node) : _tarot_shop()
-
+	#TODO if tarot_trigger.overlaps_body(jeremy_node) : _tarot_shop()
 
 func _sell_all_fish() -> void:
 	SystemData._transfer_money()

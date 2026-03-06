@@ -55,6 +55,7 @@ func _bind_signals() -> void:
 	PlayManager.idle_night_state.signal_idle_night.connect(_reset_flags)
 	PlayManager.casting_state.signal_casting.connect(_on_casting_state)
 	PlayManager.waiting_state.signal_waiting.connect(_on_waiting_state)
+	SignalBus.player_dies.connect(_die)
 
 
 func _input(event : InputEvent) -> void:
@@ -84,7 +85,6 @@ func _physics_process(delta: float) -> void:
 	else : velocity = Vector2.ZERO
 	if PlayManager.is_aiming() : _aiming(delta)
 	else : arrow_sprite.visible = false
-	if PlayManager.is_daytime() : _water_bob(delta)
 	if !PlayManager.is_dialogue() : _action()
 	
 	move_and_slide()
@@ -168,12 +168,6 @@ func _movement() -> void:
 	if input_flags & InputFlags.MOVE_RIGHT : direction += 1.0
 	velocity = Vector2(direction * move_speed, 0)
 
-# Controls the bobbing motion
-func _water_bob(delta : float) -> void:
-	bob_timer += delta
-	var bob : float = sin(bob_timer) * bob_amplitude
-	boat_sprite.position.y = bob
-
 # Action handler.
 var interacted : bool = false
 func _action() -> void:
@@ -242,3 +236,7 @@ func _on_casting_state() -> void:
 # Hide power bar on WaitingState
 func _on_waiting_state() -> void:
 	power_bar.visible = false
+
+# Sends player to death scene.
+func _die() -> void:
+	if PlayManager.request_dead_state() : GameManager.change_scene_deferred(GameManager.death_scene)

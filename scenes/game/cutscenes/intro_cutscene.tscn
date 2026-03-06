@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://3f6aflexnva0"]
+[gd_scene load_steps=21 format=3 uid="uid://3f6aflexnva0"]
 
-[ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scenes/ui/pop_ups/intro_cutscene/intro_cutscene.gd" id="1_kb0hh"]
-[ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/daytime_main.tscn" id="2_4sr7y"]
+[ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scripts/game/cutscenes/intro_cutscene.gd" id="1_kb0hh"]
+[ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/main/daytime_main.tscn" id="2_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="2_qaqdv"]
 [ext_resource type="Texture2D" uid="uid://drsdbbci2pfyp" path="res://assets/textures/background/TreeTops.png" id="3_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://bnbbyk3i184dm" path="res://assets/textures/background/TreeLowers.png" id="4_4sr7y"]
@@ -9,7 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://cafh7ij3d6eeu" path="res://assets/textures/fish/wip_fish/Catfish.png" id="6_j6n06"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="9_10lx7"]
+[ext_resource type="Texture2D" uid="uid://bkbsok460ot6f" path="res://assets/textures/background/PlaceholderDock.png" id="13_w6mpv"]
+[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="14_x43rj"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="15_pob4g"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="15_t7w3j"]
 [ext_resource type="Texture2D" uid="uid://44cx551j0x6x" path="res://assets/textures/fish/final_fish/08_Parrotfish.png" id="16_n5cky"]
 [ext_resource type="Texture2D" uid="uid://bd0t5yjd1iq30" path="res://assets/textures/vfx/CloudLarge.png" id="17_ceebp"]
 
@@ -99,6 +102,30 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(0, 1800)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HUD/ColorRect:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Catfish2:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(904.00006, 2651.0002)]
+}
 
 [sub_resource type="Animation" id="Animation_qaqdv"]
 resource_name = "intro_sequence"
@@ -158,10 +185,10 @@ tracks/4/path = NodePath("Catfish:position")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(14.333333, 14.99, 15.67),
+"times": PackedFloat32Array(14.333334, 14.99, 15.67),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(890.00006, 2633), Vector2(808.00006, 2546.0002), Vector2(683, 2647)]
+"values": [Vector2(890, 2664), Vector2(808.00006, 2546.0002), Vector2(683, 2647)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -170,10 +197,10 @@ tracks/5/path = NodePath("Catfish2:position")
 tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(15.533334, 16.216667, 16.666666),
+"times": PackedFloat32Array(15.533334, 16.216667, 16.666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(683, 2647), Vector2(808.00006, 2546.0002), Vector2(890.00006, 2633)]
+"values": [Vector2(683, 2647), Vector2(808.00006, 2546.0002), Vector2(904.00006, 2651.0002)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -199,6 +226,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(0, 1800), Vector2(0, 2000)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("HUD/ColorRect:color")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(17.033333, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sr7y"]
 _data = {
@@ -212,11 +251,16 @@ _data = {
 }
 point_count = 12
 
-[node name="IntroCutscene" type="Control"]
+[sub_resource type="LabelSettings" id="LabelSettings_4w68r"]
+font = ExtResource("15_t7w3j")
+
+[node name="IntroCutscene" type="Control" node_paths=PackedStringArray("hold_skip_control", "hold_skip_bar")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_kb0hh")
 next_scene = ExtResource("2_4sr7y")
+hold_skip_control = NodePath("CanvasLayer/HoldToSkip")
+hold_skip_bar = NodePath("CanvasLayer/HoldToSkip/MarginContainer/MarginContainer/HBoxContainer/ProgressBar")
 
 [node name="BackgroundSkyClear" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -236,6 +280,7 @@ texture = ExtResource("4_4sr7y")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
+position_smoothing_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -248,14 +293,10 @@ scale = Vector2(0.3136349, 0.3136349)
 texture = ExtResource("6_j6n06")
 
 [node name="Catfish2" type="Sprite2D" parent="."]
-position = Vector2(890.00006, 2633)
+position = Vector2(904.00006, 2651.0002)
 scale = Vector2(0.3136349, 0.3136349)
 texture = ExtResource("6_j6n06")
 flip_h = true
-
-[node name="PlaceholderWater" type="Sprite2D" parent="."]
-position = Vector2(640, 2357)
-texture = ExtResource("5_qnvo7")
 
 [node name="MockTitle" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -268,8 +309,16 @@ offset = Vector2(0, 1800)
 transform = Transform2D(1, 0, 0, 1, 0, 1800)
 follow_viewport_enabled = true
 
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
 [node name="Jeremy" parent="." instance=ExtResource("15_pob4g")]
-position = Vector2(300, 2582.0002)
+position = Vector2(350, 2475)
 scale = Vector2(0.15348448, 0.15348448)
 
 [node name="Path2D" type="Path2D" parent="."]
@@ -311,5 +360,72 @@ position = Vector2(580, 423.4379)
 rotation = 3.1415927
 scale = Vector2(1, 0.33750015)
 texture = ExtResource("17_ceebp")
+
+[node name="Dock" type="Sprite2D" parent="."]
+position = Vector2(451, 2484)
+texture = ExtResource("13_w6mpv")
+
+[node name="Water" type="Parallax2D" parent="."]
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(-20, 0)
+repeat_times = 1000
+
+[node name="Sprite2D" type="Sprite2D" parent="Water"]
+z_index = 5
+position = Vector2(0, 2000)
+texture = ExtResource("5_qnvo7")
+centered = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HoldToSkip" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchor_left = 0.7
+anchor_top = 0.9
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HoldToSkip"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HoldToSkip/MarginContainer"]
+layout_mode = 2
+texture = ExtResource("14_x43rj")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HoldToSkip/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/HoldToSkip/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/HoldToSkip/MarginContainer/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Hold to Skip"
+label_settings = SubResource("LabelSettings_4w68r")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer/HoldToSkip/MarginContainer/MarginContainer/HBoxContainer"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+value = 50.0
+show_percentage = false
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

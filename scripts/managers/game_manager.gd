@@ -14,6 +14,8 @@ var state_machine : StateMachine
 @export var main_menu_scene : PackedScene
 @export var daytime_scene : PackedScene
 @export var nighttime_scene : PackedScene
+@export var intro_scene : PackedScene
+@export var death_scene : PackedScene
 
 func _ready() -> void:
 	# Check to see if the current scene is the default. If so, kill it.
