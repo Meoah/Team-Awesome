@@ -19,6 +19,7 @@ func _ready() -> void:
 	
 	# Initial setup
 	AudioEngine.play_bgm(default_bgm)
+	PlayManager.request_dialogue_day_state()
 	await hud.fade_in().finished
 	await _walk_up_sequence().finished
 	

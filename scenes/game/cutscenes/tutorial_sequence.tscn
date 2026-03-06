@@ -1,40 +1,375 @@
-[gd_scene load_steps=5 format=3 uid="uid://5ebmwhe881d"]
+[gd_scene load_steps=17 format=3 uid="uid://5ebmwhe881d"]
 
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="1_fgbf8"]
-[ext_resource type="Script" uid="uid://b8svya20t67fs" path="res://scripts/game/cutscenes/tutorial_sequence.gd" id="1_ltyb5"]
+[ext_resource type="Script" uid="uid://b8svya20t67fs" path="res://scripts/game/cutscenes/tutorial/tutorial_sequence.gd" id="1_ltyb5"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_ltyb5"]
+[ext_resource type="Shader" uid="uid://b53gtf3nmu4po" path="res://scripts/game/cutscenes/tutorial/tutorial_sequence.gdshader" id="2_pyu63"]
 [ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/vfx/DetectiveNavi.png" id="3_64mbj"]
+[ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/jeremy/arrow.png" id="6_dqchs"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_mv02k"]
-texture = ExtResource("1_fgbf8")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-expand_margin_left = 10.0
-expand_margin_right = 10.0
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_j3af4"]
+resource_local_to_scene = true
+shader = ExtResource("2_pyu63")
+shader_parameter/hole_uv = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/feather = 0.0
 
-[node name="TutorialSequence" type="CanvasLayer" node_paths=PackedStringArray("label")]
+[sub_resource type="Theme" id="Theme_j3af4"]
+default_font = ExtResource("2_ltyb5")
+default_font_size = 24
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dqchs"]
+
+[sub_resource type="Animation" id="Animation_ofi64"]
+resource_name = "tutorial"
+length = 5.000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Navi/SpeechBubble/MarginContainer/Content:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2, 2.0333333, 3, 3.5, 3.5333335, 3.5666668, 3.6000001, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Welcome to Arrow Fishing!", "You play as Jeremy the Jerboa", "Press Space Bar to cast your Fishing Rod!", "Everytime you cast your
+rod you use up bait.", "When you get a bite, press space bar
+before time runs out to reel it up!
+That'll start the minigame.", "During the minigame, press the arrow
+combination on screen with either
+the arrow keys or WASD", "Watch out for Variants!
+[color=gold]Gold[/color] shatters after an incorrect input.
+So go slower on those!!", "Evil [color=red]red[/color] arrows must be pressed
+in the [b]OPPOSITE[/b] direction.", "When you run out of bait,
+or are done for the day,
+just walk left to head back home!", "That's all there is to it!
+Good luck and have fun!"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Navi:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.266667, 2.5333335, 3.0000002, 3.5, 3.5333335, 3.5666668, 3.6000001, 4, 4.5, 5.0000005),
+"transitions": PackedFloat32Array(1, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(350, 475), Vector2(640, 360), Vector2(500, 400), Vector2(500, 425), Vector2(500, 400), Vector2(900, 200), Vector2(640, 360), Vector2(640, 360), Vector2(640, 360), Vector2(640, 360), Vector2(100, 400), Vector2(640, 360), Vector2(350, 475)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Navi/SpeechBubble:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.0333334, 2, 2.5333333, 2.5334332, 3, 3.0333335, 3.5, 3.6333334, 4, 4.033334, 4.5, 4.533334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 2, 2.5, 3, 3.5, 3.5333335, 3.5666668, 3.6000001, 4, 4.5, 5.0000005),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blocker:material:shader_parameter/hole_uv")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.5, 2.5333333, 3.5, 3.6),
+"transitions": PackedFloat32Array(1, -2, -2, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(0.273, 0.66), Vector2(0.273, 0.66), Vector2(0.572, 0.12), Vector2(0.572, 0.12), Vector2(0, 0.65)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Blocker:material:shader_parameter/radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.5, 3, 3.5, 3.6, 4, 4.5),
+"transitions": PackedFloat32Array(1, 1, -2, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.02, 0.12, 0.0, 0.18, 0.0, 0.0, 0.18, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Blocker:material:shader_parameter/feather")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 2.4666667, 2.5, 3, 3.4666667, 3.5, 3.6, 4, 4.4666667, 4.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.1, 0.02, 0.0, 0.07, 0.02, 0.0, 0.0, 0.07, 0.02, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_yxihr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Navi:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Navi/SpeechBubble/MarginContainer/Content:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Welcome to Arrow Fishing!"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Navi/SpeechBubble:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blocker:material:shader_parameter/hole_uv")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blocker:material:shader_parameter/radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Blocker:material:shader_parameter/feather")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p15s2"]
+_data = {
+&"RESET": SubResource("Animation_yxihr"),
+&"tutorial": SubResource("Animation_ofi64")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofi64"]
+font = ExtResource("2_ltyb5")
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_p15s2"]
+resource_name = "blink"
+length = 3.0000036
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ywqia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbj8i"]
+_data = {
+&"RESET": SubResource("Animation_ywqia"),
+&"blink": SubResource("Animation_p15s2")
+}
+
+[node name="TutorialSequence" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "continue_indicator")]
 script = ExtResource("1_ltyb5")
-label = NodePath("DetectiveNavi/Label")
+animation_player = NodePath("AnimationPlayer")
+continue_indicator = NodePath("ContinueIndicator")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Blocker" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_j3af4")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.2)
+color = Color(0, 0, 0, 0.6)
 
-[node name="DetectiveNavi" type="Sprite2D" parent="."]
-position = Vector2(-21, 14.000002)
+[node name="Navi" type="Node2D" parent="."]
+
+[node name="SpeechBubble" type="PanelContainer" parent="Navi"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -95.0
+offset_right = 365.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme = SubResource("Theme_j3af4")
+theme_override_styles/panel = SubResource("StyleBoxTexture_dqchs")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Navi/SpeechBubble"]
+layout_mode = 2
+texture = ExtResource("1_fgbf8")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Navi/SpeechBubble"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="RichTextLabel" parent="Navi/SpeechBubble/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "Welcome to Arrow Fishing!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Navi"]
 scale = Vector2(0.04230577, 0.04230577)
 texture = ExtResource("3_64mbj")
 
-[node name="Label" type="RichTextLabel" parent="DetectiveNavi"]
-offset_left = 496.3862
-offset_top = -2623.7556
-offset_right = 529.3862
-offset_bottom = -2526.7556
-theme_override_styles/normal = SubResource("StyleBoxTexture_mv02k")
-fit_content = true
-vertical_alignment = 1
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p15s2")
+}
+
+[node name="ContinueIndicator" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContinueIndicator"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ContinueIndicator/HBoxContainer"]
+layout_mode = 2
+text = "Click to continue.."
+label_settings = SubResource("LabelSettings_ofi64")
+
+[node name="ContinueArrow" type="TextureRect" parent="ContinueIndicator/HBoxContainer"]
+modulate = Color(1, 0.99215686, 1, 0.78431374)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_dqchs")
+expand_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ContinueIndicator"]
+libraries = {
+&"": SubResource("AnimationLibrary_lbj8i")
+}
+autoplay = "blink"

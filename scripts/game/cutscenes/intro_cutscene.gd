@@ -1,5 +1,7 @@
 extends Control
 
+# TODO there arrow is still visible when panning down. This is undesired.
+
 @export var next_scene : PackedScene
 
 @export var hold_skip_control : Control
