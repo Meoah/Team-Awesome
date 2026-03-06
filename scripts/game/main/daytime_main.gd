@@ -75,5 +75,5 @@ func _on_fish_animation_finished(_anim_name: StringName) -> void:
 func _idle_state() -> void:
 	AudioEngine.play_bgm(default_bgm)
 
-func _on_button_pressed():
-	_end_day()
+func _on_exit_sign_body_entered(body: Node2D) -> void:
+	if body is MainCharacter : _end_day()
