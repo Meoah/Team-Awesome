@@ -1,9 +1,73 @@
-[gd_scene format=3 uid="uid://chsc80rlb7fam"]
+[gd_scene load_steps=4 format=3 uid="uid://cclc658nt2osg"]
 
-[node name="PausePopup" type="Control"]
+[ext_resource type="Script" uid="uid://d0o1muj4f7jbw" path="res://scripts/ui/pop_ups/pause_popup.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="2_yt3lu"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2vhs1"]
+
+[node name="PausePopup" type="Control" node_paths=PackedStringArray("resume_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1")
+resume_button = NodePath("CenterContainer/Panel/MarginContainer/VBoxContainer/ResumeButton")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="PanelContainer" parent="CenterContainer"]
+custom_minimum_size = Vector2(420, 320)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2vhs1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CenterContainer/Panel"]
+layout_mode = 2
+texture = ExtResource("2_yt3lu")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/Panel"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PauseLabel" type="Label" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 36
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="MainMenuButton" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Return to Main Menu"
+
+[node name="SettingsButton" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Settings"
+
+[node name="ResumeButton" type="Button" parent="CenterContainer/Panel/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+text = "Resume"
+
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/VBoxContainer/MainMenuButton" to="." method="_on_main_menu_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/VBoxContainer/SettingsButton" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="CenterContainer/Panel/MarginContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_pressed"]

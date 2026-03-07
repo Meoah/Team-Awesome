@@ -507,7 +507,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 2
 texture_normal = ExtResource("6_todbw")
 ignore_texture_size = true
 stretch_mode = 0
@@ -653,3 +652,4 @@ color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
+[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Pause/TextureButton" to="HUDController" method="_on_texture_button_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=13 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
 [ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_pnn6m"]
@@ -7,42 +7,195 @@
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/Play_Button.png" id="5_t5foa"]
 [ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="6_87tfw"]
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="7_hh21g"]
-[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="8_pavj3"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="9_d7yyt"]
-[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/Settings_Button.png" id="10_26lib"]
-[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="11_2jgrx"]
-[ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="12_e8tmt"]
-[ext_resource type="Texture2D" uid="uid://2wer6ur45n82" path="res://assets/textures/ui/MusicVolume_Button.png" id="13_yi70e"]
-[ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="14_8pxsd"]
-[ext_resource type="Texture2D" uid="uid://dkyx8of0ikxer" path="res://assets/textures/ui/Fullscreen_Button.png" id="15_7fwnw"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_648uh"]
-texture = ExtResource("3_4kdnx")
+[sub_resource type="Animation" id="Animation_hff0s"]
+resource_name = "startup"
+length = 6.000004
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/MockTitle:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.9999993, 2.933333, 5.1666665),
+"transitions": PackedFloat32Array(-2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(640, -100), Vector2(640, 360), Vector2(640, 360), Vector2(640, 180)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/MockTitle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.1333327, 3.166666, 6),
+"transitions": PackedFloat32Array(1, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.75000006)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/MockTitle:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.86666626, 1.666666, 1.9999993, 2.3333328, 2.666666, 2.9999993, 5.1666665),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1), Vector2(1.05, 1.05), Vector2(0.9, 0.9), Vector2(1.05, 1.05), Vector2(0.9, 0.9), Vector2(0.5, 0.5)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/MockTitle:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.666666, 1.9999993, 2.3333328, 2.666666, 2.9999993),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [0.0, -0.17453292519943295, 0.0, 0.17453292519943295, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MainMenu/VBoxContainer/PlayButton:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 5, 5.3333335),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MainMenu/VBoxContainer/OptionsButton:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 5.3333335, 5.666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainMenu/VBoxContainer/ExitButton:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 5.6666665, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1f7y1"]
-texture = ExtResource("9_d7yyt")
+[sub_resource type="Animation" id="Animation_pnn6m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Background/MockTitle:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(640, 360)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Background/MockTitle:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Background/MockTitle:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Background/MockTitle:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("MainMenu/VBoxContainer/PlayButton:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("MainMenu/VBoxContainer/OptionsButton:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("MainMenu/VBoxContainer/ExitButton:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4oldi"]
+[sub_resource type="Animation" id="Animation_4kdnx"]
+resource_name = "settings_open"
+loop_mode = 2
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_nsdtn"]
-texture = ExtResource("10_26lib")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4kdnx"]
+_data = {
+&"RESET": SubResource("Animation_pnn6m"),
+&"settings_open": SubResource("Animation_4kdnx"),
+&"startup": SubResource("Animation_hff0s")
+}
 
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_8saeu"]
-thickness = 6
-
-[sub_resource type="StyleBoxLine" id="StyleBoxLine_ghw46"]
-color = Color(0.92941177, 0.7882353, 0.6862745, 1)
-thickness = 6
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4oldi"]
-texture = ExtResource("13_yi70e")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73xsm"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_21mov"]
-texture = ExtResource("15_7fwnw")
-
-[node name="Main_Menu" type="Control"]
+[node name="Main_Menu" type="Control" node_paths=PackedStringArray("blocker", "animation_player", "button_quit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,189 +204,100 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hff0s")
 default_bgm = ExtResource("2_pnn6m")
+blocker = NodePath("Blocker")
+animation_player = NodePath("AnimationPlayer")
+button_quit = NodePath("MainMenu/VBoxContainer/ExitButton")
 
-[node name="Background" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -3.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_648uh")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4kdnx")
+}
+autoplay = "startup"
 
-[node name="Parallax2D2" type="Parallax2D" parent="."]
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sky" type="Sprite2D" parent="Background"]
+texture = ExtResource("3_4kdnx")
+centered = false
+
+[node name="CloudlineTop" type="Parallax2D" parent="Background"]
 scale = Vector2(1, 0.6399994)
 repeat_size = Vector2(300, 0)
 autoscroll = Vector2(40, 0)
 repeat_times = 6
 
-[node name="CloudLarge" type="Sprite2D" parent="Parallax2D2"]
+[node name="CloudLarge" type="Sprite2D" parent="Background/CloudlineTop"]
 position = Vector2(580, 356.25027)
 scale = Vector2(1, 0.5625)
 texture = ExtResource("4_gbwl8")
 
-[node name="CloudLarge2" type="Sprite2D" parent="Parallax2D2"]
+[node name="CloudLarge2" type="Sprite2D" parent="Background/CloudlineTop"]
 position = Vector2(580, 423.4379)
 rotation = 3.1415927
 scale = Vector2(1, 0.33750015)
 texture = ExtResource("4_gbwl8")
 
-[node name="Parallax2D" type="Parallax2D" parent="."]
+[node name="CloudlineBottom" type="Parallax2D" parent="Background"]
 scroll_offset = Vector2(-5.465, 0)
 repeat_size = Vector2(300, 0)
 autoscroll = Vector2(50, 0)
 repeat_times = 5
 
-[node name="CloudLarge" type="Sprite2D" parent="Parallax2D"]
+[node name="CloudLarge" type="Sprite2D" parent="Background/CloudlineBottom"]
 position = Vector2(617, 663)
 texture = ExtResource("4_gbwl8")
 
-[node name="MainButtons" type="VBoxContainer" parent="."]
+[node name="MockTitle" type="Sprite2D" parent="Background"]
+position = Vector2(640, 360)
+texture = ExtResource("9_d7yyt")
+
+[node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
+anchors_preset = 7
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -301.0
-offset_top = -111.0
-offset_right = 330.0
-offset_bottom = 379.0
+anchor_bottom = 1.0
+offset_left = -279.5
+offset_top = -456.0
+offset_right = 279.5
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MainMenu"]
+layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PlayButton" type="TextureButton" parent="MainButtons"]
+[node name="PlayButton" type="TextureButton" parent="MainMenu/VBoxContainer"]
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("5_t5foa")
 
-[node name="OptionsButton" type="TextureButton" parent="MainButtons"]
+[node name="OptionsButton" type="TextureButton" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture_normal = ExtResource("6_87tfw")
 
-[node name="ExitButton" type="TextureButton" parent="MainButtons"]
+[node name="ExitButton" type="TextureButton" parent="MainMenu/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture_normal = ExtResource("7_hh21g")
 
-[node name="Label" type="Label" parent="."]
+[node name="Blocker" type="ColorRect" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -383.0
-offset_top = -426.0
-offset_right = 437.0
-offset_bottom = -21.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.79018086, 0.6306613, 0.51011544, 0.90588236)
-theme_override_colors/font_shadow_color = Color(0.0105956, 0.0105956, 0.0105956, 0.5764706)
-theme_override_constants/shadow_offset_y = 10
-theme_override_fonts/font = ExtResource("8_pavj3")
-theme_override_font_sizes/font_size = 120
-theme_override_styles/normal = SubResource("StyleBoxTexture_1f7y1")
-text = "
-"
+color = Color(1, 1, 1, 0)
 
-[node name="Settings" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -272.5
-offset_top = -120.0
-offset_right = 272.5
-offset_bottom = 284.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_4oldi")
-
-[node name="Label" type="Label" parent="Settings"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -154.0
-offset_top = -203.0
-offset_right = 169.0
-offset_bottom = -96.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("8_pavj3")
-theme_override_font_sizes/font_size = 30
-theme_override_styles/normal = SubResource("StyleBoxTexture_nsdtn")
-horizontal_alignment = 1
-
-[node name="BackButton" type="TextureButton" parent="Settings"]
-layout_mode = 0
-offset_left = 151.5
-offset_top = 350.0
-offset_right = 1444.5
-offset_bottom = 858.0
-scale = Vector2(0.2, 0.2)
-texture_normal = ExtResource("11_2jgrx")
-
-[node name="AudioControl" type="HSlider" parent="Settings"]
-layout_mode = 0
-offset_left = 132.5
-offset_top = 193.0
-offset_right = 403.5
-offset_bottom = 209.0
-theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
-theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
-theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
-max_value = 1.0
-step = 0.05
-value = 1.0
-script = ExtResource("12_e8tmt")
-audio_bus_name = "Master"
-
-[node name="Label" type="Label" parent="Settings/AudioControl"]
-layout_mode = 0
-offset_left = 70.0
-offset_top = -64.0
-offset_right = 195.0
-offset_bottom = -15.0
-theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("8_pavj3")
-theme_override_styles/normal = SubResource("StyleBoxTexture_4oldi")
-
-[node name="Fullscreen_Control" type="CheckButton" parent="Settings"]
-layout_mode = 0
-offset_left = 113.5
-offset_top = 229.0
-offset_right = 442.5
-offset_bottom = 326.0
-theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
-theme_override_fonts/font = ExtResource("8_pavj3")
-theme_override_styles/normal = SubResource("StyleBoxTexture_73xsm")
-script = ExtResource("14_8pxsd")
-
-[node name="Label" type="Label" parent="Settings/Fullscreen_Control"]
-layout_mode = 0
-offset_left = 85.0
-offset_top = 4.0
-offset_right = 235.0
-offset_bottom = 81.0
-theme_override_styles/normal = SubResource("StyleBoxTexture_21mov")
-
-[connection signal="pressed" from="MainButtons/PlayButton" to="." method="_on_start_pressed"]
-[connection signal="pressed" from="MainButtons/OptionsButton" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="MainButtons/ExitButton" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="Settings/BackButton" to="." method="_on_backbutton_pressed"]
-[connection signal="value_changed" from="Settings/AudioControl" to="Settings/AudioControl" method="_on_value_changed"]
-[connection signal="toggled" from="Settings/Fullscreen_Control" to="Settings/Fullscreen_Control" method="_on_toggled"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
+[connection signal="gui_input" from="Blocker" to="." method="_on_blocker_gui_input"]

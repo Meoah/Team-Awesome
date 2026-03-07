@@ -19,12 +19,16 @@ func clear_queue() -> void:
 	_blocker.kill_tween()
 	_blocker.set_alpha(0.0, false)
 	# Finds all popups in the queue and frees them.
-	for each : BasePopup in _queue.values():
-		each.visible = false
-		_queue.erase(each.name)
-		each.queue_free()
+	for each_popup: BasePopup in _queue.values():
+		each_popup.visible = false
+		each_popup.queue_free()
 	# Same reason as we have it in _ready().
+	_queue.clear()
+	_number_paused = 0
 	self.visible = false
+	
+	if GameManager.get_current_state() == GameManager.pause_state:
+		GameManager.request_unpause()
 
 ## Procedure: Show Popup
 # Find the popup within the PopupLibrary by type, then sets up the popup according to given parameters.
@@ -32,7 +36,7 @@ func show_popup(popup_type : BasePopup.POPUP_TYPE, params : Dictionary = {}) -> 
 	var popup : BasePopup = PopupLibrary.create_popup(popup_type, params)
 	
 	_on_before_show(popup)
-	return popup.name # Returns name for debug purposes
+	return popup.name # Returns name for tracking
 
 # Allows running of preparation functions before actual showing of popup.
 func _on_before_show(popup: BasePopup) -> void:
@@ -106,7 +110,7 @@ func _on_before_dismiss(popup: BasePopup) -> void:
 	popup.on_before_dismiss()
 	
 	# Decrement pause tracker by 1 if popup has pausing parameter.
-	if (popup.is_will_pause()) && _number_paused > 0:
+	if popup.is_will_pause() && _number_paused > 0:
 		_number_paused -= 1
 		if _number_paused == 0:
 			GameManager.request_unpause() # Transition away from pause if counter hits 0.
@@ -142,13 +146,17 @@ func _input(event: InputEvent) -> void:
 	if event is InputEventKey:
 		# Allows escape to dismiss popup.
 		if event.keycode == KEY_ESCAPE and event.is_released():
-			if _queue.size() == 0 : return
-			
+			var popup : BasePopup = null
 			# Checks if state needs to be set back from pause.
-			var popup: BasePopup = _queue.values().back()
+			if _queue.size() > 0 : popup = _queue.values().back()
 			var current_state = GameManager.get_current_state()
 			
+			if popup and popup.is_dismiss_on_escape():
+				GameManager.dismiss_popup()
+				get_viewport().set_input_as_handled()
+				return
+			
 			# Pause only happens after all the DISMISS_ON_ESCAPE are down.
-			if popup && (popup.is_dismiss_on_escape()) : GameManager.dismiss_popup()
-			# TODO Pause menu
-			#elif current_state == GameManager.play_state : GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
+			if current_state == GameManager.play_state:
+				GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
+				get_viewport().set_input_as_handled()

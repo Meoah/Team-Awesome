@@ -3,19 +3,16 @@ extends Control
 @export_category("Audio")
 @export var default_bgm : AudioStream
 
-@onready var main_buttons = $MainButtons
-@onready var settings = $Settings
-@onready var gameStart
+@export_category("Children Nodes")
+@export var blocker : ColorRect
+@export var animation_player : AnimationPlayer
+@export var button_quit : TextureButton
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
-	main_buttons.visible = true
-	settings.visible = false
+	# Disables the quit button entirely if it's on web since that just crashes the game if clicked.
+	if OS.has_feature("web") : button_quit.visible = false
 	AudioEngine.play_bgm(default_bgm)
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
 
 
 func _on_start_pressed():
@@ -23,16 +20,17 @@ func _on_start_pressed():
 		GameManager.change_scene_deferred(GameManager.intro_scene)
 
 
-func _on_settings_pressed():
-	print("Settings Pressed")
-	main_buttons.visible = false
-	settings.visible = true
-	
-
 func _on_exit_pressed():
 	get_tree().quit() #exits out of game
-	
 
 
-func _on_backbutton_pressed():
-	_ready()
+func _on_animation_player_animation_finished(anim_name: String) -> void:
+	if anim_name == "startup" : blocker.visible = false
+
+
+func _on_blocker_gui_input(event: InputEvent) -> void:
+	if event.is_action_pressed("mouse_click") || event.is_action_pressed("action") : animation_player.seek(5.99)
+
+
+func _on_options_button_pressed() -> void:
+	GameManager.show_popup(BasePopup.POPUP_TYPE.SETTINGS)

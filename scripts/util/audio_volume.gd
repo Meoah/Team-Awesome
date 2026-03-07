@@ -1,12 +1,14 @@
 extends HSlider
+class_name AudioSlider
 
-@export var audio_bus_name: String #creates a variable of String type that will give a name to an audio bus
 
-var audio_bus_id #declares a variable that can be used as a parameter for the 
-				 #AudioServer function
+@export_enum(AudioEngine.BUS_MASTER, AudioEngine.BUS_BGM, AudioEngine.BUS_SFX, AudioEngine.BUS_DIALOGUE) var audio_bus_name : String
 
-func _ready():
-	audio_bus_id = AudioServer.get_bus_index(audio_bus_name)
+func _ready() -> void:
+	var audio_bus_index : int = AudioServer.get_bus_index(audio_bus_name)
+	var current_volume : float = AudioServer.get_bus_volume_linear(audio_bus_index)
+	
+	value = current_volume
 
 func _on_value_changed(_value) -> void:
-	AudioEngine.set_bus_volume_linear(AudioEngine.BUS_BGM, _value)
+	AudioEngine.set_bus_volume_linear(audio_bus_name, _value)
