@@ -152,3 +152,7 @@ func _on_fish_dropdown_pressed() -> void:
 func _on_bait_dropdown_pressed() -> void:
 	bait_inventory.visible = !bait_inventory.visible
 	fish_inventory.visible = false
+
+
+func _on_texture_button_pressed() -> void:
+	GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)

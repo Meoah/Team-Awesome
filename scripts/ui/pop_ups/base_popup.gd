@@ -41,6 +41,11 @@ func _init() -> void:
 func _ready() -> void:
 	_on_ready()
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_released("ui_cancel") and is_dismiss_on_escape():
+		GameManager.dismiss_popup(name)
+		get_viewport().set_input_as_handled()
+
 # Sets parameters to be used on a case by case basis.
 func set_params(_params: Dictionary = {}) -> void:
 	self.params = _params.duplicate()

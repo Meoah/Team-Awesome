@@ -28,8 +28,8 @@ func _ready() -> void:
 	hold_skip_control.modulate.a = 0.0
 	
 	var popup_parameters = {
-	"dialogue_id" = 0001,
-	"flags" = BasePopup.POPUP_FLAG.DISMISS_ON_ESCAPE
+		"dialogue_id" = 0001,
+		#"flags" = BasePopup.POPUP_FLAG.DISMISS_ON_ESCAPE
 	}
 	if PlayManager.request_dialogue_day_state():
 		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)

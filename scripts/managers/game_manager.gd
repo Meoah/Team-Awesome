@@ -26,8 +26,20 @@ func _ready() -> void:
 		print("Current scene is default, freeing it.")
 		default.queue_free()
 	
+	# TODO placeholder audio save data
+	var audio_data : Dictionary = {
+		AudioEngine.SAVE_KEY_VOLUMES : {
+			AudioEngine.SAVE_KEY_MASTER: 0.5,
+			AudioEngine.SAVE_KEY_BGM: 0.5,
+			AudioEngine.SAVE_KEY_SFX: 0.5,
+			AudioEngine.SAVE_KEY_DIALOGUE: 0.5
+				}
+			}
+	AudioEngine.load_audio_data(audio_data)
 	
 	_setup_state_machine()
+	
+	
 
 # Initializes state machine.
 func _setup_state_machine() -> void:
@@ -72,6 +84,11 @@ func request_main_menu() -> bool : return state_machine.transition_to(main_menu_
 # Clears any popups left in queue.
 func clear_popup_queue() -> void:
 	popup_queue.clear_queue()
+
+## Shows the requested popup.
+func show_popup(popup_type: BasePopup.POPUP_TYPE, params: Dictionary = {}) -> String:
+	var popup_name = popup_queue.show_popup(popup_type, params)
+	return popup_name
 
 # Dismisses the top popup. If a name is specified, dismisses that popup.
 func dismiss_popup(popup_name : String = "") -> void:

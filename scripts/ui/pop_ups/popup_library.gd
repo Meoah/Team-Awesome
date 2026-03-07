@@ -5,6 +5,7 @@ class_name PopupLibrary
 const _BLOCKER = preload("res://scenes/ui/pop_ups/blocker.tscn")
 const _GENERIC = preload("res://scenes/ui/pop_ups/generic_popup.tscn")
 const _PAUSE = preload("res://scenes/ui/pop_ups/pause_popup.tscn")
+const _SETTINGS = preload("res://scenes/ui/pop_ups/settings_popup.tscn")
 const _MINIGAMEUI = preload("res://scenes/ui/pop_ups/fish_minigame/arrows.tscn")
 const _DIALOGUE = preload("res://scenes/ui/pop_ups/dialogue_popup.tscn")
 const _SHOP = preload("res://scenes/ui/pop_ups/shop_popup.tscn")
@@ -22,8 +23,10 @@ static func create_popup(popup_type: int, params: Dictionary = {}) -> BasePopup:
 			popup = _DIALOGUE.instantiate()
 		BasePopup.POPUP_TYPE.SHOP:
 			popup = _SHOP.instantiate()
-		BasePopup.POPUP_TYPE.PAUSE: #TODO Pause Menu. This is here for demonstration purposes.
+		BasePopup.POPUP_TYPE.PAUSE:
 			popup = _PAUSE.instantiate()
+		BasePopup.POPUP_TYPE.SETTINGS:
+			popup = _SETTINGS.instantiate()
 		_: # Default
 			popup = _GENERIC.instantiate()
 	

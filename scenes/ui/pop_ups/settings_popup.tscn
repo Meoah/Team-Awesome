@@ -1,0 +1,195 @@
+[gd_scene load_steps=12 format=3 uid="uid://gbmec1b0enmv"]
+
+[ext_resource type="Script" uid="uid://bovbn0xd4wp6a" path="res://scripts/ui/pop_ups/settings_popup.gd" id="1_5l3de"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="1_agcd6"]
+[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/Settings_Button.png" id="2_5l3de"]
+[ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="3_hnp0x"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_tpevy"]
+[ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="5_xjmmi"]
+[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="6_0y5ln"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hff0s"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_8saeu"]
+thickness = 6
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ghw46"]
+color = Color(0.92941177, 0.7882353, 0.6862745, 1)
+thickness = 6
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_73xsm"]
+
+[node name="SettingsPopup" type="Control" node_paths=PackedStringArray("back_button", "first_focus_control")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_5l3de")
+back_button = NodePath("SettingsWindow/MarginContainer/VBoxContainer/TextureButton")
+first_focus_control = NodePath("SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master")
+
+[node name="SettingsWindow" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.4
+anchor_right = 0.6
+anchor_bottom = 0.8
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_hff0s")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="SettingsWindow"]
+layout_mode = 2
+texture = ExtResource("1_agcd6")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="SettingsWindow"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="SettingsWindow/MarginContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+texture = ExtResource("2_5l3de")
+expand_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Master"
+
+[node name="Master" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_hnp0x")
+audio_bus_name = "Master"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "BGM"
+
+[node name="BGM" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_hnp0x")
+audio_bus_name = "BGM"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "SFX"
+
+[node name="SFX" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_hnp0x")
+audio_bus_name = "SFX"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 10
+text = "Dialogue"
+
+[node name="Dialogue" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+theme_override_styles/slider = SubResource("StyleBoxLine_8saeu")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ghw46")
+theme_override_styles/grabber_area_highlight = SubResource("StyleBoxLine_ghw46")
+max_value = 1.0
+step = 0.05
+value = 1.0
+script = ExtResource("3_hnp0x")
+audio_bus_name = "Dialogue"
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Full Screen"
+
+[node name="Fullscreen_Control" type="CheckButton" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_colors/font_color = Color(0.4627451, 0.7921569, 0.3647059, 1)
+theme_override_fonts/font = ExtResource("4_tpevy")
+theme_override_styles/normal = SubResource("StyleBoxTexture_73xsm")
+script = ExtResource("5_xjmmi")
+
+[node name="TextureButton" type="TextureButton" parent="SettingsWindow/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+size_flags_vertical = 6
+texture_normal = ExtResource("6_0y5ln")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master" method="_on_value_changed"]
+[connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2/BGM" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2/BGM" method="_on_value_changed"]
+[connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3/SFX" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3/SFX" method="_on_value_changed"]
+[connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4/Dialogue" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4/Dialogue" method="_on_value_changed"]
+[connection signal="toggled" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5/Fullscreen_Control" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5/Fullscreen_Control" method="_on_toggled"]
+[connection signal="pressed" from="SettingsWindow/MarginContainer/VBoxContainer/TextureButton" to="." method="_on_back_pressed"]
