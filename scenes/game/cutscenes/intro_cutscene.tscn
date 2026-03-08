@@ -322,14 +322,6 @@ position = Vector2(1620, 1140)
 rotation = 2.761496
 rotates = false
 
-[node name="Label" type="Label" parent="Path2D/PathFollow2D"]
-offset_right = 40.0
-offset_bottom = 23.0
-rotation = -2.7715828
-pivot_offset = Vector2(145.785, 0)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
-text = "The only bird I had On hand"
-
 [node name="08Parrotfish" type="Sprite2D" parent="Path2D/PathFollow2D"]
 rotation = -2.761496
 scale = Vector2(0.42689675, 0.42689675)

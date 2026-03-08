@@ -1,11 +1,9 @@
-[gd_scene load_steps=54 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=53 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
 [ext_resource type="AudioStream" uid="uid://c3k0do5ko4b4x" path="res://assets/audio/bgm/dump/pressing_arrows.wav" id="2_np22p"]
-[ext_resource type="Texture2D" uid="uid://bqb5rtw7j46c7" path="res://assets/textures/debug/Cool.png" id="8_20txf"]
 [ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://scenes/ui/pop_ups/fish_minigame/sparks.gdshader" id="9_pp4l4"]
-[ext_resource type="Texture2D" uid="uid://cmh82nlyngkm5" path="res://assets/textures/debug/Lame.png" id="9_rvcsd"]
 [ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="10_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="11_xp8ps"]
 [ext_resource type="Texture2D" uid="uid://b4347mim6kpsw" path="res://assets/textures/ui/Arrows/Arrows.png" id="11_ybko8"]
@@ -13,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="13_8ksox"]
 [ext_resource type="AudioStream" uid="uid://by0a2yhtb1xx2" path="res://assets/audio/sfx/arrows_sfx/CorrectInput.wav" id="14_6t01a"]
 [ext_resource type="AudioStream" uid="uid://c2qsxm7f6l4bf" path="res://assets/audio/sfx/arrows_sfx/Weapon Bullet Shell 7MM Dropping On Cement 04.wav" id="14_qp0nd"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="15_np22p"]
 [ext_resource type="Script" uid="uid://c2w7qb8xpm6jn" path="res://scripts/ui/fish_minigame/arrow_sprite.gd" id="16_mx6gi"]
 [ext_resource type="AudioStream" uid="uid://cw4v1vxvdvah7" path="res://assets/audio/sfx/arrows_sfx/timer/FuseLit.wav" id="17_02m58"]
 [ext_resource type="AudioStream" uid="uid://c14h2hmeo5ygn" path="res://assets/audio/sfx/arrows_sfx/StarterWhistle.wav" id="17_47pa4"]
@@ -284,8 +283,6 @@ input_string = NodePath("TextEdit")
 reaction = NodePath("Reaction")
 timer = NodePath("Timer")
 progress_bar = NodePath("ProgressBar")
-success = ExtResource("8_20txf")
-failure = ExtResource("9_rvcsd")
 variants = Array[String](["Evil", "Gold", "None"])
 arrow_direction = Dictionary[String, Texture2D]({
 "Down": ExtResource("12_mx6gi"),
@@ -300,6 +297,8 @@ offset_left = 297.0
 offset_top = 60.0
 offset_right = 983.0
 offset_bottom = 262.0
+theme_override_fonts/font = ExtResource("15_np22p")
+theme_override_font_sizes/font_size = 32
 editable = false
 script = ExtResource("2_n3w4c")
 
