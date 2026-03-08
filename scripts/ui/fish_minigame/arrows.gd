@@ -170,7 +170,7 @@ func _input(_event : InputEvent):
 func correct_input():
 		input_index = input_index + 1 #Advances in the string index
 		#text_render()
-		$Reaction.set_texture(success)
+		#$Reaction.set_texture(success)
 		AudioEngine.play_sfx(sfx_success_arrow)
 		AudioEngine.play_sfx(sfx_success_arrow2)
 		var current_sprite : ArrowTexture = sprite_array.pop_front()
@@ -203,7 +203,7 @@ func timer_seqeunce():
 
 #On incorrect Input
 func incorrect_input():
-	$Reaction.set_texture(failure)
+	#$Reaction.set_texture(failure)
 	var incorrect_sprite: ArrowTexture = sprite_array[0]
 	incorrect_sprite.incorrect()
 	if varied_gold:
@@ -236,7 +236,7 @@ func fail():
 			i.erase()
 	timer.set_paused(true)
 	input_string.set_text("Times Up!!")
-	$Reaction.set_texture(failure)
+	#$Reaction.set_texture(failure)
 	for item in sprite_array:
 		$ArrowSprite.erase()
 	cleared = true
