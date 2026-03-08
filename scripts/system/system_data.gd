@@ -147,6 +147,9 @@ func use_bait(bait : int) -> bool:
 	if bait in bait_inventory:
 		if bait_inventory[bait] > 0:
 			bait_inventory[bait] -= 1
+			if bait_inventory[bait] <= 0:
+				bait_inventory.erase(bait)
+				active_bait = -1
 			inventory_updated.emit()
 			return true
 		else : print("Attempted to use bait at 0 count: ", bait)
