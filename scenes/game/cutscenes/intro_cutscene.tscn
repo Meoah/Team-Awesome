@@ -1,17 +1,18 @@
-[gd_scene load_steps=21 format=3 uid="uid://3f6aflexnva0"]
+[gd_scene load_steps=22 format=3 uid="uid://3f6aflexnva0"]
 
 [ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scripts/game/cutscenes/intro_cutscene.gd" id="1_kb0hh"]
 [ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/main/daytime_main.tscn" id="2_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://pciiuc4daisv" path="res://assets/textures/background/BackgroundSkyClear.png" id="2_qaqdv"]
+[ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_t7w3j"]
 [ext_resource type="Texture2D" uid="uid://drsdbbci2pfyp" path="res://assets/textures/background/TreeTops.png" id="3_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://bnbbyk3i184dm" path="res://assets/textures/background/TreeLowers.png" id="4_4sr7y"]
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_qnvo7"]
 [ext_resource type="Texture2D" uid="uid://cafh7ij3d6eeu" path="res://assets/textures/fish/wip_fish/Catfish.png" id="6_j6n06"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="9_10lx7"]
+[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/jeremy/MCPlaceholder.png" id="9_x43rj"]
 [ext_resource type="Texture2D" uid="uid://bkbsok460ot6f" path="res://assets/textures/background/PlaceholderDock.png" id="13_w6mpv"]
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="14_x43rj"]
-[ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="15_pob4g"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="15_t7w3j"]
 [ext_resource type="Texture2D" uid="uid://44cx551j0x6x" path="res://assets/textures/fish/final_fish/08_Parrotfish.png" id="16_n5cky"]
 [ext_resource type="Texture2D" uid="uid://bd0t5yjd1iq30" path="res://assets/textures/vfx/CloudLarge.png" id="17_ceebp"]
@@ -45,82 +46,70 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Jeremy:modulate")
+tracks/2/path = NodePath("Path2D/PathFollow2D:progress_ratio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Path2D/PathFollow2D:progress_ratio")
+tracks/3/path = NodePath("Catfish:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [Vector2(890.00006, 2633)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Catfish:position")
+tracks/4/path = NodePath("HUD:visible")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(890.00006, 2633)]
+"update": 1,
+"values": [false]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HUD:visible")
+tracks/5/path = NodePath("HUD:offset")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(0, 1800)]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("HUD:offset")
+tracks/6/path = NodePath("HUD/ColorRect:color")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 1800)]
+"values": [Color(0, 0, 0, 0)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("HUD/ColorRect:color")
+tracks/7/path = NodePath("Catfish2:position")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("Catfish2:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -157,86 +146,86 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Jeremy:modulate")
+tracks/2/path = NodePath("Path2D/PathFollow2D:progress_ratio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(13.733333, 15.299999),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Path2D/PathFollow2D:progress_ratio")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(7.366667, 11.366667),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, 1.0]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Catfish:position")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Catfish:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(14.333334, 14.99, 15.67),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(890, 2664), Vector2(808.00006, 2546.0002), Vector2(683, 2647)]
 }
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Catfish2:position")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Catfish2:position")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
 "times": PackedFloat32Array(15.533334, 16.216667, 16.666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(683, 2647), Vector2(808.00006, 2546.0002), Vector2(904.00006, 2651.0002)]
 }
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("HUD:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HUD:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
 "times": PackedFloat32Array(0, 12.766666),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("HUD:offset")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HUD:offset")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(12.500001, 14.000001),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(0, 1800), Vector2(0, 2000)]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("HUD/ColorRect:color")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("HUD/ColorRect:color")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
 "times": PackedFloat32Array(17.033333, 20),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BoatSprite:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(13.738197, 15.304864),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sr7y"]
@@ -258,9 +247,10 @@ font = ExtResource("15_t7w3j")
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_kb0hh")
-next_scene = ExtResource("2_4sr7y")
+default_bgm = ExtResource("2_t7w3j")
 hold_skip_control = NodePath("CanvasLayer/HoldToSkip")
 hold_skip_bar = NodePath("CanvasLayer/HoldToSkip/MarginContainer/MarginContainer/HBoxContainer/ProgressBar")
+next_scene = ExtResource("2_4sr7y")
 
 [node name="BackgroundSkyClear" type="Sprite2D" parent="."]
 position = Vector2(640, 360)
@@ -317,9 +307,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Jeremy" parent="." instance=ExtResource("15_pob4g")]
+[node name="BoatSprite" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(350, 2475)
-scale = Vector2(0.15348448, 0.15348448)
+scale = Vector2(0.153, 0.153)
+texture = ExtResource("9_x43rj")
 
 [node name="Path2D" type="Path2D" parent="."]
 position = Vector2(-8, -164)
