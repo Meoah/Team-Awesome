@@ -242,6 +242,7 @@ func fail():
 	cleared = true
 	await get_tree().create_timer(3).timeout
 	PlayManager.request_catching_state()
+	AudioEngine.stop_all_sfx()
 	# Stuff you want to happen between catching and idle, such as a fail animation. Note that we're paused
 	PlayManager.request_idle_day_state()
 	GameManager.popup_queue.dismiss_popup()
@@ -277,6 +278,7 @@ func win():
 			GameManager.popup_queue.dismiss_popup()
 		await get_tree().create_timer(3).timeout
 		PlayManager.request_catching_state()
+		AudioEngine.stop_all_sfx()
 		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
 		PlayManager.request_idle_day_state()
 		GameManager.popup_queue.dismiss_popup()

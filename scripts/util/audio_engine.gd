@@ -668,7 +668,7 @@ func stop_sfx_key_one(incoming_sfx_key : String, fade_time : float = 0.0) -> voi
 ## "fade_time" : If > 0, fades out each SFX accordingly before stopping.
 func stop_all_sfx(fade_time : float = 0.0) -> void:
 	# Copy keys first to safely manipulate keys.
-	var keys_copy : Array[String] = sfx_active_players_by_key.keys()
+	var keys_copy : Array = sfx_active_players_by_key.keys()
 	
 	# Goes through the list and clears each key.
 	for each_key in keys_copy : stop_sfx_key_path(each_key, fade_time)
