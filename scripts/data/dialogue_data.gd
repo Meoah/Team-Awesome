@@ -131,7 +131,6 @@ const INTRO : Dictionary = {
 	0001 : {
 		KEY_NAME : UNKNOWN,
 		KEY_TEXT : "*Knock Knock Knock*",
-		KEY_BGM : "res://assets/audio/bgm/Mega Man 2 Intro.mp3"
 	},
 	0002 : {
 		KEY_NAME : NAME_MAIN_CHARACTER,
@@ -140,6 +139,7 @@ const INTRO : Dictionary = {
 	},
 	0003 : {
 		KEY_NAME : NAME_MOB_BOSS,
+		KEY_BGM : "res://assets/audio/bgm/dump/the_frog_is_talking.wav",
 		KEY_TEXT : "Yo kid, rent is PAST DUE!",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
 		KEY_PARAMETERS : ["shaking", "emote_rage"]

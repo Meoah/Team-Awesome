@@ -38,6 +38,7 @@ func _ready() -> void:
 	_refresh_ui()
 
 func _input(event : InputEvent) -> void:
+	if PlayManager.get_current_state() is ShoppingState : return
 	# Hover detection, updates the tooltip location if any part of the hud is hovered.
 	if event is InputEventMouseMotion:
 		var hovered : Control = get_viewport().gui_get_hovered_control()

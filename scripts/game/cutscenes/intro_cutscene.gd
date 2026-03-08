@@ -1,11 +1,14 @@
 extends Control
 
-# TODO there arrow is still visible when panning down. This is undesired.
+@export_category("Audio")
+@export var default_bgm : AudioStream
 
-@export var next_scene : PackedScene
-
+@export_category("Children Nodes")
 @export var hold_skip_control : Control
 @export var hold_skip_bar : ProgressBar
+
+@export_category("PackedScenes")
+@export var next_scene : PackedScene
 
 const SKIP_FADE_DURATION : float = 0.12
 const HOLD_TO_SKIP_SECONDS : float = 1.0
@@ -35,7 +38,8 @@ func _ready() -> void:
 		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)
 
 func play_animation():
-		$AnimationPlayer.play("intro_sequence")
+	AudioEngine.play_bgm(default_bgm, "", false, 5.0)
+	$AnimationPlayer.play("intro_sequence")
 
 func _process(delta: float) -> void:
 	if not is_holding_skip : return

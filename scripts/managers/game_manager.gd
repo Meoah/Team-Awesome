@@ -39,7 +39,7 @@ func _ready() -> void:
 	
 	_setup_state_machine()
 	
-	
+	SignalBus.player_dies.connect(_die)
 
 # Initializes state machine.
 func _setup_state_machine() -> void:
@@ -105,3 +105,7 @@ func change_scene_sync(scene : PackedScene) -> void:
 		child.queue_free()
 	var new_scene = scene.instantiate()
 	scene_root.add_child(new_scene)
+
+# Sends player to death scene.
+func _die() -> void:
+	if PlayManager.request_dead_state() : change_scene_deferred(death_scene)

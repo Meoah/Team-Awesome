@@ -112,7 +112,7 @@ const HONEY_GLAZED_SKELETON : Dictionary = {
 	"weight" : 2.0,
 	"inputs" : ["Up", "Up", "Down", "Down", "Left","Right","Left","Right"],
 	"value" : 15.0,
-	"time" : 6.0
+	"time" : 4.5
 }
 #8
 const DOODLE_BIRD : Dictionary = {
@@ -157,7 +157,7 @@ const FIH : Dictionary = {
 	"weight" : 2.0,
 	"inputs" : ["Right","Up","Left","Down","Right","Up","Left","Down",],
 	"value" : 6.0,
-	"time" : 3.4
+	"time" : 3.5
 }
 #13
 const BLENDER_CARP : Dictionary = {
@@ -166,7 +166,7 @@ const BLENDER_CARP : Dictionary = {
 	"weight" : 10.0,
 	"inputs" : ["Left","Right","Up","Down","Left","Right","Up","Down"],
 	"value" : 15.0,
-	"time" : 5.0
+	"time" : 4.0
 }
 #14
 const BUBBLE_GOLDFISH : Dictionary = {
@@ -175,7 +175,7 @@ const BUBBLE_GOLDFISH : Dictionary = {
 	"weight" : 3.0,
 	"inputs" : ["Up","Up","Up","Left","Right","Left"],
 	"value" : 3.0,
-	"time" : 5.0
+	"time" : 3.0
 }
 #15
 const JELLOFISH: Dictionary = {
@@ -184,7 +184,7 @@ const JELLOFISH: Dictionary = {
 	"weight" : 10.0,
 	"inputs" : ["Left","Right","Up","Left","Right","Up"],
 	"value" : 10.0,
-	"time" : 5.0
+	"time" : 3.5
 }
 
 #16
@@ -194,7 +194,7 @@ const PUFFER_CRAB : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Up","Up","Up","Left","Left","Right","Right"],
 	"value" : 30.0,
-	"time" : 5.0
+	"time" : 4.5
 }
 
 #17
@@ -203,8 +203,8 @@ const KILLER_FISH : Dictionary = {
 	"image" : NodePath("res://assets/textures/fish/wip_fish/17_KillerFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Down","Up","Down"],
-	"value" : 30.0,
-	"time" : 5.0
+	"value" : 15.0,
+	"time" : 3.5
 }
 #18
 const POG_FISH : Dictionary = {
@@ -212,7 +212,7 @@ const POG_FISH : Dictionary = {
 	"image" : NodePath("res://assets/textures/fish/wip_fish/18_PogFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Right","Left","Right","Left","Right",],
-	"value" : 30.0,
+	"value" : 10.0,
 	"time" : 5.0
 }
 #19
@@ -221,17 +221,17 @@ const PLUG_FISH : Dictionary = {
 	"image" : NodePath("res://assets/textures/fish/wip_fish/19_PlugFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Up","Up","Up","Down","Down"],
-	"value" : 30.0,
-	"time" : 5.0
-}
+	"value" : 8.0,
+	"time" : 3.5
+	}
 #20
 const JUBILANT_FISH : Dictionary = {
 	"name" : "Jubilant Fish",
 	"image" : NodePath("res://assets/textures/fish/wip_fish/20_JubilantFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Up","Right","Down","Left","Down","Right","Up"],
-	"value" : 30.0,
-	"time" : 5.0
+	"value" : 10.0,
+	"time" : 4.5
 }
 #21
 const NATEKEK : Dictionary = {
@@ -239,8 +239,8 @@ const NATEKEK : Dictionary = {
 	"image" : NodePath("res://assets/textures/fish/wip_fish/21_Natekek.png"),
 	"weight" : 5.0,
 	"inputs" : ["Down","Right","Up","Up","Up"],
-	"value" : 30.0,
-	"time" : 5.0
+	"value" : 20.0,
+	"time" :2.5
 }
 #22
 const SHARKPUP : Dictionary = {
@@ -248,8 +248,8 @@ const SHARKPUP : Dictionary = {
 	"image" : NodePath("res://assets/textures/fish/wip_fish/22_Sharkpup.png"),
 	"weight" : 5.0,
 	"inputs" : ["Down","Left","Down","Right","Down"],
-	"value" : 30.0,
-	"time" : 5.0
+	"value" : 15.0,
+	"time" : 3.5
 }
 #23
 const TADPOLE_BOBA : Dictionary = {
@@ -257,6 +257,6 @@ const TADPOLE_BOBA : Dictionary = {
 	"image" : NodePath("res://assets/textures/fish/final_fish/23_TadpoleBoba.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Left","Right","Right"],
-	"value" : 30.0,
-	"time" : 5.0
+	"value" : 8.0,
+	"time" : 4.5
 }
