@@ -200,24 +200,25 @@ func play_bgm(
 	if incoming_track_key.is_empty():
 		if incoming_stream.resource_path != "" : incoming_track_key = incoming_stream.resource_path
 		else : incoming_track_key = "%s:%s" % [incoming_stream.get_class(), str(incoming_stream.get_instance_id())]
-
-	# Caches the current BGM progress if there is any playing.
-	_cache_active_bgm_progress()
-
-	# Retrieves the start position.
-	var start_position : float = _get_resume_position(incoming_track_key, incoming_stream, should_restart)
-
-	# If it's the same track, either restart/resume on the active bgm_player.
+	
+	# Same track already playing: leave it alone unless explicitly restarting.
 	if incoming_track_key == bgm_active_track_key and bgm_active_track_key != "":
 		var active_bgm_player : AudioStreamPlayer = _get_active_bgm_player()
-		if active_bgm_player:
+		if active_bgm_player and should_restart:
+			active_bgm_player.stop()
 			active_bgm_player.stream = incoming_stream
 			active_bgm_player.bus = BUS_BGM
 			active_bgm_player.volume_db = 0.0
-			active_bgm_player.play(start_position)
+			active_bgm_player.play(0.0)
 			_bind_bgm_finished(active_bgm_player, incoming_track_key, incoming_stream)
 		return
-
+	
+	# Caches the current BGM progress if there is any playing.
+	_cache_active_bgm_progress()
+	
+	# Retrieves the start position.
+	var start_position : float = _get_resume_position(incoming_track_key, incoming_stream, should_restart)
+	
 	# If it's a new track, crossfade into it.
 	# Finds the active and inactive bgm_players and preps them for crossfading.
 	var outgoing_player : AudioStreamPlayer = _get_active_bgm_player()
