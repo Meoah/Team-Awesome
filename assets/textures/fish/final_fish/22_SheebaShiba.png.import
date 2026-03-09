@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjruhn2tuxx1f"
-path="res://.godot/imported/12_Catfish.png-280e67ec3c1cb61edd32d321a96f5ff8.ctex"
+uid="uid://dmmve0mqdrf1b"
+path="res://.godot/imported/22_SheebaShiba.png-bfaade705ebb9035a4c9efa299888d86.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/fish/final_fish/12_Catfish.png"
-dest_files=["res://.godot/imported/12_Catfish.png-280e67ec3c1cb61edd32d321a96f5ff8.ctex"]
+source_file="res://assets/textures/fish/final_fish/22_SheebaShiba.png"
+dest_files=["res://.godot/imported/22_SheebaShiba.png-bfaade705ebb9035a4c9efa299888d86.ctex"]
 
 [params]
 

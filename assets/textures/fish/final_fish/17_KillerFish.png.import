@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://detae0k1hqy8r"
-path="res://.godot/imported/Arrows.png-a643d8d7df0b373bcf6e4644840634eb.ctex"
+uid="uid://qqackd64eyea"
+path="res://.godot/imported/17_KillerFish.png-9c9318790d556c260b56110f03446cd3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/Arrows/Arrows.png"
-dest_files=["res://.godot/imported/Arrows.png-a643d8d7df0b373bcf6e4644840634eb.ctex"]
+source_file="res://assets/textures/fish/final_fish/17_KillerFish.png"
+dest_files=["res://.godot/imported/17_KillerFish.png-9c9318790d556c260b56110f03446cd3.ctex"]
 
 [params]
 
