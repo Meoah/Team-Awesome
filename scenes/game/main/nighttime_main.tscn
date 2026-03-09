@@ -199,9 +199,11 @@ text = "FREE MONEY
 
 [node name="HUD" parent="." instance=ExtResource("12_yb8jp")]
 
-[node name="Touchscreen" type="CanvasLayer" parent="HUD"]
+[node name="Touchscreen" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 100
 
-[node name="Touchscreen" type="Control" parent="HUD/Touchscreen"]
+[node name="Touchscreen" type="Control" parent="Touchscreen"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -211,7 +213,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("14_pracl")
 
-[node name="Right" type="TextureButton" parent="HUD/Touchscreen/Touchscreen"]
+[node name="Right" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 1175.0
@@ -223,7 +225,7 @@ texture_normal = ExtResource("15_icnix")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Down" type="TextureButton" parent="HUD/Touchscreen/Touchscreen"]
+[node name="Down" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 1150.0
@@ -236,7 +238,7 @@ texture_normal = ExtResource("15_icnix")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Left" type="TextureButton" parent="HUD/Touchscreen/Touchscreen"]
+[node name="Left" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 925.0
@@ -249,7 +251,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Up" type="TextureButton" parent="HUD/Touchscreen/Touchscreen"]
+[node name="Up" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 1050.0
@@ -262,7 +264,7 @@ texture_normal = ExtResource("15_icnix")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Spacebar" type="Button" parent="HUD/Touchscreen/Touchscreen"]
+[node name="Spacebar" type="Button" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 0
@@ -273,13 +275,13 @@ offset_bottom = 675.0
 focus_mode = 0
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="button_down" from="HUD/Touchscreen/Touchscreen/Right" to="HUD/Touchscreen/Touchscreen" method="_on_right_pressed"]
-[connection signal="button_up" from="HUD/Touchscreen/Touchscreen/Right" to="HUD/Touchscreen/Touchscreen" method="_on_right_released"]
-[connection signal="button_down" from="HUD/Touchscreen/Touchscreen/Down" to="HUD/Touchscreen/Touchscreen" method="_on_down_pressed"]
-[connection signal="button_up" from="HUD/Touchscreen/Touchscreen/Down" to="HUD/Touchscreen/Touchscreen" method="_on_down_released"]
-[connection signal="button_down" from="HUD/Touchscreen/Touchscreen/Left" to="HUD/Touchscreen/Touchscreen" method="_on_left_pressed"]
-[connection signal="button_up" from="HUD/Touchscreen/Touchscreen/Left" to="HUD/Touchscreen/Touchscreen" method="_on_left_released"]
-[connection signal="button_down" from="HUD/Touchscreen/Touchscreen/Up" to="HUD/Touchscreen/Touchscreen" method="_on_up_pressed"]
-[connection signal="button_up" from="HUD/Touchscreen/Touchscreen/Up" to="HUD/Touchscreen/Touchscreen" method="_on_up_released"]
-[connection signal="button_down" from="HUD/Touchscreen/Touchscreen/Spacebar" to="HUD/Touchscreen/Touchscreen" method="_on_button_pressed"]
-[connection signal="button_up" from="HUD/Touchscreen/Touchscreen/Spacebar" to="HUD/Touchscreen/Touchscreen" method="_on_button_released"]
+[connection signal="button_down" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_pressed"]
+[connection signal="button_up" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_released"]
+[connection signal="button_down" from="Touchscreen/Touchscreen/Down" to="Touchscreen/Touchscreen" method="_on_down_pressed"]
+[connection signal="button_up" from="Touchscreen/Touchscreen/Down" to="Touchscreen/Touchscreen" method="_on_down_released"]
+[connection signal="button_down" from="Touchscreen/Touchscreen/Left" to="Touchscreen/Touchscreen" method="_on_left_pressed"]
+[connection signal="button_up" from="Touchscreen/Touchscreen/Left" to="Touchscreen/Touchscreen" method="_on_left_released"]
+[connection signal="button_down" from="Touchscreen/Touchscreen/Up" to="Touchscreen/Touchscreen" method="_on_up_pressed"]
+[connection signal="button_up" from="Touchscreen/Touchscreen/Up" to="Touchscreen/Touchscreen" method="_on_up_released"]
+[connection signal="button_down" from="Touchscreen/Touchscreen/Spacebar" to="Touchscreen/Touchscreen" method="_on_button_pressed"]
+[connection signal="button_up" from="Touchscreen/Touchscreen/Spacebar" to="Touchscreen/Touchscreen" method="_on_button_released"]

@@ -262,6 +262,8 @@ position = Vector2(389, 289)
 texture = ExtResource("17_mxkb3")
 
 [node name="Touchscreen" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 100
 
 [node name="Touchscreen" type="Control" parent="Touchscreen"]
 layout_mode = 3
