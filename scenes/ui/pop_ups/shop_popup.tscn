@@ -55,10 +55,10 @@ theme_override_constants/margin_bottom = 8
 [node name="NinePatchRect" type="NinePatchRect" parent="Screen/VBoxContainer/Cards"]
 layout_mode = 2
 texture = ExtResource("3_5ag0i")
-patch_margin_left = 50
-patch_margin_top = 50
-patch_margin_right = 50
-patch_margin_bottom = 50
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
 
 [node name="MarginContainer" type="MarginContainer" parent="Screen/VBoxContainer/Cards/NinePatchRect"]
 layout_mode = 1

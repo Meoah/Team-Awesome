@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=26 format=3 uid="uid://b856gwtwh1bno"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -16,6 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://b4so1s0p3hdbr" path="res://assets/textures/background/dock_pieces/DockFloor.png" id="14_ajsgr"]
 [ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/game/cutscenes/tutorial_sequence.tscn" id="14_i6nw5"]
 [ext_resource type="Texture2D" uid="uid://ds5l6m1ouf7h1" path="res://assets/textures/background/dock_pieces/BackDock.png" id="15_xiwi7"]
+[ext_resource type="Texture2D" uid="uid://dg7170kcnsykj" path="res://assets/textures/background/LampOff.png" id="16_xiwi7"]
 [ext_resource type="Texture2D" uid="uid://dsniqevfoi04w" path="res://assets/textures/background/dock_pieces/FrontDock.png" id="17_mxkb3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
@@ -243,6 +244,12 @@ texture = ExtResource("9_fhkke")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSign"]
 shape = SubResource("RectangleShape2D_f86r6")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="LampOff" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(160, 330)
+scale = Vector2(0.48133335, 0.48133335)
+texture = ExtResource("16_xiwi7")
 
 [node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
 position = Vector2(-100, 443)
