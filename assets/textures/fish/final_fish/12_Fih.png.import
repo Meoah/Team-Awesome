@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://detae0k1hqy8r"
-path="res://.godot/imported/Arrows.png-a643d8d7df0b373bcf6e4644840634eb.ctex"
+uid="uid://byyf5dt1lxrmc"
+path="res://.godot/imported/12_Fih.png-77e51594723edbf19d9cb3cb7c72e076.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/Arrows/Arrows.png"
-dest_files=["res://.godot/imported/Arrows.png-a643d8d7df0b373bcf6e4644840634eb.ctex"]
+source_file="res://assets/textures/fish/final_fish/12_Fih.png"
+dest_files=["res://.godot/imported/12_Fih.png-77e51594723edbf19d9cb3cb7c72e076.ctex"]
 
 [params]
 

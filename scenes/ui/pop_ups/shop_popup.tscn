@@ -1,13 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://byyulsrldui6y"]
+[gd_scene load_steps=9 format=3 uid="uid://byyulsrldui6y"]
 
 [ext_resource type="Script" uid="uid://c2kg33k74ht3c" path="res://scripts/ui/pop_ups/shop_popup.gd" id="1_pnp85"]
-[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="2_a5p4q"]
 [ext_resource type="PackedScene" uid="uid://bk1bcrfoh1bco" path="res://scenes/ui/pop_ups/shop/card.tscn" id="2_g8bmi"]
+[ext_resource type="Texture2D" uid="uid://c1efw7rf2vtwr" path="res://assets/textures/ui/LilypadBox.png" id="3_5ag0i"]
 [ext_resource type="Script" uid="uid://16uhp5idqag" path="res://scripts/ui/pop_ups/shop/card_stage.gd" id="4_ikwgw"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="5_862jk"]
+[ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/SimpleBox.png" id="6_7r0hq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x3qsi"]
+texture = ExtResource("6_7r0hq")
 
 [sub_resource type="Theme" id="Theme_5ag0i"]
 default_font = ExtResource("5_862jk")
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/fonts/font = ExtResource("5_862jk")
+Button/styles/normal = SubResource("StyleBoxTexture_x3qsi")
 
 [node name="ShopPopup" type="Control" node_paths=PackedStringArray("card_stage", "generic_bait_button")]
 layout_mode = 3
@@ -47,11 +54,11 @@ theme_override_constants/margin_bottom = 8
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Screen/VBoxContainer/Cards"]
 layout_mode = 2
-texture = ExtResource("2_a5p4q")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("3_5ag0i")
+patch_margin_left = 100
+patch_margin_top = 100
+patch_margin_right = 100
+patch_margin_bottom = 100
 
 [node name="MarginContainer" type="MarginContainer" parent="Screen/VBoxContainer/Cards/NinePatchRect"]
 layout_mode = 1

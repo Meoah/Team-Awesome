@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://detae0k1hqy8r"
-path="res://.godot/imported/Arrows.png-a643d8d7df0b373bcf6e4644840634eb.ctex"
+uid="uid://dg7170kcnsykj"
+path="res://.godot/imported/LampOff.png-88a89f27dba5310b3a081794ec850e9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/Arrows/Arrows.png"
-dest_files=["res://.godot/imported/Arrows.png-a643d8d7df0b373bcf6e4644840634eb.ctex"]
+source_file="res://assets/textures/background/LampOff.png"
+dest_files=["res://.godot/imported/LampOff.png-88a89f27dba5310b3a081794ec850e9d.ctex"]
 
 [params]
 

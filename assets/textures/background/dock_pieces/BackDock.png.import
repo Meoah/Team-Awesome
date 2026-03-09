@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bjruhn2tuxx1f"
-path="res://.godot/imported/12_Catfish.png-280e67ec3c1cb61edd32d321a96f5ff8.ctex"
+uid="uid://ds5l6m1ouf7h1"
+path="res://.godot/imported/BackDock.png-9fbff14277b30f81b924b5653e8ef46b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/fish/final_fish/12_Catfish.png"
-dest_files=["res://.godot/imported/12_Catfish.png-280e67ec3c1cb61edd32d321a96f5ff8.ctex"]
+source_file="res://assets/textures/background/dock_pieces/BackDock.png"
+dest_files=["res://.godot/imported/BackDock.png-9fbff14277b30f81b924b5653e8ef46b.ctex"]
 
 [params]
 

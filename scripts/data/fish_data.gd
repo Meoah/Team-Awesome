@@ -12,10 +12,7 @@ const FISH_ID : Dictionary = {
 	3 : TRASH,
 	4 : SWEDISH_TETRA,
 	5 : SHROOMLE,
-	6 : LINXOOO,
-	7 : HONEY_GLAZED_SKELETON,
 	8 : DOODLE_BIRD,
-	9 : DOODLE_BIRD_RARE,
 	10 : LONG_FEESH,
 	11 : FIH,
 	12 : CATFISH,
@@ -28,7 +25,7 @@ const FISH_ID : Dictionary = {
 	19 : PLUG_FISH,
 	20 : JUBILANT_FISH,
 	21 : NATEKEK,
-	22 : SHARKPUP,
+	22 : SHEEBA_SHIBA,
 	23 : TADPOLE_BOBA
 }
 
@@ -144,7 +141,7 @@ const LONG_FEESH : Dictionary = {
 #11
 const CATFISH : Dictionary = {
 	"name" : "Catfish",
-	"image" : NodePath("res://assets/textures/fish/final_fish/12_Catfish.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/11_Catfish.png"),
 	"weight" : 4.0,
 	"inputs" : ["Left", "Right", "Left", "Up", "Up","Up"],
 	"value" : 7.0,
@@ -153,7 +150,7 @@ const CATFISH : Dictionary = {
 #12
 const FIH : Dictionary = {
 	"name" : "Fih",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/11_Fih.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/12_Fih.png"),
 	"weight" : 2.0,
 	"inputs" : ["Right","Up","Left","Down","Right","Up","Left","Down",],
 	"value" : 6.0,
@@ -200,7 +197,7 @@ const PUFFER_CRAB : Dictionary = {
 #17
 const KILLER_FISH : Dictionary = {
 	"name" : "Killer Fish",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/17_KillerFish.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/17_KillerFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Down","Up","Down"],
 	"value" : 15.0,
@@ -209,7 +206,7 @@ const KILLER_FISH : Dictionary = {
 #18
 const POG_FISH : Dictionary = {
 	"name" : "Pog Fish",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/18_PogFish.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/18_PogFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Right","Left","Right","Left","Right",],
 	"value" : 10.0,
@@ -218,7 +215,7 @@ const POG_FISH : Dictionary = {
 #19
 const PLUG_FISH : Dictionary = {
 	"name" : "Plug Fish",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/19_PlugFish.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/19_ElectricEel.png"),
 	"weight" : 5.0,
 	"inputs" : ["Up","Up","Up","Down","Down"],
 	"value" : 8.0,
@@ -226,8 +223,8 @@ const PLUG_FISH : Dictionary = {
 	}
 #20
 const JUBILANT_FISH : Dictionary = {
-	"name" : "Jubilant Fish",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/20_JubilantFish.png"),
+	"name" : "Pufferberry Fish",
+	"image" : NodePath("res://assets/textures/fish/final_fish/20_PufferberryFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Up","Right","Down","Left","Down","Right","Up"],
 	"value" : 10.0,
@@ -236,16 +233,16 @@ const JUBILANT_FISH : Dictionary = {
 #21
 const NATEKEK : Dictionary = {
 	"name" : "Natekek",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/21_Natekek.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/21_Natekek.png"),
 	"weight" : 5.0,
 	"inputs" : ["Down","Right","Up","Up","Up"],
 	"value" : 20.0,
 	"time" :2.5
 }
 #22
-const SHARKPUP : Dictionary = {
-	"name" : "Sharkpup",
-	"image" : NodePath("res://assets/textures/fish/wip_fish/22_Sharkpup.png"),
+const SHEEBA_SHIBA : Dictionary = {
+	"name" : "Sheeba Shiba",
+	"image" : NodePath("res://assets/textures/fish/final_fish/22_SheebaShiba.png"),
 	"weight" : 5.0,
 	"inputs" : ["Down","Left","Down","Right","Down"],
 	"value" : 15.0,

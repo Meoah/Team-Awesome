@@ -641,6 +641,7 @@ grid_type = "Bait"
 layout_mode = 2
 
 [node name="Blocker" type="ColorRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
