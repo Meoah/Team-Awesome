@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://7t5xs6yomfmi"
-path="res://.godot/imported/Square_Border.png-81a4700dc8c0645f5f7159e35c4a2cd3.ctex"
+uid="uid://ds5l6m1ouf7h1"
+path="res://.godot/imported/BackDock.png-9fbff14277b30f81b924b5653e8ef46b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/Square_Border.png"
-dest_files=["res://.godot/imported/Square_Border.png-81a4700dc8c0645f5f7159e35c4a2cd3.ctex"]
+source_file="res://assets/textures/background/dock_pieces/BackDock.png"
+dest_files=["res://.godot/imported/BackDock.png-9fbff14277b30f81b924b5653e8ef46b.ctex"]
 
 [params]
 

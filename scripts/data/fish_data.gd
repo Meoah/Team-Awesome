@@ -223,7 +223,7 @@ const PLUG_FISH : Dictionary = {
 	}
 #20
 const JUBILANT_FISH : Dictionary = {
-	"name" : "Jubilant Fish",
+	"name" : "Pufferberry Fish",
 	"image" : NodePath("res://assets/textures/fish/final_fish/20_PufferberryFish.png"),
 	"weight" : 5.0,
 	"inputs" : ["Left","Up","Right","Down","Left","Down","Right","Up"],

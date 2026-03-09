@@ -259,6 +259,7 @@ func win():
 		AudioEngine.play_sfx(sfx_timer_end,"", 0.5)
 		AudioEngine.play_sfx(sfx_fish_caught,"", 1)
 		$ProgressBar/Sparks.hide()
+		$Control/PanelContainer.hide()
 		if varied_gold: #If fish is gold double its value
 			current_value = current_value * 2
 		elif varied_evil:
@@ -296,11 +297,11 @@ func spawn_arrows():
 	# For loop that spawns arrows
 	for i in spawn_string:
 		if varied_gold:
-			$Control/HBoxContainer/TextureRect.modulate = Color.GOLD
-		var node_to_copy = $Control/HBoxContainer/TextureRect
+			$Control/PanelContainer/HBoxContainer/TextureRect.modulate = Color.GOLD
+		var node_to_copy = $Control/PanelContainer/HBoxContainer/TextureRect
 		var copy = node_to_copy.duplicate()
 		copy.texture = arrow_direction[i]
-		$Control/HBoxContainer.add_child(copy)
+		$Control/PanelContainer/HBoxContainer.add_child(copy)
 		sprite_array.append(copy)
 		#copy.position = Vector2($Control/HBoxContainer.position.x +(count * 130), $Control/HBoxContainer.position.y)
 	print(input_array)
