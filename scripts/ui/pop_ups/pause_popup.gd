@@ -1,7 +1,13 @@
 extends BasePopup
 class_name PausePopup
 
+@export_category("Audio")
+@export var default_bgm : AudioStream
+
+@export_category("Children Nodes")
 @export var resume_button: BaseButton
+
+var _callback_bgm_key : String = ""
 
 func _on_init() -> void:
 	type = POPUP_TYPE.PAUSE
@@ -10,9 +16,12 @@ func _on_init() -> void:
 
 func _on_ready() -> void:
 	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
+	_callback_bgm_key = AudioEngine.get_active_bgm_key()
+	AudioEngine.play_bgm(default_bgm)
+	if resume_button : resume_button.grab_focus()
 
-	if resume_button:
-		resume_button.grab_focus()
+func on_after_dismiss() -> void:
+	AudioEngine.play_bgm_saved_key(_callback_bgm_key)
 
 func _on_resume_pressed() -> void:
 	GameManager.dismiss_popup()
