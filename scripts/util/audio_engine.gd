@@ -35,6 +35,7 @@ var bgm_player_b : AudioStreamPlayer = null
 var bgm_is_a_active : bool = true
 var bgm_active_track_key : String = ""
 var bgm_progress_by_track : Dictionary = {}
+var bgm_stream_by_key : Dictionary = {}
 var bgm_fade_tween : Tween = null
 var bgm_active_player : AudioStreamPlayer = null
 
@@ -180,6 +181,10 @@ func _setup_bgm() -> void:
 	bgm_player_b.bus = BUS_BGM
 	bgm_player_a.volume_db = 0.0
 	bgm_player_b.volume_db = MIN_FADE_DB
+	
+	if OS.has_feature("web"):
+		bgm_player_a.set_playback_type(AudioServer.PLAYBACK_TYPE_STREAM)
+		bgm_player_b.set_playback_type(AudioServer.PLAYBACK_TYPE_STREAM)
 
 ## Attempts to play the requested audio as a BGM from an [AudioStream]. [br][br]
 ##
@@ -200,6 +205,9 @@ func play_bgm(
 	if incoming_track_key.is_empty():
 		if incoming_stream.resource_path != "" : incoming_track_key = incoming_stream.resource_path
 		else : incoming_track_key = "%s:%s" % [incoming_stream.get_class(), str(incoming_stream.get_instance_id())]
+	
+	# Remember which stream belongs to this key so it can be resumed later by saved key.
+	bgm_stream_by_key[incoming_track_key] = incoming_stream
 	
 	# Same track already playing: leave it alone unless explicitly restarting.
 	if incoming_track_key == bgm_active_track_key and bgm_active_track_key != "":
@@ -244,7 +252,11 @@ func play_bgm(
 ## "incoming_stream_path" : The [String] path to the requested audio track. [br]
 ## "should_restart" : [code]true[/code] will force the requested audio track to start from the beginning.[br]
 ## "fade_time" : How long the crossfade time should take in seconds.
-func play_bgm_path(incoming_stream_path : String, should_restart : bool = false, fade_time : float = DEFAULT_FADE_TIME) -> void:
+func play_bgm_path(
+	incoming_stream_path : String,
+	should_restart : bool = false,
+	fade_time : float = DEFAULT_FADE_TIME
+) -> void:
 	# Abort if either the path itself or if the path does not point to a valid AudioStream.
 	if incoming_stream_path.is_empty() : return
 	var incoming_stream : AudioStream = load(incoming_stream_path) as AudioStream
@@ -252,6 +264,26 @@ func play_bgm_path(incoming_stream_path : String, should_restart : bool = false,
 
 	# Use path as the track key.
 	play_bgm(incoming_stream, incoming_stream_path, should_restart, fade_time)
+
+## Attempts to play the requested audio as a BGM from a [String] key. [br][br]
+## 
+## "incoming_track_key" : The [String] key to the requested audio track. [br]
+## "should_restart" : [code]true[/code] will force the requested audio track to start from the beginning.[br]
+## "fade_time" : How long the crossfade time should take in seconds.
+func play_bgm_saved_key(
+	incoming_track_key : String,
+	should_restart : bool = false,
+	fade_time : float = DEFAULT_FADE_TIME
+) -> void:
+	# Abort if key is empty or unknown.
+	if incoming_track_key.is_empty() : return
+	if !bgm_stream_by_key.has(incoming_track_key) : return
+	
+	var incoming_stream : AudioStream = bgm_stream_by_key[incoming_track_key] as AudioStream
+	if incoming_stream == null : return
+	
+	play_bgm(incoming_stream, incoming_track_key, should_restart, fade_time)
+
 
 ## Requests to stop the currently playing BGM. If a fade_time is set, it will fade out within that time.
 ##	Otherwise, hard cuts.
@@ -325,6 +357,10 @@ func set_bgm_progress_save_data(incoming_data : Dictionary) -> void:
 	for key in incoming_data.keys():
 		bgm_progress_by_track[str(key)] = float(incoming_data[key])
 
+## Gets the active BGM's key.
+func get_active_bgm_key() -> String:
+	return bgm_active_track_key
+
 ## Crossfades from outgoing_player into the incoming_player.
 func _start_bgm_crossfade(outgoing_player : AudioStreamPlayer, incoming_player : AudioStreamPlayer, fade_time : float) -> void:
 	# Ensure the bgm_fade_tween is killed.
@@ -356,9 +392,6 @@ func _kill_bgm_fade_tween() -> void:
 
 ## Caches the current BGM's progress to bgm_progress_by_track.
 func _cache_active_bgm_progress() -> void:
-	# TODO Double check this
-	if get_tree().paused: return
-	
 	# Aborts if there's no active BGM playing.
 	if bgm_active_track_key == "" : return
 	var active_player : AudioStreamPlayer = _get_active_bgm_player()
