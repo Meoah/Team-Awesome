@@ -181,6 +181,10 @@ func _setup_bgm() -> void:
 	bgm_player_b.bus = BUS_BGM
 	bgm_player_a.volume_db = 0.0
 	bgm_player_b.volume_db = MIN_FADE_DB
+	
+	if OS.has_feature("web"):
+		bgm_player_a.set_playback_type(AudioServer.PLAYBACK_TYPE_STREAM)
+		bgm_player_b.set_playback_type(AudioServer.PLAYBACK_TYPE_STREAM)
 
 ## Attempts to play the requested audio as a BGM from an [AudioStream]. [br][br]
 ##
