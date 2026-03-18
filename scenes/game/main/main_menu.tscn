@@ -216,6 +216,7 @@ libraries = {
 autoplay = "startup"
 
 [node name="Background" type="Node2D" parent="."]
+visible = false
 
 [node name="Sky" type="Sprite2D" parent="Background"]
 texture = ExtResource("3_4kdnx")
