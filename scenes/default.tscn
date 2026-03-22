@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://cse3lh8hmmmvr"]
+[gd_scene format=3 uid="uid://cse3lh8hmmmvr"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_qi1hx"]
 font_size = 72
 
-[node name="default" type="Control"]
+[node name="default" type="Control" unique_id=1096592053]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=700097031]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

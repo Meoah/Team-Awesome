@@ -13,6 +13,9 @@ class_name DaytimeMain
 @export var bobber_scene : PackedScene
 @export var tutorial_scene : PackedScene
 
+@onready var weather_modulate : CanvasModulate = $WeatherModulate
+@onready var rain_particles : GPUParticles2D = $RainParticles
+
 func _ready() -> void:
 	# Binds Signals
 	PlayManager.idle_day_state.signal_idle_day.connect(_idle_state)
@@ -25,6 +28,29 @@ func _ready() -> void:
 	
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
 	else : _ready_day()
+	
+	#--Weather--
+	WeatherManager.weather_changed.connect(_on_weather_changed)
+	_apply_weather(WeatherManager.current_weather)
+	
+	#Test
+	WeatherManager.set_weather(WeatherManager.WEATHER.STORM)
+	print("Weather set to: ", WeatherManager.current_weather)
+	
+func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
+	_apply_weather(new_weather)
+	
+func _apply_weather(w : WeatherManager.WEATHER) -> void:
+	match w:
+		WeatherManager.WEATHER.CLEAR:
+			weather_modulate.color = Color(1.0, 1.0, 1.0)
+			rain_particles.emitting = false
+		WeatherManager.WEATHER.RAINY:
+			weather_modulate.color = Color(0.6, 0.7,0.9 )
+			rain_particles.emitting = true
+		WeatherManager.WEATHER.STORM:
+			weather_modulate.color = Color(0.4, 0.4, 0.55)
+			rain_particles.emitting = true
 
 ## Plays the intro sequence and sets initial bait if first day.
 func _intro_scene() -> void:
