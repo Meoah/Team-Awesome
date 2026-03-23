@@ -9,7 +9,8 @@ enum POPUP_TYPE{
 	DIALOGUE,
 	SHOP,
 	COMPENDIUM, #TODO
-	SETTINGS #TODO
+	SETTINGS, #TODO
+	CREDITS
 }
 
 # Flags used to determine popup behavior.

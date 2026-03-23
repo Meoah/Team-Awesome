@@ -34,3 +34,7 @@ func _on_blocker_gui_input(event: InputEvent) -> void:
 
 func _on_options_button_pressed() -> void:
 	GameManager.show_popup(BasePopup.POPUP_TYPE.SETTINGS)
+
+
+func _on_credits_button_pressed() -> void:
+	GameManager.show_popup(BasePopup.POPUP_TYPE.CREDITS)

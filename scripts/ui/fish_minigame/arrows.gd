@@ -31,7 +31,7 @@ var input_index = 0 #Holds the index for the current input in the input array#Ho
 var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
 
 
-var enum 
+
 
 
 

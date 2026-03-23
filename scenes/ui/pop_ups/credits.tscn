@@ -1,0 +1,159 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmx4sb5w4p7uy"]
+
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_s7h7v"]
+[ext_resource type="Script" uid="uid://8ebfija4ut0" path="res://scenes/ui/pop_ups/credits.gd" id="1_tru8v"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/SimpleLogBorder.png" id="2_tru8v"]
+[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="3_2ll0y"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_n1c6h"]
+texture = ExtResource("2_tru8v")
+texture_margin_left = 31.0
+texture_margin_top = 29.0
+texture_margin_right = 30.0
+texture_margin_bottom = 31.0
+expand_margin_left = 20.0
+expand_margin_right = 20.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="Credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 5.0
+offset_top = 2.0
+offset_right = 5.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tru8v")
+
+[node name="Credits Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("1_s7h7v")
+theme_override_font_sizes/font_size = 84
+theme_override_styles/normal = SubResource("StyleBoxTexture_n1c6h")
+text = "Credits"
+
+[node name="Programming Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.021000002
+anchor_top = 0.25800002
+anchor_right = 0.24000001
+anchor_bottom = 0.55700004
+offset_left = 0.11999893
+offset_top = 0.23999023
+offset_right = 157.79999
+offset_bottom = 120.95996
+grow_horizontal = 2
+scale = Vector2(0.63898957, 0.63898957)
+theme_override_fonts/font = ExtResource("1_s7h7v")
+theme_override_font_sizes/font_size = 62
+theme_override_styles/normal = SubResource("StyleBoxTexture_n1c6h")
+text = "Programming
+Liyen Liu
+Teresa Calvin"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="Programming Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.41900003
+anchor_right = 1.0
+anchor_bottom = 0.633
+offset_top = 0.06335449
+offset_right = -2.9381409
+offset_bottom = 0.14801025
+uri = "https://delugedigital.com/"
+
+[node name="Design Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.016
+anchor_top = 0.66
+anchor_right = 0.273
+anchor_bottom = 0.87500006
+offset_left = 0.51999664
+offset_top = -0.2000122
+offset_right = 185.56
+offset_bottom = 87.99994
+grow_vertical = 2
+scale = Vector2(0.63898957, 0.63898957)
+theme_override_fonts/font = ExtResource("1_s7h7v")
+theme_override_font_sizes/font_size = 62
+theme_override_styles/normal = SubResource("StyleBoxTexture_n1c6h")
+text = "Design
+Darven Acevedo"
+horizontal_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="Design Label"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0320001
+anchor_bottom = 1.0
+offset_right = 0.07702637
+offset_bottom = -1.9945068
+uri = "https://darven-acevedo.squarespace.com/"
+
+[node name="Art Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.68100005
+anchor_top = 0.287
+anchor_right = 0.947
+anchor_bottom = 0.56200004
+offset_left = 0.3199463
+offset_top = 0.35998535
+offset_right = 191.83997
+offset_bottom = 111.359985
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.63898957, 0.63898957)
+theme_override_fonts/font = ExtResource("1_s7h7v")
+theme_override_font_sizes/font_size = 84
+theme_override_styles/normal = SubResource("StyleBoxTexture_n1c6h")
+text = "Art
+Aiyana Shaw"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LinkButton" type="LinkButton" parent="Art Label"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -6.2598877
+offset_top = 14.084747
+offset_right = 4.784912
+offset_bottom = -16.350464
+grow_horizontal = 2
+grow_vertical = 2
+uri = "https://craliestudios.carrd.co/"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.694
+anchor_top = 0.74700004
+anchor_right = 0.95300007
+anchor_bottom = 0.89300007
+offset_left = 21.679993
+offset_top = -7.840027
+offset_right = 933.1599
+offset_bottom = 395.03998
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.23, 0.23)
+texture_normal = ExtResource("3_2ll0y")
+
+[connection signal="pressed" from="TextureButton" to="." method="_on_texture_button_pressed"]
