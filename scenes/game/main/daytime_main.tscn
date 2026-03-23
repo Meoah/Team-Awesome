@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://dsniqevfoi04w" path="res://assets/textures/background/dock_pieces/FrontDock.png" id="17_mxkb3"]
 [ext_resource type="Script" uid="uid://n8mlx80hkiwy" path="res://scripts/ui/hud/touch_screen_controls.gd" id="19_qjhey"]
 [ext_resource type="Texture2D" uid="uid://c3kkwfdckcahl" path="res://assets/textures/ui/hud/touchscreen/ui_arrow.png" id="20_6xinc"]
+[ext_resource type="Texture2D" uid="uid://du7wv7t0dby11" path="res://assets/textures/vfx/raindrop.png" id="24_b82wd"]
 [ext_resource type="Script" uid="uid://bthvkd0spt0iu" path="res://Shaders/weather_manager.gd" id="24_s5bea"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
@@ -143,10 +144,15 @@ size = Vector2(10, 100)
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
 emission_shape = 3
-emission_box_extents = Vector3(512, 0, 1)
-initial_velocity_min = 900.0
-initial_velocity_max = 900.0
-gravity = Vector3(0, 1500, 0)
+emission_box_extents = Vector3(614, 10, 0)
+angle_min = -4.9999895
+angle_max = 5.000011
+direction = Vector3(0, 1, 0)
+initial_velocity_min = 300.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 900, 0)
+scale_min = 2.0
+scale_max = 3.0
 
 [node name="DaytimeMain" type="Control" unique_id=1140099099 node_paths=PackedStringArray("jeremy_node", "hud", "camera")]
 layout_mode = 3
@@ -361,8 +367,10 @@ script = ExtResource("24_s5bea")
 [node name="WeatherModulate" type="CanvasModulate" parent="." unique_id=710764120]
 
 [node name="RainParticles" type="GPUParticles2D" parent="." unique_id=326939209]
-position = Vector2(539, -140)
-amount = 1500
+position = Vector2(614, -20)
+emitting = false
+amount = 200
+texture = ExtResource("24_b82wd")
 lifetime = 1.2
 process_material = SubResource("ParticleProcessMaterial_b82wd")
 
