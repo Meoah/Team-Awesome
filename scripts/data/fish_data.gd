@@ -29,6 +29,13 @@ const FISH_ID : Dictionary = {
 	23 : TADPOLE_BOBA
 }
 
+const BOSS_ID : Dictionary = {
+	00 : NULL,
+	01 : ENDURANCE,
+	
+}
+
+
 ## Fish data
 # Must include the following:
 #	"name" : String
@@ -39,7 +46,30 @@ const FISH_ID : Dictionary = {
 #	"time" : float
 # Any other parameter is optional and can be used for speciality fish.
 
+const NULL : Dictionary = {
+	"name" : "Missing Number",
+	"image" : NodePath("res://assets/textures/fish/final_fish/01_AcornGoldfish.png"),
+	"weight" : 5.0,
+	"inputs" : ["Left","Right","Up","Down"],
+	"value" : 3.0,
+	"time" : 5.0,
+	"chance" : 0.20
+}
 
+const ENDURANCE : Dictionary = {
+	"name" : "Boss Type Fish",
+	"image" : NodePath("res://assets/textures/fish/final_fish/01_AcornGoldfish.png"),
+	"weight" : 5.0,
+	"inputs" : ["Left","Right","Up","Down"],
+	"value" : 3.0,
+	"time" : 5.0,
+	"chance" : 0.20
+}
+
+
+
+
+#Regular Fish
 #1
 const ACORN_FISH : Dictionary = {
 	"name" : "Acorn Fish",

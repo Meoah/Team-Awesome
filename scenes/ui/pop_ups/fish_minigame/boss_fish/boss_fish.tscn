@@ -1,0 +1,68 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgulr6cs2ujh2"]
+
+[ext_resource type="Script" uid="uid://cl54u1md6201m" path="res://scenes/ui/pop_ups/fish_minigame/boss_fish/boss_fish.gd" id="1_feyyk"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/SimpleLogBorder.png" id="2_3crur"]
+[ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="2_b0ins"]
+[ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="3_8p5ka"]
+[ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="3_t1kga"]
+[ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="4_p2pek"]
+[ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="5_of5o6"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7y00f"]
+texture = ExtResource("2_3crur")
+texture_margin_left = 50.0
+texture_margin_top = 50.0
+texture_margin_right = 50.0
+texture_margin_bottom = 50.0
+
+[node name="BossFish" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1280.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_feyyk")
+arrow_direction = Dictionary[String, Texture2D]({
+"Down": ExtResource("5_of5o6"),
+"Left": ExtResource("2_b0ins"),
+"Right": ExtResource("3_8p5ka"),
+"Up": ExtResource("4_p2pek")
+})
+
+[node name="BossStamina" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 1096.0
+offset_top = 58.0
+offset_right = 1137.0
+offset_bottom = 600.0
+value = 100.0
+fill_mode = 3
+
+[node name="PlayerStamina" type="ProgressBar" parent="."]
+layout_mode = 0
+offset_left = 191.0
+offset_top = 58.0
+offset_right = 232.0
+offset_bottom = 600.0
+value = 100.0
+fill_mode = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 0
+offset_left = 431.0
+offset_top = 118.0
+offset_right = 531.0
+offset_bottom = 218.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_7y00f")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PanelContainer/HBoxContainer"]
+process_mode = 3
+layout_mode = 2
+script = ExtResource("3_t1kga")

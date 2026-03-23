@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://8v7i2pn3jxgb" path="res://assets/textures/background/Placeholder_Water.png" id="5_8rhjh"]
 [ext_resource type="Texture2D" uid="uid://b2ujo6wxupnp0" path="res://assets/textures/background/background_top.png" id="5_sd21a"]
 [ext_resource type="Texture2D" uid="uid://dgmii41agwhfu" path="res://assets/textures/background/background_bottom.png" id="6_sd21a"]
-[ext_resource type="Script" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
+[ext_resource type="Script" uid="uid://kbal7ers7gbb" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
 [ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
 [ext_resource type="Texture2D" uid="uid://4i2j3bsn3hw5" path="res://assets/textures/debug/ExitSign.png" id="9_fhkke"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
