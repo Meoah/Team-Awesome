@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=17 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
 [ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_pnn6m"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/Options_Button.png" id="6_87tfw"]
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/Exit_Button.png" id="7_hh21g"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="9_d7yyt"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="10_0plrm"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="10_yn8vd"]
 
 [sub_resource type="Animation" id="Animation_pnn6m"]
 length = 0.001
@@ -96,6 +98,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CreditsButton:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1297, 567)]
+}
 
 [sub_resource type="Animation" id="Animation_4kdnx"]
 resource_name = "settings_open"
@@ -103,7 +117,7 @@ loop_mode = 2
 
 [sub_resource type="Animation" id="Animation_hff0s"]
 resource_name = "startup"
-length = 6.000004
+length = 7.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -188,6 +202,18 @@ tracks/6/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("CreditsButton:position")
+tracks/7/interp = 2
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(6.1, 6.6666665),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1297, 567), Vector2(1009, 567)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4kdnx"]
 _data = {
@@ -195,6 +221,13 @@ _data = {
 &"settings_open": SubResource("Animation_4kdnx"),
 &"startup": SubResource("Animation_hff0s")
 }
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_madmp"]
+texture = ExtResource("10_yn8vd")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [node name="Main_Menu" type="Control" node_paths=PackedStringArray("blocker", "animation_player", "button_quit")]
 layout_mode = 3
@@ -290,8 +323,20 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
 
+[node name="CreditsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1297.0
+offset_top = 567.0
+offset_right = 1544.0
+offset_bottom = 677.0
+theme_override_fonts/font = ExtResource("10_0plrm")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxTexture_madmp")
+text = "CREDITS"
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="gui_input" from="Blocker" to="." method="_on_blocker_gui_input"]
+[connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]

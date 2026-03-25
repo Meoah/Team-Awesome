@@ -9,6 +9,7 @@ const _SETTINGS = preload("res://scenes/ui/pop_ups/settings_popup.tscn")
 const _MINIGAMEUI = preload("res://scenes/ui/pop_ups/fish_minigame/arrows.tscn")
 const _DIALOGUE = preload("res://scenes/ui/pop_ups/dialogue_popup.tscn")
 const _SHOP = preload("res://scenes/ui/pop_ups/shop_popup.tscn")
+const _CREDITS = preload("res://scenes/ui/pop_ups/credits.tscn")
 
 # Returns a popup with desired parameters if requested.
 static func create_popup(popup_type: int, params: Dictionary = {}) -> BasePopup:
@@ -27,6 +28,8 @@ static func create_popup(popup_type: int, params: Dictionary = {}) -> BasePopup:
 			popup = _PAUSE.instantiate()
 		BasePopup.POPUP_TYPE.SETTINGS:
 			popup = _SETTINGS.instantiate()
+		BasePopup.POPUP_TYPE.CREDITS:
+			popup = _CREDITS.instantiate()
 		_: # Default
 			popup = _GENERIC.instantiate()
 	

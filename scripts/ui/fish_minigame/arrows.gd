@@ -32,6 +32,9 @@ var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
 
 
 
+
+
+
 #Fish Data
 var current_name : String = ""
 var current_image : NodePath
