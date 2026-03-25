@@ -62,10 +62,9 @@ func _sleep() -> void:
 			SignalBus.player_dies.emit()
 			return
 	if PlayManager.request_sleeping_state():
-		if PlayManager.request_weather_state():
-			if PlayManager.request_idle_day_state():
-				SystemData._next_day()
-				GameManager.change_scene_deferred(GameManager.daytime_scene)
+		if PlayManager.request_idle_day_state():
+			SystemData._next_day()
+			GameManager.change_scene_deferred(GameManager.daytime_scene)
 
 @export var scavange_label : Label
 var scavange : int = 3

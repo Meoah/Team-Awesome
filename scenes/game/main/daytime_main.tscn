@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=33 format=3 uid="uid://b856gwtwh1bno"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -23,7 +23,6 @@
 [ext_resource type="Script" uid="uid://n8mlx80hkiwy" path="res://scripts/ui/hud/touch_screen_controls.gd" id="19_qjhey"]
 [ext_resource type="Texture2D" uid="uid://c3kkwfdckcahl" path="res://assets/textures/ui/hud/touchscreen/ui_arrow.png" id="20_6xinc"]
 [ext_resource type="Texture2D" uid="uid://du7wv7t0dby11" path="res://assets/textures/vfx/raindrop.png" id="24_b82wd"]
-[ext_resource type="Script" uid="uid://bthvkd0spt0iu" path="res://Shaders/weather_manager.gd" id="24_s5bea"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
 
@@ -43,93 +42,9 @@ shader_parameter/ripple_width = 0.1
 [sub_resource type="Animation" id="Animation_qc6n8"]
 resource_name = "FISH!"
 length = 1.75
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.39960003, 0.69930005, 1, 1.2987001),
-"transitions": PackedFloat32Array(1, 0.23325841, 0.13869627, 1, 1),
-"update": 0,
-"values": [Vector2(442.746, 430.623), Vector2(642.73, 430.59998), Vector2(542.746, 430.623), Vector2(642.74646, 430.62347), Vector2(642.74646, 430.62347)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.39960003, 0.69930005, 1, 1.2987001),
-"transitions": PackedFloat32Array(1, 0.23325841, 0.13869627, 1, 1),
-"update": 0,
-"values": [Vector2(842.746, 430.623), Vector2(642.73, 430.59998), Vector2(742.746, 430.623), Vector2(642.74646, 430.62347), Vector2(642.74646, 430.62347)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1992155, 1.2987001, 1.3986001),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FISH/CanvasLayer/FISH 02:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1992155, 1.4013106, 1.5012106),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
 
 [sub_resource type="Animation" id="Animation_sd21a"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-200, -200)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-200, -200)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6nw5"]
 _data = {
@@ -154,7 +69,7 @@ gravity = Vector3(0, 900, 0)
 scale_min = 2.0
 scale_max = 3.0
 
-[node name="DaytimeMain" type="Control" unique_id=1140099099 node_paths=PackedStringArray("jeremy_node", "hud", "camera")]
+[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "hud", "camera")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2jsv6")
@@ -165,80 +80,84 @@ camera = NodePath("DayCam")
 bobber_scene = ExtResource("3_6j7wl")
 tutorial_scene = ExtResource("14_i6nw5")
 
-[node name="BackgroundTop" type="Parallax2D" parent="." unique_id=552759941]
+[node name="BackgroundTop" type="Parallax2D" parent="."]
 repeat_size = Vector2(1280, 720)
 repeat_times = 100
 
-[node name="Sprite2D2" type="Sprite2D" parent="BackgroundTop" unique_id=1438689269]
+[node name="Sprite2D2" type="Sprite2D" parent="BackgroundTop"]
 position = Vector2(0, -2000)
 texture = ExtResource("5_sd21a")
 centered = false
 
-[node name="BackgroundMiddle" type="Parallax2D" parent="." unique_id=907427348]
+[node name="BackgroundMiddle" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.75, 0.75)
 repeat_size = Vector2(720, 0)
 repeat_times = 1000
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundMiddle" unique_id=1018346403]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundMiddle"]
 position = Vector2(0, -1280)
 texture = ExtResource("4_qc6n8")
 centered = false
 
-[node name="BackgroundClouds" type="Parallax2D" parent="." unique_id=224571545]
+[node name="BackgroundClouds" type="Parallax2D" parent="."]
 
-[node name="BackgroundBottom" type="Parallax2D" parent="." unique_id=1563754363]
+[node name="BackgroundBottom" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.75, 0.75)
 repeat_size = Vector2(1280, 0)
 repeat_times = 1000
 
-[node name="Sprite2D" type="Sprite2D" parent="BackgroundBottom" unique_id=473486825]
+[node name="Sprite2D" type="Sprite2D" parent="BackgroundBottom"]
 texture = ExtResource("6_sd21a")
 centered = false
 
-[node name="DockPieces" type="Sprite2D" parent="." unique_id=1695948491]
+[node name="DockPieces" type="Sprite2D" parent="."]
 position = Vector2(366, 324)
 
-[node name="Boundaries" type="StaticBody2D" parent="." unique_id=223895233]
+[node name="Boundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_ovom5")
 
-[node name="LeftCollision" type="CollisionShape2D" parent="Boundaries" unique_id=1699071856]
+[node name="LeftCollision" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(-25, 360)
 shape = SubResource("RectangleShape2D_ovom5")
 
-[node name="RightCollision" type="CollisionShape2D" parent="Boundaries" unique_id=1233193820]
+[node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(640, 360)
 shape = SubResource("RectangleShape2D_3kam8")
 
-[node name="Water" type="Parallax2D" parent="." unique_id=449896214]
+[node name="Water" type="Parallax2D" parent="."]
 repeat_size = Vector2(1280, 0)
 autoscroll = Vector2(-20, 0)
 repeat_times = 1000
 
-[node name="Sprite2D" type="Sprite2D" parent="Water" unique_id=1695363178]
+[node name="Sprite2D" type="Sprite2D" parent="Water"]
 z_index = 5
 material = SubResource("ShaderMaterial_b82wd")
 texture = ExtResource("5_8rhjh")
 centered = false
 script = ExtResource("10_pj6yd")
 
-[node name="FISH" type="AnimationPlayer" parent="." unique_id=1047174662]
-libraries/ = SubResource("AnimationLibrary_i6nw5")
+[node name="FISH" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_i6nw5")
+}
 movie_quit_on_finish = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="FISH" unique_id=2125457010]
+[node name="CanvasLayer" type="CanvasLayer" parent="FISH"]
 
-[node name="FISH 01" type="Sprite2D" parent="FISH/CanvasLayer" unique_id=463326990]
-position = Vector2(-200, -200)
+[node name="FISH 01" type="Sprite2D" parent="FISH/CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(442.74597, 430.623)
 scale = Vector2(3, 3)
 texture = ExtResource("9_3kam8")
 
-[node name="FISH 02" type="Sprite2D" parent="FISH/CanvasLayer" unique_id=301750125]
-position = Vector2(-200, -200)
+[node name="FISH 02" type="Sprite2D" parent="FISH/CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(842.746, 430.623)
 scale = Vector2(3, 3)
 texture = ExtResource("10_nw8sa")
 
-[node name="DayCam" type="Camera2D" parent="." unique_id=465040017 node_paths=PackedStringArray("player")]
+[node name="DayCam" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(640, 360)
 limit_left = 0
 limit_bottom = 720
@@ -248,49 +167,49 @@ drag_vertical_enabled = true
 script = ExtResource("8_3kam8")
 player = NodePath("../Jeremy")
 
-[node name="HUD" parent="." unique_id=1888350874 instance=ExtResource("10_3kam8")]
+[node name="HUD" parent="." instance=ExtResource("10_3kam8")]
 
-[node name="DockFloor" type="Sprite2D" parent="." unique_id=269968156]
+[node name="DockFloor" type="Sprite2D" parent="."]
 position = Vector2(391, 277)
 texture = ExtResource("14_ajsgr")
 
-[node name="BackDock" type="Sprite2D" parent="." unique_id=834326123]
+[node name="BackDock" type="Sprite2D" parent="."]
 position = Vector2(389, 273)
 texture = ExtResource("15_xiwi7")
 
-[node name="ExitSign" type="Area2D" parent="." unique_id=1592233346]
+[node name="ExitSign" type="Area2D" parent="."]
 position = Vector2(0, 400)
 collision_layer = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="ExitSign" unique_id=2079425044]
+[node name="Sprite2D" type="Sprite2D" parent="ExitSign"]
 modulate = Color(1, 1, 1, 0.5)
 position = Vector2(66, -67.00001)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_fhkke")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSign" unique_id=1161805092]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSign"]
 shape = SubResource("RectangleShape2D_f86r6")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="LampOff" type="Sprite2D" parent="." unique_id=277431777]
+[node name="LampOff" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(160, 330)
 scale = Vector2(0.48133335, 0.48133335)
 texture = ExtResource("16_xiwi7")
 
-[node name="Jeremy" parent="." unique_id=1919712382 instance=ExtResource("1_oxlu7")]
+[node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
 position = Vector2(-100, 443)
 scale = Vector2(0.30607307, 0.30607307)
 
-[node name="FrontDock" type="Sprite2D" parent="." unique_id=258261076]
+[node name="FrontDock" type="Sprite2D" parent="."]
 position = Vector2(389, 289)
 texture = ExtResource("17_mxkb3")
 
-[node name="Touchscreen" type="CanvasLayer" parent="." unique_id=1920134903]
+[node name="Touchscreen" type="CanvasLayer" parent="."]
 process_mode = 3
 layer = 100
 
-[node name="Touchscreen" type="Control" parent="Touchscreen" unique_id=1527420327]
+[node name="Touchscreen" type="Control" parent="Touchscreen"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -300,7 +219,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("19_qjhey")
 
-[node name="Right" type="TextureButton" parent="Touchscreen/Touchscreen" unique_id=854777378]
+[node name="Right" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 1175.0
@@ -312,7 +231,7 @@ texture_normal = ExtResource("20_6xinc")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Down" type="TextureButton" parent="Touchscreen/Touchscreen" unique_id=1775653056]
+[node name="Down" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 1150.0
@@ -325,7 +244,7 @@ texture_normal = ExtResource("20_6xinc")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Left" type="TextureButton" parent="Touchscreen/Touchscreen" unique_id=472664998]
+[node name="Left" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 925.0
@@ -338,7 +257,7 @@ ignore_texture_size = true
 stretch_mode = 0
 flip_h = true
 
-[node name="Up" type="TextureButton" parent="Touchscreen/Touchscreen" unique_id=1983986225]
+[node name="Up" type="TextureButton" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 layout_mode = 0
 offset_left = 1050.0
@@ -351,7 +270,7 @@ texture_normal = ExtResource("20_6xinc")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Spacebar" type="Button" parent="Touchscreen/Touchscreen" unique_id=1008576090]
+[node name="Spacebar" type="Button" parent="Touchscreen/Touchscreen"]
 modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
 custom_minimum_size = Vector2(400, 100)
 layout_mode = 0
@@ -361,12 +280,9 @@ offset_right = 875.0
 offset_bottom = 675.0
 focus_mode = 0
 
-[node name="WeatherManager" type="Node" parent="." unique_id=664791557]
-script = ExtResource("24_s5bea")
+[node name="WeatherModulate" type="CanvasModulate" parent="."]
 
-[node name="WeatherModulate" type="CanvasModulate" parent="." unique_id=710764120]
-
-[node name="RainParticles" type="GPUParticles2D" parent="." unique_id=326939209]
+[node name="RainParticles" type="GPUParticles2D" parent="."]
 position = Vector2(614, -20)
 emitting = false
 amount = 200
@@ -374,7 +290,6 @@ texture = ExtResource("24_b82wd")
 lifetime = 1.2
 process_material = SubResource("ParticleProcessMaterial_b82wd")
 
-[connection signal="animation_finished" from="FISH" to="." method="_on_fish_animation_finished"]
 [connection signal="area_entered" from="ExitSign" to="." method="_on_exit_sign_area_entered"]
 [connection signal="body_entered" from="ExitSign" to="." method="_on_exit_sign_body_entered"]
 [connection signal="button_down" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_pressed"]

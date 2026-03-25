@@ -23,19 +23,20 @@ func _ready() -> void:
 	# Initial setup
 	AudioEngine.play_bgm(default_bgm)
 	PlayManager.request_dialogue_day_state()
+	
+	#--Weather--
+	WeatherManager.weather_changed.connect(_on_weather_changed)
+	_apply_weather(WeatherManager.current_weather)
+	
+	WeatherManager._roll_daily_weather()
+	
 	await hud.fade_in().finished
 	await _walk_up_sequence().finished
 	
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
 	else : _ready_day()
 	
-	#--Weather--
-	WeatherManager.weather_changed.connect(_on_weather_changed)
-	_apply_weather(WeatherManager.current_weather)
 	
-	#Test
-	WeatherManager.set_weather(WeatherManager.WEATHER.STORM)
-	print("Weather set to: ", WeatherManager.current_weather)
 	
 func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
 	_apply_weather(new_weather)
