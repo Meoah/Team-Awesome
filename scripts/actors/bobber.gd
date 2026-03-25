@@ -33,9 +33,10 @@ func _process(delta: float) -> void:
 	# TODO this sucks, use physics
 	if global_position.y > waterline_y && !is_in_water:
 		_start_bob()
+		get_node("../../Water/Sprite2D").spawn_ripple(global_position)
 		timer.start(time_until_hook)
-	
-	# If in water, bob and start timer.
+
+# If in water, bob and start timer.
 	if is_in_water: 
 		_water_bob(delta)
 	
@@ -89,3 +90,7 @@ func _on_timer_timeout() -> void:
 		hooked.emit()
 		timer.start(time_until_break)
 		_play_vfx()
+
+		timer.start(time_until_hook)
+	
+	

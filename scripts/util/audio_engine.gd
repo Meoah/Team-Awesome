@@ -66,6 +66,7 @@ func _ready() -> void:
 	var audio_save_data : Dictionary = {}
 	# Ensures sounds run while paused.
 	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 	# Setup systems.
 	_setup_bgm()
 	_setup_sfx()
@@ -392,6 +393,10 @@ func _kill_bgm_fade_tween() -> void:
 
 ## Caches the current BGM's progress to bgm_progress_by_track.
 func _cache_active_bgm_progress() -> void:
+	#Should prevent saving during pause
+	if get_tree().paused:
+		return
+	
 	# Aborts if there's no active BGM playing.
 	if bgm_active_track_key == "" : return
 	var active_player : AudioStreamPlayer = _get_active_bgm_player()
@@ -399,11 +404,21 @@ func _cache_active_bgm_progress() -> void:
 	
 	# Saves wherever the current bgm_player is at into the progress tracker.
 	if active_player.playing or active_player.stream_paused:
+
 		var play_position = active_player.get_playback_position()
 		var track_length = active_player.stream.get_length()
 		
 		if track_length - play_position < RESUME_END_CLOSE_ENOUGH : play_position = 0.0
 		bgm_progress_by_track[bgm_active_track_key] = play_position
+
+		#Resumes at a safe position
+		var pos = active_player.get_playback_position()
+		var length = active_player.stream.get_length()
+		
+		if length - pos < 0.15:
+			pos = 0.0
+		
+		bgm_progress_by_track[bgm_active_track_key] = active_player.get_playback_position()
 
 ## Returns with the saved progress position if requested, otherwise 0.0.
 func _get_resume_position(incoming_track_key : String, incoming_stream : AudioStream, should_restart : bool) -> float:

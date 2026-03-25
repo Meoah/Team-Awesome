@@ -113,7 +113,7 @@ func _setup_state_machine() -> void:
 		DeadState.STATE_NAME : [
 			IdleDayState.STATE_NAME,
 			IdleNightState.STATE_NAME],
-		
+			
 	}
 	
 	# Initializes state machine with name and valid transitions.
@@ -133,7 +133,6 @@ func _setup_state_machine() -> void:
 	shopping_state = ShoppingState.new(state_machine)
 	sleeping_state = SleepingState.new(state_machine)
 	dead_state = DeadState.new(state_machine)
-	
 	# Initial state.
 	state_machine.transition_to(dead_state)
 
@@ -155,7 +154,6 @@ func request_moving_night_state() -> bool : return state_machine.transition_to(m
 func request_shopping_state() -> bool : return state_machine.transition_to(shopping_state) == OK
 func request_sleeping_state() -> bool : return state_machine.transition_to(sleeping_state) == OK
 func request_dead_state() -> bool : return state_machine.transition_to(dead_state) == OK
-
 # State boolean checks.
 func is_movement_allowed() -> bool : return movement_states.has(state_machine.current_state.state_name)
 func is_aiming() -> bool : return aiming_states.has(state_machine.current_state.state_name)
