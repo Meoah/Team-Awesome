@@ -29,7 +29,7 @@ func _on_animation_player_animation_finished(anim_name: String) -> void:
 
 
 func _on_blocker_gui_input(event: InputEvent) -> void:
-	if event.is_action_pressed("mouse_click") || event.is_action_pressed("action") : animation_player.seek(5.99)
+	if event.is_action_pressed("mouse_click") || event.is_action_pressed("action") : animation_player.seek(6.99)
 
 
 func _on_options_button_pressed() -> void:

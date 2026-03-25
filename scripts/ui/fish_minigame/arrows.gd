@@ -156,7 +156,6 @@ func _input(_event : InputEvent):
 		player_inputs = "Down"
 	if Input.is_action_just_pressed("left"):
 		player_inputs = "Left"
-		apply_glow()
 	if Input.is_action_just_pressed("right"):
 		player_inputs = "Right"
 	
@@ -287,13 +286,6 @@ func win():
 		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
 		PlayManager.request_idle_day_state()
 		GameManager.popup_queue.dismiss_popup()
-
-
-func apply_glow():
-	var gradient = $Glow.material.get_shader_parameter("gradient")
-	gradient.gradient.set_color(1, Color(1.0, 0.0, 0.983, 1.0))
-
-
 
 
 
