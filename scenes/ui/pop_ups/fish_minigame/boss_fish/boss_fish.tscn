@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgulr6cs2ujh2"]
+[gd_scene load_steps=11 format=3 uid="uid://bgulr6cs2ujh2"]
 
 [ext_resource type="Script" uid="uid://cl54u1md6201m" path="res://scenes/ui/pop_ups/fish_minigame/boss_fish/boss_fish.gd" id="1_feyyk"]
 [ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/SimpleLogBorder.png" id="2_3crur"]
@@ -7,6 +7,12 @@
 [ext_resource type="Script" uid="uid://tntbbnkgxdlp" path="res://scripts/ui/pop_ups/texture_rect.gd" id="3_t1kga"]
 [ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="4_p2pek"]
 [ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="5_of5o6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b0ins"]
+bg_color = Color(0.64, 0.012799988, 0.012799988, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8p5ka"]
+bg_color = Color(0.19292004, 0.56, 0.1736, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7y00f"]
 texture = ExtResource("2_3crur")
@@ -38,6 +44,7 @@ offset_left = 1096.0
 offset_top = 58.0
 offset_right = 1137.0
 offset_bottom = 600.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_b0ins")
 value = 100.0
 fill_mode = 3
 
@@ -47,6 +54,7 @@ offset_left = 191.0
 offset_top = 58.0
 offset_right = 232.0
 offset_bottom = 600.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_8p5ka")
 value = 100.0
 fill_mode = 3
 
@@ -66,3 +74,10 @@ alignment = 1
 process_mode = 3
 layout_mode = 2
 script = ExtResource("3_t1kga")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_right = 244.0
+offset_bottom = 122.0
+theme_override_font_sizes/font_size = 64
+text = "asdasd"

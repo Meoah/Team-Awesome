@@ -92,11 +92,20 @@ func randInput():
 
 var dice_check : int = 3
 
+
+
+var input_count : int = 0
+var input_count_cap : int = 10
+
+
 #On correct Input
 func correct_input():
 	#input_index = input_index + 1 #Advances in the string index
+	input_count += 1
 	input_array.pop_front()
 	var dice_roll :int = randi_range(0,10)
+	if input_count < input_count_cap:
+		dice_roll = -1
 	if dice_roll < dice_check : 
 		var appending_input = randInput()
 		input_array.append(appending_input)
@@ -105,6 +114,7 @@ func correct_input():
 		copy.texture = arrow_direction[appending_input]
 		$PanelContainer/HBoxContainer.add_child(copy)
 		sprite_array.append(copy)
+		$Label.text = str(input_count, "/", str(input_count_cap))
 	print(input_array)
 	#text_render()
 	#$Reaction.set_texture(success)
@@ -122,10 +132,19 @@ func incorrect_input():
 	if not sprite_array.is_empty():
 		var incorrect_sprite: ArrowTexture = sprite_array[0]
 		incorrect_sprite.incorrect()
-
+	$PlayerStamina.value -= 15
 	set_process_input(false)
 	await get_tree().create_timer(0.3).timeout
 	set_process_input(true)
+
+
+var stamina_over_time : float = 0.03
+
+func _process(delta):
+	$PlayerStamina.value -= stamina_over_time
+	if $PlayerStamina.value == 0 && !second_wind_used:
+		second_wind()
+
 
 
 
@@ -137,8 +156,20 @@ func deal_damage():
 		await get_tree().create_timer(0.3).timeout
 		spawn_arrows()
 		dice_check += 1
+		input_count = 0
+		input_count_cap += 5
+		$PlayerStamina.value +=33
+		stamina_over_time +=0.05
 
 
+var second_wind_used : bool = false
+
+func second_wind():
+	$PlayerStamina.value = 100
+	$Label.text = "Second Wind!!!"
+	await get_tree().create_timer(0.8).timeout
+	$Label.text = str(input_count, "/", str(input_count_cap))
+	second_wind_used = true
 
 
 
