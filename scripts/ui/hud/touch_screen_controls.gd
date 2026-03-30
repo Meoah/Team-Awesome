@@ -11,7 +11,7 @@ func _input(event: InputEvent) -> void:
 		has_touch_input = true
 
 func _ready() -> void:
-	pass #hide()
+	hide()
 
 
 func _on_right_pressed() -> void:

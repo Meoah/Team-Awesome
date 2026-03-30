@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=26 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_1pk0j"]
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/main/nighttime_main.gd" id="1_53syt"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="2_s2grh"]
 [ext_resource type="AudioStream" uid="uid://c8152424wtrat" path="res://assets/audio/bgm/dump/waiting_for_night.wav" id="3_7dbdj"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="3_i5ojq"]
+[ext_resource type="Texture2D" uid="uid://c65l3uf8vn6d5" path="res://assets/textures/background/Nighttime.png" id="4_cte0j"]
+[ext_resource type="Texture2D" uid="uid://cn50pku28bhwx" path="res://assets/textures/background/Dirt_Floor.png" id="4_jhrn1"]
 [ext_resource type="Texture2D" uid="uid://i3smng8yxpbe" path="res://assets/textures/debug/blue-house-md.png" id="4_y133y"]
 [ext_resource type="Texture2D" uid="uid://p0x3tf6qd2yx" path="res://assets/textures/debug/bassprofishing.png" id="5_11rnk"]
 [ext_resource type="Texture2D" uid="uid://da0at2yyqtmkh" path="res://assets/textures/debug/Peter's_Fishing_Store.png" id="6_yb8jp"]
@@ -12,15 +13,10 @@
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="8_7dbdj"]
 [ext_resource type="Script" uid="uid://bfuyuw7kfy23" path="res://scripts/game/camera/night_cam.gd" id="9_kpww7"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="12_yb8jp"]
-[ext_resource type="Script" uid="uid://n8mlx80hkiwy" path="res://scripts/ui/hud/touch_screen_controls.gd" id="14_pracl"]
-[ext_resource type="Texture2D" uid="uid://c3kkwfdckcahl" path="res://assets/textures/ui/hud/touchscreen/ui_arrow.png" id="15_icnix"]
 [ext_resource type="Texture2D" uid="uid://du7wv7t0dby11" path="res://assets/textures/vfx/raindrop.png" id="17_c5hdm"]
 
 [sub_resource type="Theme" id="Theme_7dbdj"]
 default_font = ExtResource("1_1pk0j")
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pracl"]
-load_path = "res://.godot/imported/nighttime_background.png-c94931361a01dc8b30d39c4ef7c78b97.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk35q"]
 size = Vector2(268, 292)
@@ -85,21 +81,22 @@ scavange_label = NodePath("Scavange")
 
 [node name="Background" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 0.5)
-repeat_size = Vector2(1280, 0)
+repeat_size = Vector2(2560, 0)
 repeat_times = 4
 
 [node name="BackgroundTexture" type="Sprite2D" parent="Background"]
 modulate = Color(0.46618086, 0.4661808, 0.4661808, 1)
-texture = SubResource("CompressedTexture2D_pracl")
+position = Vector2(3, 0)
+texture = ExtResource("4_cte0j")
 centered = false
 
 [node name="Floor" type="Parallax2D" parent="."]
+scroll_offset = Vector2(-2, 0)
 repeat_size = Vector2(128, 0)
 repeat_times = 1000
 
-[node name="GroundTexture" type="Sprite2D" parent="Floor"]
-position = Vector2(0, 630)
-texture = ExtResource("3_i5ojq")
+[node name="DirtFloor" type="Sprite2D" parent="Floor"]
+texture = ExtResource("4_jhrn1")
 centered = false
 
 [node name="House" type="Area2D" parent="."]
@@ -216,81 +213,6 @@ text = "FREE MONEY
 
 [node name="HUD" parent="." instance=ExtResource("12_yb8jp")]
 
-[node name="Touchscreen" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 100
-
-[node name="Touchscreen" type="Control" parent="Touchscreen"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("14_pracl")
-
-[node name="Right" type="TextureButton" parent="Touchscreen/Touchscreen"]
-modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
-layout_mode = 0
-offset_left = 1175.0
-offset_top = 600.0
-offset_right = 1275.0
-offset_bottom = 700.0
-focus_mode = 0
-texture_normal = ExtResource("15_icnix")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Down" type="TextureButton" parent="Touchscreen/Touchscreen"]
-modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
-layout_mode = 0
-offset_left = 1150.0
-offset_top = 600.0
-offset_right = 1250.0
-offset_bottom = 700.0
-rotation = 1.5707964
-focus_mode = 0
-texture_normal = ExtResource("15_icnix")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Left" type="TextureButton" parent="Touchscreen/Touchscreen"]
-modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
-layout_mode = 0
-offset_left = 925.0
-offset_top = 600.0
-offset_right = 1025.0
-offset_bottom = 700.0
-focus_mode = 0
-texture_normal = ExtResource("15_icnix")
-ignore_texture_size = true
-stretch_mode = 0
-flip_h = true
-
-[node name="Up" type="TextureButton" parent="Touchscreen/Touchscreen"]
-modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
-layout_mode = 0
-offset_left = 1050.0
-offset_top = 575.0
-offset_right = 1150.0
-offset_bottom = 675.0
-rotation = -1.5707964
-focus_mode = 0
-texture_normal = ExtResource("15_icnix")
-ignore_texture_size = true
-stretch_mode = 0
-
-[node name="Spacebar" type="Button" parent="Touchscreen/Touchscreen"]
-modulate = Color(0.735357, 0.5370987, 0.48452926, 0.50200003)
-custom_minimum_size = Vector2(400, 100)
-layout_mode = 0
-offset_left = 475.0
-offset_top = 600.0
-offset_right = 875.0
-offset_bottom = 675.0
-focus_mode = 0
-
 [node name="WeatherModulate" type="CanvasModulate" parent="."]
 
 [node name="RainParticles" type="GPUParticles2D" parent="."]
@@ -302,13 +224,3 @@ lifetime = 1.2
 process_material = SubResource("ParticleProcessMaterial_6b7ln")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Down" to="Touchscreen/Touchscreen" method="_on_down_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Down" to="Touchscreen/Touchscreen" method="_on_down_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Left" to="Touchscreen/Touchscreen" method="_on_left_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Left" to="Touchscreen/Touchscreen" method="_on_left_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Up" to="Touchscreen/Touchscreen" method="_on_up_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Up" to="Touchscreen/Touchscreen" method="_on_up_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Spacebar" to="Touchscreen/Touchscreen" method="_on_button_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Spacebar" to="Touchscreen/Touchscreen" method="_on_button_released"]
