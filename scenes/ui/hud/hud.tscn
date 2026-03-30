@@ -672,23 +672,23 @@ process_mode = 3
 layer = 100
 
 [node name="Touchscreen" type="Control" parent="Touchscreen"]
-modulate = Color(1, 1, 1, 0.8)
+modulate = Color(1, 1, 1, 0.5)
 layout_mode = 3
 anchors_preset = 0
-offset_left = 165.0
-offset_top = 612.0
-offset_right = 165.0
-offset_bottom = 612.0
+offset_left = 180.0
+offset_top = 550.0
+offset_right = 180.0
+offset_bottom = 550.0
 mouse_filter = 2
 script = ExtResource("9_rdayf")
 
 [node name="Right" type="TextureButton" parent="Touchscreen/Touchscreen"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
-offset_left = 5.0
-offset_top = -32.0
-offset_right = 69.0
-offset_bottom = 32.0
+offset_left = 10.0
+offset_top = -64.0
+offset_right = 138.0
+offset_bottom = 64.0
 focus_mode = 0
 texture_normal = ExtResource("10_211po")
 texture_pressed = ExtResource("11_8m3cg")
@@ -697,12 +697,12 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Down" type="TextureButton" parent="Touchscreen/Touchscreen"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
-offset_left = -32.0
-offset_top = 5.0
-offset_right = 32.0
-offset_bottom = 69.0
+offset_left = -64.0
+offset_top = 10.0
+offset_right = 64.0
+offset_bottom = 138.0
 focus_mode = 0
 texture_normal = ExtResource("13_b1wkl")
 texture_pressed = ExtResource("14_r6ol6")
@@ -711,12 +711,12 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Left" type="TextureButton" parent="Touchscreen/Touchscreen"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
-offset_left = -69.0
-offset_top = -32.0
-offset_right = -5.0
-offset_bottom = 32.0
+offset_left = -138.0
+offset_top = -64.0
+offset_right = -10.0
+offset_bottom = 64.0
 focus_mode = 0
 texture_normal = ExtResource("16_dm3fy")
 texture_pressed = ExtResource("17_fte8k")
@@ -725,12 +725,12 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Up" type="TextureButton" parent="Touchscreen/Touchscreen"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
-offset_left = -32.0
-offset_top = -69.0
-offset_right = 32.0
-offset_bottom = -5.0
+offset_left = -64.0
+offset_top = -138.0
+offset_right = 64.0
+offset_bottom = -10.0
 focus_mode = 0
 texture_normal = ExtResource("19_eyak2")
 texture_pressed = ExtResource("20_qv6go")
@@ -739,16 +739,17 @@ ignore_texture_size = true
 stretch_mode = 0
 
 [node name="Spacebar" type="TextureButton" parent="Touchscreen/Touchscreen"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(192, 192)
 layout_mode = 0
-offset_left = 900.0
-offset_top = -64.0
-offset_right = 1028.0
-offset_bottom = 64.0
+offset_left = 837.0
+offset_top = -79.0
+offset_right = 1029.0
+offset_bottom = 113.0
 focus_mode = 0
 texture_normal = ExtResource("22_l4xpv")
 texture_pressed = ExtResource("23_hsac1")
 texture_click_mask = ExtResource("24_885y2")
+stretch_mode = 0
 
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
