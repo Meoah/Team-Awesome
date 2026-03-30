@@ -30,7 +30,7 @@ GameManager="*res://scenes/game_manager.tscn"
 AudioEngine="*res://scripts/util/audio_engine.gd"
 PlayManager="*res://scripts/managers/play_manager.gd"
 SignalBus="*res://scripts/util/signal_bus.gd"
-WeatherManager="*res://Shaders/weather_manager.gd"
+WeatherManager="*res://shaders/weather_manager.gd"
 
 [debug]
 
@@ -48,7 +48,8 @@ window/stretch/mode="canvas_items"
 folder_colors={
 "res://assets/": "green",
 "res://scenes/": "yellow",
-"res://scripts/": "orange"
+"res://scripts/": "orange",
+"res://shaders/": "purple"
 }
 
 [global_group]

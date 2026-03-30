@@ -1,15 +1,19 @@
-[gd_scene load_steps=17 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=21 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
 [ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_pnn6m"]
-[ext_resource type="Texture2D" uid="uid://kwehencybwcm" path="res://assets/textures/vfx/Cloud03.png" id="4_o6xfv"]
+[ext_resource type="Texture2D" uid="uid://c12qijslqo1mg" path="res://assets/textures/background/SkyBackground.png" id="3_madmp"]
+[ext_resource type="Texture2D" uid="uid://clte66jao3y3i" path="res://assets/textures/background/clouds/Cloud01.png" id="4_hff0s"]
+[ext_resource type="Texture2D" uid="uid://0of2npxdth2d" path="res://assets/textures/background/clouds/Cloud02.png" id="5_pnn6m"]
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/menu_buttons/Play_Button.png" id="5_t5foa"]
-[ext_resource type="Texture2D" uid="uid://mjb8yq3apuls" path="res://assets/textures/vfx/Cloud01.png" id="5_yn8vd"]
+[ext_resource type="Texture2D" uid="uid://b3c27srtlb2sa" path="res://assets/textures/background/clouds/Cloud03.png" id="6_4kdnx"]
 [ext_resource type="Texture2D" uid="uid://doftsqaqk2p42" path="res://assets/textures/ui/menu_buttons/Options_Button.png" id="6_87tfw"]
+[ext_resource type="Texture2D" uid="uid://dcosx8b8oj3qg" path="res://assets/textures/background/clouds/Cloud04.png" id="7_gbwl8"]
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/menu_buttons/Exit_Button.png" id="7_hh21g"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="9_d7yyt"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="10_0plrm"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="10_yn8vd"]
+[ext_resource type="Shader" uid="uid://k8pfmugxe6dy" path="res://shaders/lens_flare.gdshader" id="12_vo8jh"]
 
 [sub_resource type="Animation" id="Animation_pnn6m"]
 length = 0.001
@@ -221,8 +225,10 @@ _data = {
 &"startup": SubResource("Animation_hff0s")
 }
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yn8vd"]
-load_path = "res://.godot/imported/BackgroundSkyClear.png-ab54ea1e9927ac4b1b36e33faec7bb19.ctex"
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3wj1a"]
+shader = ExtResource("12_vo8jh")
+shader_parameter/sun_position = Vector2(1280, 720)
+shader_parameter/tint = Vector3(1.4, 1.2, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_madmp"]
 texture = ExtResource("10_yn8vd")
@@ -253,32 +259,75 @@ autoplay = "startup"
 [node name="Background" type="Node2D" parent="."]
 
 [node name="Sky" type="Sprite2D" parent="Background"]
-texture = SubResource("CompressedTexture2D_yn8vd")
+texture = ExtResource("3_madmp")
 centered = false
 
-[node name="CloudlineTop" type="Parallax2D" parent="Background"]
-scale = Vector2(1, 0.6399994)
-repeat_size = Vector2(300, 0)
+[node name="CloudlineSlow" type="Parallax2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.8)
+repeat_size = Vector2(1500, 0)
 autoscroll = Vector2(20, 0)
-repeat_times = 6
-
-[node name="CloudLarge" type="Sprite2D" parent="Background/CloudlineTop"]
-position = Vector2(580, 356.25027)
-texture = ExtResource("4_o6xfv")
-
-[node name="CloudlineBottom" type="Parallax2D" parent="Background"]
-scroll_offset = Vector2(-5.465, 0)
-repeat_size = Vector2(353.56, 0)
-autoscroll = Vector2(50, 0)
 repeat_times = 5
 
-[node name="CloudLarge" type="Sprite2D" parent="Background/CloudlineBottom"]
-position = Vector2(617, 663)
-texture = ExtResource("5_yn8vd")
+[node name="Cloud01" type="Sprite2D" parent="Background/CloudlineSlow"]
+position = Vector2(1091, 177)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("4_hff0s")
+
+[node name="Cloud05" type="Sprite2D" parent="Background/CloudlineSlow"]
+position = Vector2(193, 332)
+texture = ExtResource("4_hff0s")
+
+[node name="CloudlineMedium" type="Parallax2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.8)
+scale = Vector2(1, 0.6399994)
+repeat_size = Vector2(1500, 0)
+autoscroll = Vector2(35, 0)
+
+[node name="Cloud03" type="Sprite2D" parent="Background/CloudlineMedium"]
+position = Vector2(1093, 584.3756)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("6_4kdnx")
+
+[node name="Cloud06" type="Sprite2D" parent="Background/CloudlineMedium"]
+position = Vector2(309, 187.50017)
+texture = ExtResource("6_4kdnx")
+
+[node name="Cloud02" type="Sprite2D" parent="Background/CloudlineMedium"]
+position = Vector2(207, 692.1882)
+texture = ExtResource("5_pnn6m")
+
+[node name="CloudlineFast" type="Parallax2D" parent="Background"]
+modulate = Color(1, 1, 1, 0.8)
+scale = Vector2(1, 0.6399994)
+repeat_size = Vector2(1500, 0)
+autoscroll = Vector2(50, 0)
+
+[node name="Cloud03" type="Sprite2D" parent="Background/CloudlineFast"]
+position = Vector2(392, 246.87521)
+scale = Vector2(1.2, 1.2)
+texture = ExtResource("5_pnn6m")
+
+[node name="Cloud04" type="Sprite2D" parent="Background/CloudlineFast"]
+position = Vector2(783, 442.18793)
+texture = ExtResource("7_gbwl8")
+
+[node name="Cloud05" type="Sprite2D" parent="Background/CloudlineFast"]
+position = Vector2(892, 128.12512)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("7_gbwl8")
 
 [node name="MockTitle" type="Sprite2D" parent="Background"]
 position = Vector2(640, 360)
 texture = ExtResource("9_d7yyt")
+
+[node name="LensFlare" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_3wj1a")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="MainMenu" type="MarginContainer" parent="."]
 layout_mode = 1
