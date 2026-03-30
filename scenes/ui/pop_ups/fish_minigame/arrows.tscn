@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="13_8ksox"]
 [ext_resource type="AudioStream" uid="uid://by0a2yhtb1xx2" path="res://assets/audio/sfx/arrows_sfx/CorrectInput.wav" id="14_6t01a"]
 [ext_resource type="AudioStream" uid="uid://c2qsxm7f6l4bf" path="res://assets/audio/sfx/arrows_sfx/Weapon Bullet Shell 7MM Dropping On Cement 04.wav" id="14_qp0nd"]
-[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/SimpleLogBorder.png" id="15_jhi3u"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="15_jhi3u"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="15_np22p"]
 [ext_resource type="Script" uid="uid://c2w7qb8xpm6jn" path="res://scripts/ui/fish_minigame/arrow_sprite.gd" id="16_mx6gi"]
 [ext_resource type="AudioStream" uid="uid://cw4v1vxvdvah7" path="res://assets/audio/sfx/arrows_sfx/timer/FuseLit.wav" id="17_02m58"]

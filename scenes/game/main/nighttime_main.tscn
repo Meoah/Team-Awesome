@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/main/nighttime_main.gd" id="1_53syt"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="2_s2grh"]
 [ext_resource type="AudioStream" uid="uid://c8152424wtrat" path="res://assets/audio/bgm/dump/waiting_for_night.wav" id="3_7dbdj"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="3_i5ojq"]
-[ext_resource type="Texture2D" uid="uid://h1vw1cdlxmd7" path="res://assets/textures/background/nighttime_background.png" id="4_jhrn1"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="3_i5ojq"]
 [ext_resource type="Texture2D" uid="uid://i3smng8yxpbe" path="res://assets/textures/debug/blue-house-md.png" id="4_y133y"]
 [ext_resource type="Texture2D" uid="uid://p0x3tf6qd2yx" path="res://assets/textures/debug/bassprofishing.png" id="5_11rnk"]
 [ext_resource type="Texture2D" uid="uid://da0at2yyqtmkh" path="res://assets/textures/debug/Peter's_Fishing_Store.png" id="6_yb8jp"]
@@ -19,6 +18,9 @@
 
 [sub_resource type="Theme" id="Theme_7dbdj"]
 default_font = ExtResource("1_1pk0j")
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_pracl"]
+load_path = "res://.godot/imported/nighttime_background.png-c94931361a01dc8b30d39c4ef7c78b97.ctex"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk35q"]
 size = Vector2(268, 292)
@@ -88,7 +90,7 @@ repeat_times = 4
 
 [node name="BackgroundTexture" type="Sprite2D" parent="Background"]
 modulate = Color(0.46618086, 0.4661808, 0.4661808, 1)
-texture = ExtResource("4_jhrn1")
+texture = SubResource("CompressedTexture2D_pracl")
 centered = false
 
 [node name="Floor" type="Parallax2D" parent="."]

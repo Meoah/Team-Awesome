@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://duuwqbb7x3ow3"
+path="res://.godot/imported/dpad_element_east_clickmask.png-0864144d79a0f25753e7b5ce421fdfa8.res"
+
+[deps]
+
+source_file="res://assets/textures/ui/hud/touchscreen/dpad_element_east_clickmask.png"
+dest_files=["res://.godot/imported/dpad_element_east_clickmask.png-0864144d79a0f25753e7b5ce421fdfa8.res"]
+
+[params]
+
+create_from=0
+threshold=0.5

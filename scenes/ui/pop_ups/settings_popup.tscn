@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://gbmec1b0enmv"]
 
 [ext_resource type="Script" uid="uid://bovbn0xd4wp6a" path="res://scripts/ui/pop_ups/settings_popup.gd" id="1_5l3de"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="1_agcd6"]
-[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/Settings_Button.png" id="2_5l3de"]
+[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="1_agcd6"]
+[ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/menu_buttons/Settings_Button.png" id="2_5l3de"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="3_hnp0x"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_tpevy"]
 [ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="5_xjmmi"]
-[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/Back_Button2.png" id="6_0y5ln"]
+[ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/menu_buttons/Back_Button2.png" id="6_0y5ln"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hff0s"]
 

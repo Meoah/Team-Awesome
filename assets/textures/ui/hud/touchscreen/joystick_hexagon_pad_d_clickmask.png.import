@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://cjsnaim8vrwj2"
+path="res://.godot/imported/joystick_hexagon_pad_d_clickmask.png-f2ea524f3dd1b81208629e83ec0408b5.res"
+
+[deps]
+
+source_file="res://assets/textures/ui/hud/touchscreen/joystick_hexagon_pad_d_clickmask.png"
+dest_files=["res://.godot/imported/joystick_hexagon_pad_d_clickmask.png-f2ea524f3dd1b81208629e83ec0408b5.res"]
+
+[params]
+
+create_from=1
+threshold=0.5
