@@ -173,7 +173,6 @@ func _action() -> void:
 	if !(input_flags & InputFlags.ACTION):
 		interacted = false
 		return
-	
 	if !interacted:
 		player_interact.emit()
 		interacted = true

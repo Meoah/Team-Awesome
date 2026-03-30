@@ -33,7 +33,7 @@ func _process(delta: float) -> void:
 	# TODO this sucks, use physics
 	if global_position.y > waterline_y && !is_in_water:
 		_start_bob()
-		get_node("../../Water/Sprite2D").spawn_ripple(global_position)
+		#get_node("../../WaterBack/Water01").spawn_ripple(global_position)
 		timer.start(time_until_hook)
 
 # If in water, bob and start timer.
