@@ -656,22 +656,7 @@ grid_type = "Bait"
 [node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer/BaitGrid" instance=ExtResource("7_e7gie")]
 layout_mode = 2
 
-[node name="Blocker" type="ColorRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0)
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Touchscreen" type="CanvasLayer" parent="."]
-process_mode = 3
-layer = 100
-
-[node name="Touchscreen" type="Control" parent="Touchscreen"]
+[node name="Touchscreen" type="Control" parent="."]
 modulate = Color(1, 1, 1, 0.5)
 layout_mode = 3
 anchors_preset = 0
@@ -682,7 +667,7 @@ offset_bottom = 550.0
 mouse_filter = 2
 script = ExtResource("9_rdayf")
 
-[node name="Right" type="TextureButton" parent="Touchscreen/Touchscreen"]
+[node name="Right" type="TextureButton" parent="Touchscreen"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = 10.0
@@ -696,7 +681,7 @@ texture_click_mask = ExtResource("12_ne1ra")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Down" type="TextureButton" parent="Touchscreen/Touchscreen"]
+[node name="Down" type="TextureButton" parent="Touchscreen"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = -64.0
@@ -710,7 +695,7 @@ texture_click_mask = ExtResource("15_0kchs")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Left" type="TextureButton" parent="Touchscreen/Touchscreen"]
+[node name="Left" type="TextureButton" parent="Touchscreen"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = -138.0
@@ -724,7 +709,7 @@ texture_click_mask = ExtResource("18_t1llk")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Up" type="TextureButton" parent="Touchscreen/Touchscreen"]
+[node name="Up" type="TextureButton" parent="Touchscreen"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_left = -64.0
@@ -738,7 +723,7 @@ texture_click_mask = ExtResource("21_p1o7j")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="Spacebar" type="TextureButton" parent="Touchscreen/Touchscreen"]
+[node name="Spacebar" type="TextureButton" parent="Touchscreen"]
 custom_minimum_size = Vector2(192, 192)
 layout_mode = 0
 offset_left = 837.0
@@ -751,16 +736,27 @@ texture_pressed = ExtResource("23_hsac1")
 texture_click_mask = ExtResource("24_885y2")
 stretch_mode = 0
 
+[node name="Blocker" type="ColorRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Pause/TextureButton" to="HUDController" method="_on_texture_button_pressed"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Right" to="Touchscreen/Touchscreen" method="_on_right_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Down" to="Touchscreen/Touchscreen" method="_on_down_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Down" to="Touchscreen/Touchscreen" method="_on_down_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Left" to="Touchscreen/Touchscreen" method="_on_left_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Left" to="Touchscreen/Touchscreen" method="_on_left_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Up" to="Touchscreen/Touchscreen" method="_on_up_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Up" to="Touchscreen/Touchscreen" method="_on_up_released"]
-[connection signal="button_down" from="Touchscreen/Touchscreen/Spacebar" to="Touchscreen/Touchscreen" method="_on_button_pressed"]
-[connection signal="button_up" from="Touchscreen/Touchscreen/Spacebar" to="Touchscreen/Touchscreen" method="_on_button_released"]
+[connection signal="button_down" from="Touchscreen/Right" to="Touchscreen" method="_on_right_pressed"]
+[connection signal="button_up" from="Touchscreen/Right" to="Touchscreen" method="_on_right_released"]
+[connection signal="button_down" from="Touchscreen/Down" to="Touchscreen" method="_on_down_pressed"]
+[connection signal="button_up" from="Touchscreen/Down" to="Touchscreen" method="_on_down_released"]
+[connection signal="button_down" from="Touchscreen/Left" to="Touchscreen" method="_on_left_pressed"]
+[connection signal="button_up" from="Touchscreen/Left" to="Touchscreen" method="_on_left_released"]
+[connection signal="button_down" from="Touchscreen/Up" to="Touchscreen" method="_on_up_pressed"]
+[connection signal="button_up" from="Touchscreen/Up" to="Touchscreen" method="_on_up_released"]
+[connection signal="button_down" from="Touchscreen/Spacebar" to="Touchscreen" method="_on_button_pressed"]
+[connection signal="button_up" from="Touchscreen/Spacebar" to="Touchscreen" method="_on_button_released"]

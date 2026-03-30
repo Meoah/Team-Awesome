@@ -1,14 +1,16 @@
 extends Control
 class_name TouchScreenControls
 
-# TODO this shit is disgusting, fix it after gdc
-
+var ignore_input : bool = false
 var has_touch_input : bool = false
 
+
 func _input(event: InputEvent) -> void:
+	if ignore_input : return
 	if event is InputEventScreenTouch or event is InputEventScreenDrag:
 		show()
 		has_touch_input = true
+
 
 func _ready() -> void:
 	hide()
@@ -52,6 +54,7 @@ func _on_button_pressed() -> void:
 
 func _on_button_released() -> void:
 	_release_action("action")
+
 
 func _press_action(action_name : String) -> void:
 	var event : InputEventAction = InputEventAction.new()
