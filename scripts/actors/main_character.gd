@@ -8,6 +8,7 @@ class_name MainCharacter
 @export var power_bar : ProgressBar
 @export_category("Audio")
 @export var charging_sfx : AudioStream
+@export var hook_success_sfx : AudioStream
 # Arrow
 var arrow_distance : float = 0.0
 var cast_angle : float = 20.0
@@ -181,6 +182,7 @@ func _action() -> void:
 	if bobber_hook:
 		if PlayManager.request_reeling_state():
 			_clear_bobbers()
+			AudioEngine.play_sfx(hook_success_sfx)
 			if daytime_node : daytime_node._play_minigame()
 
 # Aiming handler
