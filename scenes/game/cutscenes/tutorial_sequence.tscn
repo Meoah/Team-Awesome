@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/nine_slices/panel_grey.png" id="1_fgbf8"]
 [ext_resource type="Script" uid="uid://b8svya20t67fs" path="res://scripts/game/cutscenes/tutorial/tutorial_sequence.gd" id="1_ltyb5"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_ltyb5"]
-[ext_resource type="Shader" uid="uid://b53gtf3nmu4po" path="res://scripts/game/cutscenes/tutorial/tutorial_sequence.gdshader" id="2_pyu63"]
+[ext_resource type="Shader" uid="uid://b53gtf3nmu4po" path="res://shaders/spotlight.gdshader" id="2_pyu63"]
 [ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/vfx/DetectiveNavi.png" id="3_64mbj"]
 [ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/jeremy/arrow.png" id="6_dqchs"]
 
