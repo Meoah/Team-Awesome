@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cclc658nt2osg"]
 
 [ext_resource type="Script" uid="uid://d0o1muj4f7jbw" path="res://scripts/ui/pop_ups/pause_popup.gd" id="1"]
-[ext_resource type="AudioStream" uid="uid://dwwx23aa1xjui" path="res://assets/audio/bgm/dump/shoppins.ogg" id="2_2vhs1"]
+[ext_resource type="AudioStream" uid="uid://dwwx23aa1xjui" path="res://assets/audio/bgm/shoppins.ogg" id="2_2vhs1"]
 [ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="2_yt3lu"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2vhs1"]

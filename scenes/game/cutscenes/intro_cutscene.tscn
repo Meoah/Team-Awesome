@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scripts/game/cutscenes/intro_cutscene.gd" id="1_kb0hh"]
 [ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/main/daytime_main.tscn" id="2_4sr7y"]
-[ext_resource type="AudioStream" uid="uid://4bqm83o3j0p3" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.ogg" id="2_cvc0b"]
+[ext_resource type="AudioStream" uid="uid://4bqm83o3j0p3" path="res://assets/audio/bgm/hell_yeah_arrow_fishing.ogg" id="2_cvc0b"]
 [ext_resource type="Texture2D" uid="uid://c12qijslqo1mg" path="res://assets/textures/background/SkyBackground.png" id="4_cvc0b"]
 [ext_resource type="Texture2D" uid="uid://clte66jao3y3i" path="res://assets/textures/background/clouds/Cloud01.png" id="5_5wfrr"]
 [ext_resource type="Texture2D" uid="uid://cafh7ij3d6eeu" path="res://assets/textures/fish/wip_fish/Catfish.png" id="6_j6n06"]
