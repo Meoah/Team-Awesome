@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://c4g7xtu4dc0po"]
+[gd_scene load_steps=7 format=3 uid="uid://c4g7xtu4dc0po"]
 
 [ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/jeremy/MCPlaceholder.png" id="1_2fv12"]
 [ext_resource type="Script" uid="uid://vc01sgmlolgc" path="res://scripts/actors/main_character.gd" id="1_mo88p"]
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="2_5ovje"]
+[ext_resource type="AudioStream" uid="uid://ctw603c24roia" path="res://assets/audio/sfx/GaugeChargeUpDown.ogg" id="3_a64bi"]
 [ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/jeremy/arrow.png" id="4_w0brd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0brd"]
@@ -15,6 +16,7 @@ bobber_scene = ExtResource("2_5ovje")
 arrow_sprite = NodePath("Arrow")
 boat_sprite = NodePath("BoatSprite")
 power_bar = NodePath("PowerBar")
+charging_sfx = ExtResource("3_a64bi")
 
 [node name="BoatSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_2fv12")
