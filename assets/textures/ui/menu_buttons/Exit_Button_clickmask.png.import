@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://dolrt2n4tunki"
+path="res://.godot/imported/Exit_Button_clickmask.png-8f17c01f4a330f4a8da04ef9341bec2a.res"
+
+[deps]
+
+source_file="res://assets/textures/ui/menu_buttons/Exit_Button_clickmask.png"
+dest_files=["res://.godot/imported/Exit_Button_clickmask.png-8f17c01f4a330f4a8da04ef9341bec2a.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

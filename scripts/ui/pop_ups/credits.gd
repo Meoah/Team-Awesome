@@ -3,6 +3,7 @@ class_name CreditsPopup
 
 @export var back_button: BaseButton
 @export var first_focus_control: Control
+@export var cancel_sfx : AudioStream
 
 
 func _on_init() -> void:
@@ -17,4 +18,5 @@ func _on_ready() -> void:
 
 
 func _on_texture_button_pressed() -> void:
+	AudioEngine.play_sfx(cancel_sfx)
 	GameManager.dismiss_popup()

@@ -1,9 +1,12 @@
-[gd_scene load_steps=24 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=36 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
 [ext_resource type="AudioStream" uid="uid://4bqm83o3j0p3" path="res://assets/audio/bgm/hell_yeah_arrow_fishing.ogg" id="2_3wj1a"]
 [ext_resource type="Texture2D" uid="uid://c12qijslqo1mg" path="res://assets/textures/background/SkyBackground.png" id="3_madmp"]
+[ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="3_pnn6m"]
+[ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="4_4kdnx"]
 [ext_resource type="Texture2D" uid="uid://clte66jao3y3i" path="res://assets/textures/background/clouds/Cloud01.png" id="4_hff0s"]
+[ext_resource type="AudioStream" uid="uid://dml22j6aq1vyx" path="res://assets/audio/sfx/ui/cancel.ogg" id="5_gbwl8"]
 [ext_resource type="Texture2D" uid="uid://0of2npxdth2d" path="res://assets/textures/background/clouds/Cloud02.png" id="5_pnn6m"]
 [ext_resource type="Texture2D" uid="uid://cps8f0ajgm8kq" path="res://assets/textures/ui/menu_buttons/Play_Button.png" id="5_t5foa"]
 [ext_resource type="Texture2D" uid="uid://b3c27srtlb2sa" path="res://assets/textures/background/clouds/Cloud03.png" id="6_4kdnx"]
@@ -12,8 +15,12 @@
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/menu_buttons/Exit_Button.png" id="7_hh21g"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="9_d7yyt"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="10_0plrm"]
+[ext_resource type="Shader" uid="uid://cjtimyxaj4ffq" path="res://shaders/outline.gdshader" id="11_4kdnx"]
 [ext_resource type="Shader" uid="uid://k8pfmugxe6dy" path="res://shaders/lens_flare.gdshader" id="12_vo8jh"]
 [ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="14_3wj1a"]
+[ext_resource type="BitMap" uid="uid://barnbjkfclgb4" path="res://assets/textures/ui/menu_buttons/Play_Button_clickmask.png" id="15_hh21g"]
+[ext_resource type="BitMap" uid="uid://lhk6rwlk83st" path="res://assets/textures/ui/menu_buttons/Options_Button_clickmask.png" id="17_pavj3"]
+[ext_resource type="BitMap" uid="uid://dolrt2n4tunki" path="res://assets/textures/ui/menu_buttons/Exit_Button_clickmask.png" id="19_d7yyt"]
 
 [sub_resource type="Animation" id="Animation_pnn6m"]
 length = 0.001
@@ -243,14 +250,64 @@ shader_parameter/sun_position = Vector2(1280, 720)
 shader_parameter/tint = Vector3(1.4, 1.2, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_pnn6m")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hh21g"]
+shader = ExtResource("11_4kdnx")
+shader_parameter/thickness = 0.0
+shader_parameter/ring_count = 16
+shader_parameter/ring_offset = 0.0
+shader_parameter/outline_color = Color(0.6745098, 0.5372549, 0.4745098, 1)
+shader_parameter/border_clipping_fix = true
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/square_border = false
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/max_or_add = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pavj3"]
+shader = ExtResource("11_4kdnx")
+shader_parameter/thickness = 0.0
+shader_parameter/ring_count = 16
+shader_parameter/ring_offset = 0.0
+shader_parameter/outline_color = Color(0.6745098, 0.5372549, 0.4745098, 1)
+shader_parameter/border_clipping_fix = true
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/square_border = false
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/max_or_add = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7yyt"]
+shader = ExtResource("11_4kdnx")
+shader_parameter/thickness = 0.0
+shader_parameter/ring_count = 16
+shader_parameter/ring_offset = 0.0
+shader_parameter/outline_color = Color(0.6745098, 0.5372549, 0.4745098, 1)
+shader_parameter/border_clipping_fix = true
+shader_parameter/aspect_ratio = 1.0
+shader_parameter/square_border = false
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/max_or_add = false
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_madmp"]
 texture = ExtResource("14_3wj1a")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
 
-[node name="Main_Menu" type="Control" node_paths=PackedStringArray("blocker", "animation_player", "button_quit")]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pavj3"]
+texture = ExtResource("14_3wj1a")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hh21g"]
+texture = ExtResource("14_3wj1a")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="Main_Menu" type="Control" node_paths=PackedStringArray("blocker", "animation_player", "button_play", "button_settings", "button_quit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -259,8 +316,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hff0s")
 default_bgm = ExtResource("2_3wj1a")
+hover_sfx = ExtResource("3_pnn6m")
+confirm_sfx = ExtResource("4_4kdnx")
+cancel_sfx = ExtResource("5_gbwl8")
 blocker = NodePath("Blocker")
 animation_player = NodePath("AnimationPlayer")
+button_play = NodePath("MainMenu/VBoxContainer/PlayButton")
+button_settings = NodePath("MainMenu/VBoxContainer/OptionsButton")
 button_quit = NodePath("MainMenu/VBoxContainer/ExitButton")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -361,22 +423,28 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="PlayButton" type="TextureButton" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_hh21g")
 custom_minimum_size = Vector2(300, 150)
 layout_mode = 2
 size_flags_horizontal = 4
 texture_normal = ExtResource("5_t5foa")
+texture_click_mask = ExtResource("15_hh21g")
 
 [node name="OptionsButton" type="TextureButton" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_pavj3")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture_normal = ExtResource("6_87tfw")
+texture_click_mask = ExtResource("17_pavj3")
 
 [node name="ExitButton" type="TextureButton" parent="MainMenu/VBoxContainer"]
+material = SubResource("ShaderMaterial_d7yyt")
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 8
 texture_normal = ExtResource("7_hh21g")
+texture_click_mask = ExtResource("19_d7yyt")
 
 [node name="Blocker" type="ColorRect" parent="."]
 layout_mode = 1
@@ -393,14 +461,25 @@ offset_left = 1297.0
 offset_top = 567.0
 offset_right = 1544.0
 offset_bottom = 677.0
+focus_mode = 0
+theme_override_constants/outline_size = 4
 theme_override_fonts/font = ExtResource("10_0plrm")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxTexture_madmp")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_pavj3")
+theme_override_styles/hover = SubResource("StyleBoxTexture_hh21g")
 text = "CREDITS"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_exited"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_start_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/OptionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/OptionsButton" to="." method="_on_options_button_mouse_exited"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]
+[connection signal="mouse_exited" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_button_mouse_exited"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
 [connection signal="gui_input" from="Blocker" to="." method="_on_blocker_gui_input"]
+[connection signal="mouse_entered" from="CreditsButton" to="." method="_on_credits_button_mouse_entered"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]

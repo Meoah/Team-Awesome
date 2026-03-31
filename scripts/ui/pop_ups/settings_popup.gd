@@ -3,6 +3,7 @@ class_name SettingsPopup
 
 @export var back_button: BaseButton
 @export var first_focus_control: Control
+@export var cancel_sfx: AudioStream
 
 func _on_init() -> void:
 	type = POPUP_TYPE.SETTINGS
@@ -14,6 +15,7 @@ func _on_ready() -> void:
 		first_focus_control.grab_focus()
 
 func _on_back_pressed() -> void:
+	AudioEngine.play_sfx(cancel_sfx)
 	GameManager.dismiss_popup()
 
 func on_after_show() -> void:
