@@ -1,7 +1,7 @@
 [gd_scene load_steps=21 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
-[ext_resource type="AudioStream" uid="uid://d0kvai3gwifqa" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.wav" id="2_pnn6m"]
+[ext_resource type="AudioStream" uid="uid://4bqm83o3j0p3" path="res://assets/audio/bgm/dump/hell_yeah_arrow_fishing.ogg" id="2_3wj1a"]
 [ext_resource type="Texture2D" uid="uid://c12qijslqo1mg" path="res://assets/textures/background/SkyBackground.png" id="3_madmp"]
 [ext_resource type="Texture2D" uid="uid://clte66jao3y3i" path="res://assets/textures/background/clouds/Cloud01.png" id="4_hff0s"]
 [ext_resource type="Texture2D" uid="uid://0of2npxdth2d" path="res://assets/textures/background/clouds/Cloud02.png" id="5_pnn6m"]
@@ -245,7 +245,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hff0s")
-default_bgm = ExtResource("2_pnn6m")
+default_bgm = ExtResource("2_3wj1a")
 blocker = NodePath("Blocker")
 animation_player = NodePath("AnimationPlayer")
 button_quit = NodePath("MainMenu/VBoxContainer/ExitButton")
