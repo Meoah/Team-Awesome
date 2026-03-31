@@ -12,8 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://qojojiaa5s65" path="res://assets/textures/ui/menu_buttons/Exit_Button.png" id="7_hh21g"]
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="9_d7yyt"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="10_0plrm"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="10_yn8vd"]
 [ext_resource type="Shader" uid="uid://k8pfmugxe6dy" path="res://shaders/lens_flare.gdshader" id="12_vo8jh"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="14_3wj1a"]
 
 [sub_resource type="Animation" id="Animation_pnn6m"]
 length = 0.001
@@ -244,7 +244,7 @@ shader_parameter/tint = Vector3(1.4, 1.2, 1)
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_pnn6m")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_madmp"]
-texture = ExtResource("10_yn8vd")
+texture = ExtResource("14_3wj1a")
 texture_margin_left = 20.0
 texture_margin_top = 20.0
 texture_margin_right = 20.0

@@ -1,12 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://gbmec1b0enmv"]
+[gd_scene load_steps=13 format=3 uid="uid://gbmec1b0enmv"]
 
 [ext_resource type="Script" uid="uid://bovbn0xd4wp6a" path="res://scripts/ui/pop_ups/settings_popup.gd" id="1_5l3de"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/nine_slices/panel_brown_damaged_dark.png" id="1_agcd6"]
 [ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/menu_buttons/Settings_Button.png" id="2_5l3de"]
+[ext_resource type="Texture2D" uid="uid://cxs5kohvf3hmy" path="res://assets/textures/ui/nine_slices/ChocolateTile.png" id="3_5l3de"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="3_hnp0x"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_tpevy"]
 [ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="5_xjmmi"]
 [ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/menu_buttons/Back_Button2.png" id="6_0y5ln"]
+
+[sub_resource type="Theme" id="Theme_hnp0x"]
+default_font = ExtResource("4_tpevy")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_hff0s"]
 
@@ -28,6 +31,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+theme = SubResource("Theme_hnp0x")
 script = ExtResource("1_5l3de")
 back_button = NodePath("SettingsWindow/MarginContainer/VBoxContainer/TextureButton")
 first_focus_control = NodePath("SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master")
@@ -46,7 +50,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_hff0s")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="SettingsWindow"]
 layout_mode = 2
-texture = ExtResource("1_agcd6")
+texture = ExtResource("3_5l3de")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -76,6 +80,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_constants/outline_size = 4
 text = "Master"
 
 [node name="Master" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer"]
@@ -99,6 +104,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_constants/outline_size = 4
 text = "BGM"
 
 [node name="BGM" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2"]
@@ -122,6 +128,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_constants/outline_size = 4
 text = "SFX"
 
 [node name="SFX" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3"]
@@ -145,6 +152,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 size_flags_horizontal = 10
+theme_override_constants/outline_size = 4
 text = "Dialogue"
 
 [node name="Dialogue" type="HSlider" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4"]
@@ -169,6 +177,7 @@ size_flags_vertical = 4
 [node name="Label" type="Label" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5"]
 layout_mode = 2
 size_flags_horizontal = 0
+theme_override_constants/outline_size = 4
 text = "Full Screen"
 
 [node name="Fullscreen_Control" type="CheckButton" parent="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5"]

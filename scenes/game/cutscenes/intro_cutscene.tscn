@@ -316,6 +316,8 @@ point_count = 12
 
 [sub_resource type="LabelSettings" id="LabelSettings_cvc0b"]
 font = ExtResource("15_t7w3j")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_4w68r"]
 font = ExtResource("15_t7w3j")

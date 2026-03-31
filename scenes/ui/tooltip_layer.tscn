@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpcgm03b1g8xn" path="res://scripts/ui/tooltip.gd" id="1_gc7l6"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_scnmh"]
-[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/nine_slices/panel_grey.png" id="2_scnmh"]
+[ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="3_scnmh"]
 
 [sub_resource type="Theme" id="Theme_bd7w1"]
 default_font = ExtResource("1_scnmh")
@@ -32,7 +32,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_jdad8")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Tooltip"]
 layout_mode = 2
-texture = ExtResource("2_scnmh")
+texture = ExtResource("3_scnmh")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -49,6 +49,7 @@ theme_override_constants/margin_bottom = 20
 [node name="Label" type="RichTextLabel" parent="Tooltip/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 fit_content = true
 scroll_active = false
