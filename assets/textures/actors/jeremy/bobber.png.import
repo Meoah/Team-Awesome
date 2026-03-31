@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c8v25tj720fxc"
-path="res://.godot/imported/Cloud02.png-b51019aa2162b12bfd593dc87cc314fa.ctex"
+uid="uid://s547mvojrov2"
+path="res://.godot/imported/bobber.png-f7fda3c0c0b4e02c3bdadc8eb6830c66.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/vfx/Cloud02.png"
-dest_files=["res://.godot/imported/Cloud02.png-b51019aa2162b12bfd593dc87cc314fa.ctex"]
+source_file="res://assets/textures/actors/jeremy/bobber.png"
+dest_files=["res://.godot/imported/bobber.png-f7fda3c0c0b4e02c3bdadc8eb6830c66.ctex"]
 
 [params]
 

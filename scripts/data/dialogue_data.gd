@@ -8,7 +8,7 @@ const UNKNOWN = "Unknown"
 
 ## Image Paths
 const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/mobboss.png")
-const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/jeremy/MCPlaceholder.png")
+const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/actors/jeremy/MCPlaceholder.png")
 
 const DEFAULT_SPEAKER_PROFILE : Dictionary = {
 	"beep_key": "dialogue_typewriter_beep",

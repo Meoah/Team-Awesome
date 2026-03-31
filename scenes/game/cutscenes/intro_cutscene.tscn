@@ -12,17 +12,17 @@
 [ext_resource type="Texture2D" uid="uid://dcosx8b8oj3qg" path="res://assets/textures/background/clouds/Cloud04.png" id="8_oacel"]
 [ext_resource type="Texture2D" uid="uid://bmrsrn68dtk" path="res://assets/textures/background/Base_Forest_BG.png" id="9_2jfsm"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="9_10lx7"]
-[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/jeremy/MCPlaceholder.png" id="9_x43rj"]
+[ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/actors/jeremy/MCPlaceholder.png" id="9_x43rj"]
 [ext_resource type="Texture2D" uid="uid://c0ohmu5v1jmb4" path="res://assets/textures/background/SkyToForest.png" id="10_c7hv6"]
 [ext_resource type="Texture2D" uid="uid://dakggumatebv8" path="res://assets/textures/background/dock_pieces/Post.png" id="11_6cdfd"]
 [ext_resource type="Texture2D" uid="uid://b4so1s0p3hdbr" path="res://assets/textures/background/dock_pieces/DockFloor.png" id="13_ejbtp"]
 [ext_resource type="Texture2D" uid="uid://b3sq2udilgcya" path="res://assets/textures/background/water/Water_01.png" id="13_toiqj"]
-[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/nine_slices/panel_grey.png" id="14_x43rj"]
 [ext_resource type="Texture2D" uid="uid://djui7gjwjptwd" path="res://assets/textures/background/dock_pieces/CampSign.png" id="15_ejrkx"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="15_t7w3j"]
 [ext_resource type="Texture2D" uid="uid://ckeuboh7v0jsc" path="res://assets/textures/background/water/Water_03.png" id="16_jhcqs"]
 [ext_resource type="Texture2D" uid="uid://44cx551j0x6x" path="res://assets/textures/fish/final_fish/08_Parrotfish.png" id="16_n5cky"]
 [ext_resource type="Shader" uid="uid://k8pfmugxe6dy" path="res://shaders/lens_flare.gdshader" id="23_5wfrr"]
+[ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="23_ujd3a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cya4y"]
 size = Vector2(10, 100)
@@ -319,6 +319,8 @@ font = ExtResource("15_t7w3j")
 
 [sub_resource type="LabelSettings" id="LabelSettings_4w68r"]
 font = ExtResource("15_t7w3j")
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
 
 [node name="IntroCutscene" type="Control" node_paths=PackedStringArray("hold_skip_control", "hold_skip_bar", "hud")]
 layout_mode = 3
@@ -564,7 +566,6 @@ horizontal_alignment = 2
 vertical_alignment = 1
 
 [node name="HoldToSkip" type="Control" parent="CanvasLayer"]
-visible = false
 layout_mode = 3
 anchor_left = 0.7
 anchor_top = 0.9
@@ -587,11 +588,13 @@ theme_override_constants/margin_bottom = 16
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/HoldToSkip/MarginContainer"]
 layout_mode = 2
-texture = ExtResource("14_x43rj")
-patch_margin_left = 16
-patch_margin_top = 16
-patch_margin_right = 16
-patch_margin_bottom = 16
+texture = ExtResource("23_ujd3a")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/HoldToSkip/MarginContainer"]
 layout_mode = 2

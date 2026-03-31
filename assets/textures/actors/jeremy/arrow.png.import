@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bd0t5yjd1iq30"
-path="res://.godot/imported/CloudLarge.png-65d83ae5c5c1df3ad405c6aae56db44c.ctex"
+uid="uid://dhuohlsyt23h5"
+path="res://.godot/imported/arrow.png-e330f693192c2a118a0885763340b60e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/vfx/CloudLarge.png"
-dest_files=["res://.godot/imported/CloudLarge.png-65d83ae5c5c1df3ad405c6aae56db44c.ctex"]
+source_file="res://assets/textures/actors/jeremy/arrow.png"
+dest_files=["res://.godot/imported/arrow.png-e330f693192c2a118a0885763340b60e.ctex"]
 
 [params]
 

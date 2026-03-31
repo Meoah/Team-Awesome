@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
 [ext_resource type="AudioStream" uid="uid://bx4hcgewtdxc3" path="res://assets/audio/bgm/pressing_arrows.ogg" id="2_np22p"]
-[ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://scenes/ui/pop_ups/fish_minigame/sparks.gdshader" id="9_pp4l4"]
+[ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://shaders/sparks.gdshader" id="9_pp4l4"]
 [ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="10_qdfjh"]
 [ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="11_xp8ps"]
 [ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="12_mx6gi"]
