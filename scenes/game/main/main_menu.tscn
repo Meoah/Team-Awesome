@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=24 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
 [ext_resource type="AudioStream" uid="uid://4bqm83o3j0p3" path="res://assets/audio/bgm/hell_yeah_arrow_fishing.ogg" id="2_3wj1a"]
@@ -225,10 +225,23 @@ _data = {
 &"startup": SubResource("Animation_hff0s")
 }
 
+[sub_resource type="Gradient" id="Gradient_3wj1a"]
+offsets = PackedFloat32Array(0, 0.7371134, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.57731956, 0.57731956, 0.57731956, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hff0s"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_pnn6m"]
+width = 1280
+height = 720
+noise = SubResource("FastNoiseLite_hff0s")
+color_ramp = SubResource("Gradient_3wj1a")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3wj1a"]
 shader = ExtResource("12_vo8jh")
 shader_parameter/sun_position = Vector2(1280, 720)
 shader_parameter/tint = Vector3(1.4, 1.2, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_pnn6m")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_madmp"]
 texture = ExtResource("10_yn8vd")

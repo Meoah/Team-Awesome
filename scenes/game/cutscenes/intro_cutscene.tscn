@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://3f6aflexnva0"]
+[gd_scene load_steps=35 format=3 uid="uid://3f6aflexnva0"]
 
 [ext_resource type="Script" uid="uid://dms5c0201yxj1" path="res://scripts/game/cutscenes/intro_cutscene.gd" id="1_kb0hh"]
 [ext_resource type="PackedScene" uid="uid://b856gwtwh1bno" path="res://scenes/game/main/daytime_main.tscn" id="2_4sr7y"]
@@ -22,9 +22,26 @@
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="15_t7w3j"]
 [ext_resource type="Texture2D" uid="uid://ckeuboh7v0jsc" path="res://assets/textures/background/water/Water_03.png" id="16_jhcqs"]
 [ext_resource type="Texture2D" uid="uid://44cx551j0x6x" path="res://assets/textures/fish/final_fish/08_Parrotfish.png" id="16_n5cky"]
+[ext_resource type="Shader" uid="uid://k8pfmugxe6dy" path="res://shaders/lens_flare.gdshader" id="23_5wfrr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cya4y"]
 size = Vector2(10, 100)
+
+[sub_resource type="Gradient" id="Gradient_5wfrr"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ujd3a"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_d207p"]
+width = 1280
+height = 720
+noise = SubResource("FastNoiseLite_ujd3a")
+color_ramp = SubResource("Gradient_5wfrr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oacel"]
+shader = ExtResource("23_5wfrr")
+shader_parameter/sun_position = Vector2(1280, 720)
+shader_parameter/tint = Vector3(1.4, 1.2, 1)
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_d207p")
 
 [sub_resource type="Animation" id="Animation_qnvo7"]
 length = 0.001
@@ -127,7 +144,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("CanvasLayer/MarginContainer:visible")
+tracks/8/path = NodePath("CanvasLayer/PersistantText:visible")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -135,6 +152,18 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("CanvasLayer/PersistantText:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_qaqdv"]
@@ -186,7 +215,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(14.333334, 14.99, 15.67),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(890, 2664), Vector2(808.00006, 2546.0002), Vector2(683, 2647)]
+"values": [Vector2(890, 664), Vector2(808, 546), Vector2(683, 647)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -198,7 +227,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(15.533334, 16.216667, 16.666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(683, 2647), Vector2(808.00006, 2546.0002), Vector2(904.00006, 2651.0002)]
+"values": [Vector2(683, 647), Vector2(808, 546), Vector2(904, 651)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -251,7 +280,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("CanvasLayer/MarginContainer:visible")
+tracks/9/path = NodePath("CanvasLayer/PersistantText:visible")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -259,6 +288,18 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CanvasLayer/PersistantText:modulate")
+tracks/10/interp = 2
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 2, 4, 6, 8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sr7y"]
@@ -276,50 +317,13 @@ point_count = 12
 [sub_resource type="LabelSettings" id="LabelSettings_cvc0b"]
 font = ExtResource("15_t7w3j")
 
-[sub_resource type="Animation" id="Animation_ujd3a"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_5wfrr"]
-resource_name = "text_blink"
-length = 2.0
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Label:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_d207p"]
-_data = {
-&"RESET": SubResource("Animation_ujd3a"),
-&"text_blink": SubResource("Animation_5wfrr")
-}
-
 [sub_resource type="LabelSettings" id="LabelSettings_4w68r"]
 font = ExtResource("15_t7w3j")
 
 [node name="IntroCutscene" type="Control" node_paths=PackedStringArray("hold_skip_control", "hold_skip_bar", "hud")]
 layout_mode = 3
-anchors_preset = 0
+anchor_right = 1.0
+anchor_bottom = 3.775
 script = ExtResource("1_kb0hh")
 default_bgm = ExtResource("2_cvc0b")
 hold_skip_control = NodePath("CanvasLayer/HoldToSkip")
@@ -479,6 +483,15 @@ repeat_times = 1000
 texture = ExtResource("16_jhcqs")
 centered = false
 
+[node name="LensFlare" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_oacel")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(640, 360)
 position_smoothing_enabled = true
@@ -522,14 +535,14 @@ texture = ExtResource("16_n5cky")
 flip_h = true
 
 [node name="BoatSprite" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0)
+modulate = Color(1, 1, 1, 0.3782339)
 position = Vector2(411.75, 2413.25)
 scale = Vector2(0.306, 0.306)
 texture = ExtResource("9_x43rj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer"]
+[node name="PersistantText" type="MarginContainer" parent="CanvasLayer"]
 visible = false
 anchors_preset = 3
 anchor_left = 1.0
@@ -543,20 +556,15 @@ grow_vertical = 0
 theme_override_constants/margin_right = 36
 theme_override_constants/margin_bottom = 32
 
-[node name="Label" type="Label" parent="CanvasLayer/MarginContainer"]
+[node name="Label" type="Label" parent="CanvasLayer/PersistantText"]
 layout_mode = 2
 text = "Hold to Skip..."
 label_settings = SubResource("LabelSettings_cvc0b")
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/MarginContainer"]
-libraries = {
-&"": SubResource("AnimationLibrary_d207p")
-}
-autoplay = "text_blink"
-
 [node name="HoldToSkip" type="Control" parent="CanvasLayer"]
+visible = false
 layout_mode = 3
 anchor_left = 0.7
 anchor_top = 0.9
