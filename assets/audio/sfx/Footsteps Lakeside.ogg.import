@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ra1t2veciuyo"
+path="res://.godot/imported/Footsteps Lakeside.ogg-87e6bed3d1817ab1a44de201c37547c0.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/sfx/Footsteps Lakeside.ogg"
+dest_files=["res://.godot/imported/Footsteps Lakeside.ogg-87e6bed3d1817ab1a44de201c37547c0.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
