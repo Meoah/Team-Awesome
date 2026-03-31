@@ -5,6 +5,12 @@ class_name ShopPopup
 @export var card_scene : PackedScene
 @export var generic_bait_button : Button
 
+@export var confirm_sfx: AudioStream
+@export var cancel_sfx: AudioStream
+@export var hover_sfx: AudioStream
+@export var reroll_sfx: AudioStream
+@export var purchase_sfx: AudioStream
+
 enum SHOP_TYPE_FLAGS {NONE, BAIT, UPGRADE, TAROT}
 var shop_type : SHOP_TYPE_FLAGS = SHOP_TYPE_FLAGS.NONE
 var save_data : Array = []
@@ -61,11 +67,8 @@ func generate_item_id(item_category : String) -> int:
 	if available_ids : return available_ids.pick_random()
 	else : return 0
 
-func _on_button_pressed() -> void:
-	for each in range(10):
-		card_stage._add_card(prep_card())
-
 func _on_back_pressed() -> void:
+	AudioEngine.play_sfx(cancel_sfx)
 	var shop_save_data : Array[Dictionary] = card_stage.save_current_cards()
 	SignalBus.shop_closed.emit(shop_save_data, shop_type)
 	PlayManager.request_idle_night_state()
@@ -73,10 +76,14 @@ func _on_back_pressed() -> void:
 
 # Buys generic bait, always available in bait shop.
 func _on_bait_pressed() -> void:
+	AudioEngine.play_sfx(confirm_sfx)
 	if SystemData.spend_money(15.0):
+		AudioEngine.play_sfx(purchase_sfx)
 		SystemData._add_bait(1, 10)
 
 func _card_purchased(card_info : Dictionary = {}) -> void:
+	AudioEngine.play_sfx(confirm_sfx)
+	AudioEngine.play_sfx(purchase_sfx)
 	var item_category : String = card_info.get(Card.PURCHASED_ITEM_CATEGORY, "")
 	var item_id : int = card_info.get(Card.PURCHASED_ITEM_ID, -1)
 	var item_quantity : int = card_info.get(Card.PURCHASED_ITEM_QUANTITY, 1)
@@ -95,7 +102,14 @@ func _card_purchased(card_info : Dictionary = {}) -> void:
 func _on_reroll_pressed() -> void:
 	if !SystemData.spend_money(10.0) : return
 	
+	AudioEngine.play_sfx(confirm_sfx)
+	AudioEngine.play_sfx(reroll_sfx)
+	
 	card_stage._clear_cards()
 	await card_stage.cards_cleared
 	
 	card_stage._add_cards(_new_hand(INITIAL_DRAWN_CARDS))
+
+
+func _on_button_mouse_entered() -> void:
+	AudioEngine.play_sfx(hover_sfx)

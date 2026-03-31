@@ -27,6 +27,7 @@ card_cost_panel = NodePath("Cost")
 card_cost_label = NodePath("Cost/MarginContainer/Label")
 
 [node name="CardFront" type="NinePatchRect" parent="."]
+self_modulate = Color(0.95468724, 0.95468724, 0.95468724, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -62,6 +63,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 6.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CardFront/MarginContainer/VBoxContainer/Image"]
+self_modulate = Color(0.95468724, 0.95468724, 0.95468724, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,6 +100,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 3.5
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CardFront/MarginContainer/VBoxContainer/Details"]
+self_modulate = Color(0.95468724, 0.95468724, 0.95468724, 1)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -146,6 +149,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ci7qd")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Type"]
+self_modulate = Color(0.95468724, 0.95468724, 0.95468724, 1)
 layout_mode = 2
 texture = ExtResource("2_d84nm")
 patch_margin_left = 16
@@ -180,6 +184,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ci7qd")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Quantity"]
+self_modulate = Color(0.95468724, 0.95468724, 0.95468724, 1)
 layout_mode = 2
 texture = ExtResource("2_d84nm")
 patch_margin_left = 16
@@ -213,6 +218,7 @@ grow_horizontal = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ci7qd")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Cost"]
+self_modulate = Color(0.95468724, 0.95468724, 0.95468724, 1)
 layout_mode = 2
 texture = ExtResource("2_d84nm")
 patch_margin_left = 16

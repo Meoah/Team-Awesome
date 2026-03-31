@@ -13,6 +13,8 @@ const HOVER_LIFT_SCALE : float = 0.75
 const ANIMATION_TIME : float = 0.12
 const FAN_STRENGTH : float = 0.35
 
+@export var card_fwip_sfx : AudioStream
+
 var cards : Array[Card] = []
 var hovered : Card = null
 var tweens : Dictionary = {}
@@ -159,7 +161,9 @@ func _set_hover(incoming_card : Card) -> void:
 	
 	# Shows tooltip on cursor if hovered over.
 	if hovered == null : GameManager.get_tooltip_layer()._hide_tooltip()
-	else : GameManager.get_tooltip_layer()._show_tooltip(get_global_mouse_position(), _get_hover_tooltip_text(hovered))
+	else:
+		AudioEngine.play_sfx(card_fwip_sfx)
+		GameManager.get_tooltip_layer()._show_tooltip(get_global_mouse_position(), _get_hover_tooltip_text(hovered))
 	
 	_update_layout()
 

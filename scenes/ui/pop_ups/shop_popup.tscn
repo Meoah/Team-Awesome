@@ -1,19 +1,37 @@
-[gd_scene load_steps=8 format=3 uid="uid://byyulsrldui6y"]
+[gd_scene load_steps=17 format=3 uid="uid://byyulsrldui6y"]
 
 [ext_resource type="Script" uid="uid://c2kg33k74ht3c" path="res://scripts/ui/pop_ups/shop_popup.gd" id="1_pnp85"]
 [ext_resource type="PackedScene" uid="uid://bk1bcrfoh1bco" path="res://scenes/ui/pop_ups/shop/card.tscn" id="2_g8bmi"]
 [ext_resource type="Texture2D" uid="uid://dpqvt02k24opm" path="res://assets/textures/ui/nine_slices/LilypadBox.png" id="3_5ag0i"]
+[ext_resource type="AudioStream" uid="uid://b0mcndospyqq1" path="res://assets/audio/sfx/ui/shop/purchase.ogg" id="3_7r0hq"]
+[ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="3_esyx8"]
 [ext_resource type="Script" uid="uid://16uhp5idqag" path="res://scripts/ui/pop_ups/shop/card_stage.gd" id="4_ikwgw"]
+[ext_resource type="AudioStream" uid="uid://dml22j6aq1vyx" path="res://assets/audio/sfx/ui/cancel.ogg" id="4_qh7u2"]
+[ext_resource type="AudioStream" uid="uid://brgk4sqfr0vms" path="res://assets/audio/sfx/ui/shop/card_fwip.ogg" id="5_5ag0i"]
+[ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="5_6j18k"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="5_862jk"]
+[ext_resource type="AudioStream" uid="uid://ofsn0pkqnava" path="res://assets/audio/sfx/ui/shop/reroll.ogg" id="6_iou70"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7r0hq"]
+texture = ExtResource("3_5ag0i")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_rvgsh"]
+texture = ExtResource("3_5ag0i")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_x3qsi"]
+texture = ExtResource("3_5ag0i")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lbphi"]
 texture = ExtResource("3_5ag0i")
 
 [sub_resource type="Theme" id="Theme_5ag0i"]
 default_font = ExtResource("5_862jk")
 Button/constants/outline_size = 4
 Button/fonts/font = ExtResource("5_862jk")
+Button/styles/focus = SubResource("StyleBoxTexture_7r0hq")
+Button/styles/hover = SubResource("StyleBoxTexture_rvgsh")
 Button/styles/normal = SubResource("StyleBoxTexture_x3qsi")
+Button/styles/pressed = SubResource("StyleBoxTexture_lbphi")
 
 [node name="ShopPopup" type="Control" node_paths=PackedStringArray("card_stage", "generic_bait_button")]
 layout_mode = 3
@@ -26,6 +44,11 @@ script = ExtResource("1_pnp85")
 card_stage = NodePath("Screen/VBoxContainer/Cards/NinePatchRect/MarginContainer/CardStage")
 card_scene = ExtResource("2_g8bmi")
 generic_bait_button = NodePath("Screen/VBoxContainer/Options/HBoxContainer/Bait")
+confirm_sfx = ExtResource("3_esyx8")
+cancel_sfx = ExtResource("4_qh7u2")
+hover_sfx = ExtResource("5_6j18k")
+reroll_sfx = ExtResource("6_iou70")
+purchase_sfx = ExtResource("3_7r0hq")
 
 [node name="Screen" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -76,6 +99,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 25.0
 script = ExtResource("4_ikwgw")
+card_fwip_sfx = ExtResource("5_5ag0i")
 
 [node name="Options" type="MarginContainer" parent="Screen/VBoxContainer"]
 layout_mode = 2
@@ -112,6 +136,9 @@ theme = SubResource("Theme_5ag0i")
 text = "Reroll
 (Cost: $10)"
 
+[connection signal="mouse_entered" from="Screen/VBoxContainer/Options/HBoxContainer/Back" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Screen/VBoxContainer/Options/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="mouse_entered" from="Screen/VBoxContainer/Options/HBoxContainer/Bait" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Screen/VBoxContainer/Options/HBoxContainer/Bait" to="." method="_on_bait_pressed"]
+[connection signal="mouse_entered" from="Screen/VBoxContainer/Options/HBoxContainer/Reroll" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="Screen/VBoxContainer/Options/HBoxContainer/Reroll" to="." method="_on_reroll_pressed"]
