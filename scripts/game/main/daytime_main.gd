@@ -31,16 +31,16 @@ func _ready() -> void:
 	WeatherManager._roll_daily_weather()
 	
 	await hud.fade_in().finished
-	await _walk_up_sequence().finished
+	await jeremy_node.walk_up_sequence()
 	
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
 	else : _ready_day()
-	
-	
-	
+
+
 func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
 	_apply_weather(new_weather)
-	
+
+
 func _apply_weather(w : WeatherManager.WEATHER) -> void:
 	match w:
 		WeatherManager.WEATHER.CLEAR:
@@ -52,6 +52,7 @@ func _apply_weather(w : WeatherManager.WEATHER) -> void:
 		WeatherManager.WEATHER.STORM:
 			weather_modulate.color = Color(0.4, 0.4, 0.55)
 			rain_particles.emitting = true
+
 
 ## Plays the intro sequence and sets initial bait if first day.
 func _intro_scene() -> void:
@@ -70,12 +71,6 @@ func _play_tutorial() -> void:
 func _ready_day() -> void:
 	PlayManager.request_idle_day_state()
 
-## Returns a tween for awaiting .finished.
-## TODO maybe put this into Jeremy instead
-func _walk_up_sequence() -> Tween:
-	var tween := create_tween()
-	tween.tween_property(jeremy_node, "global_position:x", 350.0, 1.0)
-	return tween
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cyaxfdsfosdd3"
-path="res://.godot/imported/MCPlaceholder.png-244aeb477ea9421c7510e3f4583a3965.ctex"
+uid="uid://dfaibn08a6od6"
+path="res://.godot/imported/jeremy_sheet.png-3b79a0715659334f026df37e5be2374f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/actors/jeremy/MCPlaceholder.png"
-dest_files=["res://.godot/imported/MCPlaceholder.png-244aeb477ea9421c7510e3f4583a3965.ctex"]
+source_file="res://assets/textures/actors/jeremy/jeremy_sheet.png"
+dest_files=["res://.godot/imported/jeremy_sheet.png-3b79a0715659334f026df37e5be2374f.ctex"]
 
 [params]
 
