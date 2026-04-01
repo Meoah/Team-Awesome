@@ -12,7 +12,7 @@ func set_weather(new_weather : WEATHER) -> void:
 	current_weather = new_weather
 	weather_changed.emit(current_weather)
 
-func _roll_daily_weather() -> void:
+func _roll_weather() -> void:
 	set_weather(
 		[WEATHER.CLEAR,
 		 WEATHER.RAINY,

@@ -30,7 +30,8 @@ GameManager="*res://scenes/game_manager.tscn"
 AudioEngine="*res://scripts/util/audio_engine.gd"
 PlayManager="*res://scripts/managers/play_manager.gd"
 SignalBus="*res://scripts/util/signal_bus.gd"
-WeatherManager="*uid://bthvkd0spt0iu"
+TimeManager="*res://scripts/managers/time_manager.gd"
+WeatherManager="*res://scripts/managers/weather_manager.gd"
 
 [debug]
 

@@ -13,6 +13,7 @@ class_name DaytimeMain
 @export var bobber_scene : PackedScene
 @export var tutorial_scene : PackedScene
 
+@onready var clock_hand : Sprite2D = $HUD/Node2D/ClockHand
 @onready var weather_modulate : CanvasModulate = $WeatherModulate
 @onready var rain_particles : GPUParticles2D = $RainParticles
 
@@ -27,8 +28,12 @@ func _ready() -> void:
 	#--Weather--
 	WeatherManager.weather_changed.connect(_on_weather_changed)
 	_apply_weather(WeatherManager.current_weather)
+	WeatherManager._roll_weather()
 	
-	WeatherManager._roll_daily_weather()
+	#--Time--
+	TimeManager._set_time(6.0)
+	_update_lighting(TimeManager.current_hour)
+	TimeManager.time_updated.connect(_on_time_updated)
 	
 	await hud.fade_in().finished
 	await _walk_up_sequence().finished
@@ -36,8 +41,7 @@ func _ready() -> void:
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
 	else : _ready_day()
 	
-	
-	
+# Weather-------	
 func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
 	_apply_weather(new_weather)
 	
@@ -104,3 +108,31 @@ func _idle_state() -> void:
 
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()
+
+func _on_time_updated(hour : float) -> void:
+	_update_lighting(hour)
+	
+#Updates lighting for each time quadrant change
+func _update_lighting(hour : float) -> void:
+	var color : Color
+	
+	if hour >= 6.0 and hour < 9.0:
+		var t := (hour -6.0) / 3.0
+		color = Color(1.0, lerp(0.6, 1.0, t), lerp(0.4, 0.9, t))
+	elif hour >= 9.0 and hour < 13.0:
+		var t := (hour - 9.0) / 4.0
+		color = Color(1.0, lerp(1.0, 1.0, t), lerp(0.9, 1.0, t))
+	elif hour >= 13.0 and hour < 18.0:
+		var t := (hour - 13.0) /5.0
+		color = Color(1.0, lerp(0.9, 0.5, t), lerp(0.8, 0.3, t))
+	elif hour >= 18.0 and hour < 21.0:
+		var t := (hour - 18.0) / 3.0
+		color = Color(lerp(0.6, 0.2, t), lerp(0.4, 0.2, t), lerp(0.5, 0.4, t))
+	else:
+		color = Color(0.15, 0.15, 0.25)	
+	$WeatherModulate.color = color
+	
+#Updates weather conditions for each time quadrant changes
+func _on_period_change(new_quadrant : int) -> void:
+	if new_quadrant == 1:
+		WeatherManager._roll_weather() #Change weather with quadrant crossing
