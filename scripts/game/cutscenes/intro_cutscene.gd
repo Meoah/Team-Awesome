@@ -105,5 +105,6 @@ func _skip_intro() -> void:
 	$AnimationPlayer.seek(SKIP_SEEK_TIME, true)
 	set_process_input(false)
 
-func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	GameManager.change_scene_deferred(next_scene)
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "intro_sequence":
+		GameManager.change_scene_deferred(next_scene)

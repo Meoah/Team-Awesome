@@ -29,6 +29,7 @@ var upgrade_inventory : Dictionary = {
 		ItemData.KEY_DESCRIPTION : "There's nothing here.."
 			},
 		}
+var license : int = -1
 
 
 # Signals

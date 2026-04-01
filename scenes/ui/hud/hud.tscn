@@ -685,6 +685,7 @@ grid_type = "Bait"
 layout_mode = 2
 
 [node name="Touchscreen" type="Control" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.5)
 layout_mode = 3
 anchors_preset = 0

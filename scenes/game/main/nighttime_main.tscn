@@ -216,10 +216,10 @@ horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 0
-offset_left = 827.0
-offset_top = 156.0
-offset_right = 1096.0
-offset_bottom = 308.0
+offset_left = 2281.0
+offset_top = 175.0
+offset_right = 2550.0
+offset_bottom = 327.0
 focus_mode = 0
 text = "FREE MONEY
 (debug)"
