@@ -180,7 +180,7 @@ shape = SubResource("RectangleShape2D_vpuja")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="Jeremy" parent="." instance=ExtResource("2_s2grh")]
-position = Vector2(329.00003, 583)
+position = Vector2(350, 550)
 scale = Vector2(0.15348448, 0.15348448)
 
 [node name="Boundaries" type="StaticBody2D" parent="."]

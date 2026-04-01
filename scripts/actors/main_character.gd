@@ -3,8 +3,9 @@ class_name MainCharacter
 
 @export_category("Children Nodes")
 @export var bobber_scene : PackedScene
+@export var collision_shape: CollisionShape2D
 @export var arrow_sprite : Sprite2D
-@export var boat_sprite : Sprite2D
+@export var body_sprite: AnimatedSprite2D
 @export var power_bar : ProgressBar
 @export_category("Audio")
 @export var charging_sfx : AudioStream
@@ -27,7 +28,7 @@ enum InputFlags{
 	ACTION		= 1 << 4
 }
 var input_flags : int = 0
-var move_speed : float = 500.0
+var move_speed : float = 250.0
 # Bobbing
 var bob_amplitude : float = 40.0
 var bob_speed : float = 8.0
@@ -80,21 +81,47 @@ func _input(event : InputEvent) -> void:
 	
 	#TODO cancel button?
 
+
 func _process(delta: float) -> void:
 	if PlayManager.is_aiming() : _cast_handler(delta)
 
+
 func _physics_process(delta: float) -> void:
 	if PlayManager.is_movement_allowed() : _movement()
-	else : velocity = Vector2.ZERO
+	else:
+		velocity = Vector2.ZERO
+		body_sprite.play("idle")
 	if PlayManager.is_aiming() : _aiming(delta)
 	else : arrow_sprite.visible = false
 	if !PlayManager.is_dialogue() : _action()
 	
 	move_and_slide()
 
+
 func _notification(what: int) -> void:
 	# Resets movement flags to 0 if window loses focus.
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT : input_flags = 0
+
+
+func walk_up_sequence() -> void:
+	set_physics_process(false)
+	collision_shape.set_disabled(true)
+	
+	var target_x : float = 350.0
+	body_sprite.play("walking")
+	
+	while global_position.x < target_x:
+		velocity.x = move_speed
+		move_and_slide()
+		
+		if global_position.x >= target_x : break
+		
+		await get_tree().physics_frame
+	
+	velocity.x = 0.0
+	collision_shape.set_disabled(false)
+	set_physics_process(true)
+
 
 # Resets the flags back to 0.
 func _reset_flags() -> void:
@@ -168,8 +195,16 @@ func _set_flag(flag : int, enabled : bool) -> void:
 # Movement handler
 func _movement() -> void:
 	var direction : float = 0.0
-	if input_flags & InputFlags.MOVE_LEFT : direction -= 1.0
-	if input_flags & InputFlags.MOVE_RIGHT : direction += 1.0
+	if input_flags & InputFlags.MOVE_LEFT:
+		body_sprite.flip_h = true
+		direction -= 1.0
+	if input_flags & InputFlags.MOVE_RIGHT:
+		body_sprite.flip_h = false
+		direction += 1.0
+		
+	if direction != 0.0 : body_sprite.play("walking")
+	else : body_sprite.play("idle")
+	
 	velocity = Vector2(direction * move_speed, 0)
 
 # Action handler.
@@ -241,3 +276,18 @@ func _on_casting_state() -> void:
 # Hide power bar on WaitingState
 func _on_waiting_state() -> void:
 	power_bar.visible = false
+
+
+func _on_body_frame_changed() -> void:
+	if body_sprite.get_animation() == "walking":
+		if body_sprite.frame == 1 or body_sprite.frame == 3:
+			_footstep_sfx()
+
+## Checks which ground surface Jeremy is on, then play the appropriate sound.
+func _footstep_sfx() -> void:
+	# TODO We perhaps we can use an area2D to detect what's under his feet. For now,
+	#	we just determine surface by main scene.
+	if daytime_node:
+		print("wood step")
+	if nighttime_node:
+		print("dirt step")

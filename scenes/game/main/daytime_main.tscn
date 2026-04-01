@@ -26,10 +26,10 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovom5"]
-size = Vector2(50, 720)
+size = Vector2(100, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kam8"]
-size = Vector2(50, 720)
+size = Vector2(100, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
 size = Vector2(10, 100)
@@ -209,11 +209,11 @@ collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_ovom5")
 
 [node name="LeftCollision" type="CollisionShape2D" parent="Boundaries"]
-position = Vector2(-25, 360)
+position = Vector2(-50, 360)
 shape = SubResource("RectangleShape2D_ovom5")
 
 [node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
-position = Vector2(640, 360)
+position = Vector2(650, 360)
 shape = SubResource("RectangleShape2D_3kam8")
 
 [node name="Midground" type="Node2D" parent="."]
@@ -254,7 +254,7 @@ shape = SubResource("RectangleShape2D_f86r6")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(-100, 443)
+position = Vector2(-50, 425)
 scale = Vector2(0.25, 0.25)
 
 [node name="PostFR" type="Sprite2D" parent="."]
