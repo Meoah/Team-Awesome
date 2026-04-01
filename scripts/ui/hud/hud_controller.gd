@@ -10,11 +10,16 @@ class_name HUDController
 @export var exotic_slot : Slot
 @export var active_bait_slot : Slot
 @export var active_bait_label : RichTextLabel
-@export var money_label : RichTextLabel
+@export var money_label : MoneyLabel
 @export var rent_label : RichTextLabel
 @export var fish_bucket_value_label : Label
 @export var day_label : Label
 @export var week_label : Label
+
+@export_category("Audio")
+@export var receiving_money_sfx: AudioStream
+@export var hover_sfx: AudioStream
+@export var confirm_sfx: AudioStream
 
 # Fadeout Consts
 const FADE_DELAY_SECONDS: float = 2.0
@@ -25,6 +30,8 @@ const IDLE_ALPHA: float = 0.6
 var fade_timer: Timer
 var fade_tween: Tween
 
+var current_money : float = 0.0
+
 func _ready() -> void:
 	# Bind Signals
 	SystemData.inventory_updated.connect(_refresh_ui)
@@ -32,10 +39,12 @@ func _ready() -> void:
 	
 	# Initial setup.
 	_fadeout_timer_setup()
+	current_money = SystemData.get_money()
 	
 	# Waits for other system setup to finish, then refresh ui once.
 	await get_tree().process_frame
 	_refresh_ui()
+	money_label._setup()
 
 func _input(event : InputEvent) -> void:
 	if PlayManager.get_current_state() is ShoppingState : return
@@ -95,7 +104,19 @@ func _update_active_bait() -> void:
 
 ## Sets current money and rent.
 func _update_money() -> void:
-	money_label.text = "$%.2f" % SystemData.get_money()
+	var new_money: float = SystemData.get_money()
+	var delta_money: float = new_money - current_money
+	if delta_money > 0:
+		var shake_strength : float = log(1.0 + delta_money)
+		money_label.trigger_impact(shake_strength, true, Color(0.0, 0.75, 0.0, 1.0))
+		AudioEngine.play_sfx(receiving_money_sfx)
+	if new_money < current_money:
+		var shake_strength : float = log(1.0 + abs(delta_money))
+		if new_money < 10.0 : money_label.trigger_impact(shake_strength, true, Color(0.75, 0.0, 0.0, 1.0))
+		else : money_label.trigger_impact(shake_strength, false)
+	
+	current_money = new_money
+	money_label.text = "$%.2f" % current_money
 	rent_label.text = "[color=red]$%.2f[/color]" % SystemData.calculate_rent()
 	fish_bucket_value_label.text = "Total Value: $%.2f" % SystemData.get_delayed_money()
 
@@ -129,6 +150,7 @@ func _set_unhovered_state() -> void:
 func _on_slot_left_clicked(hovered: Slot) -> void:
 	if hovered.get_parent() is not InventoryGrid: return
 	if hovered.saved_data.has(ItemData.KEY_TYPE) && hovered.saved_data[ItemData.KEY_TYPE] == ItemData.BAIT:
+		AudioEngine.play_sfx(confirm_sfx)
 		SystemData.set_active_bait(hovered.saved_item_id)
 
 ## Signal connected function to trigger fadeout.
@@ -146,14 +168,20 @@ func _fade_to_alpha(target_alpha: float) -> void:
 
 ## Flips the fish inventory visibility and turns off the rest.
 func _on_fish_dropdown_pressed() -> void:
+	AudioEngine.play_sfx(confirm_sfx)
 	fish_inventory.visible = !fish_inventory.visible
 	bait_inventory.visible = false
 
 ## Flips the bait inventory visibility and turns off the rest.
 func _on_bait_dropdown_pressed() -> void:
+	AudioEngine.play_sfx(confirm_sfx)
 	bait_inventory.visible = !bait_inventory.visible
 	fish_inventory.visible = false
 
 
 func _on_texture_button_pressed() -> void:
 	GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
+
+
+func _on_button_mouse_entered() -> void:
+	AudioEngine.play_sfx(hover_sfx)

@@ -1,11 +1,15 @@
-[gd_scene load_steps=29 format=3 uid="uid://cjoxd6e64nw52"]
+[gd_scene load_steps=33 format=3 uid="uid://cjoxd6e64nw52"]
 
 [ext_resource type="Script" uid="uid://shdm3vohmc5v" path="res://scripts/ui/hud/hud.gd" id="1_e7gie"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_ax4tw"]
 [ext_resource type="Script" uid="uid://dkj7jecxesoy4" path="res://scripts/ui/hud/hud_controller.gd" id="2_todbw"]
+[ext_resource type="AudioStream" uid="uid://0ioaa52g3nxl" path="res://assets/audio/sfx/ui/receiving_money.ogg" id="4_211po"]
 [ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="4_ncqqj"]
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="5_4m4yb"]
+[ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="5_ne1ra"]
+[ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="6_b1wkl"]
 [ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="7_e7gie"]
+[ext_resource type="Script" uid="uid://bamsnhc1re05o" path="res://scripts/ui/hud/money.gd" id="7_rdayf"]
 [ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/hud/inventory_grid.tscn" id="7_todbw"]
 [ext_resource type="Script" uid="uid://n8mlx80hkiwy" path="res://scripts/ui/hud/touch_screen_controls.gd" id="9_rdayf"]
 [ext_resource type="Texture2D" uid="uid://capj3x3l5ed5t" path="res://assets/textures/ui/hud/touchscreen/dpad_element_east.png" id="10_211po"]
@@ -57,11 +61,14 @@ lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodS
 exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/ExoticSlot")
 active_bait_slot = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer/ActiveBait")
 active_bait_label = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/BaitName")
-money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Money")
+money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Control/Money")
 rent_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Rent")
 fish_bucket_value_label = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishBucketValue")
 day_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer/DayLabel")
 week_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer/WeekLabel")
+receiving_money_sfx = ExtResource("4_211po")
+hover_sfx = ExtResource("5_ne1ra")
+confirm_sfx = ExtResource("6_b1wkl")
 
 [node name="Top" type="Control" parent="HUDController"]
 layout_mode = 2
@@ -418,8 +425,19 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Money" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Money" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/outline_size = 4
 theme_override_font_sizes/normal_font_size = 32
@@ -430,6 +448,7 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("7_rdayf")
 
 [node name="DividerLine" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 1)
@@ -746,7 +765,6 @@ texture_click_mask = ExtResource("24_885y2")
 stretch_mode = 0
 
 [node name="Blocker" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -756,7 +774,9 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[connection signal="mouse_entered" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
+[connection signal="mouse_entered" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Pause/PanelContainer/TextureButton" to="HUDController" method="_on_texture_button_pressed"]
 [connection signal="button_down" from="Touchscreen/Right" to="Touchscreen" method="_on_right_pressed"]

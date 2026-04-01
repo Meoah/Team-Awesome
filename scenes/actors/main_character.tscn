@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c4g7xtu4dc0po"]
+[gd_scene load_steps=9 format=3 uid="uid://c4g7xtu4dc0po"]
 
 [ext_resource type="Texture2D" uid="uid://cyaxfdsfosdd3" path="res://assets/textures/actors/jeremy/MCPlaceholder.png" id="1_2fv12"]
 [ext_resource type="Script" uid="uid://vc01sgmlolgc" path="res://scripts/actors/main_character.gd" id="1_mo88p"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://ctw603c24roia" path="res://assets/audio/sfx/fishing/charge_bar.ogg" id="3_a64bi"]
 [ext_resource type="AudioStream" uid="uid://b0ufk6u4fh7" path="res://assets/audio/sfx/fishing/Hook jingle.ogg" id="4_4t3nx"]
 [ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/actors/jeremy/arrow.png" id="4_w0brd"]
+[ext_resource type="AudioStream" uid="uid://ct2mqxttb242d" path="res://assets/audio/sfx/fishing/casting.ogg" id="5_k58o6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w0brd"]
 size = Vector2(800, 800)
@@ -19,6 +20,7 @@ boat_sprite = NodePath("BoatSprite")
 power_bar = NodePath("PowerBar")
 charging_sfx = ExtResource("3_a64bi")
 hook_success_sfx = ExtResource("4_4t3nx")
+casting_sfx = ExtResource("5_k58o6")
 
 [node name="BoatSprite" type="Sprite2D" parent="."]
 texture = ExtResource("1_2fv12")

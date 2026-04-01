@@ -34,9 +34,9 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_hnp0x")
 script = ExtResource("1_5l3de")
+cancel_sfx = ExtResource("3_tpevy")
 back_button = NodePath("SettingsWindow/MarginContainer/VBoxContainer/TextureButton")
 first_focus_control = NodePath("SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master")
-cancel_sfx = ExtResource("3_tpevy")
 
 [node name="SettingsWindow" type="PanelContainer" parent="."]
 layout_mode = 1

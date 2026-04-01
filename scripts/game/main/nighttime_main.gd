@@ -4,13 +4,18 @@ class_name NighttimeMain
 ## Audio exports
 @export_category("Audio")
 @export var default_bgm : AudioStream
+@export var scavange_sfx: AudioStream
+@export var scavange_bucket_empty_sfx: AudioStream
+@export var sleeping_sfx: AudioStream
 
+@export_category("Children Nodes")
 @export var jeremy_node : MainCharacter
 @export var house_trigger : Area2D
 @export var bucket_trigger : Area2D
 @export var shop_trigger : Area2D
 @export var upgrade_trigger : Area2D
 @export var tarot_trigger : Area2D
+@export var hud : HUD
 
 @export var house_label : Label
 
@@ -45,6 +50,8 @@ func _ready() -> void:
 	WeatherManager.weather_changed.connect(_on_weather_changed)
 	_apply_weather(WeatherManager.current_weather)
 	
+	await hud.fade_in(0.5).finished
+	
 func _interaction() -> void:
 	if house_trigger.overlaps_body(jeremy_node) : _sleep()
 	if bucket_trigger.overlaps_body(jeremy_node) : _bucket()
@@ -62,6 +69,9 @@ func _sleep() -> void:
 			SignalBus.player_dies.emit()
 			return
 	if PlayManager.request_sleeping_state():
+		AudioEngine.play_sfx(sleeping_sfx)
+		AudioEngine.stop_bgm(1.0)
+		await hud.fade_to_black(4.0).finished
 		if PlayManager.request_idle_day_state():
 			SystemData._next_day()
 			GameManager.change_scene_deferred(GameManager.daytime_scene)
@@ -70,6 +80,7 @@ func _sleep() -> void:
 var scavange : int = 3
 func _bucket() -> void:
 	if scavange > 0:
+		AudioEngine.play_sfx(scavange_sfx)
 		scavange -= 1
 		scavange_label.text = "Scavange attempts left: %d" % scavange
 		var luck = randf_range(0.0, 1.0)
@@ -78,6 +89,8 @@ func _bucket() -> void:
 		if luck > 0.5 : SystemData._add_bait(1, 1)
 		if luck > 0.2 : SystemData._add_bait(1, 1)
 	if scavange <= 0:
+		if bucket_trigger.rotation_degrees != 90:
+			AudioEngine.play_sfx(scavange_bucket_empty_sfx)
 		bucket_trigger.rotation_degrees = 90
 
 func _bait_shop() -> void:

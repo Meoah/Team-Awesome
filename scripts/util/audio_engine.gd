@@ -732,6 +732,14 @@ func stop_all_sfx(fade_time : float = 0.0) -> void:
 	sfx_last_play_time_by_key.clear()
 
 ## Returns true if any SFX player is currently active for this key.
+func is_sfx_key_stream_playing(incoming_sfx_stream: AudioStream) -> bool:
+	if !incoming_sfx_stream : return false
+	var incoming_sfx_key: String = ""
+	if incoming_sfx_stream.resource_path != "" : incoming_sfx_key = incoming_sfx_stream.resource_path
+	else : incoming_sfx_key = "%s:%s" % [incoming_sfx_stream.get_class(), str(incoming_sfx_stream.get_instance_id())]
+	
+	return is_sfx_key_playing(incoming_sfx_key)
+	
 func is_sfx_key_playing(incoming_sfx_key : String) -> bool:
 	if incoming_sfx_key.is_empty() : return false
 	if !sfx_active_players_by_key.has(incoming_sfx_key) : return false

@@ -9,6 +9,7 @@ class_name MainCharacter
 @export_category("Audio")
 @export var charging_sfx : AudioStream
 @export var hook_success_sfx : AudioStream
+@export var casting_sfx: AudioStream
 # Arrow
 var arrow_distance : float = 0.0
 var cast_angle : float = 20.0
@@ -108,6 +109,7 @@ func _cast_handler(delta : float) -> void:
 			PlayManager.request_casting_state()
 	else:
 		if PlayManager.get_current_state() is CastingState:
+			AudioEngine.play_sfx(casting_sfx)
 			_throw_bobber()
 			PlayManager.request_waiting_state()
 

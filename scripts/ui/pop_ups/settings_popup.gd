@@ -1,9 +1,11 @@
 extends BasePopup
 class_name SettingsPopup
 
+@export_category("Audio")
+@export var cancel_sfx : AudioStream
+
 @export var back_button: BaseButton
 @export var first_focus_control: Control
-@export var cancel_sfx: AudioStream
 
 func _on_init() -> void:
 	type = POPUP_TYPE.SETTINGS
