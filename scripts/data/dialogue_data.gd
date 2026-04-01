@@ -8,7 +8,7 @@ const UNKNOWN = "Unknown"
 
 ## Image Paths
 const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/mobboss.png")
-const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/jeremy/MCPlaceholder.png")
+const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/actors/jeremy/MCPlaceholder.png")
 
 const DEFAULT_SPEAKER_PROFILE : Dictionary = {
 	"beep_key": "dialogue_typewriter_beep",
@@ -93,7 +93,7 @@ const DEBUG_EXAMPLE : Dictionary = {
 	},
 	0002 : {
 		KEY_NAME : NAME_MOB_BOSS,
-		KEY_BGM : "res://assets/audio/bgm/dump/the_frog_is_talking.wav",
+		KEY_BGM : "res://assets/audio/bgm/the_frog_is_talking.ogg",
 		KEY_TEXT : "Yo kid, where's my money?",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
 		KEY_PARAMETERS : ["shaking", "emote_rage"]
@@ -139,7 +139,7 @@ const INTRO : Dictionary = {
 	},
 	0003 : {
 		KEY_NAME : NAME_MOB_BOSS,
-		KEY_BGM : "res://assets/audio/bgm/dump/the_frog_is_talking.wav",
+		KEY_BGM : "res://assets/audio/bgm/the_frog_is_talking.ogg",
 		KEY_TEXT : "Yo kid, rent is PAST DUE!",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
 		KEY_PARAMETERS : ["shaking", "emote_rage"]

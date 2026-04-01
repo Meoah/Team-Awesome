@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://b7kq5erfymeec"
+path="res://.godot/imported/Forest lake.ogg-cfe2a345e4f6ffb39bec58dcd2c15b94.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/audio/ambience/Forest lake.ogg"
+dest_files=["res://.godot/imported/Forest lake.ogg-cfe2a345e4f6ffb39bec58dcd2c15b94.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

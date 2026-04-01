@@ -3,7 +3,7 @@ class_name DialoguePopup
 
 # TODO Multiple options
 
-## Node Exports
+@export_category("Children Nodes")
 @export var speaker_label : Label
 @export var speaker_nine_slice : NinePatchRect
 @export var speaker_margin : MarginContainer
@@ -14,6 +14,9 @@ class_name DialoguePopup
 @export var content : RichTextLabel
 @export var option_a : Button
 @export var option_b : Button
+@export_category("Audio")
+@export var typewriter_beep_stream : AudioStream
+@export var advance_dialogue_sfx : AudioStream
 
 var dialogue_id : int = 0000
 var current_section_id : int = 0001
@@ -134,7 +137,6 @@ func _set_content(incoming_text : String) -> void:
 ## Typewriter
 var typewriter_profile : Dictionary = {}
 var typewriter_beeps_enabled : bool = false
-@export var typewriter_beep_stream : AudioStream
 var typewriter_rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 const TYPEWRITER_SPEED : float = 0.02
@@ -235,7 +237,7 @@ func _advance_dialogue(source : String) -> void:
 		"a" : current_section_id = (option_a_goto if option_a_goto > 0 else current_section_id + 1)
 		"b" : current_section_id = (option_b_goto if option_b_goto > 0 else current_section_id + 1)
 		"continue" : current_section_id = (goto if goto > 0 else current_section_id + 1)
-	
+	AudioEngine.play_sfx(advance_dialogue_sfx, "", 0.25)
 	_dialogue()
 
 # Attempts to emit each signal in the signal array.

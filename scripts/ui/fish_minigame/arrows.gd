@@ -7,8 +7,9 @@ class_name MinigameUIPopup
 @export var sfx_round_start : AudioStream
 @export var sfx_timer_start : AudioStream
 @export var sfx_timer_end : AudioStream
+@export var sfx_struggle: AudioStream
 @export var sfx_success_arrow : AudioStream
-@export var sfx_success_arrow2 : AudioStream
+@export var sfx_fail: AudioStream
 @export var sfx_gold_fail : AudioStream
 @export var sfx_fish_caught : AudioStream
 
@@ -175,7 +176,6 @@ func correct_input():
 		#text_render()
 		#$Reaction.set_texture(success)
 		AudioEngine.play_sfx(sfx_success_arrow)
-		AudioEngine.play_sfx(sfx_success_arrow2)
 		var current_sprite : ArrowTexture = sprite_array.pop_front()
 		var smoke : smoke_sprite = $Smoke
 		if varied_obscured:
@@ -223,6 +223,9 @@ var dissipation : float = 1
 func _process(_delta):
 	progress_bar.value = timer.time_left
 	$ProgressBar/Label.set_text("%.2f s" % timer.time_left)
+	if !cleared:
+		if !AudioEngine.is_sfx_key_stream_playing(sfx_struggle):
+			AudioEngine.play_sfx(sfx_struggle)
 	if cleared:
 		timer.set_paused(true)
 
@@ -232,11 +235,13 @@ func _on_timer_timeout() -> void:
 
 #Fail Script
 func fail():
+	AudioEngine.stop_all_sfx()
 	if varied_gold:
 		AudioEngine.play_sfx(sfx_gold_fail)
 		$ProgressBar/Sparks.hide()
 		for i in sprite_array:
 			i.erase()
+	AudioEngine.play_sfx(sfx_fail)
 	timer.set_paused(true)
 	input_string.set_text("Times Up!!")
 	#$Reaction.set_texture(failure)
@@ -254,13 +259,14 @@ func fail():
 var cleared = false
 func win():
 	if input_index == input_array.size() :
+		AudioEngine.stop_all_sfx()
 		cleared = true
 		var fish_image = load(current_image)
 		$Reaction.texture = fish_image
 		input_index = 0
 		AudioEngine.stop_sfx_key(sfx_timer_start)
-		AudioEngine.play_sfx(sfx_timer_end,"", 0.5)
-		AudioEngine.play_sfx(sfx_fish_caught,"", 1)
+		AudioEngine.play_sfx(sfx_timer_end)
+		AudioEngine.play_sfx(sfx_fish_caught)
 		$ProgressBar/Sparks.hide()
 		$Control/PanelContainer.hide()
 		if varied_gold: #If fish is gold double its value

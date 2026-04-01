@@ -1,10 +1,15 @@
 extends CharacterBody2D
 class_name MainCharacter
 
-## Node exports
+@export_category("Children Nodes")
 @export var bobber_scene : PackedScene
 @export var arrow_sprite : Sprite2D
 @export var boat_sprite : Sprite2D
+@export var power_bar : ProgressBar
+@export_category("Audio")
+@export var charging_sfx : AudioStream
+@export var hook_success_sfx : AudioStream
+@export var casting_sfx: AudioStream
 # Arrow
 var arrow_distance : float = 0.0
 var cast_angle : float = 20.0
@@ -29,7 +34,6 @@ var bob_speed : float = 8.0
 var bob_timer : float = 0.0
 # Power bar
 var cast_power : float = 0.0
-@export var power_bar : ProgressBar
 var time_held : float = 0.0
 var bar_direction : float = 1.0
 # Parent Nodes
@@ -105,6 +109,7 @@ func _cast_handler(delta : float) -> void:
 			PlayManager.request_casting_state()
 	else:
 		if PlayManager.get_current_state() is CastingState:
+			AudioEngine.play_sfx(casting_sfx)
 			_throw_bobber()
 			PlayManager.request_waiting_state()
 
@@ -117,7 +122,7 @@ func _charging(delta : float) -> void:
 	var min_rate : float = 50.0
 	var max_rate : float = 180.0
 	var ramp_strength : float = 1.5
-	
+	AudioEngine.play_sfx(charging_sfx, "", 1.0, 1, 0, 2.21)
 	# Controls power by time. Slow near bottom, fast near top.
 	var factor : float = pow(cast_power / 100.0, ramp_strength)
 	var rate = lerp(min_rate, max_rate, factor)
@@ -173,13 +178,13 @@ func _action() -> void:
 	if !(input_flags & InputFlags.ACTION):
 		interacted = false
 		return
-	
 	if !interacted:
 		player_interact.emit()
 		interacted = true
 	if bobber_hook:
 		if PlayManager.request_reeling_state():
 			_clear_bobbers()
+			AudioEngine.play_sfx(hook_success_sfx)
 			if daytime_node : daytime_node._play_minigame()
 
 # Aiming handler
@@ -203,6 +208,7 @@ func _update_arrow() -> void:
 
 # Throws the bobber with input angle and force.
 func _throw_bobber() -> void:
+	AudioEngine.stop_sfx_key(charging_sfx)
 	if active_bobber_count < bobber_limit:
 		active_bobber_count += 1
 		var bobber : RigidBody2D = bobber_scene.instantiate()

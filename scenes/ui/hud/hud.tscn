@@ -1,13 +1,32 @@
-[gd_scene load_steps=14 format=3 uid="uid://cjoxd6e64nw52"]
+[gd_scene load_steps=33 format=3 uid="uid://cjoxd6e64nw52"]
 
 [ext_resource type="Script" uid="uid://shdm3vohmc5v" path="res://scripts/ui/hud/hud.gd" id="1_e7gie"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="2_ax4tw"]
 [ext_resource type="Script" uid="uid://dkj7jecxesoy4" path="res://scripts/ui/hud/hud_controller.gd" id="2_todbw"]
+[ext_resource type="AudioStream" uid="uid://0ioaa52g3nxl" path="res://assets/audio/sfx/ui/receiving_money.ogg" id="4_211po"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="4_ncqqj"]
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="5_4m4yb"]
-[ext_resource type="Texture2D" uid="uid://cbhtfna6mhxm6" path="res://assets/textures/ui/panel_brown_damaged_dark.png" id="6_todbw"]
+[ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="5_ne1ra"]
+[ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="6_b1wkl"]
 [ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="7_e7gie"]
+[ext_resource type="Script" uid="uid://bamsnhc1re05o" path="res://scripts/ui/hud/money.gd" id="7_rdayf"]
 [ext_resource type="PackedScene" uid="uid://himmnj7djqgt" path="res://scenes/ui/hud/inventory_grid.tscn" id="7_todbw"]
-[ext_resource type="Texture2D" uid="uid://bubkm6extv28x" path="res://assets/textures/ui/panel_grey.png" id="8_swth0"]
+[ext_resource type="Script" uid="uid://n8mlx80hkiwy" path="res://scripts/ui/hud/touch_screen_controls.gd" id="9_rdayf"]
+[ext_resource type="Texture2D" uid="uid://capj3x3l5ed5t" path="res://assets/textures/ui/hud/touchscreen/dpad_element_east.png" id="10_211po"]
+[ext_resource type="Texture2D" uid="uid://b5p3yai267csw" path="res://assets/textures/ui/hud/touchscreen/dpad_element_east_highlight.png" id="11_8m3cg"]
+[ext_resource type="BitMap" uid="uid://duuwqbb7x3ow3" path="res://assets/textures/ui/hud/touchscreen/dpad_element_east_clickmask.png" id="12_ne1ra"]
+[ext_resource type="Texture2D" uid="uid://cd5w3xutk6u37" path="res://assets/textures/ui/hud/touchscreen/dpad_element_south.png" id="13_b1wkl"]
+[ext_resource type="Texture2D" uid="uid://b0gcs0qglm1xc" path="res://assets/textures/ui/hud/touchscreen/dpad_element_south_highlight.png" id="14_r6ol6"]
+[ext_resource type="BitMap" uid="uid://gvg7rurio272" path="res://assets/textures/ui/hud/touchscreen/dpad_element_south_clickmask.png" id="15_0kchs"]
+[ext_resource type="Texture2D" uid="uid://cms87p7cj0l7" path="res://assets/textures/ui/hud/touchscreen/dpad_element_west.png" id="16_dm3fy"]
+[ext_resource type="Texture2D" uid="uid://bxh04iisrjx1w" path="res://assets/textures/ui/hud/touchscreen/dpad_element_west_highlight.png" id="17_fte8k"]
+[ext_resource type="BitMap" uid="uid://cadpf575vog1f" path="res://assets/textures/ui/hud/touchscreen/dpad_element_west_clickmask.png" id="18_t1llk"]
+[ext_resource type="Texture2D" uid="uid://cocoggdbtr6lt" path="res://assets/textures/ui/hud/touchscreen/dpad_element_north.png" id="19_eyak2"]
+[ext_resource type="Texture2D" uid="uid://bea5hm22qkllx" path="res://assets/textures/ui/hud/touchscreen/dpad_element_north_highlight.png" id="20_qv6go"]
+[ext_resource type="BitMap" uid="uid://dsny546yhgb2y" path="res://assets/textures/ui/hud/touchscreen/dpad_element_north_clickmask.png" id="21_p1o7j"]
+[ext_resource type="Texture2D" uid="uid://b141rvyiga36m" path="res://assets/textures/ui/hud/touchscreen/joystick_hexagon_pad_d.png" id="22_l4xpv"]
+[ext_resource type="Texture2D" uid="uid://6dw1h2p8pb0d" path="res://assets/textures/ui/hud/touchscreen/joystick_hexagon_pad_highlight.png" id="23_hsac1"]
+[ext_resource type="BitMap" uid="uid://cjsnaim8vrwj2" path="res://assets/textures/ui/hud/touchscreen/joystick_hexagon_pad_d_clickmask.png" id="24_885y2"]
 
 [sub_resource type="Theme" id="Theme_swth0"]
 default_font = ExtResource("2_ax4tw")
@@ -42,11 +61,14 @@ lure_slot = NodePath("Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodS
 exotic_slot = NodePath("Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer/AspectRatioContainer/ExoticSlot")
 active_bait_slot = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/AspectRatioContainer/ActiveBait")
 active_bait_label = NodePath("Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer/BaitName")
-money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Money")
+money_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Control/Money")
 rent_label = NodePath("Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Rent")
 fish_bucket_value_label = NodePath("Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer/FishBucketValue")
 day_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer/DayLabel")
 week_label = NodePath("Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer/WeekLabel")
+receiving_money_sfx = ExtResource("4_211po")
+hover_sfx = ExtResource("5_ne1ra")
+confirm_sfx = ExtResource("6_b1wkl")
 
 [node name="Top" type="Control" parent="HUDController"]
 layout_mode = 2
@@ -88,7 +110,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -144,7 +166,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_todbw")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -185,6 +207,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Rod"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Rod"
 horizontal_alignment = 1
 
@@ -208,6 +231,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/Reel"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Reel"
 horizontal_alignment = 1
 
@@ -231,6 +255,7 @@ layout_mode = 2
 
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/RodUpgradeSlots/TempRodSlots/MarginContainer/VBoxContainer/Slots/VBoxContainer3"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Lure"
 horizontal_alignment = 1
 
@@ -252,7 +277,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_todbw")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -284,6 +309,7 @@ layout_mode = 2
 [node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/ExoticGear/TempExoticSlot/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 8
+theme_override_constants/outline_size = 4
 text = "Exotic"
 horizontal_alignment = 1
 vertical_alignment = 2
@@ -306,7 +332,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_a660p")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -338,6 +364,7 @@ layout_mode = 2
 
 [node name="BaitName" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "Generic Bait"
 fit_content = true
@@ -378,7 +405,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -398,9 +425,21 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Money" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 48)
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+
+[node name="Money" type="RichTextLabel" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "$0.00"
@@ -409,6 +448,7 @@ scroll_active = false
 autowrap_mode = 0
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("7_rdayf")
 
 [node name="DividerLine" type="ColorRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Rent/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(1, 1)
@@ -419,6 +459,7 @@ mouse_filter = 2
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[color=red]$100.00"
@@ -441,7 +482,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -458,6 +499,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="DayLabel" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Day/MarginContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "Day 1 / 5"
 horizontal_alignment = 1
@@ -471,7 +513,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_e7gie")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -488,6 +530,7 @@ theme_override_constants/margin_bottom = 20
 
 [node name="WeekLabel" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/WeekDay/Week/MarginContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 theme_override_font_sizes/font_size = 16
 text = "Week 1"
 horizontal_alignment = 1
@@ -500,30 +543,30 @@ size_flags_vertical = 5
 size_flags_stretch_ratio = 5.0
 mouse_filter = 2
 
-[node name="TextureButton" type="TextureButton" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause"]
+[node name="PanelContainer" type="PanelContainer" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture_normal = ExtResource("6_todbw")
-ignore_texture_size = true
-stretch_mode = 0
 
-[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -23.5
-offset_top = -11.5
-offset_right = 23.5
-offset_bottom = 11.5
-grow_horizontal = 2
-grow_vertical = 2
+[node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause/PanelContainer"]
+layout_mode = 2
+texture = ExtResource("4_ncqqj")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="TextureButton" type="Button" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause/PanelContainer"]
+layout_mode = 2
+focus_mode = 0
+flat = true
+
+[node name="Label" type="Label" parent="HUDController/Top/MarginContainer/HBoxContainer/Pause/PanelContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Pause"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -567,7 +610,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_swth0")
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory"]
 layout_mode = 2
 mouse_filter = 1
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -593,6 +636,7 @@ layout_mode = 2
 
 [node name="FishBucketValue" type="Label" parent="HUDController/Bottom/MarginContainer/Bottom/Left/FishInventory/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/outline_size = 4
 text = "Total Value: $99999.99"
 
 [node name="BuffGrid" parent="HUDController/Bottom/MarginContainer/Bottom/Left" instance=ExtResource("7_todbw")]
@@ -619,7 +663,7 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_swth0")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory"]
 layout_mode = 2
-texture = ExtResource("8_swth0")
+texture = ExtResource("4_ncqqj")
 patch_margin_left = 16
 patch_margin_top = 16
 patch_margin_right = 16
@@ -640,8 +684,87 @@ grid_type = "Bait"
 [node name="Slot" parent="HUDController/Bottom/MarginContainer/Bottom/Right/BaitInventory/MarginContainer/BaitGrid" instance=ExtResource("7_e7gie")]
 layout_mode = 2
 
+[node name="Touchscreen" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0.5)
+layout_mode = 3
+anchors_preset = 0
+offset_left = 180.0
+offset_top = 550.0
+offset_right = 180.0
+offset_bottom = 550.0
+mouse_filter = 2
+script = ExtResource("9_rdayf")
+
+[node name="Right" type="TextureButton" parent="Touchscreen"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = 10.0
+offset_top = -64.0
+offset_right = 138.0
+offset_bottom = 64.0
+focus_mode = 0
+texture_normal = ExtResource("10_211po")
+texture_pressed = ExtResource("11_8m3cg")
+texture_click_mask = ExtResource("12_ne1ra")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Down" type="TextureButton" parent="Touchscreen"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = -64.0
+offset_top = 10.0
+offset_right = 64.0
+offset_bottom = 138.0
+focus_mode = 0
+texture_normal = ExtResource("13_b1wkl")
+texture_pressed = ExtResource("14_r6ol6")
+texture_click_mask = ExtResource("15_0kchs")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Left" type="TextureButton" parent="Touchscreen"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = -138.0
+offset_top = -64.0
+offset_right = -10.0
+offset_bottom = 64.0
+focus_mode = 0
+texture_normal = ExtResource("16_dm3fy")
+texture_pressed = ExtResource("17_fte8k")
+texture_click_mask = ExtResource("18_t1llk")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Up" type="TextureButton" parent="Touchscreen"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = -64.0
+offset_top = -138.0
+offset_right = 64.0
+offset_bottom = -10.0
+focus_mode = 0
+texture_normal = ExtResource("19_eyak2")
+texture_pressed = ExtResource("20_qv6go")
+texture_click_mask = ExtResource("21_p1o7j")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Spacebar" type="TextureButton" parent="Touchscreen"]
+custom_minimum_size = Vector2(192, 192)
+layout_mode = 0
+offset_left = 837.0
+offset_top = -79.0
+offset_right = 1029.0
+offset_bottom = 113.0
+focus_mode = 0
+texture_normal = ExtResource("22_l4xpv")
+texture_pressed = ExtResource("23_hsac1")
+texture_click_mask = ExtResource("24_885y2")
+stretch_mode = 0
+
 [node name="Blocker" type="ColorRect" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -651,6 +774,18 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
 
+[connection signal="mouse_entered" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]
+[connection signal="mouse_entered" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Bait/PanelContainer/MarginContainer2/BaitDropdown" to="HUDController" method="_on_bait_dropdown_pressed"]
-[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Pause/TextureButton" to="HUDController" method="_on_texture_button_pressed"]
+[connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/Pause/PanelContainer/TextureButton" to="HUDController" method="_on_texture_button_pressed"]
+[connection signal="button_down" from="Touchscreen/Right" to="Touchscreen" method="_on_right_pressed"]
+[connection signal="button_up" from="Touchscreen/Right" to="Touchscreen" method="_on_right_released"]
+[connection signal="button_down" from="Touchscreen/Down" to="Touchscreen" method="_on_down_pressed"]
+[connection signal="button_up" from="Touchscreen/Down" to="Touchscreen" method="_on_down_released"]
+[connection signal="button_down" from="Touchscreen/Left" to="Touchscreen" method="_on_left_pressed"]
+[connection signal="button_up" from="Touchscreen/Left" to="Touchscreen" method="_on_left_released"]
+[connection signal="button_down" from="Touchscreen/Up" to="Touchscreen" method="_on_up_pressed"]
+[connection signal="button_up" from="Touchscreen/Up" to="Touchscreen" method="_on_up_released"]
+[connection signal="button_down" from="Touchscreen/Spacebar" to="Touchscreen" method="_on_button_pressed"]
+[connection signal="button_up" from="Touchscreen/Spacebar" to="Touchscreen" method="_on_button_released"]

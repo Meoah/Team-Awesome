@@ -1,0 +1,16 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+uid="uid://barnbjkfclgb4"
+path="res://.godot/imported/Play_Button_clickmask.png-46b7f4a34d2c1eda6a34e1a35eb32463.res"
+
+[deps]
+
+source_file="res://assets/textures/ui/menu_buttons/Play_Button_clickmask.png"
+dest_files=["res://.godot/imported/Play_Button_clickmask.png-46b7f4a34d2c1eda6a34e1a35eb32463.res"]
+
+[params]
+
+create_from=1
+threshold=0.5

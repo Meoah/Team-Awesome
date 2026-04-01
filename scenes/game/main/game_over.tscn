@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://buum3xnaqnv5x"]
 
 [ext_resource type="Script" uid="uid://cbt7mkm6nlf1s" path="res://scripts/game/main/game_over.gd" id="1_xdcsw"]
-[ext_resource type="AudioStream" uid="uid://bj1gsv8tnuapf" path="res://assets/audio/bgm/dump/sleep_with_the_fishes.wav" id="2_bkenv"]
+[ext_resource type="AudioStream" uid="uid://d2dd0tlknqus0" path="res://assets/audio/bgm/sleep_with_the_fishes.ogg" id="2_bkenv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s2grh"]
 font_size = 64

@@ -19,6 +19,9 @@ var is_in_water : bool = false
 @export var indicator : Sprite2D
 @export var progress_bar : ProgressBar
 @export var progress_label : Label
+@export_category("Audio")
+@export var water_splash_sfx : AudioStream
+@export var hook_indicator_sfx : AudioStream
 
 # Signals to be used by MainCharacter
 signal hooked
@@ -27,13 +30,13 @@ signal hook_timeout
 func _ready() -> void:
 	time_until_hook = randf_range(1.0, 5.0)
 	time_until_break = randf_range(3.0, 5.0)
+	progress_bar.max_value = time_until_break
 
 func _process(delta: float) -> void:
 	# Detects if bobber has fallen past the waterline. Freeze body and start timer.
 	# TODO this sucks, use physics
 	if global_position.y > waterline_y && !is_in_water:
 		_start_bob()
-		get_node("../../Water/Sprite2D").spawn_ripple(global_position)
 		timer.start(time_until_hook)
 
 # If in water, bob and start timer.
@@ -44,10 +47,7 @@ func _process(delta: float) -> void:
 	if waiting : _progress_bar()
 
 # Decrements progress bar according to timer.
-func _progress_bar(initial : bool = false) -> void:
-	if initial:
-		progress_bar.max_value = timer.time_left
-		progress_bar.visible = true
+func _progress_bar() -> void:
 	progress_bar.value = timer.time_left
 	progress_label.set_text("%.2f s" % timer.time_left)
 
@@ -60,6 +60,7 @@ func _indicator() -> void:
 
 # Initializes variables for bobbing.
 func _start_bob() -> void:
+	AudioEngine.play_sfx(water_splash_sfx)
 	is_in_water = true
 	freeze = true
 	waiting = true
@@ -72,7 +73,9 @@ func _water_bob(delta : float) -> void:
 
 # Makes the exclaimation and starts the progress timer.
 func _play_vfx() -> void:
-	_progress_bar(true)
+	AudioEngine.play_sfx(hook_indicator_sfx)
+	_progress_bar()
+	progress_bar.visible = true
 	_indicator()
 
 # Hook handler
@@ -90,7 +93,3 @@ func _on_timer_timeout() -> void:
 		hooked.emit()
 		timer.start(time_until_break)
 		_play_vfx()
-
-		timer.start(time_until_hook)
-	
-	
