@@ -29,15 +29,25 @@ var correct_inputs : Array
 var current_value : float = 0
 var time : float = 0
 
+var input_pool : Array[String] = ["Left","Up","Down","Right"]
+
 
 var chosen_fish_id : int
+
+
+
+func generate_string():
+	for i in 100:
+		correct_inputs.append(randInput())
+
+
 
 func apply_data():
 	var chosen_fish = FishData.BOSS_ID[01]
 	current_name = chosen_fish["name"]
 	current_image = chosen_fish["image"]
 	current_weight = chosen_fish["weight"]
-	correct_inputs = chosen_fish["inputs"]
+	#correct_inputs = chosen_fish["inputs"]
 	current_value = chosen_fish["value"]
 	time = chosen_fish["time"]
 
@@ -51,8 +61,10 @@ func _ready() -> void:
 
 #On Ready
 func start_minigame():
+	generate_string()
 	apply_data()
 	input_array = correct_inputs.duplicate()
+	
 	display_text = correct_inputs.duplicate(true)
 	#timer_seqeunce()
 	#await timer_seqeunce()
@@ -86,8 +98,8 @@ func _input(_event : InputEvent):
 
 
 func randInput():
-	var input_pool = correct_inputs.duplicate()
-	return input_pool.pick_random()
+	var input_choice = input_pool.duplicate()
+	return input_choice.pick_random()
 
 
 var dice_check : int = 3
@@ -103,18 +115,14 @@ func correct_input():
 	#input_index = input_index + 1 #Advances in the string index
 	input_count += 1
 	input_array.pop_front()
-	var dice_roll :int = randi_range(0,10)
+	var dice_roll :int = randi_range(0,3)
 	if input_count < input_count_cap:
 		dice_roll = -1
-	if dice_roll < dice_check : 
-		var appending_input = randInput()
-		input_array.append(appending_input)
-		var node_to_copy = $PanelContainer/HBoxContainer/TextureRect
-		var copy = node_to_copy.duplicate()
-		copy.texture = arrow_direction[appending_input]
-		$PanelContainer/HBoxContainer.add_child(copy)
-		sprite_array.append(copy)
-		$Label.text = str(input_count, "/", str(input_count_cap))
+	if dice_roll < dice_check:
+		var final_input : int = input_count + 5
+		for i in range(final_input,input_array.size()):
+			input_array.remove_at(i)
+		pass
 	print(input_array)
 	#text_render()
 	#$Reaction.set_texture(success)
