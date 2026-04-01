@@ -1,6 +1,7 @@
 extends Node
 
 var current_hour : float = 6.0
+var time_enabled : bool = false
 
 signal time_updated(new_hour : float)
 signal period_changed(new_period : int)
@@ -13,6 +14,9 @@ func _set_time(hour : float) -> void:
 
 #Advance Time 1.5 hours per cast
 func _advance_time(amount : float) -> void:
+	#Ensures time does not advance during tutorial 
+	if not time_enabled:
+		return
 	var old_quadrant := _get_quadrant(current_hour)
 	#Wraps, prevents time from becoming 24.5
 	current_hour = fposmod(current_hour + amount, 24.0) 

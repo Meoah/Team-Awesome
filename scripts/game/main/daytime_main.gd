@@ -13,9 +13,9 @@ class_name DaytimeMain
 @export var bobber_scene : PackedScene
 @export var tutorial_scene : PackedScene
 
-@onready var clock_hand : Sprite2D = $HUD/Node2D/ClockHand
-@onready var weather_modulate : CanvasModulate = $WeatherModulate
-@onready var rain_particles : GPUParticles2D = $RainParticles
+@onready var clock   = $Clock_Weather/ClockFace
+@onready var weather = $Clock_Weather/WeatherModulate
+@onready var rain    = $Clock_Weather/RainParticles
 
 func _ready() -> void:
 	# Binds Signals
@@ -32,6 +32,7 @@ func _ready() -> void:
 	
 	#--Time--
 	TimeManager._set_time(6.0)
+	TimeManager.time_enabled = false
 	_update_lighting(TimeManager.current_hour)
 	TimeManager.time_updated.connect(_on_time_updated)
 	
@@ -41,21 +42,6 @@ func _ready() -> void:
 	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
 	else : _ready_day()
 	
-# Weather-------	
-func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
-	_apply_weather(new_weather)
-	
-func _apply_weather(w : WeatherManager.WEATHER) -> void:
-	match w:
-		WeatherManager.WEATHER.CLEAR:
-			weather_modulate.color = Color(1.0, 1.0, 1.0)
-			rain_particles.emitting = false
-		WeatherManager.WEATHER.RAINY:
-			weather_modulate.color = Color(0.6, 0.7,0.9 )
-			rain_particles.emitting = true
-		WeatherManager.WEATHER.STORM:
-			weather_modulate.color = Color(0.4, 0.4, 0.55)
-			rain_particles.emitting = true
 
 ## Plays the intro sequence and sets initial bait if first day.
 func _intro_scene() -> void:
@@ -73,7 +59,8 @@ func _play_tutorial() -> void:
 ## Default function for the day.
 func _ready_day() -> void:
 	PlayManager.request_idle_day_state()
-
+	TimeManager.time_enabled = true
+	
 ## Returns a tween for awaiting .finished.
 ## TODO maybe put this into Jeremy instead
 func _walk_up_sequence() -> Tween:
@@ -130,8 +117,23 @@ func _update_lighting(hour : float) -> void:
 		color = Color(lerp(0.6, 0.2, t), lerp(0.4, 0.2, t), lerp(0.5, 0.4, t))
 	else:
 		color = Color(0.15, 0.15, 0.25)	
-	$WeatherModulate.color = color
+		weather.color = color
+# Weather-------	
+func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
+	_apply_weather(new_weather)
 	
+func _apply_weather(w : WeatherManager.WEATHER) -> void:
+	match w:
+		WeatherManager.WEATHER.CLEAR:
+			weather.color = Color(1.0, 1.0, 1.0)
+			rain.emitting = false
+		WeatherManager.WEATHER.RAINY:
+			weather.color = Color(0.6, 0.7,0.9 )
+			rain.emitting = true
+		WeatherManager.WEATHER.STORM:
+			weather.color = Color(0.4, 0.4, 0.55)
+			rain.emitting = true
+
 #Updates weather conditions for each time quadrant changes
 func _on_period_change(new_quadrant : int) -> void:
 	if new_quadrant == 1:

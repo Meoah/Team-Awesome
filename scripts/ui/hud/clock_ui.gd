@@ -12,19 +12,19 @@ var smooth_speed : float = 0.3
 func _ready() -> void:
 	TimeManager.time_updated.connect(_on_time_updated)
 	
-	var start_rotation := _hour_to_rotation(TimeManager.current_hour * DEGREES_PER_HOUR)
-	clock_hand.rotation = start_rotation
-	target_rotation = start_rotation
+	#var start_rotation := _hour_to_rotation(TimeManager.current_hour * DEGREES_PER_HOUR)
+	#clock_face.rotation = start_rotation
+	#target_rotation = start_rotation
 
 func _on_time_updated(new_hour : float) -> void:
 	target_rotation = _hour_to_rotation(new_hour * DEGREES_PER_HOUR)
 
 func _process(delta: float) -> void:
-	clock_hand.rotation = lerp_angle(
-		clock_hand.rotation,
+	clock_face.rotation = lerp_angle(
+		clock_face.rotation,
 		target_rotation,
 		smooth_speed * delta
 	)
 
 func _hour_to_rotation(hour : float) -> float:
-	return deg_to_rad(-(hour * DEGREES_PER_HOUR) - ROTATION_OFFSET)
+	return deg_to_rad((hour * DEGREES_PER_HOUR) - ROTATION_OFFSET)

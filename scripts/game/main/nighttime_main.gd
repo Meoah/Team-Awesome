@@ -14,8 +14,8 @@ class_name NighttimeMain
 
 @export var house_label : Label
 
-@onready var weather_modulate : CanvasModulate = $WeatherModulate
-@onready var rain_particles : GPUParticles2D = $RainParticles
+@onready var weather : CanvasModulate = $Clock_Weather/WeatherModulate
+@onready var rain    : GPUParticles2D = $Clock_Weather/RainParticles
 
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 
@@ -44,10 +44,6 @@ func _ready() -> void:
 	
 	WeatherManager.weather_changed.connect(_on_weather_changed)
 	_apply_weather(WeatherManager.current_weather)
-	
-	#---Time----
-	TimeManager._set_time(18.0)
-	TimeManager.time_updated.connect(_on_time_updated)
 	
 func _interaction() -> void:
 	if house_trigger.overlaps_body(jeremy_node) : _sleep()
@@ -139,16 +135,11 @@ func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
 func _apply_weather(w : WeatherManager.WEATHER) -> void:
 	match w:
 		WeatherManager.WEATHER.CLEAR:
-			weather_modulate.color = Color(1.0, 1.0, 1.0)
-			rain_particles.emitting = false
+			weather.color = Color(1.0, 1.0, 1.0)
+			rain.emitting = false
 		WeatherManager.WEATHER.RAINY:
-			weather_modulate.color = Color(0.6, 0.7, 0.9)
-			rain_particles.emitting = true
+			weather.color = Color(0.6, 0.7, 0.9)
+			rain.emitting = true
 		WeatherManager.WEATHER.STORM:
-			weather_modulate.color = Color(0.4, 0.4, 0.55)
-			rain_particles.emitting = true
-
-func _on_time_updated(hour : float) -> void:
-	var t := (hour - 18.0) / 6.0
-	var brightness : float = lerp(0.3, 0.15, clamp(t, 0.0, 1.0))
-	$WeatherModulate.color = Color(brightness, brightness, brightness + 0.05)
+			weather.color = Color(0.4, 0.4, 0.55)
+			rain.emitting = true
