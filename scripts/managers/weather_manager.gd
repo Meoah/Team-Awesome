@@ -1,11 +1,14 @@
 extends Node
 
-enum WEATHER {CLEAR, STORM, RAINY}
+enum WEATHER {CLEAR, RAINY} #May add STORM later.
 
 var current_weather : WEATHER = WEATHER.CLEAR
 
 signal weather_changed(new_weather : WEATHER)
 
+func _ready() -> void:
+	_roll_weather()
+	
 func set_weather(new_weather : WEATHER) -> void:
 	if current_weather == new_weather:
 		return
@@ -15,6 +18,5 @@ func set_weather(new_weather : WEATHER) -> void:
 func _roll_weather() -> void:
 	set_weather(
 		[WEATHER.CLEAR,
-		 WEATHER.RAINY,
-		 WEATHER.STORM].pick_random()
+		WEATHER.RAINY].pick_random()
 	)

@@ -267,6 +267,7 @@ offset_bottom = 675.0
 focus_mode = 0
 
 [node name="Clock_Weather" parent="." instance=ExtResource("15_s5bea")]
+position = Vector2(-8, 22)
 
 [connection signal="area_entered" from="ExitSign" to="." method="_on_exit_sign_area_entered"]
 [connection signal="body_entered" from="ExitSign" to="." method="_on_exit_sign_body_entered"]

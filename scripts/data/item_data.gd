@@ -175,7 +175,7 @@ const GENERIC_BAIT : Dictionary = {
 	KEY_COST : 1.0,
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
-	KEY_QUANTITY_MAX : 10,
+	KEY_QUANTITY_MAX : 100,
 	KEY_DESCRIPTION : "As generic as it comes."
 }
 

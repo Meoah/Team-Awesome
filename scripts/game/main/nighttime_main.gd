@@ -14,9 +14,11 @@ class_name NighttimeMain
 
 @export var house_label : Label
 
-@onready var weather : CanvasModulate = $Clock_Weather/WeatherModulate
-@onready var rain    : GPUParticles2D = $Clock_Weather/RainParticles
+@onready var clock   = $Clock_Weather/ClockFace
+@onready var weather = $Clock_Weather/WeatherModulate
+@onready var rain    = $Clock_Weather/RainLayer/RainParticles
 
+var weather_color : Color = Color.WHITE
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 
 func _on_sleep_pressed() -> void:
@@ -133,13 +135,14 @@ func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
 	_apply_weather(new_weather)
 	
 func _apply_weather(w : WeatherManager.WEATHER) -> void:
+	
 	match w:
 		WeatherManager.WEATHER.CLEAR:
-			weather.color = Color(1.0, 1.0, 1.0)
+			weather_color = Color(1.0, 1.0, 1.0)
 			rain.emitting = false
 		WeatherManager.WEATHER.RAINY:
-			weather.color = Color(0.6, 0.7, 0.9)
+			weather_color = Color(0.6, 0.7,0.9 )
 			rain.emitting = true
-		WeatherManager.WEATHER.STORM:
-			weather.color = Color(0.4, 0.4, 0.55)
-			rain.emitting = true
+		#WeatherManager.WEATHER.STORM:
+			#weather_color = Color(0.4, 0.4, 0.55)
+			#rain.emitting = true
