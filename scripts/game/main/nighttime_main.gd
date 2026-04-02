@@ -17,28 +17,15 @@ class_name NighttimeMain
 @export var tarot_trigger : Area2D
 @export var hud : HUD
 
-@export var house_label : Label
-
 @onready var weather_modulate : CanvasModulate = $WeatherModulate
 @onready var rain_particles : GPUParticles2D = $RainParticles
 
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
-
-func _on_sleep_pressed() -> void:
-	if SystemData.get_day() == 5:
-		if !SystemData.spend_money(SystemData.calculate_rent()):
-			SignalBus.player_dies.emit()
-			return
-	if PlayManager.request_sleeping_state():
-		print("Sleepin")
-		if PlayManager.request_idle_day_state():
-			SystemData._next_day()
-			GameManager.change_scene_deferred(GameManager.daytime_scene)
+var scavange: int = -1
 
 func _ready() -> void:
 	_sell_all_fish()
-	if SystemData.get_day() == 5:
-		house_label.text = "PAY RENT OR DIE"
+	_prepare_scavange_bucket()
 		
 	# Bind Signals
 	jeremy_node.player_interact.connect(_interaction)
@@ -52,6 +39,23 @@ func _ready() -> void:
 	
 	await hud.fade_in(0.5).finished
 	
+	_check_win_condition()
+	
+	SystemData.camp_day = SystemData.get_day()
+
+
+func _check_win_condition() -> void:
+	if SystemData.winner_screen_shown:
+		return
+	match SystemData.license:
+		1, 2:
+			if SystemData.get_money() >= SystemData.calculate_goal():
+				GameManager.show_popup(BasePopup.POPUP_TYPE.WINNER)
+		3: 
+			if SystemData.boss_defeated:
+				GameManager.show_popup(BasePopup.POPUP_TYPE.WINNER)
+
+
 func _interaction() -> void:
 	if house_trigger.overlaps_body(jeremy_node) : _sleep()
 	if bucket_trigger.overlaps_body(jeremy_node) : _bucket()
@@ -64,20 +68,31 @@ func _sell_all_fish() -> void:
 	SystemData._clear_fish_inventory()
 
 func _sleep() -> void:
-	if SystemData.get_day() == 5:
-		if !SystemData.spend_money(SystemData.calculate_rent()):
+	var final_day = 1 + (SystemData.license * 2)
+	if SystemData.get_day() >= final_day:
+		if SystemData.get_money() < SystemData.calculate_goal():
 			SignalBus.player_dies.emit()
 			return
-	if PlayManager.request_sleeping_state():
-		AudioEngine.play_sfx(sleeping_sfx)
-		AudioEngine.stop_bgm(1.0)
-		await hud.fade_to_black(4.0).finished
-		if PlayManager.request_idle_day_state():
-			SystemData._next_day()
-			GameManager.change_scene_deferred(GameManager.daytime_scene)
+	if PlayManager.get_current_state() is not SleepingState:
+		if PlayManager.request_sleeping_state():
+			AudioEngine.play_sfx(sleeping_sfx)
+			AudioEngine.stop_bgm(8.0)
+			await hud.fade_to_black(4.0).finished
+			if PlayManager.request_idle_day_state():
+				SystemData.add_stamina(50)
+				SystemData._next_day()
+				SystemData.camp_scavange = scavange
+				GameManager.change_scene_deferred(GameManager.daytime_scene)
+
+
+func _prepare_scavange_bucket() -> void:
+	if SystemData.get_day() > SystemData.camp_day:
+		SystemData.camp_scavange = 3
+	scavange = SystemData.camp_scavange
+	
+	_update_bucket()
 
 @export var scavange_label : Label
-var scavange : int = 3
 func _bucket() -> void:
 	if scavange > 0:
 		AudioEngine.play_sfx(scavange_sfx)
@@ -92,6 +107,11 @@ func _bucket() -> void:
 		if bucket_trigger.rotation_degrees != 90:
 			AudioEngine.play_sfx(scavange_bucket_empty_sfx)
 		bucket_trigger.rotation_degrees = 90
+
+func _update_bucket() -> void:
+	if scavange <= 0:
+		bucket_trigger.rotation_degrees = 90
+	scavange_label.text = "Scavange attempts left: %d" % scavange
 
 func _bait_shop() -> void:
 	var popup_parameters = {

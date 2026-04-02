@@ -4,13 +4,14 @@ class_name BasePopup
 # Type of popup being called. Used by PopupLibrary.
 enum POPUP_TYPE{
 	GENERIC,
-	PAUSE, #TODO
+	PAUSE,
 	MINIGAMEUI,
 	DIALOGUE,
 	SHOP,
 	COMPENDIUM, #TODO
-	SETTINGS, #TODO
-	CREDITS
+	SETTINGS,
+	CREDITS,
+	WINNER
 }
 
 # Flags used to determine popup behavior.

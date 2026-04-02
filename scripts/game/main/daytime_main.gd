@@ -23,6 +23,8 @@ func _ready() -> void:
 	# Initial setup
 	AudioEngine.play_bgm(default_bgm)
 	PlayManager.request_dialogue_day_state()
+	if SystemData.fresh_run:
+		_equip_license_gear()
 	
 	#--Weather--
 	WeatherManager.weather_changed.connect(_on_weather_changed)
@@ -33,8 +35,14 @@ func _ready() -> void:
 	await hud.fade_in().finished
 	await jeremy_node.walk_up_sequence()
 	
-	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
-	else : _ready_day()
+	# Cutscenes
+	if SystemData.fresh_run:
+		if SystemData.license == 1 : _intro_scene()
+		else: _ready_day()
+	else:
+		_ready_day()
+	
+	SystemData.fresh_run = false
 
 
 func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
@@ -58,8 +66,6 @@ func _apply_weather(w : WeatherManager.WEATHER) -> void:
 func _intro_scene() -> void:
 	PlayManager.request_dialogue_day_state()
 	_play_tutorial()
-	SystemData._add_bait(1, 5)
-	SystemData.set_active_bait(1)
 
 ## Instantiates tutorital scene and binds its finished signal to _ready_day()
 func _play_tutorial() -> void:
@@ -82,11 +88,12 @@ func _end_day() -> void:
 	if PlayManager.request_idle_night_state():
 		GameManager.change_scene_deferred(GameManager.nighttime_scene)
 
-func _play_minigame() -> void:
+func _play_minigame(distance: float) -> void:
 	$FISH.play("FISH!") #Plays FISH! Animation
 	await $FISH.animation_finished
 	var popup_parameters = {
-		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE
+		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE,
+		"distance" = distance
 	}
 	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAMEUI, popup_parameters)
 
@@ -99,3 +106,18 @@ func _idle_state() -> void:
 
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()
+
+
+# TODO REMOVE THIS LATER, HARDCODED RUN EQUIPMENT
+func _equip_license_gear() -> void:
+	match SystemData.license:
+		1:
+			pass
+		2:
+			SystemData.set_upgrade(ItemData.ROD, ItemData.get_data(ItemData.ROD, 1))
+			SystemData.set_upgrade(ItemData.REEL, ItemData.get_data(ItemData.REEL, 2))
+			SystemData.set_upgrade(ItemData.EXOTIC, ItemData.get_data(ItemData.EXOTIC, 2))
+		3:
+			SystemData.set_upgrade(ItemData.ROD, ItemData.get_data(ItemData.ROD, 2))
+			SystemData.set_upgrade(ItemData.LURE, ItemData.get_data(ItemData.LURE, 1))
+			SystemData.set_upgrade(ItemData.EXOTIC, ItemData.get_data(ItemData.EXOTIC, 3))

@@ -17,7 +17,7 @@ static func get_available_ids(category : String) -> Array[int]:
 	var list : Array[int] = []
 	var source : Dictionary = _get_category_dictionary(category)
 	
-	for key in source.keys() : if key != 0 : list.append(key)
+	for key in source.keys() : if key > 0 : list.append(key)
 	return list
 
 ## Returns with the proper dictionary from the given string.
@@ -34,6 +34,8 @@ static func _get_category_dictionary(category : String) -> Dictionary:
 const UPGRADES_EXOTIC : Dictionary = {
 	0 : DUMMY_EXOTIC,
 	1 : MULTI_BOBBER,
+	2 : ROCKET_LAUNCHER,
+	3 : BOSS_DETECTOR
 }
 
 const UPGRADES_REEL : Dictionary = {
@@ -45,17 +47,18 @@ const UPGRADES_REEL : Dictionary = {
 const UPGRADES_RODS : Dictionary = {
 	0 : DUMMY_ROD,
 	1 : WOODEN_ROD,
+	2 : FIBERGLASS_ROD
 }
 
 const UPGRADES_LURES : Dictionary = {
 	0 : DUMMY_LURE,
 	1 : PLASTIC_LURE,
-	
 }
 
 const BAIT_DATA : Dictionary = {
+	-1 : GENERIC_BAIT,
 	0 : DUMMY_BAIT,
-	1 : GENERIC_BAIT,
+	1 : WORM_BAIT,
 	2 : MAGIC_BAIT,
 }
 
@@ -105,7 +108,7 @@ const FISHTAGRAM_REEL : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/upgrades/reels/Fishtagram_reel_temp.png"),
 	KEY_TYPE : REEL,
 	KEY_COST : 150.0,
-	KEY_DESCRIPTION : "5% to autocomplete minigame. Reel was skipped, too boring :/ "
+	KEY_DESCRIPTION : "10% to autocomplete minigame.[br][br]Reel was skipped, too boring :/ "
 }
 
 ## Rods
@@ -122,7 +125,15 @@ const WOODEN_ROD : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/wooden_rod_temp.png"),
 	KEY_TYPE : ROD,
 	KEY_COST : 15.0,
-	KEY_DESCRIPTION : "Adds +2% value to every other fish caught!"
+	KEY_DESCRIPTION : "+20% fish value[br]-25% stamina usage"
+}
+
+const FIBERGLASS_ROD : Dictionary = {
+	KEY_NAME : "Fiberglass Rod",
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/wooden_rod_temp.png"),
+	KEY_TYPE : ROD,
+	KEY_COST : 15.0,
+	KEY_DESCRIPTION : "+100% fish value[br]-40% stamina usage"
 }
 
 ## Lures
@@ -139,7 +150,7 @@ const PLASTIC_LURE : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/upgrades/lures/plastic_lure_temp.png"),
 	KEY_TYPE : LURE,
 	KEY_COST : 15.0,
-	KEY_DESCRIPTION : "+3% chance to upgrade fish rarity!"
+	KEY_DESCRIPTION : "+25% fishing speed"
 }
 
 ## Exotics
@@ -159,7 +170,30 @@ const MULTI_BOBBER : Dictionary = {
 	KEY_DESCRIPTION : "Fire three bobbers to catch multiple fish with one use of your bait!"
 }
 
+const ROCKET_LAUNCHER : Dictionary = {
+	KEY_NAME : "Rocket Launcher",
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/rocket_launcher.png"),
+	KEY_TYPE : EXOTIC,
+	KEY_COST : 200.0,
+	KEY_DESCRIPTION : "Okay hear me out...[br]rockets.[br][br]+1000% casting strength."
+}
+
+const BOSS_DETECTOR : Dictionary = {
+	KEY_NAME : "Boss Detector",
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/metal_detector.png"),
+	KEY_TYPE : EXOTIC,
+	KEY_COST : 200.0,
+	KEY_DESCRIPTION : "Allows Jeremy to locate exceptionally rare fish.[br][br]Shows the shadow of the boss fish."
+}
+
 ## Bait Bundles
+const GENERIC_BAIT : Dictionary = {
+	KEY_NAME : "Generic Bait",
+	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
+	KEY_TYPE : BAIT,
+	KEY_DESCRIPTION : "As generic as it comes."
+}
+
 const DUMMY_BAIT : Dictionary = {
 	KEY_NAME : "Dummy Bait",
 	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
@@ -168,15 +202,15 @@ const DUMMY_BAIT : Dictionary = {
 	KEY_DESCRIPTION : "Get baited."
 }
 
-const GENERIC_BAIT : Dictionary = {
-	KEY_NAME : "Generic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
+const WORM_BAIT : Dictionary = {
+	KEY_NAME : "Worm Bait",
+	KEY_IMAGE : NodePath("res://assets/textures/bait/worm_bait_placeholder.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 1.0,
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 10,
-	KEY_DESCRIPTION : "As generic as it comes."
+	KEY_DESCRIPTION : "Ew, slimy."
 }
 
 const MAGIC_BAIT : Dictionary = {

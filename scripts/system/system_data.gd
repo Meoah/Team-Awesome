@@ -29,10 +29,19 @@ var upgrade_inventory : Dictionary = {
 		ItemData.KEY_DESCRIPTION : "There's nothing here.."
 			},
 		}
-
+var license: int = -1
+var player_stamina: float = 100.0
+var fresh_run: bool = true
+var camp_day: int = 0
+var camp_scavange: int = 3
+var boss_defeated: bool = false
+var winner_screen_shown: bool = false
+var value_multiplier: float = 1.0
 
 # Signals
 signal inventory_updated
+signal stamina_updated
+signal not_enough_stamina
 
 # Resets everything to default values.
 func _reset_all() -> void:
@@ -41,6 +50,14 @@ func _reset_all() -> void:
 	_clear_fish_inventory()
 	_reset_bait_inventory()
 	_reset_upgrades()
+	
+	camp_day = 0
+	camp_scavange = 3
+	player_stamina = 100.0
+	fresh_run = true
+	boss_defeated = false
+	winner_screen_shown = false
+	value_multiplier = 1.0
 
 ## Money methods
 func _set_money(money : float) -> void:
@@ -69,13 +86,13 @@ func _transfer_money() -> void:
 	delayed_money = 0.0
 	inventory_updated.emit()
 
-# TODO this sucks
-func calculate_rent() -> float:
-	var base : float = 100.0
-	var growth : float = 1.15
-	
-	var rent : float = base * pow(growth, SystemData.get_week() - 1)
-	return rent
+
+func calculate_goal() -> float:
+	match license:
+		1: return 100.0
+		2: return 2500.0
+		3: return -1
+		_: return -1
 
 ## Week and day methods. Five days in a week.
 func _set_day(input_day : int) -> void:
@@ -84,8 +101,7 @@ func _set_day(input_day : int) -> void:
 func _next_day() -> void:
 	day += 1
 	inventory_updated.emit()
-func get_day() -> int : return ((day - 1) % 5) + 1
-func get_week() -> int : return ((day - 1) / 5) + 1
+func get_day() -> int : return day
 func _reset_day() -> void:
 	day = 1
 	inventory_updated.emit()
@@ -144,6 +160,8 @@ func _add_bait(bait : int, quantity : int = 1) -> void:
 
 # Attempts to use a bait. Returns false if either invalid bait or bait count is at 0.
 func use_bait(bait : int) -> bool:
+	if bait == -1 : return true
+	
 	if bait in bait_inventory:
 		if bait_inventory[bait] > 0:
 			bait_inventory[bait] -= 1
@@ -153,7 +171,8 @@ func use_bait(bait : int) -> bool:
 			inventory_updated.emit()
 			return true
 		else : print("Attempted to use bait at 0 count: ", bait)
-	else : print("Attempted to use invalid bait: ", bait)
+	
+	print("Attempted to use invalid bait: ", bait)
 	return false
 
 func get_active_bait() -> int : return active_bait
@@ -161,6 +180,7 @@ func get_active_bait_count() -> int :
 	if bait_inventory.has(active_bait) : return bait_inventory[active_bait]
 	else : return 0
 func set_active_bait(bait : int) -> void:
+	if bait == -1 : active_bait = -1
 	if bait_inventory.has(bait) : if bait_inventory[bait] > 0 : active_bait = bait
 	inventory_updated.emit()
 
@@ -190,3 +210,25 @@ func _reset_upgrades() -> void :
 				},
 			}
 	inventory_updated.emit()
+
+func get_stamina() -> float:
+	return player_stamina
+
+func set_stamina(new_stamina: float) -> void:
+	player_stamina = clamp(new_stamina, 0.0, 100.0)
+	stamina_updated.emit()
+
+func add_stamina(value: float) -> void:
+	player_stamina += value
+	player_stamina = clamp(player_stamina, 0.0, 100.0)
+	stamina_updated.emit()
+
+func use_stamina(value: float) -> bool:
+	if value > player_stamina:
+		not_enough_stamina.emit()
+		inventory_updated.emit()
+		return false
+	
+	player_stamina -= value
+	stamina_updated.emit()
+	return true

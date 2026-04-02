@@ -14,6 +14,8 @@ func enter(previous_state : State, data : Dictionary = {}) -> void:
 	GameManager.clear_popup_queue()
 	GameManager.change_scene_deferred(GameManager.main_menu_scene)
 	
+	PlayManager.request_dead_state()
+	SystemData._reset_all()
 	signal_main_menu.emit()
 	
 func exit(next_state : State) -> void:

@@ -13,7 +13,7 @@ var bob_amplitude : float = 10.0
 var bob_speed : float = 10.0
 var bob_timer : float = 0.0
 # Waterline detection
-@export var waterline_y : float = 620
+@export var waterline_y : float = 650
 var is_in_water : bool = false
 # VFX nodes
 @export var indicator : Sprite2D
@@ -53,7 +53,7 @@ func _progress_bar() -> void:
 
 # Makes the indicator pop out for 1 second.
 func _indicator() -> void:
-	# TODO SFX here
+	AudioEngine.play_sfx(hook_indicator_sfx)
 	indicator.visible = true
 	await get_tree().create_timer(1).timeout
 	indicator.visible = false
@@ -73,7 +73,6 @@ func _water_bob(delta : float) -> void:
 
 # Makes the exclaimation and starts the progress timer.
 func _play_vfx() -> void:
-	AudioEngine.play_sfx(hook_indicator_sfx)
 	_progress_bar()
 	progress_bar.visible = true
 	_indicator()

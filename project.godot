@@ -25,12 +25,12 @@ buses/default_bus_layout="uid://bjhnqgsdy6jgg"
 
 [autoload]
 
-SystemData="*res://scripts/system/system_data.gd"
-GameManager="*res://scenes/game_manager.tscn"
-AudioEngine="*res://scripts/util/audio_engine.gd"
-PlayManager="*res://scripts/managers/play_manager.gd"
 SignalBus="*res://scripts/util/signal_bus.gd"
+SystemData="*res://scripts/system/system_data.gd"
+PlayManager="*res://scripts/managers/play_manager.gd"
+AudioEngine="*res://scripts/util/audio_engine.gd"
 WeatherManager="*res://scripts/managers/weather_manager.gd"
+GameManager="*res://scenes/game_manager.tscn"
 
 [debug]
 
@@ -55,6 +55,10 @@ folder_colors={
 [global_group]
 
 bobber_group="Bobbers."
+
+[gui]
+
+common/snap_controls_to_pixels=false
 
 [input]
 
@@ -98,6 +102,10 @@ mouse_click={
 2d_physics/layer_1="player"
 2d_physics/layer_2="bound"
 2d_physics/layer_3="interactable"
+
+[physics]
+
+common/physics_ticks_per_second=200
 
 [rendering]
 

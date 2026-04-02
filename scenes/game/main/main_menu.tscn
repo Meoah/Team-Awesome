@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bs6fqe1euvjxa"]
+[gd_scene load_steps=46 format=3 uid="uid://bs6fqe1euvjxa"]
 
 [ext_resource type="Script" uid="uid://c5uuc65y6jov" path="res://scripts/game/main/main_menu.gd" id="1_hff0s"]
 [ext_resource type="AudioStream" uid="uid://4bqm83o3j0p3" path="res://assets/audio/bgm/hell_yeah_arrow_fishing.ogg" id="2_3wj1a"]
@@ -21,6 +21,7 @@
 [ext_resource type="BitMap" uid="uid://barnbjkfclgb4" path="res://assets/textures/ui/menu_buttons/Play_Button_clickmask.png" id="15_hh21g"]
 [ext_resource type="BitMap" uid="uid://lhk6rwlk83st" path="res://assets/textures/ui/menu_buttons/Options_Button_clickmask.png" id="17_pavj3"]
 [ext_resource type="BitMap" uid="uid://dolrt2n4tunki" path="res://assets/textures/ui/menu_buttons/Exit_Button_clickmask.png" id="19_d7yyt"]
+[ext_resource type="Texture2D" uid="uid://y2mh7rjf6x1s" path="res://assets/textures/ui/nine_slices/WoodTexture.png" id="22_pavj3"]
 
 [sub_resource type="Animation" id="Animation_pnn6m"]
 length = 0.001
@@ -120,10 +121,54 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(1297, 567)]
 }
-
-[sub_resource type="Animation" id="Animation_4kdnx"]
-resource_name = "settings_open"
-loop_mode = 2
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("LevelSelect:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -720)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("MainMenu:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(360.5, 244)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Fade:color")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Fade:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_hff0s"]
 resource_name = "startup"
@@ -225,10 +270,66 @@ tracks/7/keys = {
 "values": [Vector2(1297, 567), Vector2(1009, 567)]
 }
 
+[sub_resource type="Animation" id="Animation_4kdnx"]
+resource_name = "level_select"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MainMenu:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(360.5, 244), Vector2(360.5, 720)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LevelSelect:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -720), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pavj3"]
+resource_name = "fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Fade:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4kdnx"]
 _data = {
 &"RESET": SubResource("Animation_pnn6m"),
-&"settings_open": SubResource("Animation_4kdnx"),
+&"fade_out": SubResource("Animation_pavj3"),
+&"level_select": SubResource("Animation_4kdnx"),
 &"startup": SubResource("Animation_hff0s")
 }
 
@@ -307,7 +408,54 @@ texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
 
-[node name="Main_Menu" type="Control" node_paths=PackedStringArray("blocker", "animation_player", "button_play", "button_settings", "button_quit")]
+[sub_resource type="Theme" id="Theme_d7yyt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_26lib"]
+texture = ExtResource("22_pavj3")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_2jgrx"]
+font = ExtResource("10_0plrm")
+font_size = 64
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_e8tmt"]
+default_font = ExtResource("10_0plrm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yi70e"]
+texture = ExtResource("14_3wj1a")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8pxsd"]
+texture = ExtResource("14_3wj1a")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7fwnw"]
+texture = ExtResource("14_3wj1a")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="Theme" id="Theme_f6wy8"]
+default_font = ExtResource("10_0plrm")
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 32
+Button/styles/hover = SubResource("StyleBoxTexture_yi70e")
+Button/styles/normal = SubResource("StyleBoxTexture_8pxsd")
+Button/styles/pressed = SubResource("StyleBoxTexture_7fwnw")
+
+[node name="Main_Menu" type="Control" node_paths=PackedStringArray("blocker", "fade_node", "animation_player", "button_play", "button_settings", "button_quit")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -320,6 +468,7 @@ hover_sfx = ExtResource("3_pnn6m")
 confirm_sfx = ExtResource("4_4kdnx")
 cancel_sfx = ExtResource("5_gbwl8")
 blocker = NodePath("Blocker")
+fade_node = NodePath("Fade")
 animation_player = NodePath("AnimationPlayer")
 button_play = NodePath("MainMenu/VBoxContainer/PlayButton")
 button_settings = NodePath("MainMenu/VBoxContainer/OptionsButton")
@@ -412,8 +561,9 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -279.5
-offset_top = -456.0
+offset_top = -476.0
 offset_right = 279.5
+offset_bottom = 0.00079345703
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_constants/margin_bottom = 20
@@ -446,15 +596,6 @@ size_flags_vertical = 8
 texture_normal = ExtResource("7_hh21g")
 texture_click_mask = ExtResource("19_d7yyt")
 
-[node name="Blocker" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(1, 1, 1, 0)
-
 [node name="CreditsButton" type="Button" parent="."]
 layout_mode = 0
 offset_left = 1297.0
@@ -470,6 +611,134 @@ theme_override_styles/pressed = SubResource("StyleBoxTexture_pavj3")
 theme_override_styles/hover = SubResource("StyleBoxTexture_hh21g")
 text = "CREDITS"
 
+[node name="LevelSelect" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -720.0
+offset_bottom = -720.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelSelect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="LevelSelect/MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_d7yyt")
+theme_override_styles/panel = SubResource("StyleBoxTexture_26lib")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LevelSelect/MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "Select A Fishing License"
+label_settings = SubResource("LabelSettings_2jgrx")
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="LicenseOne" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_e8tmt")
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "[font_size=24][u]Raft License[/u][/font_size] (Tutorial)
+Cost: [color=red]$ 100[/color]
+Duration: 3 days
+
+Get your feet wet."
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="LicenseTwo" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_e8tmt")
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "[font_size=24][u]Skiff License[/u][/font_size] (Standard)
+Cost: [color=red]$ 2500[/color]
+Duration: 5 days
+
+Bigger fish, bigger reward."
+horizontal_alignment = 1
+
+[node name="MarginContainer3" type="MarginContainer" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 150
+theme_override_constants/margin_right = 150
+
+[node name="LicenseThree" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_e8tmt")
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "[font_size=24][u]Sloop License[/u][/font_size] (Boss)
+Cost: [color=red]$ ???[/color]
+Duration: 7 days
+
+There's something lurking in the waters...
+"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="LevelSelect/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_f6wy8")
+text = "Back"
+
+[node name="Blocker" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(1, 1, 1, 0)
+
+[node name="Fade" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_entered"]
 [connection signal="mouse_exited" from="MainMenu/VBoxContainer/PlayButton" to="." method="_on_play_button_mouse_exited"]
@@ -480,6 +749,14 @@ text = "CREDITS"
 [connection signal="mouse_entered" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_button_mouse_entered"]
 [connection signal="mouse_exited" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_button_mouse_exited"]
 [connection signal="pressed" from="MainMenu/VBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
-[connection signal="gui_input" from="Blocker" to="." method="_on_blocker_gui_input"]
 [connection signal="mouse_entered" from="CreditsButton" to="." method="_on_credits_button_mouse_entered"]
 [connection signal="pressed" from="CreditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="mouse_entered" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/LicenseOne" to="." method="_on_generic_button_mouse_entered"]
+[connection signal="pressed" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer/LicenseOne" to="." method="_on_license_one_pressed"]
+[connection signal="mouse_entered" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/LicenseTwo" to="." method="_on_generic_button_mouse_entered"]
+[connection signal="pressed" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer2/LicenseTwo" to="." method="_on_license_two_pressed"]
+[connection signal="mouse_entered" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer3/LicenseThree" to="." method="_on_generic_button_mouse_entered"]
+[connection signal="pressed" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/MarginContainer3/LicenseThree" to="." method="_on_license_three_pressed"]
+[connection signal="mouse_entered" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/Back" to="." method="_on_generic_button_mouse_entered"]
+[connection signal="pressed" from="LevelSelect/MarginContainer/PanelContainer/VBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="gui_input" from="Blocker" to="." method="_on_blocker_gui_input"]

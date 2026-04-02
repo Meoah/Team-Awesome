@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://buum3xnaqnv5x"]
+[gd_scene load_steps=5 format=3 uid="uid://buum3xnaqnv5x"]
 
 [ext_resource type="Script" uid="uid://cbt7mkm6nlf1s" path="res://scripts/game/main/game_over.gd" id="1_xdcsw"]
 [ext_resource type="AudioStream" uid="uid://d2dd0tlknqus0" path="res://assets/audio/bgm/sleep_with_the_fishes.ogg" id="2_bkenv"]
+[ext_resource type="AudioStream" uid="uid://c82oo72p1t0yp" path="res://assets/audio/sfx/game_over.ogg" id="3_e87cx"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_s2grh"]
 font_size = 64
@@ -17,6 +18,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_xdcsw")
 default_bgm = ExtResource("2_bkenv")
+game_over_sfx = ExtResource("3_e87cx")
 
 [node name="TextureRect" type="ColorRect" parent="."]
 layout_mode = 1

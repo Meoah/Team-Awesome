@@ -11,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://bj0xw6pb17jxn" path="res://assets/textures/ui/Mock_Title.png" id="7_sg50k"]
 [ext_resource type="Texture2D" uid="uid://dcosx8b8oj3qg" path="res://assets/textures/background/clouds/Cloud04.png" id="8_oacel"]
 [ext_resource type="Texture2D" uid="uid://bmrsrn68dtk" path="res://assets/textures/background/Base_Forest_BG.png" id="9_2jfsm"]
-[ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="9_10lx7"]
 [ext_resource type="Texture2D" uid="uid://c0ohmu5v1jmb4" path="res://assets/textures/background/SkyToForest.png" id="10_c7hv6"]
 [ext_resource type="Texture2D" uid="uid://dakggumatebv8" path="res://assets/textures/background/dock_pieces/Post.png" id="11_6cdfd"]
 [ext_resource type="Texture2D" uid="uid://b4so1s0p3hdbr" path="res://assets/textures/background/dock_pieces/DockFloor.png" id="13_ejbtp"]
@@ -133,7 +132,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("World/Bird/PathFollow2D:progress_ratio")
+tracks/2/path = NodePath("World/Midground/Bird/PathFollow2D:progress_ratio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -145,7 +144,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("World/Catfish:position")
+tracks/3/path = NodePath("World/Midground/Catfish:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -157,79 +156,71 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HUD:visible")
+tracks/4/path = NodePath("World/Midground/Catfish2:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(904.00006, 2651.0002)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HUD:offset")
+tracks/5/path = NodePath("SkipWindow/PersistantText:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 1800)]
+"update": 1,
+"values": [false]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("HUD/Fade:color")
+tracks/6/path = NodePath("SkipWindow/PersistantText:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("World/Catfish2:position")
+tracks/7/path = NodePath("SkipWindow/ColorRect:color")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(904.00006, 2651.0002)]
+"values": [Color(0, 0, 0, 1)]
 }
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("SkipWindow/PersistantText:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("SkipWindow/PersistantText:modulate")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+
+[sub_resource type="Animation" id="Animation_5wfrr"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SkipWindow/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_qaqdv"]
 resource_name = "intro_sequence"
-length = 20.0
+length = 17.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -257,7 +248,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("World/Bird/PathFollow2D:progress_ratio")
+tracks/2/path = NodePath("World/Midground/Bird/PathFollow2D:progress_ratio")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -269,82 +260,46 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("World/Catfish:position")
+tracks/3/path = NodePath("World/Midground/Catfish:position")
 tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(14.333334, 14.99, 15.67),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(890, 664), Vector2(808, 546), Vector2(683, 647)]
+"values": [Vector2(890, 700), Vector2(808, 546), Vector2(683, 700)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("World/Catfish2:position")
+tracks/4/path = NodePath("World/Midground/Catfish2:position")
 tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(15.533334, 16.216667, 16.666668),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(683, 647), Vector2(808, 546), Vector2(904, 651)]
+"values": [Vector2(683, 700), Vector2(808, 546), Vector2(904, 700)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("HUD:visible")
+tracks/5/path = NodePath("SkipWindow/PersistantText:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 12.766666),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("HUD:offset")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(12.500001, 14.000001),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(0, 1800), Vector2(0, 2000)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("HUD/Fade:color")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(17.033333, 20),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("SkipWindow/PersistantText:visible")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
 }
-tracks/9/type = "value"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("SkipWindow/PersistantText:modulate")
-tracks/9/interp = 2
-tracks/9/loop_wrap = true
-tracks/9/keys = {
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("SkipWindow/PersistantText:modulate")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(0, 2, 4, 6, 8),
 "transitions": PackedFloat32Array(-2, -2, -2, -2, -2),
 "update": 0,
@@ -354,6 +309,7 @@ tracks/9/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4sr7y"]
 _data = {
 &"RESET": SubResource("Animation_qnvo7"),
+&"fade_in": SubResource("Animation_5wfrr"),
 &"intro_sequence": SubResource("Animation_qaqdv")
 }
 
@@ -375,7 +331,7 @@ script = ExtResource("1_kb0hh")
 default_bgm = ExtResource("2_cvc0b")
 hold_skip_control = NodePath("SkipWindow/HoldToSkip")
 hold_skip_bar = NodePath("SkipWindow/HoldToSkip/MarginContainer/MarginContainer/HBoxContainer/ProgressBar")
-hud = NodePath("HUD")
+hud = NodePath("")
 next_scene = ExtResource("2_4sr7y")
 
 [node name="World" type="Node2D" parent="."]
@@ -466,50 +422,49 @@ texture = ExtResource("10_c7hv6")
 centered = false
 
 [node name="Midground" type="Node2D" parent="World"]
-visible = false
 
-[node name="PostBR" type="Sprite2D" parent="World"]
+[node name="PostBR" type="Sprite2D" parent="World/Midground"]
 position = Vector2(530, 500)
 texture = ExtResource("11_6cdfd")
 
-[node name="PostBL" type="Sprite2D" parent="World"]
+[node name="PostBL" type="Sprite2D" parent="World/Midground"]
 position = Vector2(190, 500)
 texture = ExtResource("11_6cdfd")
 
-[node name="Catfish" type="Sprite2D" parent="World"]
+[node name="WaterBack" type="Parallax2D" parent="World/Midground"]
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(-20, 0)
+repeat_times = 1000
+
+[node name="Water01" type="Sprite2D" parent="World/Midground/WaterBack"]
+texture = ExtResource("13_toiqj")
+centered = false
+
+[node name="Catfish" type="Sprite2D" parent="World/Midground"]
 position = Vector2(890.00006, 2633)
 scale = Vector2(0.3136349, 0.3136349)
 texture = ExtResource("6_j6n06")
 
-[node name="Catfish2" type="Sprite2D" parent="World"]
+[node name="Catfish2" type="Sprite2D" parent="World/Midground"]
 position = Vector2(904.00006, 2651.0002)
 scale = Vector2(0.3136349, 0.3136349)
 texture = ExtResource("6_j6n06")
 flip_h = true
 
-[node name="WaterBack" type="Parallax2D" parent="World"]
-repeat_size = Vector2(1280, 0)
-autoscroll = Vector2(-20, 0)
-repeat_times = 1000
-
-[node name="Water01" type="Sprite2D" parent="World/WaterBack"]
-texture = ExtResource("13_toiqj")
-centered = false
-
-[node name="DockFloor" type="Sprite2D" parent="World"]
+[node name="DockFloor" type="Sprite2D" parent="World/Midground"]
 position = Vector2(349, 525)
 texture = ExtResource("13_ejbtp")
 
-[node name="Bird" type="Path2D" parent="World"]
+[node name="Bird" type="Path2D" parent="World/Midground"]
 position = Vector2(0, -2000)
 curve = SubResource("Curve2D_ceebp")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="World/Bird"]
+[node name="PathFollow2D" type="PathFollow2D" parent="World/Midground/Bird"]
 position = Vector2(1620, 1140)
 rotation = 2.761496
 rotates = false
 
-[node name="08Parrotfish" type="Sprite2D" parent="World/Bird/PathFollow2D"]
+[node name="08Parrotfish" type="Sprite2D" parent="World/Midground/Bird/PathFollow2D"]
 rotation = -2.761496
 scale = Vector2(0.42689675, 0.42689675)
 texture = ExtResource("16_n5cky")
@@ -528,33 +483,35 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(655, -1598)
 texture = ExtResource("7_sg50k")
 
-[node name="ExitSign" type="Area2D" parent="World"]
+[node name="Foreground" type="Node2D" parent="World"]
+
+[node name="ExitSign" type="Area2D" parent="World/Foreground"]
 position = Vector2(0, 400)
 collision_layer = 4
 
-[node name="Sprite2D" type="Sprite2D" parent="World/ExitSign"]
+[node name="Sprite2D" type="Sprite2D" parent="World/Foreground/ExitSign"]
 position = Vector2(72, 15)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("15_ejrkx")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="World/ExitSign"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="World/Foreground/ExitSign"]
 shape = SubResource("RectangleShape2D_cya4y")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="PostFR" type="Sprite2D" parent="World"]
+[node name="PostFR" type="Sprite2D" parent="World/Foreground"]
 position = Vector2(441, 600)
 texture = ExtResource("11_6cdfd")
 
-[node name="PostFL" type="Sprite2D" parent="World"]
+[node name="PostFL" type="Sprite2D" parent="World/Foreground"]
 position = Vector2(63, 600)
 texture = ExtResource("11_6cdfd")
 
-[node name="WaterFront" type="Parallax2D" parent="World"]
+[node name="WaterFront" type="Parallax2D" parent="World/Foreground"]
 repeat_size = Vector2(1280, 0)
 autoscroll = Vector2(-30, 0)
 repeat_times = 1000
 
-[node name="Water03" type="Sprite2D" parent="World/WaterFront"]
+[node name="Water03" type="Sprite2D" parent="World/Foreground/WaterFront"]
 texture = ExtResource("16_jhcqs")
 centered = false
 
@@ -575,20 +532,7 @@ position_smoothing_enabled = true
 libraries = {
 &"": SubResource("AnimationLibrary_4sr7y")
 }
-
-[node name="HUD" parent="." instance=ExtResource("9_10lx7")]
-visible = false
-offset = Vector2(0, 1800)
-transform = Transform2D(1, 0, 0, 1, 0, 1800)
-follow_viewport_enabled = true
-
-[node name="Fade" type="ColorRect" parent="HUD"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 0)
+autoplay = "fade_in"
 
 [node name="SkipWindow" type="CanvasLayer" parent="."]
 
@@ -666,5 +610,13 @@ size_flags_horizontal = 3
 size_flags_vertical = 1
 value = 50.0
 show_percentage = false
+
+[node name="ColorRect" type="ColorRect" parent="SkipWindow"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

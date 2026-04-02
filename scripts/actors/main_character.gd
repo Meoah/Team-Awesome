@@ -7,6 +7,7 @@ class_name MainCharacter
 @export var arrow_sprite : Sprite2D
 @export var body_sprite: AnimatedSprite2D
 @export var power_bar : ProgressBar
+@export var camera: DayCam
 @export_category("Audio")
 @export var charging_sfx : AudioStream
 @export var hook_success_sfx : AudioStream
@@ -54,12 +55,29 @@ func _ready() -> void:
 	
 	# Pass the play state machine and bind state signals to callables.
 	if PlayManager.get_state_machine() : _bind_signals()
+	
+	# Changes stats according to equipment
+	_check_equipment()
 
 func _bind_signals() -> void:
 	PlayManager.idle_day_state.signal_idle_day.connect(_reset_flags)
 	PlayManager.idle_night_state.signal_idle_night.connect(_reset_flags)
 	PlayManager.casting_state.signal_casting.connect(_on_casting_state)
 	PlayManager.waiting_state.signal_waiting.connect(_on_waiting_state)
+
+
+var stamina_usage: float = 10.0
+var strength_multiplier: float = 1.0
+# TODO CHANGE THIS LATER, THE EQUIPMENT IS FAKE RIGHT NOW, HARDCODED TO LICENSE.
+func _check_equipment() -> void:
+	match SystemData.license:
+		1:
+			pass
+		2:
+			stamina_usage = 7.5
+			strength_multiplier = 4.0
+		3:
+			stamina_usage = 6.0
 
 
 func _input(event : InputEvent) -> void:
@@ -105,6 +123,7 @@ func _notification(what: int) -> void:
 
 func walk_up_sequence() -> void:
 	set_physics_process(false)
+	body_sprite.flip_h = false
 	collision_shape.set_disabled(true)
 	
 	var target_x : float = 350.0
@@ -131,9 +150,12 @@ func _reset_flags() -> void:
 func _cast_handler(delta : float) -> void:
 	if input_flags & InputFlags.ACTION: 
 		if PlayManager.get_current_state() is CastingState:
+			body_sprite.flip_h = false
 			_charging(delta)
-		elif SystemData.use_bait(SystemData.get_active_bait()):
-			PlayManager.request_casting_state()
+		elif SystemData.use_stamina(stamina_usage):
+			if SystemData.use_bait(SystemData.get_active_bait()):
+				body_sprite.flip_h = false
+				PlayManager.request_casting_state()
 	else:
 		if PlayManager.get_current_state() is CastingState:
 			AudioEngine.play_sfx(casting_sfx)
@@ -218,9 +240,11 @@ func _action() -> void:
 		interacted = true
 	if bobber_hook:
 		if PlayManager.request_reeling_state():
+			var rightmost_bobber = camera._find_target()
+			var distance = rightmost_bobber.position.x
 			_clear_bobbers()
 			AudioEngine.play_sfx(hook_success_sfx)
-			if daytime_node : daytime_node._play_minigame()
+			if daytime_node : daytime_node._play_minigame(distance)
 
 # Aiming handler
 func _aiming(delta) -> void:
@@ -248,7 +272,7 @@ func _throw_bobber() -> void:
 		active_bobber_count += 1
 		var bobber : RigidBody2D = bobber_scene.instantiate()
 		var radians : float = deg_to_rad(cast_angle)
-		var impulse : Vector2 = Vector2(cos(radians), -sin(radians)) * (cast_power + 20) * 7.5
+		var impulse : Vector2 = Vector2(cos(radians), -sin(radians)) * (cast_power + 20) * 7.5 * strength_multiplier
 		bobber.hooked.connect(_on_bobber_fish_hook)
 		bobber.hook_timeout.connect(_on_bobber_hook_timeout)
 		add_child(bobber)

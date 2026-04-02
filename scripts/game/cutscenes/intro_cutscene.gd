@@ -13,7 +13,7 @@ extends Control
 
 const SKIP_FADE_DURATION : float = 0.12
 const HOLD_TO_SKIP_SECONDS : float = 1.0
-const SKIP_SEEK_TIME : float = 17.0
+const SKIP_SEEK_TIME : float = 16.99
 const SHOW_SKIP_DELAY : float = 0.12
 
 var skip_tween: Tween
@@ -105,5 +105,6 @@ func _skip_intro() -> void:
 	$AnimationPlayer.seek(SKIP_SEEK_TIME, true)
 	set_process_input(false)
 
-func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
-	GameManager.change_scene_deferred(next_scene)
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "intro_sequence":
+		GameManager.change_scene_deferred(next_scene)
