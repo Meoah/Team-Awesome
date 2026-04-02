@@ -31,9 +31,7 @@ var player_inputs = "0" #Holds the current player input
 var input_index = 0 #Holds the index for the current input in the input array#Holds ammount of fish caught
 var sprite_array : Array[ArrowTexture] #Accessing the ArrowSprite Class
 
-
-
-
+var distance: float = -1
 
 
 #Fish Data
@@ -60,7 +58,8 @@ func apply_data():
 	current_value = chosen_fish["value"]
 	time = chosen_fish["time"]
 
-
+func _on_set_params() -> void:
+	distance = params.get("distance", -1)
 
 
 #Variants 
@@ -116,8 +115,14 @@ func start_minigame():
 	AudioEngine.play_bgm(default_bgm)
 	progress_bar.max_value = time
 	input_index = 0
+	if SystemData.get_upgrade(ItemData.REEL).get(ItemData.KEY_NAME, "") == "Fishtagram Reel":
+		var diceroll: float = randf_range(0, 1)
+		if diceroll >= 0.9:
+			cleared = true
+			input_index = input_array.size()
+			win()
+			return
 	spawn_arrows()
-
 	
 	
 
@@ -269,13 +274,21 @@ func win():
 		AudioEngine.play_sfx(sfx_fish_caught)
 		$ProgressBar/Sparks.hide()
 		$Control/PanelContainer.hide()
+		
 		if varied_gold: #If fish is gold double its value
 			current_value = current_value * 2
 		elif varied_evil:
 			current_value = current_value * 1.5
 		elif varied_obscured:
 			current_value = current_value * 1.75
-		input_string.set_text(current_name + "\n Weight: " + str(current_weight) + "\n Value: " + str(current_value))
+		
+		if distance > 0:
+			var distance_multiplier: float = pow(2.0, log(distance / 100) / log(10))
+			current_value *= distance_multiplier
+		
+		current_value *= SystemData.value_multiplier
+		
+		input_string.set_text(current_name + "\n Weight: %.2f\n Value: %.2f" % [current_weight, current_value])
 		SystemData._add_money_delay(current_value)
 		SystemData._add_fish(chosen_fish_id)
 		if chosen_fish_id == 21:

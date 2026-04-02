@@ -36,7 +36,7 @@ var camp_day: int = 0
 var camp_scavange: int = 3
 var boss_defeated: bool = false
 var winner_screen_shown: bool = false
-
+var value_multiplier: float = 1.0
 
 # Signals
 signal inventory_updated
@@ -57,6 +57,7 @@ func _reset_all() -> void:
 	fresh_run = true
 	boss_defeated = false
 	winner_screen_shown = false
+	value_multiplier = 1.0
 
 ## Money methods
 func _set_money(money : float) -> void:

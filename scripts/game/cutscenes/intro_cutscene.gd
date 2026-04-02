@@ -13,7 +13,7 @@ extends Control
 
 const SKIP_FADE_DURATION : float = 0.12
 const HOLD_TO_SKIP_SECONDS : float = 1.0
-const SKIP_SEEK_TIME : float = 17.0
+const SKIP_SEEK_TIME : float = 16.99
 const SHOW_SKIP_DELAY : float = 0.12
 
 var skip_tween: Tween

@@ -56,6 +56,10 @@ folder_colors={
 
 bobber_group="Bobbers."
 
+[gui]
+
+common/snap_controls_to_pixels=false
+
 [input]
 
 left={
@@ -98,6 +102,10 @@ mouse_click={
 2d_physics/layer_1="player"
 2d_physics/layer_2="bound"
 2d_physics/layer_3="interactable"
+
+[physics]
+
+common/physics_ticks_per_second=200
 
 [rendering]
 

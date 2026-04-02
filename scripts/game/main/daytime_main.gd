@@ -38,9 +38,11 @@ func _ready() -> void:
 	# Cutscenes
 	if SystemData.fresh_run:
 		if SystemData.license == 1 : _intro_scene()
+		else: _ready_day()
+	else:
+		_ready_day()
 	
 	SystemData.fresh_run = false
-	_ready_day()
 
 
 func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
@@ -86,11 +88,12 @@ func _end_day() -> void:
 	if PlayManager.request_idle_night_state():
 		GameManager.change_scene_deferred(GameManager.nighttime_scene)
 
-func _play_minigame() -> void:
+func _play_minigame(distance: float) -> void:
 	$FISH.play("FISH!") #Plays FISH! Animation
 	await $FISH.animation_finished
 	var popup_parameters = {
-		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE
+		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE,
+		"distance" = distance
 	}
 	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAMEUI, popup_parameters)
 
@@ -108,6 +111,13 @@ func _on_exit_sign_body_entered(body: Node2D) -> void:
 # TODO REMOVE THIS LATER, HARDCODED RUN EQUIPMENT
 func _equip_license_gear() -> void:
 	match SystemData.license:
-		1: pass
-		2: pass
-		3: pass
+		1:
+			pass
+		2:
+			SystemData.set_upgrade(ItemData.ROD, ItemData.get_data(ItemData.ROD, 1))
+			SystemData.set_upgrade(ItemData.REEL, ItemData.get_data(ItemData.REEL, 2))
+			SystemData.set_upgrade(ItemData.EXOTIC, ItemData.get_data(ItemData.EXOTIC, 2))
+		3:
+			SystemData.set_upgrade(ItemData.ROD, ItemData.get_data(ItemData.ROD, 2))
+			SystemData.set_upgrade(ItemData.LURE, ItemData.get_data(ItemData.LURE, 1))
+			SystemData.set_upgrade(ItemData.EXOTIC, ItemData.get_data(ItemData.EXOTIC, 3))
