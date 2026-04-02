@@ -23,6 +23,8 @@ func _ready() -> void:
 	# Initial setup
 	AudioEngine.play_bgm(default_bgm)
 	PlayManager.request_dialogue_day_state()
+	if SystemData.fresh_run:
+		_equip_license_gear()
 	
 	#--Weather--
 	WeatherManager.weather_changed.connect(_on_weather_changed)
@@ -33,8 +35,12 @@ func _ready() -> void:
 	await hud.fade_in().finished
 	await jeremy_node.walk_up_sequence()
 	
-	if SystemData.get_day() == 1 && SystemData.get_week() == 1 : _intro_scene()
-	else : _ready_day()
+	# Cutscenes
+	if SystemData.fresh_run:
+		if SystemData.license == 1 : _intro_scene()
+	
+	SystemData.fresh_run = false
+	_ready_day()
 
 
 func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
@@ -58,8 +64,6 @@ func _apply_weather(w : WeatherManager.WEATHER) -> void:
 func _intro_scene() -> void:
 	PlayManager.request_dialogue_day_state()
 	_play_tutorial()
-	SystemData._add_bait(1, 5)
-	SystemData.set_active_bait(1)
 
 ## Instantiates tutorital scene and binds its finished signal to _ready_day()
 func _play_tutorial() -> void:
@@ -99,3 +103,11 @@ func _idle_state() -> void:
 
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()
+
+
+# TODO REMOVE THIS LATER, HARDCODED RUN EQUIPMENT
+func _equip_license_gear() -> void:
+	match SystemData.license:
+		1: pass
+		2: pass
+		3: pass

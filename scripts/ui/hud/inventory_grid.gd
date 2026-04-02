@@ -45,6 +45,12 @@ func _fish_grid() -> void:
 ## Handles bait grid.
 func _bait_grid() -> void:
 	var contents : Dictionary = SystemData.get_bait_inventory()
+	
+	# Always put generic bait as first slot.
+	var generic_bait_slot : Slot = slot_scene.instantiate()
+	add_child(generic_bait_slot)
+	generic_bait_slot.set_slot(ItemData.get_data(ItemData.BAIT, -1))
+	
 	for bait_id in contents.keys():
 		var amount : int = contents[bait_id]
 		var bait_data = ItemData.get_data(ItemData.BAIT, bait_id)

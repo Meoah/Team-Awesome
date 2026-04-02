@@ -119,6 +119,7 @@ text = "Back
 "
 
 [node name="Bait" type="Button" parent="Screen/VBoxContainer/Options/HBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 size_flags_horizontal = 6

@@ -54,12 +54,26 @@ func _ready() -> void:
 	
 	# Pass the play state machine and bind state signals to callables.
 	if PlayManager.get_state_machine() : _bind_signals()
+	
+	# Changes stats according to equipment
+	_check_equipment()
 
 func _bind_signals() -> void:
 	PlayManager.idle_day_state.signal_idle_day.connect(_reset_flags)
 	PlayManager.idle_night_state.signal_idle_night.connect(_reset_flags)
 	PlayManager.casting_state.signal_casting.connect(_on_casting_state)
 	PlayManager.waiting_state.signal_waiting.connect(_on_waiting_state)
+
+
+# TODO CHANGE THIS LATER, THE EQUIPMENT IS FAKE RIGHT NOW, HARDCODED TO LICENSE.
+func _check_equipment() -> void:
+	match SystemData.license:
+		1:
+			pass
+		2:
+			pass
+		3:
+			pass
 
 
 func _input(event : InputEvent) -> void:
@@ -105,6 +119,7 @@ func _notification(what: int) -> void:
 
 func walk_up_sequence() -> void:
 	set_physics_process(false)
+	body_sprite.flip_h = false
 	collision_shape.set_disabled(true)
 	
 	var target_x : float = 350.0
@@ -131,9 +146,12 @@ func _reset_flags() -> void:
 func _cast_handler(delta : float) -> void:
 	if input_flags & InputFlags.ACTION: 
 		if PlayManager.get_current_state() is CastingState:
+			body_sprite.flip_h = false
 			_charging(delta)
-		elif SystemData.use_bait(SystemData.get_active_bait()):
-			PlayManager.request_casting_state()
+		elif SystemData.use_stamina(10.0):
+			if SystemData.use_bait(SystemData.get_active_bait()):
+				body_sprite.flip_h = false
+				PlayManager.request_casting_state()
 	else:
 		if PlayManager.get_current_state() is CastingState:
 			AudioEngine.play_sfx(casting_sfx)

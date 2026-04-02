@@ -23,6 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://dakggumatebv8" path="res://assets/textures/background/dock_pieces/Post.png" id="17_b82wd"]
 [ext_resource type="Texture2D" uid="uid://du7wv7t0dby11" path="res://assets/textures/vfx/raindrop.png" id="24_b82wd"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
+size = Vector2(10, 100)
+
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ovom5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovom5"]
@@ -30,9 +33,6 @@ size = Vector2(100, 720)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3kam8"]
 size = Vector2(100, 720)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
-size = Vector2(10, 100)
 
 [sub_resource type="Animation" id="Animation_qjhey"]
 resource_name = "FISH!_2"
@@ -204,6 +204,65 @@ position = Vector2(0, -1440)
 texture = ExtResource("6_e7nxg")
 centered = false
 
+[node name="Midground" type="Node2D" parent="."]
+
+[node name="PostBR" type="Sprite2D" parent="Midground"]
+position = Vector2(530, 500)
+texture = ExtResource("17_b82wd")
+
+[node name="PostBL" type="Sprite2D" parent="Midground"]
+position = Vector2(190, 500)
+texture = ExtResource("17_b82wd")
+
+[node name="WaterBack" type="Parallax2D" parent="Midground"]
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(-20, 0)
+repeat_times = 1000
+
+[node name="Water01" type="Sprite2D" parent="Midground/WaterBack"]
+texture = ExtResource("12_6xinc")
+centered = false
+
+[node name="DockFloor" type="Sprite2D" parent="Midground"]
+position = Vector2(349, 525)
+texture = ExtResource("14_ajsgr")
+
+[node name="ExitSign" type="Area2D" parent="Midground"]
+position = Vector2(0, 400)
+collision_layer = 4
+
+[node name="Sprite2D" type="Sprite2D" parent="Midground/ExitSign"]
+position = Vector2(72, 15)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("13_pj6yd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Midground/ExitSign"]
+shape = SubResource("RectangleShape2D_f86r6")
+debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
+position = Vector2(-50, 425)
+scale = Vector2(0.25, 0.25)
+
+[node name="Foreground" type="Node2D" parent="."]
+
+[node name="PostFR" type="Sprite2D" parent="Foreground"]
+position = Vector2(441, 600)
+texture = ExtResource("17_b82wd")
+
+[node name="PostFL" type="Sprite2D" parent="Foreground"]
+position = Vector2(63, 600)
+texture = ExtResource("17_b82wd")
+
+[node name="WaterFront" type="Parallax2D" parent="Foreground"]
+repeat_size = Vector2(1280, 0)
+autoscroll = Vector2(-30, 0)
+repeat_times = 1000
+
+[node name="Water03" type="Sprite2D" parent="Foreground/WaterFront"]
+texture = ExtResource("13_e7nxg")
+centered = false
+
 [node name="Boundaries" type="StaticBody2D" parent="."]
 collision_layer = 2
 physics_material_override = SubResource("PhysicsMaterial_ovom5")
@@ -215,64 +274,6 @@ shape = SubResource("RectangleShape2D_ovom5")
 [node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(650, 360)
 shape = SubResource("RectangleShape2D_3kam8")
-
-[node name="Midground" type="Node2D" parent="."]
-visible = false
-
-[node name="PostBR" type="Sprite2D" parent="."]
-position = Vector2(530, 500)
-texture = ExtResource("17_b82wd")
-
-[node name="PostBL" type="Sprite2D" parent="."]
-position = Vector2(190, 500)
-texture = ExtResource("17_b82wd")
-
-[node name="WaterBack" type="Parallax2D" parent="."]
-repeat_size = Vector2(1280, 0)
-autoscroll = Vector2(-20, 0)
-repeat_times = 1000
-
-[node name="Water01" type="Sprite2D" parent="WaterBack"]
-texture = ExtResource("12_6xinc")
-centered = false
-
-[node name="DockFloor" type="Sprite2D" parent="."]
-position = Vector2(349, 525)
-texture = ExtResource("14_ajsgr")
-
-[node name="ExitSign" type="Area2D" parent="."]
-position = Vector2(0, 400)
-collision_layer = 4
-
-[node name="Sprite2D" type="Sprite2D" parent="ExitSign"]
-position = Vector2(72, 15)
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("13_pj6yd")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSign"]
-shape = SubResource("RectangleShape2D_f86r6")
-debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
-
-[node name="Jeremy" parent="." instance=ExtResource("1_oxlu7")]
-position = Vector2(-50, 425)
-scale = Vector2(0.25, 0.25)
-
-[node name="PostFR" type="Sprite2D" parent="."]
-position = Vector2(441, 600)
-texture = ExtResource("17_b82wd")
-
-[node name="PostFL" type="Sprite2D" parent="."]
-position = Vector2(63, 600)
-texture = ExtResource("17_b82wd")
-
-[node name="WaterFront" type="Parallax2D" parent="."]
-repeat_size = Vector2(1280, 0)
-autoscroll = Vector2(-30, 0)
-repeat_times = 1000
-
-[node name="Water03" type="Sprite2D" parent="WaterFront"]
-texture = ExtResource("13_e7nxg")
-centered = false
 
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {
@@ -316,5 +317,5 @@ texture = ExtResource("24_b82wd")
 lifetime = 1.2
 process_material = SubResource("ParticleProcessMaterial_b82wd")
 
-[connection signal="area_entered" from="ExitSign" to="." method="_on_exit_sign_area_entered"]
-[connection signal="body_entered" from="ExitSign" to="." method="_on_exit_sign_body_entered"]
+[connection signal="area_entered" from="Midground/ExitSign" to="." method="_on_exit_sign_area_entered"]
+[connection signal="body_entered" from="Midground/ExitSign" to="." method="_on_exit_sign_body_entered"]

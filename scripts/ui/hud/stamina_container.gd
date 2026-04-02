@@ -1,5 +1,5 @@
-extends RichTextLabel
-class_name MoneyLabel
+extends HBoxContainer
+class_name StaminaContainer
 
 @export var shake_decay : float = 12.0
 @export var noise_speed : float = 10.0
@@ -9,18 +9,24 @@ class_name MoneyLabel
 
 var shake_amount : float = 0.0
 var time_elapsed : float = 0.0
+var original_position : Vector2
 var flash_timer : float = 0.0
 var active_flash_color : Color
 
 var noise : FastNoiseLite
 
 func _ready() -> void:
+	SystemData.not_enough_stamina.connect(trigger_impact.bind(2))
 	set_process(false)
+	_setup()
 
 func _setup() -> void:
+	original_position = position
+	
 	noise = FastNoiseLite.new()
 	noise.seed = randi()
 	noise.frequency = 1.0
+	
 	set_process(true)
 
 func _process(delta : float) -> void:
@@ -47,9 +53,9 @@ func _update_shake(delta : float) -> void:
 		var strength : float = shake_amount * shake_amount
 		var offset : Vector2 = Vector2(noise_x, noise_y) * strength
 		
-		position = offset
+		position = original_position + offset
 	else:
-		position = Vector2.ZERO
+		position = original_position
 
 func _update_flash(delta : float) -> void:
 	if flash_timer > 0.0:

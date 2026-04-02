@@ -1,0 +1,136 @@
+[gd_scene load_steps=15 format=3 uid="uid://d2y3jprohd0t3"]
+
+[ext_resource type="Script" uid="uid://dttdn3i1dmhah" path="res://scripts/ui/pop_ups/winner_popup.gd" id="1_fga4m"]
+[ext_resource type="Texture2D" uid="uid://y2mh7rjf6x1s" path="res://assets/textures/ui/nine_slices/WoodTexture.png" id="2_6kubv"]
+[ext_resource type="AudioStream" uid="uid://cmrjitxvhw4nn" path="res://assets/audio/bgm/pick_a_card.ogg" id="2_lxeym"]
+[ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="2_smd30"]
+[ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="3_lxeym"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_xfb5r"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="4_smd30"]
+
+[sub_resource type="Theme" id="Theme_lxeym"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ipy3b"]
+texture = ExtResource("2_6kubv")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="Theme" id="Theme_tvw6w"]
+default_font = ExtResource("3_xfb5r")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yi70e"]
+texture = ExtResource("4_smd30")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8pxsd"]
+texture = ExtResource("4_smd30")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7fwnw"]
+texture = ExtResource("4_smd30")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="Theme" id="Theme_gv184"]
+default_font = ExtResource("3_xfb5r")
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 32
+Button/styles/hover = SubResource("StyleBoxTexture_yi70e")
+Button/styles/normal = SubResource("StyleBoxTexture_8pxsd")
+Button/styles/pressed = SubResource("StyleBoxTexture_7fwnw")
+
+[node name="WinnerPopup" type="Control" node_paths=PackedStringArray("content_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fga4m")
+default_bgm = ExtResource("2_lxeym")
+hover_sfx = ExtResource("2_smd30")
+cancel_sfx = ExtResource("3_lxeym")
+confirm_sfx = ExtResource("3_lxeym")
+content_label = NodePath("MarginContainer/PanelContainer/VBoxContainer/Content")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+theme = SubResource("Theme_lxeym")
+theme_override_styles/panel = SubResource("StyleBoxTexture_ipy3b")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="Title" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = SubResource("Theme_tvw6w")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[wave amp=50.0 freq=5.0 connected=1][rainbow freq=1.0 sat=0.8 val=0.8 speed=0.5]You Win!"
+scroll_active = false
+scroll_following_visible_characters = true
+horizontal_alignment = 1
+
+[node name="Content" type="RichTextLabel" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+theme = SubResource("Theme_tvw6w")
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Your did it!
+
+Thanks for playing."
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/separation = 50
+
+[node name="Back" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = SubResource("Theme_gv184")
+text = "Return to Main Menu"
+
+[node name="Continue" type="Button" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme = SubResource("Theme_gv184")
+text = "Continue"
+
+[connection signal="mouse_entered" from="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Back" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Back" to="." method="_on_back_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Continue" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Continue" to="." method="_on_continue_pressed"]

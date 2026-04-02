@@ -11,10 +11,10 @@ class_name HUDController
 @export var active_bait_slot : Slot
 @export var active_bait_label : RichTextLabel
 @export var money_label : MoneyLabel
-@export var rent_label : RichTextLabel
+@export var goal_label : RichTextLabel
 @export var fish_bucket_value_label : Label
 @export var day_label : Label
-@export var week_label : Label
+@export var stamina_bar : ProgressBar
 
 @export_category("Audio")
 @export var receiving_money_sfx: AudioStream
@@ -35,6 +35,7 @@ var current_money : float = 0.0
 func _ready() -> void:
 	# Bind Signals
 	SystemData.inventory_updated.connect(_refresh_ui)
+	SystemData.stamina_updated.connect(_update_stamina)
 	SignalBus.slot_left_clicked.connect(_on_slot_left_clicked)
 	
 	# Initial setup.
@@ -43,6 +44,7 @@ func _ready() -> void:
 	
 	# Waits for other system setup to finish, then refresh ui once.
 	await get_tree().process_frame
+	_update_stamina()
 	_refresh_ui()
 	money_label._setup()
 
@@ -75,14 +77,10 @@ func _tooltip(hovered : Control, tooltip_layer : TooltipLayer) -> void:
 
 ## Refreshes each module.
 func _refresh_ui() -> void:
-	# Forces the fadeout to reset. TODO: Do we want this?
-	#_set_hovered_state()
-	#_set_unhovered_state()
-	
 	_update_equipment()
 	_update_active_bait()
 	_update_money()
-	_update_weekday()
+	_update_day()
 
 ## Sets the slots of each equipment.
 func _update_equipment() -> void:
@@ -98,8 +96,9 @@ func _update_active_bait() -> void:
 	var active_bait : int = SystemData.get_active_bait()
 	var active_bait_quantity : int = SystemData.get_active_bait_count()
 	var active_bait_data : Dictionary = ItemData.get_data(ItemData.BAIT, active_bait)
+	var active_bait_id : int = ItemData.BAIT_DATA.find_key(active_bait_data)
 	
-	active_bait_slot.set_slot(active_bait_data, active_bait_quantity)
+	active_bait_slot.set_slot(active_bait_data, active_bait_quantity, active_bait_id)
 	active_bait_label.text = active_bait_data.get(ItemData.KEY_NAME, "Nothing")
 
 ## Sets current money and rent.
@@ -117,13 +116,28 @@ func _update_money() -> void:
 	
 	current_money = new_money
 	money_label.text = "$%.2f" % current_money
-	rent_label.text = "[color=red]$%.2f[/color]" % SystemData.calculate_rent()
+	
+	if SystemData.calculate_goal() > 0:
+		goal_label.text = "[color=red]$%.2f[/color]" % SystemData.calculate_goal()
+	else:
+		goal_label.text = "---"
+	
 	fish_bucket_value_label.text = "Total Value: $%.2f" % SystemData.get_delayed_money()
 
+# TODO hardcoded
 ## Sets day and week.
-func _update_weekday() -> void:
-	day_label.text = "Day %d / 5" % SystemData.get_day()
-	week_label.text = "Week %d" % SystemData.get_week()
+func _update_day() -> void:
+	var max_day : int = -1
+	
+	match SystemData.license:
+		1: max_day = 3
+		2: max_day = 5
+		3: max_day = 7
+	
+	day_label.text = "Day %d / %d" % [SystemData.get_day(), max_day]
+
+func _update_stamina() -> void:
+	stamina_bar.value = SystemData.get_stamina()
 
 ## Sets up a timer for the fadeout.
 func _fadeout_timer_setup() -> void:

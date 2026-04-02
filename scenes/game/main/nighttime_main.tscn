@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=29 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_1pk0j"]
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/main/nighttime_main.gd" id="1_53syt"]
@@ -22,18 +22,12 @@
 default_font = ExtResource("1_1pk0j")
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_cte0j"]
-random_pitch = 5.0
 random_volume_offset_db = 3.0
 streams_count = 1
 stream_0/stream = ExtResource("4_mwgha")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pk35q"]
 size = Vector2(268, 292)
-
-[sub_resource type="LabelSettings" id="LabelSettings_1pk0j"]
-font = ExtResource("1_1pk0j")
-font_size = 24
-font_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rrrim"]
 size = Vector2(378, 604.875)
@@ -69,7 +63,7 @@ gravity = Vector3(0, 900, 0)
 scale_min = 2.0
 scale_max = 3.0
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "house_trigger", "bucket_trigger", "shop_trigger", "upgrade_trigger", "tarot_trigger", "hud", "house_label", "scavange_label")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "house_trigger", "bucket_trigger", "shop_trigger", "upgrade_trigger", "tarot_trigger", "hud", "scavange_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -89,7 +83,6 @@ shop_trigger = NodePath("BaitShop")
 upgrade_trigger = NodePath("UpgradeShop")
 tarot_trigger = NodePath("TarotShop")
 hud = NodePath("HUD")
-house_label = NodePath("House/Label")
 scavange_label = NodePath("Scavange")
 
 [node name="Background" type="Parallax2D" parent="."]
@@ -123,15 +116,6 @@ texture = ExtResource("4_y133y")
 shape = SubResource("RectangleShape2D_pk35q")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="Label" type="Label" parent="House"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "DON'T FORGET YOUR RENT"
-label_settings = SubResource("LabelSettings_1pk0j")
-
 [node name="BaitBucket" type="Area2D" parent="."]
 position = Vector2(479.99997, 572)
 scale = Vector2(0.2, 0.2)
@@ -156,6 +140,7 @@ shape = SubResource("RectangleShape2D_1fmtj")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="UpgradeShop" type="Area2D" parent="."]
+visible = false
 position = Vector2(1615, 510.00003)
 scale = Vector2(0.30065724, 0.30065724)
 collision_layer = 4

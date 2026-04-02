@@ -25,12 +25,12 @@ buses/default_bus_layout="uid://bjhnqgsdy6jgg"
 
 [autoload]
 
-SystemData="*res://scripts/system/system_data.gd"
-GameManager="*res://scenes/game_manager.tscn"
-AudioEngine="*res://scripts/util/audio_engine.gd"
-PlayManager="*res://scripts/managers/play_manager.gd"
 SignalBus="*res://scripts/util/signal_bus.gd"
+SystemData="*res://scripts/system/system_data.gd"
+PlayManager="*res://scripts/managers/play_manager.gd"
+AudioEngine="*res://scripts/util/audio_engine.gd"
 WeatherManager="*res://scripts/managers/weather_manager.gd"
+GameManager="*res://scenes/game_manager.tscn"
 
 [debug]
 

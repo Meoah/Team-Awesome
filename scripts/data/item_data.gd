@@ -17,7 +17,7 @@ static func get_available_ids(category : String) -> Array[int]:
 	var list : Array[int] = []
 	var source : Dictionary = _get_category_dictionary(category)
 	
-	for key in source.keys() : if key != 0 : list.append(key)
+	for key in source.keys() : if key > 0 : list.append(key)
 	return list
 
 ## Returns with the proper dictionary from the given string.
@@ -54,8 +54,9 @@ const UPGRADES_LURES : Dictionary = {
 }
 
 const BAIT_DATA : Dictionary = {
+	-1 : GENERIC_BAIT,
 	0 : DUMMY_BAIT,
-	1 : GENERIC_BAIT,
+	1 : WORM_BAIT,
 	2 : MAGIC_BAIT,
 }
 
@@ -160,6 +161,13 @@ const MULTI_BOBBER : Dictionary = {
 }
 
 ## Bait Bundles
+const GENERIC_BAIT : Dictionary = {
+	KEY_NAME : "Generic Bait",
+	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
+	KEY_TYPE : BAIT,
+	KEY_DESCRIPTION : "As generic as it comes."
+}
+
 const DUMMY_BAIT : Dictionary = {
 	KEY_NAME : "Dummy Bait",
 	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
@@ -168,15 +176,15 @@ const DUMMY_BAIT : Dictionary = {
 	KEY_DESCRIPTION : "Get baited."
 }
 
-const GENERIC_BAIT : Dictionary = {
-	KEY_NAME : "Generic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
+const WORM_BAIT : Dictionary = {
+	KEY_NAME : "Worm Bait",
+	KEY_IMAGE : NodePath("res://assets/textures/bait/worm_bait_placeholder.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 1.0,
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 10,
-	KEY_DESCRIPTION : "As generic as it comes."
+	KEY_DESCRIPTION : "Ew, slimy."
 }
 
 const MAGIC_BAIT : Dictionary = {

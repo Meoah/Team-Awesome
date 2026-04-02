@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://gbmec1b0enmv"]
+[gd_scene load_steps=15 format=3 uid="uid://gbmec1b0enmv"]
 
 [ext_resource type="Script" uid="uid://bovbn0xd4wp6a" path="res://scripts/ui/pop_ups/settings_popup.gd" id="1_5l3de"]
 [ext_resource type="Texture2D" uid="uid://d23om0gbiqiry" path="res://assets/textures/ui/menu_buttons/Settings_Button.png" id="2_5l3de"]
 [ext_resource type="Texture2D" uid="uid://cxs5kohvf3hmy" path="res://assets/textures/ui/nine_slices/ChocolateTile.png" id="3_5l3de"]
 [ext_resource type="Script" uid="uid://c2kycjhjsowfw" path="res://scripts/util/audio_volume.gd" id="3_hnp0x"]
 [ext_resource type="AudioStream" uid="uid://dml22j6aq1vyx" path="res://assets/audio/sfx/ui/cancel.ogg" id="3_tpevy"]
+[ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="3_xjmmi"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_tpevy"]
 [ext_resource type="Script" uid="uid://bubl3cxipu10w" path="res://scripts/util/fullscreen_control.gd" id="5_xjmmi"]
 [ext_resource type="Texture2D" uid="uid://dpo56153ju0cl" path="res://assets/textures/ui/menu_buttons/Back_Button2.png" id="6_0y5ln"]
@@ -34,6 +35,7 @@ grow_vertical = 2
 mouse_filter = 2
 theme = SubResource("Theme_hnp0x")
 script = ExtResource("1_5l3de")
+hover_sfx = ExtResource("3_xjmmi")
 cancel_sfx = ExtResource("3_tpevy")
 back_button = NodePath("SettingsWindow/MarginContainer/VBoxContainer/TextureButton")
 first_focus_control = NodePath("SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master")
@@ -198,9 +200,15 @@ texture_normal = ExtResource("6_0y5ln")
 ignore_texture_size = true
 stretch_mode = 5
 
+[connection signal="mouse_entered" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master" to="." method="_on_generic_mouse_entered"]
 [connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer/Master" method="_on_value_changed"]
+[connection signal="mouse_entered" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2/BGM" to="." method="_on_generic_mouse_entered"]
 [connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2/BGM" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer2/BGM" method="_on_value_changed"]
+[connection signal="mouse_entered" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3/SFX" to="." method="_on_generic_mouse_entered"]
 [connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3/SFX" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer3/SFX" method="_on_value_changed"]
+[connection signal="mouse_entered" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4/Dialogue" to="." method="_on_generic_mouse_entered"]
 [connection signal="value_changed" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4/Dialogue" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer4/Dialogue" method="_on_value_changed"]
+[connection signal="mouse_entered" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5/Fullscreen_Control" to="." method="_on_generic_mouse_entered"]
 [connection signal="toggled" from="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5/Fullscreen_Control" to="SettingsWindow/MarginContainer/VBoxContainer/HBoxContainer5/Fullscreen_Control" method="_on_toggled"]
+[connection signal="mouse_entered" from="SettingsWindow/MarginContainer/VBoxContainer/TextureButton" to="." method="_on_generic_mouse_entered"]
 [connection signal="pressed" from="SettingsWindow/MarginContainer/VBoxContainer/TextureButton" to="." method="_on_back_pressed"]

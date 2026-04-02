@@ -1,8 +1,8 @@
 extends BasePopup
 class_name CreditsPopup
 
-@export var back_button: BaseButton
-@export var first_focus_control: Control
+
+@export var hover_sfx: AudioStream
 @export var cancel_sfx : AudioStream
 
 
@@ -12,11 +12,10 @@ func _on_init() -> void:
 	bg_opacity = 0.82
 
 
-func _on_ready() -> void:
-	if first_focus_control:
-		first_focus_control.grab_focus()
-
-
 func _on_texture_button_pressed() -> void:
 	AudioEngine.play_sfx(cancel_sfx)
 	GameManager.dismiss_popup()
+
+
+func _on_texture_button_mouse_entered() -> void:
+	AudioEngine.play_sfx(hover_sfx)
