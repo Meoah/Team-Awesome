@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=78 format=4 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/arrows.gd" id="1_0iavb"]
 [ext_resource type="Script" uid="uid://djyje6hc7igie" path="res://scripts/ui/fish_minigame/arrows_display.gd" id="2_n3w4c"]
@@ -31,6 +31,8 @@
 [ext_resource type="AudioStream" uid="uid://b6vkq77wj16dl" path="res://assets/audio/sfx/minigame/fish_caught.wav" id="22_np22p"]
 [ext_resource type="Texture2D" uid="uid://bt21lg10tl72u" path="res://assets/textures/vfx/explosion_sprite_sheet.png" id="23_jhi3u"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="24_sfubr"]
+[ext_resource type="Texture2D" uid="uid://b8g8wbn7tntvi" path="res://assets/textures/upgrades/reels/Fishtagram_reel_temp.png" id="32_4vk57"]
+[ext_resource type="Shader" uid="uid://5tv86xl27pp5" path="res://shaders/godrays.gdshader" id="33_rtb8i"]
 
 [sub_resource type="AudioStreamPlaylist" id="AudioStreamPlaylist_np22p"]
 loop = false
@@ -336,6 +338,65 @@ animations = [{
 "speed": 30.0
 }]
 
+[sub_resource type="Animation" id="Animation_8047j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-182, 520)]
+}
+
+[sub_resource type="Animation" id="Animation_kpbv3"]
+resource_name = "Reel_Skipped"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.7333333, 2.4666667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-213, 600), Vector2(157, 600), Vector2(157, 600), Vector2(-213, 600)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f3qlm"]
+_data = {
+&"RESET": SubResource("Animation_8047j"),
+&"Reel_Skipped": SubResource("Animation_kpbv3")
+}
+
+[sub_resource type="Gradient" id="Gradient_5bkyc"]
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_15pq2"]
+gradient = SubResource("Gradient_5bkyc")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l3v6j"]
+shader = ExtResource("33_rtb8i")
+shader_parameter/gradient = SubResource("GradientTexture2D_15pq2")
+shader_parameter/spread = 0.33
+shader_parameter/cutoff = 1.58
+shader_parameter/size = 0.95
+shader_parameter/speed = 1.0
+shader_parameter/ray1_density = 20.505
+shader_parameter/ray2_density = 30.0
+shader_parameter/ray2_intensity = 0.06
+shader_parameter/core_intensity = 0.53
+shader_parameter/hdr = false
+shader_parameter/seed = 5.0
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_p3kl2"]
+
 [node name="Arrows" type="Control" node_paths=PackedStringArray("input_string", "reaction", "timer", "progress_bar")]
 process_mode = 3
 layout_mode = 3
@@ -507,5 +568,31 @@ scale = Vector2(3.46831, 3.4683104)
 sprite_frames = SubResource("SpriteFrames_rnbwo")
 frame = 20
 frame_progress = 1.0
+
+[node name="ReelSkipAnim" type="AnimationPlayer" parent="."]
+root_node = NodePath("../FishtagramReelTemp")
+libraries = {
+&"": SubResource("AnimationLibrary_f3qlm")
+}
+
+[node name="FishtagramReelTemp" type="Sprite2D" parent="."]
+position = Vector2(-182, 520)
+texture = ExtResource("32_4vk57")
+
+[node name="Sprite2D" type="Sprite2D" parent="FishtagramReelTemp"]
+z_index = -1
+material = SubResource("ShaderMaterial_l3v6j")
+scale = Vector2(639.5005, 639.5005)
+texture = SubResource("CanvasTexture_p3kl2")
+
+[node name="Label" type="Label" parent="FishtagramReelTemp"]
+offset_left = -94.0
+offset_top = 67.0
+offset_right = 102.0
+offset_bottom = 115.0
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("15_np22p")
+theme_override_font_sizes/font_size = 32
+text = "Reel Skipped!"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

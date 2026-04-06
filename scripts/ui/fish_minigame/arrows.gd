@@ -121,6 +121,7 @@ func start_minigame():
 			cleared = true
 			input_index = input_array.size()
 			win()
+			$ReelSkipAnim.play("Reel_Skipped")
 			return
 	spawn_arrows()
 	
