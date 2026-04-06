@@ -269,6 +269,7 @@ func _update_arrow() -> void:
 func _throw_bobber() -> void:
 	AudioEngine.stop_sfx_key(charging_sfx)
 	if active_bobber_count < bobber_limit:
+		TimeManager._advance_time(1.5)
 		active_bobber_count += 1
 		var bobber : RigidBody2D = bobber_scene.instantiate()
 		var radians : float = deg_to_rad(cast_angle)

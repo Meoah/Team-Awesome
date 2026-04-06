@@ -17,9 +17,6 @@ class_name NighttimeMain
 @export var tarot_trigger : Area2D
 @export var hud : HUD
 
-@onready var weather_modulate : CanvasModulate = $WeatherModulate
-@onready var rain_particles : GPUParticles2D = $RainParticles
-
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 var scavange: int = -1
 
@@ -33,9 +30,6 @@ func _ready() -> void:
 	SignalBus.shop_closed.connect(_save_shop_data)
 	
 	AudioEngine.play_bgm(default_bgm)
-	
-	WeatherManager.weather_changed.connect(_on_weather_changed)
-	_apply_weather(WeatherManager.current_weather)
 	
 	await hud.fade_in(0.5).finished
 	
@@ -162,17 +156,3 @@ func _save_shop_data(save_data : Array[Dictionary], shop_type : ShopPopup.SHOP_T
 func _on_button_pressed() -> void:
 	SystemData._add_money(200.0)
 	
-func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
-	_apply_weather(new_weather)
-	
-func _apply_weather(w : WeatherManager.WEATHER) -> void:
-	match w:
-		WeatherManager.WEATHER.CLEAR:
-			weather_modulate.color = Color(1.0, 1.0, 1.0)
-			rain_particles.emitting = false
-		WeatherManager.WEATHER.RAINY:
-			weather_modulate.color = Color(0.6, 0.7, 0.9)
-			rain_particles.emitting = true
-		WeatherManager.WEATHER.STORM:
-			weather_modulate.color = Color(0.4, 0.4, 0.55)
-			rain_particles.emitting = true

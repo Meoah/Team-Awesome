@@ -323,7 +323,7 @@ font = ExtResource("15_t7w3j")
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="IntroCutscene" type="Control" node_paths=PackedStringArray("hold_skip_control", "hold_skip_bar", "hud")]
+[node name="IntroCutscene" type="Control" node_paths=PackedStringArray("hold_skip_control", "hold_skip_bar")]
 layout_mode = 3
 anchor_right = 1.0
 anchor_bottom = 3.775
@@ -331,7 +331,6 @@ script = ExtResource("1_kb0hh")
 default_bgm = ExtResource("2_cvc0b")
 hold_skip_control = NodePath("SkipWindow/HoldToSkip")
 hold_skip_bar = NodePath("SkipWindow/HoldToSkip/MarginContainer/MarginContainer/HBoxContainer/ProgressBar")
-hud = NodePath("")
 next_scene = ExtResource("2_4sr7y")
 
 [node name="World" type="Node2D" parent="."]
