@@ -155,7 +155,6 @@ func text_render():
 
 #On Key Press: Checks if Key Press is the same as the current correct input 
 func _input(_event : InputEvent):
-	
 	if Input.is_action_just_pressed("up"):
 		player_inputs = "Up"
 	if Input.is_action_just_pressed("down"):
@@ -165,6 +164,7 @@ func _input(_event : InputEvent):
 	if Input.is_action_just_pressed("right"):
 		player_inputs = "Right"
 	
+	
 	if input_index <= input_array.size() and cleared == false:
 		if Input.is_action_just_pressed("up") or Input.is_action_just_pressed("down") or Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left") :
 			if player_inputs == input_array[input_index]:
@@ -172,7 +172,12 @@ func _input(_event : InputEvent):
 			else:
 				incorrect_input()
 			win()
-
+	if delay:
+			PlayManager.request_catching_state()
+			AudioEngine.stop_all_sfx()
+			# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
+			PlayManager.request_idle_day_state()
+			GameManager.popup_queue.dismiss_popup()
 
 
 #On correct Input
@@ -240,6 +245,7 @@ func _on_timer_timeout() -> void:
 
 #Fail Script
 func fail():
+	set_process_input(false)
 	AudioEngine.stop_all_sfx()
 	if varied_gold:
 		AudioEngine.play_sfx(sfx_gold_fail)
@@ -254,6 +260,8 @@ func fail():
 		$ArrowSprite.erase()
 	cleared = true
 	await get_tree().create_timer(3).timeout
+	delay = true
+	set_process_input(true)
 	PlayManager.request_catching_state()
 	AudioEngine.stop_all_sfx()
 	# Stuff you want to happen between catching and idle, such as a fail animation. Note that we're paused
@@ -261,11 +269,14 @@ func fail():
 	GameManager.popup_queue.dismiss_popup()
 
 #Win Script. Prints fish data and resets the scene after 3 seconds
+var delay : bool = false
+
 var cleared = false
 func win():
 	if input_index == input_array.size() :
-		AudioEngine.stop_all_sfx()
+		set_process_input(false)
 		cleared = true
+		AudioEngine.stop_all_sfx()
 		var fish_image = load(current_image)
 		$Reaction.texture = fish_image
 		input_index = 0
@@ -274,7 +285,7 @@ func win():
 		AudioEngine.play_sfx(sfx_fish_caught)
 		$ProgressBar/Sparks.hide()
 		$Control/PanelContainer.hide()
-		
+		$TextEdit.visible = true
 		if varied_gold: #If fish is gold double its value
 			current_value = current_value * 2
 		elif varied_evil:
@@ -300,11 +311,13 @@ func win():
 			PlayManager.request_idle_day_state()
 			GameManager.popup_queue.dismiss_popup()
 		await get_tree().create_timer(3).timeout
-		PlayManager.request_catching_state()
-		AudioEngine.stop_all_sfx()
-		# Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
-		PlayManager.request_idle_day_state()
-		GameManager.popup_queue.dismiss_popup()
+		set_process_input(true)
+		delay = true
+		#PlayManager.request_catching_state()
+		#AudioEngine.stop_all_sfx()
+		## Stuff you want to happen between catching and idle, such as a catch animation. Note that we're paused
+		#PlayManager.request_idle_day_state()
+		#GameManager.popup_queue.dismiss_popup()
 
 
 
