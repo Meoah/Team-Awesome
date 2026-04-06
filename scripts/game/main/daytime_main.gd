@@ -14,22 +14,7 @@ class_name DaytimeMain
 @export var tutorial_scene : PackedScene
 
 
-func _ready() -> void:
-	
-	#--Time--
-	TimeManager.time_updated.connect(_on_time_updated)
-	WeatherManager.weather_changed.connect(_on_weather_changed)
-	
-	TimeManager._set_time(6.0)
-	TimeManager.time_enabled = false
-	#time_color = Color(0.3, 0.5, 0.5)     
-	#weather_color = Color(1.0, 1.0, 1.0)
-	last_weather_roll = int(TimeManager.current_hour)
-	
-	#--Weather--
-	_apply_weather(WeatherManager.current_weather)
-	_update_lighting(TimeManager.current_hour)		   
-					 
+func _ready() -> void: 
 	# Binds Signals
 	PlayManager.idle_day_state.signal_idle_day.connect(_idle_state)
 	

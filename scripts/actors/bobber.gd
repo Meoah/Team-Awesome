@@ -32,10 +32,6 @@ func _ready() -> void:
 	time_until_hook = randf_range(1.0, 5.0)
 	time_until_break = randf_range(3.0, 5.0)
 	progress_bar.max_value = time_until_break
-
-	#--Advance Time---
-	if TimeManager:
-		TimeManager._advance_time(1.5)
 	
 func _process(delta: float) -> void:
 	# Detects if bobber has fallen past the waterline. Freeze body and start timer.

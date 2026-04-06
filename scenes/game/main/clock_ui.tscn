@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c8n4q1j28m2jg" path="res://scripts/ui/hud/clock_ui.gd" id="1_4mefg"]
 [ext_resource type="Texture2D" uid="uid://clafw8cbt6f6o" path="res://assets/textures/ui/Inventory_Images/ClockFace_00002_.png" id="2_0s63h"]
-[ext_resource type="Texture2D" uid="uid://cgkasc0d10r3" path="res://assets/textures/ui/Inventory_Images/ClockHand.png" id="3_bigf5"]
+[ext_resource type="Texture2D" uid="uid://bol88hosvsvta" path="res://assets/textures/ui/Inventory_Images/ClockHand.png" id="3_bigf5"]
 [ext_resource type="Script" uid="uid://c21bksdl4cjhv" path="res://scripts/ui/hud/time_label.gd" id="4_bigf5"]
 [ext_resource type="Texture2D" uid="uid://du7wv7t0dby11" path="res://assets/textures/vfx/raindrop.png" id="5_72i22"]
 
