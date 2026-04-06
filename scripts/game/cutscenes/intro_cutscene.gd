@@ -6,7 +6,6 @@ extends Control
 @export_category("Children Nodes")
 @export var hold_skip_control : Control
 @export var hold_skip_bar : ProgressBar
-@export var hud : HUD
 
 @export_category("PackedScenes")
 @export var next_scene : PackedScene
@@ -37,11 +36,6 @@ func _ready() -> void:
 	}
 	if PlayManager.request_dialogue_day_state():
 		GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.DIALOGUE, popup_parameters)
-	
-	for child in hud.get_children():
-		if child is TouchScreenControls:
-			child.ignore_input = true
-			break
 
 func play_animation():
 	AudioEngine.play_bgm(default_bgm, "", false, 5.0)

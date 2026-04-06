@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxengg22601k2"
-path="res://.godot/imported/arrow.png-e330f693192c2a118a0885763340b60e.ctex"
+uid="uid://clafw8cbt6f6o"
+path="res://.godot/imported/ClockFace_00002_.png-a152da8ba1dca8f289253f6a051501d8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/actors/jeremy/arrow.png"
-dest_files=["res://.godot/imported/arrow.png-e330f693192c2a118a0885763340b60e.ctex"]
+source_file="res://assets/textures/ui/Inventory_Images/ClockFace_00002_.png"
+dest_files=["res://.godot/imported/ClockFace_00002_.png-a152da8ba1dca8f289253f6a051501d8.ctex"]
 
 [params]
 

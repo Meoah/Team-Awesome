@@ -29,8 +29,9 @@ SignalBus="*res://scripts/util/signal_bus.gd"
 SystemData="*res://scripts/system/system_data.gd"
 PlayManager="*res://scripts/managers/play_manager.gd"
 AudioEngine="*res://scripts/util/audio_engine.gd"
-WeatherManager="*res://scripts/managers/weather_manager.gd"
 GameManager="*res://scenes/game_manager.tscn"
+TimeManager="*res://scripts/managers/time_manager.gd"
+WeatherManager="*res://scripts/managers/weather_manager.gd"
 
 [debug]
 

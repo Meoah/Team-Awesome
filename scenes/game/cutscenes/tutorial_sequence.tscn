@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://b53gtf3nmu4po" path="res://shaders/spotlight.gdshader" id="2_pyu63"]
 [ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/actors/DetectiveNavi.png" id="3_64mbj"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="4_dqchs"]
-[ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/actors/jeremy/arrow.png" id="6_dqchs"]
+[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="6_dqchs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j3af4"]
 resource_local_to_scene = true

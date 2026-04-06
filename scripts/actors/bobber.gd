@@ -15,6 +15,7 @@ var bob_timer : float = 0.0
 # Waterline detection
 @export var waterline_y : float = 650
 var is_in_water : bool = false
+
 # VFX nodes
 @export var indicator : Sprite2D
 @export var progress_bar : ProgressBar
@@ -31,7 +32,7 @@ func _ready() -> void:
 	time_until_hook = randf_range(1.0, 5.0)
 	time_until_break = randf_range(3.0, 5.0)
 	progress_bar.max_value = time_until_break
-
+	
 func _process(delta: float) -> void:
 	# Detects if bobber has fallen past the waterline. Freeze body and start timer.
 	# TODO this sucks, use physics

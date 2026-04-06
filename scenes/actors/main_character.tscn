@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://8rtag1fl3an4" path="res://scenes/actors/bobber.tscn" id="2_5ovje"]
 [ext_resource type="AudioStream" uid="uid://ctw603c24roia" path="res://assets/audio/sfx/fishing/charge_bar.ogg" id="3_a64bi"]
 [ext_resource type="AudioStream" uid="uid://b0ufk6u4fh7" path="res://assets/audio/sfx/fishing/Hook jingle.ogg" id="4_4t3nx"]
-[ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/actors/jeremy/arrow.png" id="4_w0brd"]
+[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="4_w0brd"]
 [ext_resource type="AudioStream" uid="uid://ct2mqxttb242d" path="res://assets/audio/sfx/fishing/casting.ogg" id="5_k58o6"]
 [ext_resource type="Texture2D" uid="uid://dfaibn08a6od6" path="res://assets/textures/actors/jeremy/jeremy_sheet.png" id="6_k58o6"]
 

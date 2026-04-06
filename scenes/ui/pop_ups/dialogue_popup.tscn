@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bfm2wj2amel5w" path="res://assets/textures/ui/dialogue/character_portraits/mobboss.png" id="2_qpbe1"]
 [ext_resource type="AudioStream" uid="uid://snu7d8811xkm" path="res://assets/audio/sfx/dialogue/advance_dialogue.ogg" id="3_gfr62"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_a0ly1"]
-[ext_resource type="Texture2D" uid="uid://dhuohlsyt23h5" path="res://assets/textures/actors/jeremy/arrow.png" id="4_piijg"]
+[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="4_piijg"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="5_jqb3i"]
 
 [sub_resource type="Theme" id="Theme_piijg"]
