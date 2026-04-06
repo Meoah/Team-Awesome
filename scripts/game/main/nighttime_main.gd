@@ -17,6 +17,7 @@ class_name NighttimeMain
 @export var tarot_trigger : Area2D
 @export var hud : HUD
 
+var weather_color : Color = Color.WHITE
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 var scavange: int = -1
 
