@@ -233,6 +233,9 @@ var dissipation : float = 1
 func _process(_delta):
 	progress_bar.value = timer.time_left
 	$ProgressBar/Label.set_text("%.2f s" % timer.time_left)
+	
+	if $ProgressBar.value == 0:
+		fail()
 	if !cleared:
 		if !AudioEngine.is_sfx_key_stream_playing(sfx_struggle):
 			AudioEngine.play_sfx(sfx_struggle)
@@ -241,11 +244,14 @@ func _process(_delta):
 
 #Time runout
 func _on_timer_timeout() -> void:
+	$TextEdit.text = "Time's Up!"
 	fail() # Replace with function body.
 
 #Fail Script
 func fail():
 	set_process_input(false)
+	#$Control/PanelContainer.hide()
+	$TextEdit.visible = true
 	AudioEngine.stop_all_sfx()
 	if varied_gold:
 		AudioEngine.play_sfx(sfx_gold_fail)
@@ -256,9 +262,10 @@ func fail():
 	timer.set_paused(true)
 	input_string.set_text("Times Up!!")
 	#$Reaction.set_texture(failure)
-	for item in sprite_array:
-		$ArrowSprite.erase()
+	#for item in sprite_array:
+		#$ArrowSprite.erase()
 	cleared = true
+	$Control/PanelContainer.hide()
 	await get_tree().create_timer(3).timeout
 	delay = true
 	set_process_input(true)

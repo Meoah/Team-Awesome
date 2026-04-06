@@ -380,7 +380,6 @@ theme_override_constants/line_spacing = 0
 theme_override_fonts/font = ExtResource("15_np22p")
 theme_override_font_sizes/font_size = 36
 theme_override_styles/read_only = SubResource("StyleBoxTexture_3svcc")
-text = "sdjfkl;kj"
 placeholder_text = "Place"
 editable = false
 script = ExtResource("2_n3w4c")
