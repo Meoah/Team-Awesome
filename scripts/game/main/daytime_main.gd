@@ -71,7 +71,7 @@ func _play_minigame(distance: float) -> void:
 		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE,
 		"distance" = distance
 	}
-	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAMEUI, popup_parameters)
+	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAME, popup_parameters)
 
 func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.stop(true)

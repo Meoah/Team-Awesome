@@ -1,0 +1,79 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3ws1cm3wid84"]
+
+[ext_resource type="Script" uid="uid://cfiigx6uxw8tn" path="res://scripts/ui/fish_minigame/arrow.gd" id="1_0r5r5"]
+[ext_resource type="Texture2D" uid="uid://dc133i3eb8ups" path="res://assets/textures/ui/Arrows/0.tres" id="2_5ewal"]
+[ext_resource type="Texture2D" uid="uid://cj88pt0rb6kul" path="res://assets/textures/ui/Arrows/1.tres" id="3_ulipv"]
+[ext_resource type="Texture2D" uid="uid://bmyqxt2tdjuib" path="res://assets/textures/ui/Arrows/2.tres" id="4_4mker"]
+[ext_resource type="Texture2D" uid="uid://blvkbqny5n6wn" path="res://assets/textures/ui/Arrows/3.tres" id="5_ci5ak"]
+[ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://shaders/sparks.gdshader" id="6_4mker"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ci5ak"]
+shader = ExtResource("6_4mker")
+shader_parameter/speed = 0.10000000149012
+shader_parameter/pixelSize = 0.0150000007125
+shader_parameter/alpha = 1.0
+shader_parameter/flickerStrength = 0.1050000049875
+shader_parameter/toColor = Color(0, 0, 0, 1)
+shader_parameter/fromColor = Color(0.011764706, 0, 0, 1)
+shader_parameter/hueShift = 0.0
+shader_parameter/saturationFactor = 0.0
+shader_parameter/particleCount = 16.0
+shader_parameter/brightness = 0.00110000004497
+shader_parameter/fireShift = 0.0
+shader_parameter/fireShiftFrequency = 1.0
+shader_parameter/size = Vector2(0.05, 0.75)
+shader_parameter/glow = Vector2(0.001, 0.04)
+shader_parameter/sparkCount = 1.0
+shader_parameter/sparkSize = 0.00050000002375
+shader_parameter/sparkSpeed = 0.10000000149012
+shader_parameter/sparkColor = Color(1, 0.7, 0, 1)
+shader_parameter/smokeCount = 50.0
+shader_parameter/smokeSize = 0.01200000056999999
+shader_parameter/smokeDrift = 0.5
+shader_parameter/smokeColor = Color(0.05, 0.05, 0.05, 1)
+shader_parameter/windForce = 0.0
+shader_parameter/aspectRatio = 1.0
+shader_parameter/posOffset = Vector2(0, -0.81)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_d73rm"]
+
+[node name="Arrow" type="Control" node_paths=PackedStringArray("_arrow_texture", "_smoke_vfx")]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_0r5r5")
+_arrow_texture = NodePath("ArrowTexture")
+_smoke_vfx = NodePath("SmokeVFX")
+_left_arrow_texture = ExtResource("2_5ewal")
+_up_arrow_texture = ExtResource("3_ulipv")
+_down_arrow_texture = ExtResource("4_4mker")
+_right_arrow_texture = ExtResource("5_ci5ak")
+
+[node name="ArrowTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5ewal")
+stretch_mode = 3
+
+[node name="SmokeVFX" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+light_mask = 512
+visibility_layer = 512
+z_index = 2
+z_as_relative = false
+material = SubResource("ShaderMaterial_ci5ak")
+position = Vector2(-25, -50)
+scale = Vector2(150, 150)
+texture = SubResource("CanvasTexture_d73rm")
+centered = false
