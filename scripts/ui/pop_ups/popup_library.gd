@@ -6,7 +6,7 @@ const _BLOCKER = preload("res://scenes/ui/pop_ups/blocker.tscn")
 const _GENERIC = preload("res://scenes/ui/pop_ups/generic_popup.tscn")
 const _PAUSE = preload("res://scenes/ui/pop_ups/pause_popup.tscn")
 const _SETTINGS = preload("res://scenes/ui/pop_ups/settings_popup.tscn")
-const _MINIGAMEUI = preload("res://scenes/ui/pop_ups/fish_minigame/arrows.tscn")
+const _MINIGAME = preload("res://scenes/ui/pop_ups/fish_minigame/minigame_popup.tscn")
 const _DIALOGUE = preload("res://scenes/ui/pop_ups/dialogue_popup.tscn")
 const _SHOP = preload("res://scenes/ui/pop_ups/shop_popup.tscn")
 const _CREDITS = preload("res://scenes/ui/pop_ups/credits.tscn")
@@ -19,8 +19,8 @@ static func create_popup(popup_type: int, params: Dictionary = {}) -> BasePopup:
 	
 	# Look for the requested popup and instantiate it.
 	match popup_type:
-		BasePopup.POPUP_TYPE.MINIGAMEUI:
-			popup = _MINIGAMEUI.instantiate()
+		BasePopup.POPUP_TYPE.MINIGAME:
+			popup = _MINIGAME.instantiate()
 		BasePopup.POPUP_TYPE.DIALOGUE:
 			popup = _DIALOGUE.instantiate()
 		BasePopup.POPUP_TYPE.SHOP:

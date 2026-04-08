@@ -663,7 +663,7 @@ theme = SubResource("Theme_e8tmt")
 theme_override_constants/outline_size = 4
 bbcode_enabled = true
 text = "[font_size=24][u]Raft License[/u][/font_size] (Tutorial)
-Cost: [color=red]$ 100[/color]
+Cost: [color=red]$ 500[/color]
 Duration: 3 days
 
 Get your feet wet."

@@ -89,7 +89,7 @@ func _transfer_money() -> void:
 
 func calculate_goal() -> float:
 	match license:
-		1: return 100.0
+		1: return 500.0
 		2: return 2500.0
 		3: return -1
 		_: return -1

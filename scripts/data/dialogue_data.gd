@@ -134,43 +134,133 @@ const INTRO : Dictionary = {
 	},
 	0002 : {
 		KEY_NAME : NAME_MAIN_CHARACTER,
-		KEY_TEXT : "Oh dear! Who's at the door?",
+		KEY_TEXT : "H- Hello? Is this where I can purchase a fishing license?",
 		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT
 	},
 	0003 : {
-		KEY_NAME : NAME_MOB_BOSS,
-		KEY_BGM : "res://assets/audio/bgm/the_frog_is_talking.ogg",
-		KEY_TEXT : "Yo kid, rent is PAST DUE!",
-		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
-		KEY_PARAMETERS : ["shaking", "emote_rage"]
+		KEY_NAME : UNKNOWN,
+		KEY_TEXT : "You come to me... ",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT
 	},
 	0004 : {
-		KEY_NAME : NAME_MAIN_CHARACTER,
-		KEY_TEXT : "Oh uhhhh, do I pay him??",
-		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_BGM : "res://assets/audio/bgm/the_frog_is_talking.ogg",
+		KEY_TEXT : "On this beautiful sunny day...",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
-		KEY_OPTION_A : "Yes",
-		KEY_OPTION_A_GOTO : 0006,
-		KEY_OPTION_B : "No (This is a bad idea)",
-		KEY_OPTION_B_GOTO : 0005,
 	},
 	0005 : {
 		KEY_NAME : NAME_MOB_BOSS,
-		KEY_TEXT : "A wise guy I see. Time to swim with the fishes.",
+		KEY_TEXT : "Asking for a fishing license?",
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
-		KEY_RETURN : true,
-		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
-		KEY_SIGNAL : ["player_dies"]
 	},
 	0006 : {
-		KEY_NAME : NAME_MOB_BOSS,
-		KEY_TEXT : "That's right kid, cough up the dough.",
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "Oh, am I in the wrong place?",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
 		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+	},
+	0007 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "No we got 'em here.",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+	},
+	0008 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "It'll just cost ya...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0009 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "Oh Great! How much does it cost?",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0010 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "For a small fish in a big pond like yourself?",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0011 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "Five Hundred",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0012 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "FIVE HUNDRED!?!?",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0013 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "I don't have that kind of money...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0014 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "It's alright little guppy...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0015 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "We can loan ya the dough...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0016 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "Just dont miss a payment...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0017 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "Or it'll be you swimming with the fishes...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0018 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "Oh... I see.",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0019 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "Well... Im confident enough to pull through!",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0020 : {
+		KEY_NAME : NAME_MAIN_CHARACTER,
+		KEY_TEXT : "There should be plenty of fish in the sea, right!",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0021 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "Sure kid...",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+	},
+	0022 : {
+		KEY_NAME : NAME_MOB_BOSS,
+		KEY_TEXT : "Just don't miss a payment",
+		KEY_IMAGE_R : IMAGE_MOB_BOSS_DEFAULT,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
 		KEY_RETURN : true,
 		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
 		KEY_SIGNAL : ["run_intro"]
 	}
 }
+
+
 
 const BAIT_SHOP : Dictionary = {
 	0000 : {
