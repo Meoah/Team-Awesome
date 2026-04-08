@@ -75,7 +75,7 @@ func _update_lighting(hour: float) -> void:
 		time_color = Color(lerp(0.6, 0.2, t), lerp(0.4, 0.2, t), lerp(0.5, 0.4, t), 0.25)
 		
 	else:
-		time_color = Color(0.15, 0.15, 0.25)
+		time_color = Color(0.15, 0.15, 0.25, 0.25)
 		print("_update_lighting called | hour: ", hour,
 			"time_color before: ", time_color)
 	_apply_combined_color()

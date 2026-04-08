@@ -77,6 +77,7 @@ script = ExtResource("4_bigf5")
 
 [node name="RainLayer" type="CanvasLayer" parent="."]
 follow_viewport_enabled = true
+follow_viewport_scale = 787.585
 
 [node name="RainParticles" type="GPUParticles2D" parent="RainLayer"]
 unique_name_in_owner = true
