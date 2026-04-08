@@ -9,6 +9,8 @@ class_name DaytimeMain
 @export var hud : HUD
 @export var camera : Camera2D
 
+@export var weather_modulate : CanvasModulate
+
 @export_category("PackedScenes")
 @export var bobber_scene : PackedScene
 @export var tutorial_scene : PackedScene
@@ -83,6 +85,17 @@ func _idle_state() -> void:
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()
 
+#-----Lighting by time------
+func _set_up_lighting() -> void:
+	if TimeManager and weather_modulate:
+		weather_modulate.color = TimeManager.get_color_hour(TimeManager.current_hour) 
+		TimeManager.time_updated.connect(_on_time_updated)
+
+func  _on_time_updated(new_hour : float) -> void:
+	if not weather_modulate:
+		return
+	var tween = create_tween()
+	tween.tween_property(weather_modulate, "color", TimeManager.get_color_hour(new_hour), 2.0)
 
 # TODO REMOVE THIS LATER, HARDCODED RUN EQUIPMENT
 func _equip_license_gear() -> void:

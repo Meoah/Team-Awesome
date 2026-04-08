@@ -47,12 +47,12 @@ mouse_filter = 2
 color = Color(1, 1, 1, 0)
 
 [node name="ClockFace" type="Sprite2D" parent="."]
-position = Vector2(1257.5, 705.82056)
+position = Vector2(1183.5, 623.82056)
 scale = Vector2(0.38085943, 0.3632812)
 texture = ExtResource("2_0s63h")
 
 [node name="ClockHand" type="Sprite2D" parent="."]
-position = Vector2(1258.4462, 626.41534)
+position = Vector2(1184.4462, 544.41534)
 rotation = -3.1415925
 scale = Vector2(0.23734017, 0.22818494)
 texture = ExtResource("3_bigf5")

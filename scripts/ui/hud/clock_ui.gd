@@ -106,8 +106,6 @@ func _apply_weather(w : WeatherManager.WEATHER) -> void:
 
 #Combines weather and lighting
 func _apply_combined_color() -> void:
-	print("Final Color | time: ", time_color,
-			" | weather: ", weather_color,
-			" | combined: ", time_color * weather_color)
-	weather.color = time_color * weather_color	
-	
+	var target := time_color * weather_color
+	var tween = create_tween()
+	tween.tween_property(weather, "color", target, 2.0)
