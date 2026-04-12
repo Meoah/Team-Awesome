@@ -44,6 +44,11 @@ var nighttime_node : NighttimeMain
 # Signals
 signal player_interact
 
+var time_spent_per_cast: float = 1.5
+
+var queued_cast_bait_id: int = -1
+var hooked_bobbers: Array[Bobber] = []
+
 func _ready() -> void:
 	# Initializes arrow sprite.
 	arrow_distance = arrow_sprite.position.length()
@@ -77,6 +82,7 @@ func _check_equipment() -> void:
 			stamina_usage = 7.5
 			strength_multiplier = 4.0
 		3:
+			time_spent_per_cast *= 0.75
 			stamina_usage = 6.0
 
 
@@ -152,15 +158,15 @@ func _cast_handler(delta : float) -> void:
 		if PlayManager.get_current_state() is CastingState:
 			body_sprite.flip_h = false
 			_charging(delta)
-		elif SystemData.use_stamina(stamina_usage):
-			if SystemData.use_bait(SystemData.get_active_bait()):
-				body_sprite.flip_h = false
-				PlayManager.request_casting_state()
-	else:
-		if PlayManager.get_current_state() is CastingState:
-			AudioEngine.play_sfx(casting_sfx)
-			_throw_bobber()
-			PlayManager.request_waiting_state()
+		
+		elif active_bobber_count < bobber_limit:
+			body_sprite.flip_h = false
+			PlayManager.request_casting_state()
+	
+	elif PlayManager.get_current_state() is CastingState:
+		AudioEngine.play_sfx(casting_sfx)
+		if _throw_bobber(): PlayManager.request_waiting_state()
+		else: PlayManager.request_idle_day_state()
 
 # Charges the power bar.
 func _charging(delta : float) -> void:
@@ -206,8 +212,11 @@ func _flash_power_bar() -> void:
 func _clear_bobbers() -> void:
 	bobber_hook = 0
 	active_bobber_count = 0
+	hooked_bobbers.clear()
+	
 	for child in get_children():
-		if child is Bobber : child.queue_free()
+		if child is Bobber:
+			child.queue_free()
 
 # Sets flag on or off
 func _set_flag(flag : int, enabled : bool) -> void:
@@ -235,16 +244,23 @@ func _action() -> void:
 	if !(input_flags & InputFlags.ACTION):
 		interacted = false
 		return
+	
 	if !interacted:
 		player_interact.emit()
 		interacted = true
-	if bobber_hook:
+	
+	if bobber_hook > 0:
 		if PlayManager.request_reeling_state():
-			var rightmost_bobber = camera._find_target()
-			var distance = rightmost_bobber.position.x
-			_clear_bobbers()
+			var hooked_bobber := _get_reel_target_bobber()
+			if !hooked_bobber: return
+			
+			var distance: float = hooked_bobber.position.x
+			var encounter_type: Bobber.EncounterType = hooked_bobber.encounter_type
+			
 			AudioEngine.play_sfx(hook_success_sfx)
-			if daytime_node : daytime_node._play_minigame(distance)
+			_clear_bobbers()
+			
+			if daytime_node: daytime_node.start_fishing_encounter(encounter_type, distance)
 
 # Aiming handler
 func _aiming(delta) -> void:
@@ -266,30 +282,66 @@ func _update_arrow() -> void:
 	arrow_sprite.position = Vector2(cos(cast_angle_radian), -sin(cast_angle_radian)) * arrow_distance
 
 # Throws the bobber with input angle and force.
-func _throw_bobber() -> void:
+func _throw_bobber() -> bool:
 	AudioEngine.stop_sfx_key(charging_sfx)
-	if active_bobber_count < bobber_limit:
-		TimeManager._advance_time(1.5)
-		active_bobber_count += 1
-		var bobber : RigidBody2D = bobber_scene.instantiate()
-		var radians : float = deg_to_rad(cast_angle)
-		var impulse : Vector2 = Vector2(cos(radians), -sin(radians)) * (cast_power + 20) * 7.5 * strength_multiplier
-		bobber.hooked.connect(_on_bobber_fish_hook)
-		bobber.hook_timeout.connect(_on_bobber_hook_timeout)
-		add_child(bobber)
-		bobber.apply_impulse(impulse)
+	
+	if active_bobber_count >= bobber_limit: return false
+	
+	var bait_id: int = SystemData.get_active_bait()
+	
+	if !SystemData.use_stamina(stamina_usage): return false
+	if !SystemData.use_bait(bait_id): return false
+	
+	queued_cast_bait_id = bait_id
+	
+	TimeManager._advance_time(time_spent_per_cast)
+	active_bobber_count += 1
+	
+	var bobber: Bobber = bobber_scene.instantiate()
+	bobber.cast_bait_id = queued_cast_bait_id
+	queued_cast_bait_id = -1
+	
+	var radians: float = deg_to_rad(cast_angle)
+	var impulse: Vector2 = Vector2(cos(radians), -sin(radians)) * (cast_power + 20) * 7.5 * strength_multiplier
+	
+	bobber.hooked.connect(_on_bobber_fish_hook)
+	bobber.hook_timeout.connect(_on_bobber_hook_timeout)
+	
+	if daytime_node: bobber.landed_in_water.connect(daytime_node._on_bobber_landed_in_water)
+	
+	add_child(bobber)
+	bobber.apply_impulse(impulse)
+	return true
+
+func _get_reel_target_bobber() -> Bobber:
+	var chosen: Bobber = null
+	var best_x: float = -INF
+	
+	for bobber in hooked_bobbers:
+		if !is_instance_valid(bobber):
+			continue
+		if bobber.global_position.x > best_x:
+			best_x = bobber.global_position.x
+			chosen = bobber
+	
+	return chosen
 
 ## Handles signal functions
 # Sets flag if fish is hooked.
-func _on_bobber_fish_hook() -> void : bobber_hook += 1
+func _on_bobber_fish_hook(bobber: Bobber) -> void:
+	bobber_hook += 1
+	if !hooked_bobbers.has(bobber): hooked_bobbers.append(bobber)
 
 # Timeout causes line to be cut. If no more bobbers out, transition state.
-func _on_bobber_hook_timeout() -> void:
+func _on_bobber_hook_timeout(bobber: Bobber) -> void:
 	active_bobber_count -= 1
-	bobber_hook -=1
+	hooked_bobbers.erase(bobber)
+	
+	if bobber_hook > 0: bobber_hook -= 1
+	
 	if active_bobber_count <= 0:
-		active_bobber_count = 0 # Guarantee the reset.
-		bobber_hook = false
+		active_bobber_count = 0
+		bobber_hook = 0
 		PlayManager.request_idle_day_state()
 
 # Make power bar visible and resets cast variables on CastingState

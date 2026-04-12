@@ -1,6 +1,19 @@
 extends RigidBody2D
 class_name Bobber
 
+# Signals to be used by MainCharacter
+signal landed_in_water(bobber: Bobber)
+signal hooked(bobber: Bobber)
+signal hook_timeout(bobber: Bobber)
+
+enum EncounterType {
+	NORMAL,
+	BOSS
+}
+
+var cast_bait_id: int = -1
+var encounter_type: EncounterType = EncounterType.NORMAL
+
 # Fish timers
 @export var timer : Timer
 var waiting : bool = false
@@ -24,9 +37,6 @@ var is_in_water : bool = false
 @export var water_splash_sfx : AudioStream
 @export var hook_indicator_sfx : AudioStream
 
-# Signals to be used by MainCharacter
-signal hooked
-signal hook_timeout
 
 func _ready() -> void:
 	time_until_hook = randf_range(1.0, 5.0)
@@ -65,6 +75,7 @@ func _start_bob() -> void:
 	is_in_water = true
 	freeze = true
 	waiting = true
+	landed_in_water.emit(self)
 
 # Controls the bobbing motion
 func _water_bob(delta : float) -> void:
@@ -82,7 +93,7 @@ func _play_vfx() -> void:
 func _on_timer_timeout() -> void:
 	# Second timeout. Emit hook_timeout, then queue_free().
 	if fish_hooked:
-		hook_timeout.emit()
+		hook_timeout.emit(self)
 		queue_free()
 		return
 		
@@ -90,6 +101,6 @@ func _on_timer_timeout() -> void:
 	if waiting:
 		freeze = false
 		fish_hooked = true
-		hooked.emit()
+		hooked.emit(self)
 		timer.start(time_until_break)
 		_play_vfx()

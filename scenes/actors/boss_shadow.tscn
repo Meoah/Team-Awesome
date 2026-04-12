@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3lb2hsqyd5mi"]
+
+[ext_resource type="Texture2D" uid="uid://bf7n3potbkk26" path="res://assets/textures/debug/boss_shadow.png" id="1_3ggsr"]
+[ext_resource type="Script" uid="uid://244xlpxgfq4b" path="res://scripts/actors/boss_shadow.gd" id="1_bwncg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwncg"]
+size = Vector2(256, 94)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_deu7f"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3ggsr")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BossShadow" type="Area2D" node_paths=PackedStringArray("collision_shape")]
+script = ExtResource("1_bwncg")
+collision_shape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bwncg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.5019608)
+sprite_frames = SubResource("SpriteFrames_deu7f")
+autoplay = "default"

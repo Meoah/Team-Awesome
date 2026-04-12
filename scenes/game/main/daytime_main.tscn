@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=30 format=3 uid="uid://b856gwtwh1bno"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://b4so1s0p3hdbr" path="res://assets/textures/background/dock_pieces/DockFloor.png" id="14_ajsgr"]
 [ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/game/cutscenes/tutorial_sequence.tscn" id="14_i6nw5"]
 [ext_resource type="Texture2D" uid="uid://dakggumatebv8" path="res://assets/textures/background/dock_pieces/Post.png" id="17_b82wd"]
+[ext_resource type="PackedScene" uid="uid://d3lb2hsqyd5mi" path="res://scenes/actors/boss_shadow.tscn" id="18_e7nxg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
 size = Vector2(10, 100)
@@ -94,7 +95,7 @@ _data = {
 &"RESET": SubResource("Animation_sd21a")
 }
 
-[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "hud", "camera")]
+[node name="DaytimeMain" type="Control" node_paths=PackedStringArray("jeremy_node", "hud", "camera", "boss_shadow")]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2jsv6")
@@ -102,6 +103,7 @@ default_bgm = ExtResource("2_e7nxg")
 jeremy_node = NodePath("Jeremy")
 hud = NodePath("HUD")
 camera = NodePath("DayCam")
+boss_shadow = NodePath("BossShadow")
 bobber_scene = ExtResource("3_6j7wl")
 tutorial_scene = ExtResource("14_i6nw5")
 
@@ -262,6 +264,10 @@ shape = SubResource("RectangleShape2D_ovom5")
 [node name="RightCollision" type="CollisionShape2D" parent="Boundaries"]
 position = Vector2(650, 360)
 shape = SubResource("RectangleShape2D_3kam8")
+
+[node name="BossShadow" parent="." instance=ExtResource("18_e7nxg")]
+z_index = 2
+position = Vector2(918, 650)
 
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {
