@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=64 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/minigame_popup.gd" id="1_co3bf"]
 [ext_resource type="AudioStream" uid="uid://bx4hcgewtdxc3" path="res://assets/audio/bgm/pressing_arrows.ogg" id="2_06j22"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dreyt8f5wrd8q" path="res://assets/textures/ui/nine_slices/progress_white_small.png" id="20_mv0ug"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="22_gjchp"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="23_vgf2p"]
+[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="24_2eskw"]
 [ext_resource type="Script" uid="uid://bw1d8jfjije3h" path="res://scripts/ui/fish_minigame/countdown_bar.gd" id="25_ef8oi"]
 [ext_resource type="Script" uid="uid://bjqerl6c0hfo6" path="res://scripts/ui/fish_minigame/arrow_container.gd" id="25_wvna3"]
 [ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://shaders/sparks.gdshader" id="26_3cm2c"]
@@ -297,7 +298,51 @@ shader_parameter/seed = 5.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_p3kl2"]
 
-[node name="MinigamePopup" type="Control" node_paths=PackedStringArray("_reaction_node", "_countdown_bar", "_arrow_container", "_results_window")]
+[sub_resource type="LabelSettings" id="LabelSettings_5vhg8"]
+font = ExtResource("22_gjchp")
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ywqia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p15s2"]
+resource_name = "blink"
+length = 3.0000036
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbj8i"]
+_data = {
+&"RESET": SubResource("Animation_ywqia"),
+&"blink": SubResource("Animation_p15s2")
+}
+
+[node name="MinigamePopup" type="Control" node_paths=PackedStringArray("_reaction_node", "_countdown_bar", "_arrow_container", "_results_window", "_continue_indicator")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -319,6 +364,7 @@ _reaction_node = NodePath("Reaction")
 _countdown_bar = NodePath("CountdownBar")
 _arrow_container = NodePath("ArrowContainer")
 _results_window = NodePath("ResultsWindow")
+_continue_indicator = NodePath("ContinueIndicator")
 _arrow_scene = ExtResource("18_gxcjo")
 
 [node name="CountdownBar" type="TextureProgressBar" parent="." node_paths=PackedStringArray("_time_left_label", "_start_marker", "_end_marker", "_sparks", "timer")]
@@ -468,5 +514,40 @@ theme_override_constants/outline_size = 8
 theme_override_fonts/font = ExtResource("22_gjchp")
 theme_override_font_sizes/font_size = 32
 text = "Reel Skipped!"
+
+[node name="ContinueIndicator" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContinueIndicator"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ContinueIndicator/HBoxContainer"]
+layout_mode = 2
+text = "Click to continue.."
+label_settings = SubResource("LabelSettings_5vhg8")
+
+[node name="ContinueArrow" type="TextureRect" parent="ContinueIndicator/HBoxContainer"]
+modulate = Color(1, 0.99215686, 1, 0.78431374)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("24_2eskw")
+expand_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ContinueIndicator"]
+libraries = {
+&"": SubResource("AnimationLibrary_lbj8i")
+}
+autoplay = "blink"
 
 [connection signal="timeout" from="CountdownBar/Timer" to="." method="_on_timer_timeout"]

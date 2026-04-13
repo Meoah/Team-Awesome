@@ -30,6 +30,7 @@ enum InputFlags{
 }
 var input_flags : int = 0
 var move_speed : float = 250.0
+var suppress_gameplay_input_until_release: bool = false
 # Bobbing
 var bob_amplitude : float = 40.0
 var bob_speed : float = 8.0
@@ -87,7 +88,17 @@ func _check_equipment() -> void:
 
 
 func _input(event : InputEvent) -> void:
-	if event.is_echo() : return
+	if event.is_echo(): return
+	
+	if suppress_gameplay_input_until_release:
+		input_flags = 0
+		interacted = false
+		
+		if _has_any_gameplay_input_pressed():
+			get_viewport().set_input_as_handled()
+			return
+		
+		suppress_gameplay_input_until_release = false
 	
 	# Arrow Keys
 	if event.is_action_pressed("left"):		_set_flag(InputFlags.MOVE_LEFT, true)
@@ -102,8 +113,6 @@ func _input(event : InputEvent) -> void:
 	# Action
 	if event.is_action_pressed("action"):	_set_flag(InputFlags.ACTION, true)
 	if event.is_action_released("action"):	_set_flag(InputFlags.ACTION, false)
-	
-	#TODO cancel button?
 
 
 func _process(delta: float) -> void:
@@ -151,6 +160,23 @@ func walk_up_sequence() -> void:
 # Resets the flags back to 0.
 func _reset_flags() -> void:
 	input_flags = 0
+
+
+func suppress_input_until_release() -> void:
+	suppress_gameplay_input_until_release = true
+	input_flags = 0
+	interacted = false
+
+
+func _has_any_gameplay_input_pressed() -> bool:
+	return (
+		Input.is_action_pressed("left")
+		or Input.is_action_pressed("right")
+		or Input.is_action_pressed("up")
+		or Input.is_action_pressed("down")
+		or Input.is_action_pressed("action")
+	)
+
 
 # Transitions to casting state, then continously charge while action held.
 func _cast_handler(delta : float) -> void:
