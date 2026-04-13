@@ -19,7 +19,7 @@
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="16_7krjj"]
 [ext_resource type="Texture2D" uid="uid://bt21lg10tl72u" path="res://assets/textures/vfx/explosion_sprite_sheet.png" id="17_c5lks"]
 [ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="18_t3b4m"]
-[ext_resource type="Texture2D" uid="uid://bxi1lboi72dby" path="res://assets/textures/fish/final_fish/boss_fish/Joel_sprite_sheet.png" id="19_kn60h"]
+[ext_resource type="Texture2D" uid="uid://bxi1lboi72dby" path="res://assets/textures/fish/final_fish/boss_fish/world_1_boss/Joel_sprite_sheet.png" id="19_kn60h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_np22p"]
 content_margin_top = 20.0
@@ -760,7 +760,6 @@ position = Vector2(635, 479.99994)
 scale = Vector2(0.6746573, 0.6708732)
 
 [node name="ReactionAnimation" type="AnimatedSprite2D" parent="."]
-visible = false
 position = Vector2(634, 492.00705)
 scale = Vector2(1.5155149, 1.5155149)
 sprite_frames = SubResource("SpriteFrames_rnbwo")
