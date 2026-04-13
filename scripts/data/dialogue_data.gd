@@ -284,15 +284,15 @@ const BAIT_SHOP : Dictionary = {
 
 const JERRY_LICENSE_1 : Dictionary = {
 	0001 : {
-		KEY_NAME : "Jerry",
+		KEY_NAME : "Felix",
 		KEY_TEXT : "Hey Jeremy!\nWe'll make it through this, just gotta get enough money to pay the boss right?"
 	},
 	0002 : {
-		KEY_NAME : "Jerry",
+		KEY_NAME : "Felix",
 		KEY_TEXT : "Just keep going what you do best and fish! I heard that the further out you cast, the higher value the fish, so aim far!"
 	},
 	0003 : {
-		KEY_NAME : "Jerry",
+		KEY_NAME : "Felix",
 		KEY_TEXT : "Don't forget to rest as well. Can't exactly fish when you can't even stay awake right? Have a break, a meal, or just go to sleep when you're tired, alright?",
 		KEY_RETURN : true
 	}
@@ -300,23 +300,31 @@ const JERRY_LICENSE_1 : Dictionary = {
 
 const JERRY_LICENSE_2 : Dictionary = {
 	0001 : {
-		KEY_NAME : "Jerry",
+		KEY_NAME : "Felix",
 		KEY_TEXT : "Another overpriced license.. Oh well, we'll make it through as always.",
 	},
 	0002 : {
-		KEY_NAME : "Jerry",
+		KEY_NAME : "Felix",
 		KEY_TEXT : "Luckily we brought our new gadget along. Your lure shoots so far now!"
 	},
 	0003 : {
-		KEY_NAME : "Jerry",
-		KEY_TEXT : "That guy came along with us as well.. said he got some special bait you can try. Shady guy.. If you don't want to buy from him, you could always.. uh.. dig and scavange through [i]that[/i]].. I'm sure there's some worms in there if you're lucky.",
+		KEY_NAME : "Felix",
+		KEY_TEXT : "That guy came along with us as well.. said he got some special bait you can try. Shady guy.. If you don't want to buy from him, you could always.. uh.. dig and scavange through..",
+	},
+	0004 : {
+		KEY_NAME : "Felix",
+		KEY_TEXT : "..THAT.",
+	},
+	0005 : {
+		KEY_NAME : "Felix",
+		KEY_TEXT : "I'm sure there's some worms in there if you're lucky.",
 		KEY_RETURN : true
 	}
 }
 
 const JERRY_LICENSE_3 : Dictionary = {
 	0001 : {
-		KEY_NAME : "Jerry",
+		KEY_NAME : "Felix",
 		KEY_TEXT : "There's something in the waters.. I guess that's why they sent us here. Our sources tells us that our target's fond of this 'Magic Bait'.. Maybe that weird guy has some for sale?",
 		KEY_RETURN : true
 	}

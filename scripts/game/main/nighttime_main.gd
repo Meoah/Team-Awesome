@@ -12,7 +12,7 @@ class_name NighttimeMain
 @export var _jeremy_node: MainCharacter
 @export var _house_trigger: CampInteractable
 @export var _campfire_trigger: CampInteractable
-@export var _jerry_trigger: CampInteractable
+@export var _felix_trigger: CampInteractable
 @export var _scavange_trigger: CampInteractable
 @export var _baitmonger_trigger: CampInteractable
 @export var _food_stall_trigger: CampInteractable
@@ -44,7 +44,7 @@ func _ready() -> void:
 func _check_shops() -> void:
 	_house_trigger.set_interactable_enabled(true)
 	_campfire_trigger.set_interactable_enabled(true)
-	_jerry_trigger.set_interactable_enabled(true)
+	_felix_trigger.set_interactable_enabled(true)
 	_scavange_trigger.set_interactable_enabled(SystemData.license >= 2)
 	_baitmonger_trigger.set_interactable_enabled(SystemData.license >= 2)
 	_food_stall_trigger.set_interactable_enabled(SystemData.license >= 3)
