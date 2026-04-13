@@ -1,0 +1,19 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://bted7025casbn"]
+
+[ext_resource type="AudioStream" uid="uid://bff8wbwtvmqs8" path="res://assets/audio/sfx/minigame/struggle/struggle1.ogg" id="1_3hqmk"]
+[ext_resource type="AudioStream" uid="uid://b5w0c22lh7evs" path="res://assets/audio/sfx/minigame/struggle/struggle2.ogg" id="2_meuum"]
+[ext_resource type="AudioStream" uid="uid://bjq4j17uqyhbw" path="res://assets/audio/sfx/minigame/struggle/struggle3.ogg" id="3_kh0b2"]
+[ext_resource type="AudioStream" uid="uid://c5uo3ccpve0pp" path="res://assets/audio/sfx/minigame/struggle/struggle4.ogg" id="4_gjkye"]
+[ext_resource type="AudioStream" uid="uid://u6a84g8e388p" path="res://assets/audio/sfx/minigame/struggle/struggle5.ogg" id="5_5nj40"]
+
+[resource]
+random_pitch = 1.25
+random_volume_offset_db = 4.0
+streams_count = 5
+stream_0/stream = ExtResource("1_3hqmk")
+stream_0/weight = 3.0
+stream_1/stream = ExtResource("2_meuum")
+stream_1/weight = 3.0
+stream_2/stream = ExtResource("3_kh0b2")
+stream_3/stream = ExtResource("4_gjkye")
+stream_4/stream = ExtResource("5_5nj40")

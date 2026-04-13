@@ -1,0 +1,21 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=8 format=3 uid="uid://dqm6vynonx4of"]
+
+[ext_resource type="AudioStream" uid="uid://dhgm441ripbe0" path="res://assets/audio/sfx/footsteps/dirt/lakestep1.ogg" id="1_m2244"]
+[ext_resource type="AudioStream" uid="uid://drlj3kla006xo" path="res://assets/audio/sfx/footsteps/dirt/lakestep2.ogg" id="2_rwwuf"]
+[ext_resource type="AudioStream" uid="uid://w0jd7ekg0bik" path="res://assets/audio/sfx/footsteps/dirt/lakestep3.ogg" id="3_j4vpr"]
+[ext_resource type="AudioStream" uid="uid://umphqcue5hig" path="res://assets/audio/sfx/footsteps/dirt/lakestep4.ogg" id="4_2m4op"]
+[ext_resource type="AudioStream" uid="uid://cl4iva6eac3fd" path="res://assets/audio/sfx/footsteps/dirt/lakestep5.ogg" id="5_p2bkm"]
+[ext_resource type="AudioStream" uid="uid://d0yiskpj3oy8q" path="res://assets/audio/sfx/footsteps/dirt/lakestep6.ogg" id="6_dphb5"]
+[ext_resource type="AudioStream" uid="uid://ddoi322kt7neh" path="res://assets/audio/sfx/footsteps/dirt/lakestep7.ogg" id="7_rxlfy"]
+
+[resource]
+random_pitch = 1.25
+random_volume_offset_db = 3.0
+streams_count = 7
+stream_0/stream = ExtResource("1_m2244")
+stream_1/stream = ExtResource("2_rwwuf")
+stream_2/stream = ExtResource("3_j4vpr")
+stream_3/stream = ExtResource("4_2m4op")
+stream_4/stream = ExtResource("5_p2bkm")
+stream_5/stream = ExtResource("6_dphb5")
+stream_6/stream = ExtResource("7_rxlfy")

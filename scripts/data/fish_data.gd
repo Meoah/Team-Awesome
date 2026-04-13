@@ -6,7 +6,7 @@ var fish_price: int
 var icon: Texture2D
 
 # Table of Contents. When refrencing fish, use the ID accociated to locate the data.
-const FISH_ID : Dictionary = {
+const FISH_ID: Dictionary = {
 	1 : ACORN_FISH,
 	2 : RAINBOW_EEL,
 	3 : TRASH,
@@ -27,6 +27,10 @@ const FISH_ID : Dictionary = {
 	21 : NATEKEK,
 	22 : SHEEBA_SHIBA,
 	23 : TADPOLE_BOBA
+}
+
+const BOSS_ID: Dictionary = {
+	1 : JOEL_FISH
 }
 
 ## Fish data
@@ -256,4 +260,16 @@ const TADPOLE_BOBA : Dictionary = {
 	"inputs" : ["Left","Right","Left","Left","Right","Right"],
 	"value" : 8.0,
 	"time" : 4.5
+}
+
+
+# BOSS FISH
+#1
+const JOEL_FISH : Dictionary = {
+	"name" : "Joel",
+	"image" : NodePath("res://assets/textures/fish/final_fish/23_TadpoleBoba.png"),
+	"weight" : 5.0,
+	"inputs" : [], # Leave it empty
+	"value" : 8.0,
+	"time" : 10.0
 }

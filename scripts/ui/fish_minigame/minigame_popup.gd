@@ -9,6 +9,7 @@ class_name MinigamePopup
 @export var _sfx_timer_end: AudioStream
 @export var _sfx_struggle: AudioStream
 @export var _sfx_success_arrow: AudioStream
+@export var _sfx_wrong_arrow: AudioStream
 @export var _sfx_fail: AudioStream
 @export var _sfx_gold_fail: AudioStream
 @export var _sfx_fish_caught: AudioStream
@@ -18,6 +19,7 @@ class_name MinigamePopup
 @export var _countdown_bar: CountdownBar
 @export var _arrow_container: ArrowContainer
 @export var _results_window: ResultsWindow
+@export var _continue_indicator: Control
 
 @export_category("Data")
 @export var _arrow_scene: PackedScene
@@ -208,7 +210,10 @@ func _input(event : InputEvent):
 			if _input_index == _input_array.size(): _win()
 	
 	if event is InputEventMouseMotion: return
-	if _delay: _return_to_fishing()
+	if _delay:
+		get_viewport().set_input_as_handled()
+		_return_to_fishing()
+		return
 
 # On correct Input
 func correct_input():
@@ -226,6 +231,8 @@ func incorrect_input():
 	if chosen_fish_variant == FishVariantType.GOLD:
 		_fail()
 		return
+		
+	AudioEngine.play_sfx(_sfx_wrong_arrow)
 	
 	set_process_input(false)
 	await get_tree().create_timer(0.3).timeout
@@ -304,6 +311,7 @@ func _win():
 
 func _prep_return_to_fishing() -> void:
 	await get_tree().create_timer(1.0).timeout
+	_set_continue_visible(true)
 	set_process_input(true)
 	_delay = true
 	
@@ -314,10 +322,24 @@ func _prep_return_to_fishing() -> void:
 func _return_to_fishing() -> void:
 	if !is_inside_tree() or is_queued_for_deletion(): return
 	
+	_suppress_player_input()
+	
 	PlayManager.request_catching_state()
 	AudioEngine.stop_all_sfx()
-	
-	# TODO Stuff you want to happen between catching and idle, such as a fail animation. Note that we're paused
-	
 	PlayManager.request_idle_day_state()
 	GameManager.popup_queue.dismiss_popup()
+
+
+func _suppress_player_input() -> void:
+	var scene_container: Control = GameManager.get_scene_container()
+	if scene_container.get_child_count() <= 0:
+		return
+	
+	var active_scene = scene_container.get_child(0)
+	if active_scene is DaytimeMain and active_scene.jeremy_node:
+		active_scene.jeremy_node.suppress_input_until_release()
+
+
+## Sets the continue UI element visibility.
+func _set_continue_visible(visible_value: bool) -> void:
+	if _continue_indicator : _continue_indicator.visible = visible_value

@@ -48,6 +48,7 @@ window/stretch/mode="canvas_items"
 
 folder_colors={
 "res://assets/": "green",
+"res://assets/textures/placeholders/": "red",
 "res://scenes/": "yellow",
 "res://scripts/": "orange",
 "res://shaders/": "purple"
@@ -60,6 +61,7 @@ bobber_group="Bobbers."
 [gui]
 
 common/snap_controls_to_pixels=false
+theme/custom_font="uid://ciwjf56aydm2a"
 
 [input]
 

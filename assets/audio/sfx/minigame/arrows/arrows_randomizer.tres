@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://b5smwrrqj58oc"]
+
+[ext_resource type="AudioStream" uid="uid://ddoelt7dv8dv4" path="res://assets/audio/sfx/minigame/arrows/arrow1.ogg" id="1_k0jt8"]
+[ext_resource type="AudioStream" uid="uid://wtctofuql2tt" path="res://assets/audio/sfx/minigame/arrows/arrow2.ogg" id="2_bvy1t"]
+[ext_resource type="AudioStream" uid="uid://bh4dcxalp5ixr" path="res://assets/audio/sfx/minigame/arrows/arrow3.ogg" id="3_g4hh1"]
+[ext_resource type="AudioStream" uid="uid://c1pwpt5oj70on" path="res://assets/audio/sfx/minigame/arrows/arrow4.ogg" id="4_gvwfj"]
+
+[resource]
+random_pitch = 1.25
+random_volume_offset_db = 4.0
+streams_count = 4
+stream_0/stream = ExtResource("1_k0jt8")
+stream_1/stream = ExtResource("2_bvy1t")
+stream_2/stream = ExtResource("3_g4hh1")
+stream_3/stream = ExtResource("4_gvwfj")

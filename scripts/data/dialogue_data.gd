@@ -42,6 +42,12 @@ const DIALOGUE_ID : Dictionary[int,Dictionary] = {
 	0000 : DEBUG_EXAMPLE,
 	0001 : INTRO,
 	0002 : BAIT_SHOP,
+	0102 : JERRY_LICENSE_1,
+	0103 : JERRY_LICENSE_2,
+	0104 : JERRY_LICENSE_3,
+	0105 : CAMPFIRE_MEAL,
+	0106 : CAMPFIRE_COOLDOWN,
+	0107 : FOODSTALL_TEASER,
 }
 
 ## Dialogue data
@@ -269,9 +275,73 @@ const BAIT_SHOP : Dictionary = {
 	},
 	0001 : {
 		KEY_NAME : NAME_BAIT_VENDOR,
-		KEY_TEXT : "Hello there, do you want some shoppins?",
+		KEY_TEXT : "'sup man. I found some bait. Gonna cost ya though.",
 		KEY_RETURN : true,
 		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
 		KEY_SIGNAL : ["start_bait_shop"]
 	},
+}
+
+const JERRY_LICENSE_1 : Dictionary = {
+	0001 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "Hey Jeremy!\nWe'll make it through this, just gotta get enough money to pay the boss right?"
+	},
+	0002 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "Just keep going what you do best and fish! I heard that the further out you cast, the higher value the fish, so aim far!"
+	},
+	0003 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "Don't forget to rest as well. Can't exactly fish when you can't even stay awake right? Have a break, a meal, or just go to sleep when you're tired, alright?",
+		KEY_RETURN : true
+	}
+}
+
+const JERRY_LICENSE_2 : Dictionary = {
+	0001 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "Another overpriced license.. Oh well, we'll make it through as always.",
+	},
+	0002 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "Luckily we brought our new gadget along. Your lure shoots so far now!"
+	},
+	0003 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "That guy came along with us as well.. said he got some special bait you can try. Shady guy.. If you don't want to buy from him, you could always.. uh.. dig and scavange through [i]that[/i]].. I'm sure there's some worms in there if you're lucky.",
+		KEY_RETURN : true
+	}
+}
+
+const JERRY_LICENSE_3 : Dictionary = {
+	0001 : {
+		KEY_NAME : "Jerry",
+		KEY_TEXT : "There's something in the waters.. I guess that's why they sent us here. Our sources tells us that our target's fond of this 'Magic Bait'.. Maybe that weird guy has some for sale?",
+		KEY_RETURN : true
+	}
+}
+
+const CAMPFIRE_MEAL : Dictionary = {
+	0001 : {
+		KEY_NAME : "Campfire",
+		KEY_TEXT : "Jeremy has a quick meal. +25 stamina. 30 minutes pass.",
+		KEY_RETURN : true
+	}
+}
+
+const CAMPFIRE_COOLDOWN : Dictionary = {
+	0001 : {
+		KEY_NAME : "Campfire",
+		KEY_TEXT : "Still too full for another meal. Come back later.",
+		KEY_RETURN : true
+	}
+}
+
+const FOODSTALL_TEASER : Dictionary = {
+	0001 : {
+		KEY_NAME : "Food Stall",
+		KEY_TEXT : "Yo. Sorry pal, but I ain't got no ingredents atta moment. Come back later, ya hear? (Not available in the demo, sorry.)",
+		KEY_RETURN : true
+	}
 }

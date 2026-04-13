@@ -5,11 +5,12 @@ class_name DaytimeMain
 @export var default_bgm : AudioStream
 
 @export_category("Children Nodes")
-@export var jeremy_node : MainCharacter
-@export var hud : HUD
-@export var camera : Camera2D
+@export var jeremy_node: MainCharacter
+@export var hud: HUD
+@export var camera: Camera2D
+@export var boss_shadow: BossShadow
 
-@export var weather_modulate : CanvasModulate
+const MAGIC_BAIT_ID: int = 2
 
 @export_category("PackedScenes")
 @export var bobber_scene : PackedScene
@@ -26,8 +27,11 @@ func _ready() -> void:
 	if SystemData.fresh_run:
 		_equip_license_gear()
 	
-	
 	await hud.fade_in().finished
+	
+	if _check_loss_condition(): return
+	
+	await jeremy_node.walk_up_sequence()
 	await jeremy_node.walk_up_sequence()
 	
 	# Cutscenes
@@ -38,6 +42,18 @@ func _ready() -> void:
 		_ready_day()
 	
 	SystemData.fresh_run = false
+
+
+func _check_loss_condition() -> bool:
+	if SystemData.license == 3:
+		return false
+	
+	var final_day: int = 1 + (SystemData.license * 2)
+	if SystemData.get_day() > final_day and SystemData.get_money() < SystemData.calculate_goal():
+		SignalBus.player_dies.emit()
+		return true
+	
+	return false
 
 
 ## Plays the intro sequence and sets initial bait if first day.
@@ -63,17 +79,38 @@ func is_can_fish() -> bool:
 	return false
 
 func _end_day() -> void:
+	TimeManager._advance_time(1.0, true)
+	
 	if PlayManager.request_idle_night_state():
 		GameManager.change_scene_deferred(GameManager.nighttime_scene)
 
-func _play_minigame(distance: float) -> void:
-	$FISH.play("FISH!") #Plays FISH! Animation
+
+func _on_bobber_landed_in_water(bobber: Bobber) -> void:
+	if !is_instance_valid(bobber): return
+	
+	bobber.encounter_type = Bobber.EncounterType.NORMAL
+	
+	if SystemData.license != 3: return
+	if SystemData.boss_defeated: return
+	if bobber.cast_bait_id != MAGIC_BAIT_ID: return
+	if !boss_shadow.visible: return
+	
+	if boss_shadow.contains_bobber(bobber): bobber.encounter_type = Bobber.EncounterType.BOSS
+
+func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: float) -> void:
+	$FISH.play("FISH!")
 	await $FISH.animation_finished
+	
+	var popup_type: BasePopup.POPUP_TYPE = BasePopup.POPUP_TYPE.MINIGAME
+	if encounter_type == Bobber.EncounterType.BOSS: popup_type = BasePopup.POPUP_TYPE.BOSS_MINIGAME
+	
 	var popup_parameters = {
 		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE,
-		"distance" = distance
+		"_distance" = distance
 	}
-	GameManager.popup_queue.show_popup(BasePopup.POPUP_TYPE.MINIGAME, popup_parameters)
+	
+	GameManager.popup_queue.show_popup(popup_type, popup_parameters)
+
 
 func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.stop(true)
@@ -84,18 +121,6 @@ func _idle_state() -> void:
 
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()
-
-#-----Lighting by time------
-func _set_up_lighting() -> void:
-	if TimeManager and weather_modulate:
-		weather_modulate.color = TimeManager.get_color_hour(TimeManager.current_hour) 
-		TimeManager.time_updated.connect(_on_time_updated)
-
-func  _on_time_updated(new_hour : float) -> void:
-	if not weather_modulate:
-		return
-	var tween = create_tween()
-	tween.tween_property(weather_modulate, "color", TimeManager.get_color_hour(new_hour), 2.0)
 
 # TODO REMOVE THIS LATER, HARDCODED RUN EQUIPMENT
 func _equip_license_gear() -> void:

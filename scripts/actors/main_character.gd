@@ -12,6 +12,9 @@ class_name MainCharacter
 @export var charging_sfx : AudioStream
 @export var hook_success_sfx : AudioStream
 @export var casting_sfx: AudioStream
+@export var _wood_step_sfx: AudioStream
+@export var _dirt_step_sfx: AudioStream
+
 # Arrow
 var arrow_distance : float = 0.0
 var cast_angle : float = 20.0
@@ -30,6 +33,7 @@ enum InputFlags{
 }
 var input_flags : int = 0
 var move_speed : float = 250.0
+var suppress_gameplay_input_until_release: bool = false
 # Bobbing
 var bob_amplitude : float = 40.0
 var bob_speed : float = 8.0
@@ -43,6 +47,11 @@ var daytime_node : DaytimeMain
 var nighttime_node : NighttimeMain
 # Signals
 signal player_interact
+
+var time_spent_per_cast: float = 1.5
+
+var queued_cast_bait_id: int = -1
+var hooked_bobbers: Array[Bobber] = []
 
 func _ready() -> void:
 	# Initializes arrow sprite.
@@ -77,11 +86,22 @@ func _check_equipment() -> void:
 			stamina_usage = 7.5
 			strength_multiplier = 4.0
 		3:
+			time_spent_per_cast *= 0.75
 			stamina_usage = 6.0
 
 
 func _input(event : InputEvent) -> void:
-	if event.is_echo() : return
+	if event.is_echo(): return
+	
+	if suppress_gameplay_input_until_release:
+		input_flags = 0
+		interacted = false
+		
+		if _has_any_gameplay_input_pressed():
+			get_viewport().set_input_as_handled()
+			return
+		
+		suppress_gameplay_input_until_release = false
 	
 	# Arrow Keys
 	if event.is_action_pressed("left"):		_set_flag(InputFlags.MOVE_LEFT, true)
@@ -96,8 +116,6 @@ func _input(event : InputEvent) -> void:
 	# Action
 	if event.is_action_pressed("action"):	_set_flag(InputFlags.ACTION, true)
 	if event.is_action_released("action"):	_set_flag(InputFlags.ACTION, false)
-	
-	#TODO cancel button?
 
 
 func _process(delta: float) -> void:
@@ -146,21 +164,38 @@ func walk_up_sequence() -> void:
 func _reset_flags() -> void:
 	input_flags = 0
 
+
+func suppress_input_until_release() -> void:
+	suppress_gameplay_input_until_release = true
+	input_flags = 0
+	interacted = false
+
+
+func _has_any_gameplay_input_pressed() -> bool:
+	return (
+		Input.is_action_pressed("left")
+		or Input.is_action_pressed("right")
+		or Input.is_action_pressed("up")
+		or Input.is_action_pressed("down")
+		or Input.is_action_pressed("action")
+	)
+
+
 # Transitions to casting state, then continously charge while action held.
 func _cast_handler(delta : float) -> void:
 	if input_flags & InputFlags.ACTION: 
 		if PlayManager.get_current_state() is CastingState:
 			body_sprite.flip_h = false
 			_charging(delta)
-		elif SystemData.use_stamina(stamina_usage):
-			if SystemData.use_bait(SystemData.get_active_bait()):
-				body_sprite.flip_h = false
-				PlayManager.request_casting_state()
-	else:
-		if PlayManager.get_current_state() is CastingState:
-			AudioEngine.play_sfx(casting_sfx)
-			_throw_bobber()
-			PlayManager.request_waiting_state()
+		
+		elif active_bobber_count < bobber_limit:
+			body_sprite.flip_h = false
+			PlayManager.request_casting_state()
+	
+	elif PlayManager.get_current_state() is CastingState:
+		AudioEngine.play_sfx(casting_sfx)
+		if _throw_bobber(): PlayManager.request_waiting_state()
+		else: PlayManager.request_idle_day_state()
 
 # Charges the power bar.
 func _charging(delta : float) -> void:
@@ -206,8 +241,11 @@ func _flash_power_bar() -> void:
 func _clear_bobbers() -> void:
 	bobber_hook = 0
 	active_bobber_count = 0
+	hooked_bobbers.clear()
+	
 	for child in get_children():
-		if child is Bobber : child.queue_free()
+		if child is Bobber:
+			child.queue_free()
 
 # Sets flag on or off
 func _set_flag(flag : int, enabled : bool) -> void:
@@ -235,16 +273,23 @@ func _action() -> void:
 	if !(input_flags & InputFlags.ACTION):
 		interacted = false
 		return
+	
 	if !interacted:
 		player_interact.emit()
 		interacted = true
-	if bobber_hook:
+	
+	if bobber_hook > 0:
 		if PlayManager.request_reeling_state():
-			var rightmost_bobber = camera._find_target()
-			var distance = rightmost_bobber.position.x
-			_clear_bobbers()
+			var hooked_bobber: Bobber = _get_reel_target_bobber()
+			if !hooked_bobber: return
+			
+			var distance: float = hooked_bobber.position.x
+			var encounter_type: Bobber.EncounterType = hooked_bobber.encounter_type
+			
 			AudioEngine.play_sfx(hook_success_sfx)
-			if daytime_node : daytime_node._play_minigame(distance)
+			_clear_bobbers()
+			
+			if daytime_node: daytime_node.start_fishing_encounter(encounter_type, distance)
 
 # Aiming handler
 func _aiming(delta) -> void:
@@ -266,30 +311,66 @@ func _update_arrow() -> void:
 	arrow_sprite.position = Vector2(cos(cast_angle_radian), -sin(cast_angle_radian)) * arrow_distance
 
 # Throws the bobber with input angle and force.
-func _throw_bobber() -> void:
+func _throw_bobber() -> bool:
 	AudioEngine.stop_sfx_key(charging_sfx)
-	if active_bobber_count < bobber_limit:
-		TimeManager._advance_time(1.5)
-		active_bobber_count += 1
-		var bobber : RigidBody2D = bobber_scene.instantiate()
-		var radians : float = deg_to_rad(cast_angle)
-		var impulse : Vector2 = Vector2(cos(radians), -sin(radians)) * (cast_power + 20) * 7.5 * strength_multiplier
-		bobber.hooked.connect(_on_bobber_fish_hook)
-		bobber.hook_timeout.connect(_on_bobber_hook_timeout)
-		add_child(bobber)
-		bobber.apply_impulse(impulse)
+	
+	if active_bobber_count >= bobber_limit: return false
+	
+	var bait_id: int = SystemData.get_active_bait()
+	
+	if !SystemData.use_stamina(stamina_usage): return false
+	if !SystemData.use_bait(bait_id): return false
+	
+	queued_cast_bait_id = bait_id
+	
+	TimeManager._advance_time(time_spent_per_cast)
+	active_bobber_count += 1
+	
+	var bobber: Bobber = bobber_scene.instantiate()
+	bobber.cast_bait_id = queued_cast_bait_id
+	queued_cast_bait_id = -1
+	
+	var radians: float = deg_to_rad(cast_angle)
+	var impulse: Vector2 = Vector2(cos(radians), -sin(radians)) * (cast_power + 20) * 7.5 * strength_multiplier
+	
+	bobber.hooked.connect(_on_bobber_fish_hook)
+	bobber.hook_timeout.connect(_on_bobber_hook_timeout)
+	
+	if daytime_node: bobber.landed_in_water.connect(daytime_node._on_bobber_landed_in_water)
+	
+	add_child(bobber)
+	bobber.apply_impulse(impulse)
+	return true
+
+func _get_reel_target_bobber() -> Bobber:
+	var chosen: Bobber = null
+	var best_x: float = -INF
+	
+	for bobber in hooked_bobbers:
+		if !is_instance_valid(bobber):
+			continue
+		if bobber.global_position.x > best_x:
+			best_x = bobber.global_position.x
+			chosen = bobber
+	
+	return chosen
 
 ## Handles signal functions
 # Sets flag if fish is hooked.
-func _on_bobber_fish_hook() -> void : bobber_hook += 1
+func _on_bobber_fish_hook(bobber: Bobber) -> void:
+	bobber_hook += 1
+	if !hooked_bobbers.has(bobber): hooked_bobbers.append(bobber)
 
 # Timeout causes line to be cut. If no more bobbers out, transition state.
-func _on_bobber_hook_timeout() -> void:
+func _on_bobber_hook_timeout(bobber: Bobber) -> void:
 	active_bobber_count -= 1
-	bobber_hook -=1
+	hooked_bobbers.erase(bobber)
+	
+	if bobber_hook > 0: bobber_hook -= 1
+	
 	if active_bobber_count <= 0:
-		active_bobber_count = 0 # Guarantee the reset.
-		bobber_hook = false
+		active_bobber_count = 0
+		bobber_hook = 0
 		PlayManager.request_idle_day_state()
 
 # Make power bar visible and resets cast variables on CastingState
@@ -312,7 +393,5 @@ func _on_body_frame_changed() -> void:
 func _footstep_sfx() -> void:
 	# TODO We perhaps we can use an area2D to detect what's under his feet. For now,
 	#	we just determine surface by main scene.
-	if daytime_node:
-		print("wood step")
-	if nighttime_node:
-		print("dirt step")
+	if daytime_node: AudioEngine.play_sfx(_wood_step_sfx)
+	if nighttime_node: AudioEngine.play_sfx(_dirt_step_sfx)

@@ -10,6 +10,7 @@ var _arrow_tracker: Array[Arrow] = []
 var current_arrow_index: int = 0
 
 func add_arrow(arrow: Arrow) -> void:
+	show()
 	_arrow_tracker.append(arrow)
 	_arrow_list.add_child(arrow)
 
@@ -25,6 +26,21 @@ func correct_arrow(index: int) -> void:
 
 func incorrect_arrow(index: int) -> void:
 	_arrow_tracker[index].incorrect()
+
+
+func clear_arrows() -> void:
+	for arrow in _arrow_tracker:
+		if is_instance_valid(arrow):
+			arrow.queue_free()
+	
+	_arrow_tracker.clear()
+	current_arrow_index = 0
+	show()
+	_highlight_node.hide()
+
+
+func row_size() -> int:
+	return _arrow_tracker.size()
 
 
 func _process(delta: float) -> void:
