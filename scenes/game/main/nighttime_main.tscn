@@ -64,7 +64,7 @@ size = Vector2(100, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5hdm"]
 size = Vector2(100, 720)
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("_jeremy_node", "hud", "scavange_label")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("_jeremy_node", "_house_trigger", "_campfire_trigger", "_jerry_trigger", "_scavange_trigger", "_baitmonger_trigger", "_food_stall_trigger", "hud", "scavange_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -80,6 +80,12 @@ scavange_sfx = SubResource("AudioStreamRandomizer_cte0j")
 scavange_bucket_empty_sfx = ExtResource("5_c5hdm")
 sleeping_sfx = ExtResource("6_6b7ln")
 _jeremy_node = NodePath("Jeremy")
+_house_trigger = NodePath("House")
+_campfire_trigger = NodePath("Campfire")
+_jerry_trigger = NodePath("Jerry")
+_scavange_trigger = NodePath("ScavangePile")
+_baitmonger_trigger = NodePath("Baitmonger")
+_food_stall_trigger = NodePath("FoodStall")
 hud = NodePath("HUD")
 scavange_label = NodePath("ScavangePile/Scavange")
 
@@ -103,10 +109,11 @@ repeat_times = 1000
 texture = ExtResource("4_jhrn1")
 centered = false
 
-[node name="House" type="Area2D" parent="."]
+[node name="House" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(350, 460)
 collision_layer = 4
 script = ExtResource("9_6b7ln")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="House"]
 texture = ExtResource("4_y133y")
@@ -115,10 +122,11 @@ texture = ExtResource("4_y133y")
 shape = SubResource("RectangleShape2D_pk35q")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="Campfire" type="Area2D" parent="."]
+[node name="Campfire" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(750, 575)
 collision_layer = 4
 script = ExtResource("11_x8obj")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Campfire"]
 scale = Vector2(0.2, 0.2)
@@ -129,10 +137,11 @@ position = Vector2(-75, 0)
 shape = SubResource("RectangleShape2D_qt33y")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="Jerry" type="Area2D" parent="."]
+[node name="Jerry" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(950, 585)
 collision_layer = 4
 script = ExtResource("13_gbmub")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Jerry"]
 scale = Vector2(0.5, 0.5)
@@ -148,10 +157,11 @@ flip_h = true
 shape = SubResource("RectangleShape2D_dtf4f")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="ScavangePile" type="Area2D" parent="."]
+[node name="ScavangePile" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(1175, 550)
 collision_layer = 4
 script = ExtResource("15_qt33y")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="ScavangePile"]
 scale = Vector2(0.2, 0.2)
@@ -169,10 +179,11 @@ offset_bottom = -66.0
 text = "Scavange attempts left: 3"
 horizontal_alignment = 1
 
-[node name="Baitmonger" type="Area2D" parent="."]
+[node name="Baitmonger" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(1382, 493)
 collision_layer = 4
 script = ExtResource("17_dtf4f")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="Baitmonger"]
 scale = Vector2(0.4, 0.4)
@@ -182,10 +193,11 @@ texture = ExtResource("13_x8obj")
 shape = SubResource("RectangleShape2D_1fmtj")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="FoodStall" type="Area2D" parent="."]
+[node name="FoodStall" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(1594, 495)
 collision_layer = 4
 script = ExtResource("19_xxygj")
+collision_shape = NodePath("CollisionShape2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="FoodStall"]
 scale = Vector2(0.5, 0.5)
