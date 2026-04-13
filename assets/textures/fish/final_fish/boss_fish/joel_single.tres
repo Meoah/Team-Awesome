@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://cai003fpgvn68"]
+
+[ext_resource type="Texture2D" uid="uid://bxi1lboi72dby" path="res://assets/textures/fish/final_fish/boss_fish/Joel_sprite_sheet.png" id="1_u72dq"]
+
+[resource]
+atlas = ExtResource("1_u72dq")
+region = Rect2(802.6598, 762.7062, 282.95386, 153.2666)

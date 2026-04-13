@@ -203,6 +203,9 @@ func _input(event: InputEvent) -> void:
 			_return_to_fishing()
 		return
 	
+	if Input.is_action_just_pressed("mouse_click") :
+		_win()
+	
 	if _between_rows: return
 	
 	var player_input: String = _read_direction_input()
@@ -345,8 +348,12 @@ func _win() -> void:
 	
 	SystemData.boss_defeated = true
 	
-	var fish_image: Texture = load(_current_image)
-	_reaction_node.texture = fish_image
+	$ReactionAnimation.visible = true
+	$ReactionAnimation.play("joel")
+	
+	
+	#var fish_image: Texture = load(_current_image)
+	#_reaction_node.texture = fish_image
 	
 	var payout: float = _current_value
 	
