@@ -12,6 +12,9 @@ class_name MainCharacter
 @export var charging_sfx : AudioStream
 @export var hook_success_sfx : AudioStream
 @export var casting_sfx: AudioStream
+@export var _wood_step_sfx: AudioStream
+@export var _dirt_step_sfx: AudioStream
+
 # Arrow
 var arrow_distance : float = 0.0
 var cast_angle : float = 20.0
@@ -390,7 +393,5 @@ func _on_body_frame_changed() -> void:
 func _footstep_sfx() -> void:
 	# TODO We perhaps we can use an area2D to detect what's under his feet. For now,
 	#	we just determine surface by main scene.
-	if daytime_node:
-		print("wood step")
-	if nighttime_node:
-		print("dirt step")
+	if daytime_node: AudioEngine.play_sfx(_wood_step_sfx)
+	if nighttime_node: AudioEngine.play_sfx(_dirt_step_sfx)

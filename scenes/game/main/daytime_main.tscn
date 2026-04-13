@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=33 format=3 uid="uid://b856gwtwh1bno"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -21,7 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://b4so1s0p3hdbr" path="res://assets/textures/background/dock_pieces/DockFloor.png" id="14_ajsgr"]
 [ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/game/cutscenes/tutorial_sequence.tscn" id="14_i6nw5"]
 [ext_resource type="Texture2D" uid="uid://dakggumatebv8" path="res://assets/textures/background/dock_pieces/Post.png" id="17_b82wd"]
+[ext_resource type="AudioStream" uid="uid://bjjf1jht62o3k" path="res://assets/audio/sfx/fishing/hook_success.ogg" id="17_pj6yd"]
+[ext_resource type="AudioStream" uid="uid://dqm6vynonx4of" path="res://assets/audio/sfx/footsteps/dirt/dirt_step_randomizer.tres" id="18_b82wd"]
 [ext_resource type="PackedScene" uid="uid://d3lb2hsqyd5mi" path="res://scenes/actors/boss_shadow.tscn" id="18_e7nxg"]
+[ext_resource type="AudioStream" uid="uid://dircp4ylcl7rr" path="res://assets/audio/sfx/footsteps/wood/wood_step_randomizer.tres" id="18_s5bea"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
 size = Vector2(10, 100)
@@ -231,6 +234,9 @@ debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 position = Vector2(-50, 425)
 scale = Vector2(0.25, 0.25)
 camera = NodePath("../DayCam")
+hook_success_sfx = ExtResource("17_pj6yd")
+_wood_step_sfx = ExtResource("18_s5bea")
+_dirt_step_sfx = ExtResource("18_b82wd")
 
 [node name="Foreground" type="Node2D" parent="."]
 

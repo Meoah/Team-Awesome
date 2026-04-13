@@ -9,6 +9,7 @@ class_name MinigamePopup
 @export var _sfx_timer_end: AudioStream
 @export var _sfx_struggle: AudioStream
 @export var _sfx_success_arrow: AudioStream
+@export var _sfx_wrong_arrow: AudioStream
 @export var _sfx_fail: AudioStream
 @export var _sfx_gold_fail: AudioStream
 @export var _sfx_fish_caught: AudioStream
@@ -230,6 +231,8 @@ func incorrect_input():
 	if chosen_fish_variant == FishVariantType.GOLD:
 		_fail()
 		return
+		
+	AudioEngine.play_sfx(_sfx_wrong_arrow)
 	
 	set_process_input(false)
 	await get_tree().create_timer(0.3).timeout

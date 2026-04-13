@@ -1,114 +1,115 @@
-[gd_scene load_steps=48 format=3 uid="uid://264lc2go5kdr"]
+[gd_scene load_steps=49 format=3 uid="uid://264lc2go5kdr"]
 
-[ext_resource type="Script" uid="uid://dmhqh0vxrg3j6" path="res://scripts/ui/fish_minigame/boss_minigame_popup.gd" id="1_lsghu"]
-[ext_resource type="AudioStream" uid="uid://csjtfyjxrb8rc" path="res://assets/audio/bgm/boss_fight.ogg" id="2_chrsx"]
-[ext_resource type="AudioStream" uid="uid://brerbjlmvskhy" path="res://assets/audio/sfx/minigame/boss/boss_round_start.ogg" id="3_5dh6o"]
-[ext_resource type="AudioStream" uid="uid://bted7025casbn" path="res://assets/audio/sfx/minigame/struggle/struggle_random.tres" id="4_5dh6o"]
-[ext_resource type="AudioStream" uid="uid://b5smwrrqj58oc" path="res://assets/audio/sfx/minigame/arrows/arrows_random.tres" id="5_wuji6"]
-[ext_resource type="AudioStream" uid="uid://quoc0r0e1j8t" path="res://assets/audio/sfx/minigame/fail.ogg" id="15_xmqwd"]
-[ext_resource type="AudioStream" uid="uid://b6vkq77wj16dl" path="res://assets/audio/sfx/minigame/fish_caught.wav" id="17_qdssc"]
-[ext_resource type="PackedScene" uid="uid://d3ws1cm3wid84" path="res://scenes/ui/pop_ups/fish_minigame/arrow.tscn" id="18_8ycrq"]
-[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="18_wuji6"]
-[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="21_pt0pv"]
-[ext_resource type="Script" uid="uid://bjqerl6c0hfo6" path="res://scripts/ui/fish_minigame/arrow_container.gd" id="22_c4r5y"]
-[ext_resource type="Texture2D" uid="uid://coxwm8oh6le2f" path="res://assets/textures/ui/nine_slices/progress_transparent_small.png" id="22_t8i43"]
-[ext_resource type="Texture2D" uid="uid://c1adow6y0lrcq" path="res://assets/textures/ui/nine_slices/progress_green_small.png" id="23_nb08q"]
-[ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="23_twpo1"]
-[ext_resource type="Script" uid="uid://cn36bdgkpsbur" path="res://scripts/ui/fish_minigame/results_window.gd" id="24_e1ktp"]
-[ext_resource type="Texture2D" uid="uid://bvyec2xpq4f31" path="res://assets/textures/ui/nine_slices/progress_red_small.png" id="24_r5wta"]
-[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="25_jjs40"]
-[ext_resource type="Texture2D" uid="uid://bt21lg10tl72u" path="res://assets/textures/vfx/explosion_sprite_sheet.png" id="26_sjq3q"]
+[ext_resource type="Script" uid="uid://dmhqh0vxrg3j6" path="res://scripts/ui/fish_minigame/boss_minigame_popup.gd" id="1_lut1a"]
+[ext_resource type="AudioStream" uid="uid://csjtfyjxrb8rc" path="res://assets/audio/bgm/boss_fight.ogg" id="2_v3msc"]
+[ext_resource type="AudioStream" uid="uid://brerbjlmvskhy" path="res://assets/audio/sfx/minigame/boss/boss_round_start.ogg" id="3_kn60h"]
+[ext_resource type="AudioStream" uid="uid://bted7025casbn" path="res://assets/audio/sfx/minigame/struggle/struggle_randomizer.tres" id="4_hc08t"]
+[ext_resource type="AudioStream" uid="uid://b5smwrrqj58oc" path="res://assets/audio/sfx/minigame/arrows/arrows_randomizer.tres" id="5_d8coy"]
+[ext_resource type="AudioStream" uid="uid://quoc0r0e1j8t" path="res://assets/audio/sfx/minigame/fail.ogg" id="6_l83bu"]
+[ext_resource type="AudioStream" uid="uid://coklwppam58ch" path="res://assets/audio/sfx/minigame/arrows/wrong_arrow.ogg" id="6_v3msc"]
+[ext_resource type="AudioStream" uid="uid://b6vkq77wj16dl" path="res://assets/audio/sfx/minigame/fish_caught.wav" id="7_4fy5r"]
+[ext_resource type="PackedScene" uid="uid://d3ws1cm3wid84" path="res://scenes/ui/pop_ups/fish_minigame/arrow.tscn" id="8_ceqid"]
+[ext_resource type="Texture2D" uid="uid://coxwm8oh6le2f" path="res://assets/textures/ui/nine_slices/progress_transparent_small.png" id="9_i14j2"]
+[ext_resource type="Texture2D" uid="uid://c1adow6y0lrcq" path="res://assets/textures/ui/nine_slices/progress_green_small.png" id="10_ljtpn"]
+[ext_resource type="Texture2D" uid="uid://bvyec2xpq4f31" path="res://assets/textures/ui/nine_slices/progress_red_small.png" id="11_1o4p6"]
+[ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="12_tg0un"]
+[ext_resource type="Script" uid="uid://bjqerl6c0hfo6" path="res://scripts/ui/fish_minigame/arrow_container.gd" id="13_55b3f"]
+[ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="14_jjgpa"]
+[ext_resource type="Script" uid="uid://cn36bdgkpsbur" path="res://scripts/ui/fish_minigame/results_window.gd" id="15_pkrwe"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="16_7krjj"]
+[ext_resource type="Texture2D" uid="uid://bt21lg10tl72u" path="res://assets/textures/vfx/explosion_sprite_sheet.png" id="17_c5lks"]
+[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="18_t3b4m"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_np22p"]
 content_margin_top = 20.0
 content_margin_bottom = 20.0
-texture = ExtResource("21_pt0pv")
+texture = ExtResource("12_tg0un")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_thhsj"]
-texture = ExtResource("23_twpo1")
+texture = ExtResource("14_jjgpa")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k0mt6"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(213, 294, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hq8j0"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(71, 294, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_a6xgp"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(0, 0, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l556t"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(71, 0, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_c6528"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(142, 0, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aawsu"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(213, 0, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pl1c1"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(284, 0, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sfubr"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(0, 98, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3svcc"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(71, 98, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4vk57"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(142, 98, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rtb8i"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(213, 98, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8047j"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(284, 98, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpbv3"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(0, 196, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_f3qlm"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(71, 196, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5bkyc"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(142, 196, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_15pq2"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(213, 196, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l3v6j"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(284, 196, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p3kl2"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(0, 294, 71, 98)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_n3614"]
-atlas = ExtResource("26_sjq3q")
+atlas = ExtResource("17_c5lks")
 region = Rect2(284, 294, 71, 98)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rnbwo"]
@@ -317,7 +318,7 @@ _data = {
 }
 
 [sub_resource type="LabelSettings" id="LabelSettings_yt485"]
-font = ExtResource("25_jjs40")
+font = ExtResource("16_7krjj")
 font_size = 32
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
@@ -368,13 +369,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_lsghu")
-_default_bgm = ExtResource("2_chrsx")
-_sfx_round_start = ExtResource("3_5dh6o")
-_sfx_struggle = ExtResource("4_5dh6o")
-_sfx_success_arrow = ExtResource("5_wuji6")
-_sfx_fail = ExtResource("15_xmqwd")
-_sfx_fish_caught = ExtResource("17_qdssc")
+script = ExtResource("1_lut1a")
+_default_bgm = ExtResource("2_v3msc")
+_sfx_round_start = ExtResource("3_kn60h")
+_sfx_struggle = ExtResource("4_hc08t")
+_sfx_success_arrow = ExtResource("5_d8coy")
+_sfx_wrong_arrow = ExtResource("6_v3msc")
+_sfx_fail = ExtResource("6_l83bu")
+_sfx_fish_caught = ExtResource("7_4fy5r")
 _reaction_node = NodePath("Reaction")
 _arrow_container = NodePath("ArrowContainer")
 _results_window = NodePath("ResultsWindow")
@@ -384,7 +386,7 @@ _player_stamina_label = NodePath("StaminaUI/PlayerStaminaLabel")
 _boss_stamina_label = NodePath("StaminaUI/BossStaminaLabel")
 _animation_player = NodePath("AnimationPlayer")
 _continue_indicator = NodePath("ContinueIndicator")
-_arrow_scene = ExtResource("18_8ycrq")
+_arrow_scene = ExtResource("8_ceqid")
 
 [node name="StaminaUI" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -414,8 +416,8 @@ stretch_margin_left = 8
 stretch_margin_top = 8
 stretch_margin_right = 8
 stretch_margin_bottom = 8
-texture_under = ExtResource("22_t8i43")
-texture_progress = ExtResource("23_nb08q")
+texture_under = ExtResource("9_i14j2")
+texture_progress = ExtResource("10_ljtpn")
 
 [node name="BossStaminaLabel" type="Label" parent="StaminaUI"]
 layout_mode = 2
@@ -432,8 +434,8 @@ stretch_margin_left = 8
 stretch_margin_top = 8
 stretch_margin_right = 8
 stretch_margin_bottom = 8
-texture_under = ExtResource("22_t8i43")
-texture_progress = ExtResource("24_r5wta")
+texture_under = ExtResource("9_i14j2")
+texture_progress = ExtResource("11_1o4p6")
 
 [node name="ArrowContainer" type="PanelContainer" parent="." node_paths=PackedStringArray("_arrow_list", "_highlight_node")]
 custom_minimum_size = Vector2(800, 100)
@@ -450,7 +452,7 @@ offset_bottom = -150.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_np22p")
-script = ExtResource("22_c4r5y")
+script = ExtResource("13_55b3f")
 _arrow_list = NodePath("ArrowList")
 _highlight_node = NodePath("Highlight")
 
@@ -480,13 +482,13 @@ offset_bottom = -100.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_thhsj")
-script = ExtResource("24_e1ktp")
+script = ExtResource("15_pkrwe")
 _results_label = NodePath("Results")
 
 [node name="Results" type="RichTextLabel" parent="ResultsWindow"]
 layout_mode = 2
 theme_override_constants/outline_size = 4
-theme_override_fonts/normal_font = ExtResource("25_jjs40")
+theme_override_fonts/normal_font = ExtResource("16_7krjj")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 fit_content = true
@@ -536,7 +538,7 @@ modulate = Color(1, 0.99215686, 1, 0.78431374)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-texture = ExtResource("18_wuji6")
+texture = ExtResource("18_t3b4m")
 expand_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ContinueIndicator"]

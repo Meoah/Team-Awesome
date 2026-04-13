@@ -6,6 +6,7 @@ class_name BossMinigamePopup
 @export var _sfx_round_start: AudioStream
 @export var _sfx_struggle: AudioStream
 @export var _sfx_success_arrow: AudioStream
+@export var _sfx_wrong_arrow: AudioStream
 @export var _sfx_fail: AudioStream
 @export var _sfx_fish_caught: AudioStream
 
@@ -258,6 +259,7 @@ func _on_incorrect_input() -> void:
 		_fail()
 		return
 	
+	AudioEngine.play_sfx(_sfx_wrong_arrow)
 	set_process_input(false)
 	await get_tree().create_timer(INPUT_LOCKOUT_SECONDS).timeout
 	
