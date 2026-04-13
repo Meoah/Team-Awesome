@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://o4rx0t814322"
-path="res://.godot/imported/Stanley_bucket.webp-5b9f642be56af6a41de6ef8961c67f0f.ctex"
+uid="uid://bf7n3potbkk26"
+path="res://.godot/imported/boss_shadow.png-447d2ba6acffbac80e5252ef29e4b51d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/debug/Stanley_bucket.webp"
-dest_files=["res://.godot/imported/Stanley_bucket.webp-5b9f642be56af6a41de6ef8961c67f0f.ctex"]
+source_file="res://assets/textures/placeholders/boss_shadow.png"
+dest_files=["res://.godot/imported/boss_shadow.png-447d2ba6acffbac80e5252ef29e4b51d.ctex"]
 
 [params]
 

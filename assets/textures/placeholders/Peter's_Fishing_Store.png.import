@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://i3smng8yxpbe"
-path="res://.godot/imported/blue-house-md.png-37adf56928470f7eb938009d45297df9.ctex"
+uid="uid://da0at2yyqtmkh"
+path="res://.godot/imported/Peter's_Fishing_Store.png-5d5709186e0db1c4ebbae36106a42e9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/debug/blue-house-md.png"
-dest_files=["res://.godot/imported/blue-house-md.png-37adf56928470f7eb938009d45297df9.ctex"]
+source_file="res://assets/textures/placeholders/Peter's_Fishing_Store.png"
+dest_files=["res://.godot/imported/Peter's_Fishing_Store.png-5d5709186e0db1c4ebbae36106a42e9f.ctex"]
 
 [params]
 

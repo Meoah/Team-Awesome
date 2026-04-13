@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emps5yrliobm"
-path="res://.godot/imported/My_Event061_Tarrot_Showcase.webp-c02b796ccc1c1f6f2ce0090377eb5428.ctex"
+uid="uid://bt5eyn66ksuyk"
+path="res://.godot/imported/log.png-d3c5169ba19f7311e64db4b6cc499f9b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/debug/My_Event061_Tarrot_Showcase.webp"
-dest_files=["res://.godot/imported/My_Event061_Tarrot_Showcase.webp-c02b796ccc1c1f6f2ce0090377eb5428.ctex"]
+source_file="res://assets/textures/placeholders/log.png"
+dest_files=["res://.godot/imported/log.png-d3c5169ba19f7311e64db4b6cc499f9b.ctex"]
 
 [params]
 

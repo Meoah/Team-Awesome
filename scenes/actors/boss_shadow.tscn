@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://d3lb2hsqyd5mi"]
 
-[ext_resource type="Texture2D" uid="uid://bf7n3potbkk26" path="res://assets/textures/debug/boss_shadow.png" id="1_3ggsr"]
+[ext_resource type="Texture2D" uid="uid://bf7n3potbkk26" path="res://assets/textures/placeholders/boss_shadow.png" id="1_3ggsr"]
 [ext_resource type="Script" uid="uid://244xlpxgfq4b" path="res://scripts/actors/boss_shadow.gd" id="1_bwncg"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwncg"]

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://p0x3tf6qd2yx"
-path="res://.godot/imported/bassprofishing.png-0b79ec745d5ff2a7b537225679f9183c.ctex"
+uid="uid://o4rx0t814322"
+path="res://.godot/imported/Stanley_bucket.webp-cf83a6ac3a9aa35942ae1f26153538aa.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/debug/bassprofishing.png"
-dest_files=["res://.godot/imported/bassprofishing.png-0b79ec745d5ff2a7b537225679f9183c.ctex"]
+source_file="res://assets/textures/placeholders/Stanley_bucket.webp"
+dest_files=["res://.godot/imported/Stanley_bucket.webp-cf83a6ac3a9aa35942ae1f26153538aa.ctex"]
 
 [params]
 

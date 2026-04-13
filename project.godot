@@ -48,6 +48,7 @@ window/stretch/mode="canvas_items"
 
 folder_colors={
 "res://assets/": "green",
+"res://assets/textures/placeholders/": "red",
 "res://scenes/": "yellow",
 "res://scripts/": "orange",
 "res://shaders/": "purple"

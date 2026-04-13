@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dkj7jecxesoy4" path="res://scripts/ui/hud/hud_controller.gd" id="2_todbw"]
 [ext_resource type="AudioStream" uid="uid://0ioaa52g3nxl" path="res://assets/audio/sfx/ui/receiving_money.ogg" id="4_211po"]
 [ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="4_ncqqj"]
-[ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/debug/Stanley_bucket.webp" id="5_4m4yb"]
+[ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/placeholders/Stanley_bucket.webp" id="5_4m4yb"]
 [ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="5_ne1ra"]
 [ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="6_b1wkl"]
 [ext_resource type="PackedScene" uid="uid://dyaxs1jdloena" path="res://scenes/ui/hud/slot.tscn" id="7_e7gie"]

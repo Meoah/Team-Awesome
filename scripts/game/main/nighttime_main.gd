@@ -9,15 +9,15 @@ class_name NighttimeMain
 @export var sleeping_sfx: AudioStream
 
 @export_category("Children Nodes")
-@export var jeremy_node : MainCharacter
-@export var house_trigger : Area2D
-@export var bucket_trigger : Area2D
-@export var shop_trigger : Area2D
-@export var upgrade_trigger : Area2D
-@export var tarot_trigger : Area2D
+@export var _jeremy_node: MainCharacter
+@export var _house_trigger: Area2D
+@export var _campfire_trigger: Area2D
+@export var _jerry_trigger: Area2D
+@export var _scavange_trigger: Area2D
+@export var _baitmonger_trigger: Area2D
+@export var _food_stall_trigger: Area2D
 @export var hud : HUD
 
-var weather_color : Color = Color.WHITE
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 var scavange: int = -1
 
@@ -26,17 +26,30 @@ func _ready() -> void:
 	_prepare_scavange_bucket()
 		
 	# Bind Signals
-	jeremy_node.player_interact.connect(_interaction)
+	_jeremy_node.player_interact.connect(_interaction)
 	SignalBus.start_bait_shop.connect(_start_bait_shop)
 	SignalBus.shop_closed.connect(_save_shop_data)
 	
 	AudioEngine.play_bgm(default_bgm)
 	
-	await hud.fade_in(0.5).finished
+	await hud.fade_in().finished
+	await _jeremy_node.walk_up_sequence()
 	
+	_check_shops()
 	_check_win_condition()
 	
 	SystemData.camp_day = SystemData.get_day()
+
+
+func _check_shops() -> void:
+	match SystemData.license:
+		1:
+			pass
+		2:
+			_scavange_trigger.show()
+			_baitmonger_trigger.show()
+		3:
+			_food_stall_trigger.show()
 
 
 func _check_win_condition() -> void:
@@ -52,11 +65,9 @@ func _check_win_condition() -> void:
 
 
 func _interaction() -> void:
-	if house_trigger.overlaps_body(jeremy_node) : _sleep()
-	if bucket_trigger.overlaps_body(jeremy_node) : _bucket()
-	if shop_trigger.overlaps_body(jeremy_node) : _bait_shop()
-	if upgrade_trigger.overlaps_body(jeremy_node) : _upgrade_shop()
-	#TODO if tarot_trigger.overlaps_body(jeremy_node) : _tarot_shop()
+	if _house_trigger.overlaps_body(_jeremy_node): _sleep()
+	if _scavange_trigger.overlaps_body(_jeremy_node): _bucket()
+	if _baitmonger_trigger.overlaps_body(_jeremy_node): _bait_shop()
 
 func _sell_all_fish() -> void:
 	SystemData._transfer_money()
@@ -99,13 +110,13 @@ func _bucket() -> void:
 		if luck > 0.5 : SystemData._add_bait(1, 1)
 		if luck > 0.2 : SystemData._add_bait(1, 1)
 	if scavange <= 0:
-		if bucket_trigger.rotation_degrees != 90:
+		if _scavange_trigger.rotation_degrees != 90:
 			AudioEngine.play_sfx(scavange_bucket_empty_sfx)
-		bucket_trigger.rotation_degrees = 90
+		_scavange_trigger.rotation_degrees = 90
 
 func _update_bucket() -> void:
 	if scavange <= 0:
-		bucket_trigger.rotation_degrees = 90
+		_scavange_trigger.rotation_degrees = 90
 	scavange_label.text = "Scavange attempts left: %d" % scavange
 
 func _bait_shop() -> void:
@@ -157,3 +168,9 @@ func _save_shop_data(save_data : Array[Dictionary], shop_type : ShopPopup.SHOP_T
 func _on_button_pressed() -> void:
 	SystemData._add_money(200.0)
 	
+
+
+func _on_exit_sign_body_entered(body: Node2D) -> void:
+	if body is MainCharacter:
+		if PlayManager.request_idle_night_state():
+			GameManager.change_scene_deferred(GameManager.daytime_scene)

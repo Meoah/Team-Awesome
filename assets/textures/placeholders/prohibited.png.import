@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf7n3potbkk26"
-path="res://.godot/imported/boss_shadow.png-d6c53d536cf650ced8d6a379f179079a.ctex"
+uid="uid://dpyu65euhj5p0"
+path="res://.godot/imported/prohibited.png-0842ee2e4cc6b3a75aff73daa6f87da9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/debug/boss_shadow.png"
-dest_files=["res://.godot/imported/boss_shadow.png-d6c53d536cf650ced8d6a379f179079a.ctex"]
+source_file="res://assets/textures/placeholders/prohibited.png"
+dest_files=["res://.godot/imported/prohibited.png-0842ee2e4cc6b3a75aff73daa6f87da9.ctex"]
 
 [params]
 
