@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bxi1lboi72dby"
-path="res://.godot/imported/Joel_sprite_sheet.png-ccbc2f5fae13ec3ed486c9e5d3dc7907.ctex"
+path="res://.godot/imported/Joel_sprite_sheet.png-3b605da3b369632f42e0c55436b8f6a0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/fish/final_fish/boss_fish/Joel_sprite_sheet.png"
-dest_files=["res://.godot/imported/Joel_sprite_sheet.png-ccbc2f5fae13ec3ed486c9e5d3dc7907.ctex"]
+source_file="res://assets/textures/fish/final_fish/boss_fish/world_1_boss/Joel_sprite_sheet.png"
+dest_files=["res://.godot/imported/Joel_sprite_sheet.png-3b605da3b369632f42e0c55436b8f6a0.ctex"]
 
 [params]
 
