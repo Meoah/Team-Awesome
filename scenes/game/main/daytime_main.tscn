@@ -294,9 +294,6 @@ position = Vector2(640, 360)
 limit_left = 0
 limit_bottom = 720
 limit_smoothed = true
-position_smoothing_enabled = true
-drag_horizontal_enabled = true
-drag_vertical_enabled = true
 script = ExtResource("8_3kam8")
 player = NodePath("../Jeremy")
 
