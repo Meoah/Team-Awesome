@@ -251,7 +251,7 @@ func _action() -> void:
 	
 	if bobber_hook > 0:
 		if PlayManager.request_reeling_state():
-			var hooked_bobber := _get_reel_target_bobber()
+			var hooked_bobber: Bobber = _get_reel_target_bobber()
 			if !hooked_bobber: return
 			
 			var distance: float = hooked_bobber.position.x

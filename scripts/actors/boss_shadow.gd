@@ -5,6 +5,12 @@ class_name BossShadow
 
 func _ready() -> void:
 	visible = SystemData.license == 3 and !SystemData.boss_defeated
+	PlayManager.idle_day_state.signal_idle_day.connect(_refresh_self)
+
+
+func _refresh_self() -> void:
+	visible = SystemData.license == 3 and !SystemData.boss_defeated
+
 
 func contains_bobber(bobber: Bobber) -> bool:
 	if !is_instance_valid(bobber): return false

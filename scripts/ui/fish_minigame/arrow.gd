@@ -61,6 +61,8 @@ func _apply_type() -> void:
 		ArrowType.EVIL:
 			_arrow_texture.self_modulate = Color.RED
 			direction = OPPOSITE_DIRECTION.get(direction)
+		ArrowType.HEALING:
+			_arrow_texture.self_modulate = Color.LIME_GREEN
 
 
 func _apply_direction() -> void:
