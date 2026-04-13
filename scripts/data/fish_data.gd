@@ -52,7 +52,8 @@ const ACORN_FISH : Dictionary = {
 	"inputs" : ["Left","Right","Up","Down"],
 	"value" : 3.0,
 	"time" : 5.0,
-	"chance" : 0.20
+	"chance" : 0.20,
+	"description" : "Not a single thought between those eyes..."
 }
 #2
 const RAINBOW_EEL : Dictionary = {
@@ -62,7 +63,8 @@ const RAINBOW_EEL : Dictionary = {
 	"inputs" : ["Down", "Left", "Up", "Right","Down","Down"],
 	"value" : 7.0,
 	"time" : 3.5,
-	"chance" : 0.10
+	"chance" : 0.10,
+	"description" : "This gummy fella adds a bit of a sour taste to any dish"
 }
 #3
 const TRASH : Dictionary = {
@@ -72,7 +74,8 @@ const TRASH : Dictionary = {
 	"inputs" : ["Up","Up","Right"],
 	"value" : -2.0,
 	"time" : 4,
-	"chance" : 0.5
+	"chance" : 0.5,
+	"description" : "I wouldn't use this for any meal..."
 }
 #4
 const SWEDISH_TETRA : Dictionary = {
@@ -82,7 +85,8 @@ const SWEDISH_TETRA : Dictionary = {
 	"inputs" : ["Left","Right","Left","Right"],
 	"value" : 4.0,
 	"time" : 3.0,
-	"chance" : 0.5
+	"chance" : 0.5,
+	"description" : "Known for its juicy interior"
 }
 #5
 const SHROOMLE : Dictionary = {
@@ -91,11 +95,11 @@ const SHROOMLE : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Up","Down","Up"],
 	"value" : 10.0,
-	"time" : 5.0
+	"time" : 5.0,
+	"description" : "The mushrooms on its shell are harvested for a truffly aroma"
 }
 
 
-#TODO Below is fish with temp art. Filepath should be updated when art it finalized
 
 #6
 const LINXOOO : Dictionary = {
@@ -104,9 +108,10 @@ const LINXOOO : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Right","Up","Down","Right","Right"],
 	"value" : 10.0,
-	"time" : 5.0
+	"time" : 5.0,
+	"description" : "Pretty sure thats just a dog that fell in the lake..."
 }
-#7
+#7 (Deprecated)
 const HONEY_GLAZED_SKELETON : Dictionary = {
 	"name" : "Honey Glazed Skeleton",
 	"image" : NodePath("res://assets/textures/fish/wip_fish/Honey Glazed Skeleton.png"),
@@ -122,9 +127,10 @@ const DOODLE_BIRD : Dictionary = {
 	"weight" : 2.0,
 	"inputs" : ["Left","Left","Right","Right","Down","Down"],
 	"value" : 4.0,
-	"time" : 3.0
+	"time" : 3.0,
+	"description" : "An ampbhibious type critter that likes to fly around as well as chill underwater."
 }
-#9
+#9 (Deprecated)
 const DOODLE_BIRD_RARE : Dictionary = {
 	"name" : "Doodle Bird (Rare)",
 	"image" : NodePath("res://assets/textures/fish/wip_fish/FuckassBird(Rare).png"),
@@ -140,7 +146,8 @@ const LONG_FEESH : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Right","Right","Right","Right","Right","Right","Right","Right"],
 	"value" : 10.0,
-	"time" : 4.0
+	"time" : 4.0,
+	"description" : "This long fish tends to get stuck in narrow passage ways causing floods..."
 }
 #11
 const CATFISH : Dictionary = {
@@ -149,7 +156,8 @@ const CATFISH : Dictionary = {
 	"weight" : 4.0,
 	"inputs" : ["Left", "Right", "Left", "Up", "Up","Up"],
 	"value" : 7.0,
-	"time" : 3.5
+	"time" : 3.5,
+	"description" : ""
 }
 #12
 const FIH : Dictionary = {
@@ -158,7 +166,8 @@ const FIH : Dictionary = {
 	"weight" : 2.0,
 	"inputs" : ["Right","Up","Left","Down","Right","Up","Left","Down",],
 	"value" : 6.0,
-	"time" : 3.5
+	"time" : 3.5,
+	"description" : "Would you answer?"
 }
 #13
 const BLENDER_CARP : Dictionary = {
@@ -167,7 +176,8 @@ const BLENDER_CARP : Dictionary = {
 	"weight" : 10.0,
 	"inputs" : ["Left","Right","Up","Down","Left","Right","Up","Down"],
 	"value" : 15.0,
-	"time" : 4.0
+	"time" : 4.0,
+	"description" : "Pretty sure thats just a cube that sorta looks like a fish"
 }
 #14
 const BUBBLE_GOLDFISH : Dictionary = {
@@ -176,7 +186,8 @@ const BUBBLE_GOLDFISH : Dictionary = {
 	"weight" : 3.0,
 	"inputs" : ["Up","Up","Up","Left","Right","Left"],
 	"value" : 3.0,
-	"time" : 3.0
+	"time" : 3.0,
+	"description" : "These fish are know for competitive racing tournaments. This one came in last place..."
 }
 #15
 const JELLOFISH: Dictionary = {
@@ -185,7 +196,8 @@ const JELLOFISH: Dictionary = {
 	"weight" : 10.0,
 	"inputs" : ["Left","Right","Up","Left","Right","Up"],
 	"value" : 10.0,
-	"time" : 3.5
+	"time" : 3.5,
+	"description" : "Its soft interior is rumored to be watermelon flavor."
 }
 
 #16
@@ -195,7 +207,8 @@ const PUFFER_CRAB : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Up","Up","Up","Left","Left","Right","Right"],
 	"value" : 30.0,
-	"time" : 4.5
+	"time" : 4.5,
+	"description" : "Crab with the puffer."
 }
 
 #17
@@ -205,7 +218,8 @@ const KILLER_FISH : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Down","Up","Down"],
 	"value" : 15.0,
-	"time" : 3.5
+	"time" : 3.5,
+	"description" : "He'll be your killer fish for the evening."
 }
 #18
 const POG_FISH : Dictionary = {
@@ -214,7 +228,8 @@ const POG_FISH : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Right","Left","Right","Left","Right",],
 	"value" : 10.0,
-	"time" : 5.0
+	"time" : 5.0,
+	"description" : "Seems a little too excited to get caught"
 }
 #19
 const PLUG_FISH : Dictionary = {
@@ -223,7 +238,8 @@ const PLUG_FISH : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Up","Up","Up","Down","Down"],
 	"value" : 8.0,
-	"time" : 3.5
+	"time" : 3.5,
+	"description" : "This electric eel adds some energy to a dish"
 	}
 #20
 const JUBILANT_FISH : Dictionary = {
@@ -232,7 +248,8 @@ const JUBILANT_FISH : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Left","Up","Right","Down","Left","Down","Right","Up"],
 	"value" : 10.0,
-	"time" : 4.5
+	"time" : 4.5,
+	"description" : "Strawberry flavored"
 }
 #21
 const NATEKEK : Dictionary = {
@@ -241,7 +258,8 @@ const NATEKEK : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Down","Right","Up","Up","Up"],
 	"value" : 20.0,
-	"time" :2.5
+	"time" :2.5,
+	"description" : "This toad like to blow himself up sometimes"
 }
 #22
 const SHEEBA_SHIBA : Dictionary = {
@@ -267,7 +285,7 @@ const TADPOLE_BOBA : Dictionary = {
 #1
 const JOEL_FISH : Dictionary = {
 	"name" : "Joel",
-	"image" : NodePath("res://assets/textures/fish/final_fish/23_TadpoleBoba.png"),
+	"image" : NodePath("res://assets/textures/fish/final_fish/boss_fish/joel_single.tres"),
 	"weight" : 5.0,
 	"inputs" : [], # Leave it empty
 	"value" : 8.0,
