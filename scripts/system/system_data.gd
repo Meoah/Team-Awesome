@@ -37,6 +37,7 @@ var camp_scavange: int = 3
 var boss_defeated: bool = false
 var winner_screen_shown: bool = false
 var value_multiplier: float = 1.0
+var campfire_available_at_hour: float = 0.0
 
 # Signals
 signal inventory_updated
@@ -58,6 +59,7 @@ func _reset_all() -> void:
 	boss_defeated = false
 	winner_screen_shown = false
 	value_multiplier = 1.0
+	campfire_available_at_hour = 0.0
 
 ## Money methods
 func _set_money(money : float) -> void:
@@ -232,3 +234,12 @@ func use_stamina(value: float) -> bool:
 	player_stamina -= value
 	stamina_updated.emit()
 	return true
+
+func can_use_campfire() -> bool:
+	return TimeManager.get_absolute_hour() >= campfire_available_at_hour
+
+func get_campfire_hours_remaining() -> float:
+	return max(0.0, campfire_available_at_hour - TimeManager.get_absolute_hour())
+
+func mark_campfire_used(cooldown_hours: float = 6.0) -> void:
+	campfire_available_at_hour = TimeManager.get_absolute_hour() + cooldown_hours

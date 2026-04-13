@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=39 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_1pk0j"]
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/main/nighttime_main.gd" id="1_53syt"]
@@ -11,13 +11,21 @@
 [ext_resource type="AudioStream" uid="uid://dckbjxm0wsw5h" path="res://assets/audio/sfx/campsite/scavange_bucket_empty.ogg" id="5_c5hdm"]
 [ext_resource type="AudioStream" uid="uid://dkfcuh06uxjyn" path="res://assets/audio/sfx/campsite/sleep.ogg" id="6_6b7ln"]
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/placeholders/Stanley_bucket.webp" id="8_7dbdj"]
+[ext_resource type="Script" uid="uid://ew6c2wpg0r62" path="res://scripts/game/camp/camp_house.gd" id="9_6b7ln"]
 [ext_resource type="Script" uid="uid://bfuyuw7kfy23" path="res://scripts/game/camera/night_cam.gd" id="9_kpww7"]
 [ext_resource type="Texture2D" uid="uid://mxl7hq1pxn01" path="res://assets/textures/placeholders/campfire.png" id="10_c5hdm"]
 [ext_resource type="Texture2D" uid="uid://bt5eyn66ksuyk" path="res://assets/textures/placeholders/log.png" id="11_6b7ln"]
+[ext_resource type="Script" uid="uid://cvebsd124fbfw" path="res://scripts/game/camp/camp_campfire.gd" id="11_x8obj"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="12_yb8jp"]
+[ext_resource type="Script" uid="uid://xk43qet2andi" path="res://scripts/game/camp/camp_jerry.gd" id="13_gbmub"]
 [ext_resource type="Texture2D" uid="uid://m5nped6t8u60" path="res://assets/textures/placeholders/baitmonger.png" id="13_x8obj"]
 [ext_resource type="Texture2D" uid="uid://v2dqapay6yd6" path="res://assets/textures/placeholders/foodstall.png" id="14_gbmub"]
 [ext_resource type="Texture2D" uid="uid://djui7gjwjptwd" path="res://assets/textures/background/dock_pieces/CampSign.png" id="14_pracl"]
+[ext_resource type="Script" uid="uid://dpm2uq0q842a2" path="res://scripts/game/camp/camp_scavange_pile.gd" id="15_qt33y"]
+[ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/actors/DetectiveNavi.png" id="15_xxygj"]
+[ext_resource type="Script" uid="uid://d0h8m3nuc56sh" path="res://scripts/game/camp/camp_baitmonger.gd" id="17_dtf4f"]
+[ext_resource type="Script" uid="uid://cmmm6rxhndcu" path="res://scripts/game/camp/camp_food_stall.gd" id="19_xxygj"]
+[ext_resource type="Script" uid="uid://c6d4dxsoqt58c" path="res://scripts/game/camp/camp_exit_sign.gd" id="25_kls8q"]
 
 [sub_resource type="Theme" id="Theme_7dbdj"]
 default_font = ExtResource("1_1pk0j")
@@ -45,7 +53,7 @@ size = Vector2(100, 200)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxygj"]
 size = Vector2(175, 200)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_icnix"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m74tg"]
 size = Vector2(10, 100)
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_icnix"]
@@ -56,7 +64,7 @@ size = Vector2(100, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5hdm"]
 size = Vector2(100, 720)
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("_jeremy_node", "_house_trigger", "_campfire_trigger", "_jerry_trigger", "_scavange_trigger", "_baitmonger_trigger", "_food_stall_trigger", "hud", "scavange_label")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("_jeremy_node", "hud", "scavange_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -72,12 +80,6 @@ scavange_sfx = SubResource("AudioStreamRandomizer_cte0j")
 scavange_bucket_empty_sfx = ExtResource("5_c5hdm")
 sleeping_sfx = ExtResource("6_6b7ln")
 _jeremy_node = NodePath("Jeremy")
-_house_trigger = NodePath("House")
-_campfire_trigger = NodePath("Campfire")
-_jerry_trigger = NodePath("Jerry")
-_scavange_trigger = NodePath("ScavangePile")
-_baitmonger_trigger = NodePath("Baitmonger")
-_food_stall_trigger = NodePath("FoodStall")
 hud = NodePath("HUD")
 scavange_label = NodePath("ScavangePile/Scavange")
 
@@ -104,6 +106,7 @@ centered = false
 [node name="House" type="Area2D" parent="."]
 position = Vector2(350, 460)
 collision_layer = 4
+script = ExtResource("9_6b7ln")
 
 [node name="Sprite2D" type="Sprite2D" parent="House"]
 texture = ExtResource("4_y133y")
@@ -115,6 +118,7 @@ debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 [node name="Campfire" type="Area2D" parent="."]
 position = Vector2(750, 575)
 collision_layer = 4
+script = ExtResource("11_x8obj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Campfire"]
 scale = Vector2(0.2, 0.2)
@@ -128,19 +132,26 @@ debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 [node name="Jerry" type="Area2D" parent="."]
 position = Vector2(950, 585)
 collision_layer = 4
+script = ExtResource("13_gbmub")
 
 [node name="Sprite2D" type="Sprite2D" parent="Jerry"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_6b7ln")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Jerry"]
+position = Vector2(0, -34.999996)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("15_xxygj")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Jerry"]
 shape = SubResource("RectangleShape2D_dtf4f")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="ScavangePile" type="Area2D" parent="."]
-visible = false
 position = Vector2(1175, 550)
 collision_layer = 4
+script = ExtResource("15_qt33y")
 
 [node name="Sprite2D" type="Sprite2D" parent="ScavangePile"]
 scale = Vector2(0.2, 0.2)
@@ -159,9 +170,9 @@ text = "Scavange attempts left: 3"
 horizontal_alignment = 1
 
 [node name="Baitmonger" type="Area2D" parent="."]
-visible = false
 position = Vector2(1382, 493)
 collision_layer = 4
+script = ExtResource("17_dtf4f")
 
 [node name="Sprite2D" type="Sprite2D" parent="Baitmonger"]
 scale = Vector2(0.4, 0.4)
@@ -172,9 +183,9 @@ shape = SubResource("RectangleShape2D_1fmtj")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="FoodStall" type="Area2D" parent="."]
-visible = false
 position = Vector2(1594, 495)
 collision_layer = 4
+script = ExtResource("19_xxygj")
 
 [node name="Sprite2D" type="Sprite2D" parent="FoodStall"]
 scale = Vector2(0.5, 0.5)
@@ -188,6 +199,7 @@ debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 [node name="ExitSign" type="Area2D" parent="."]
 position = Vector2(0, 520)
 collision_layer = 4
+script = ExtResource("25_kls8q")
 
 [node name="Sprite2D" type="Sprite2D" parent="ExitSign"]
 position = Vector2(72, 15)
@@ -195,7 +207,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("14_pracl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ExitSign"]
-shape = SubResource("RectangleShape2D_icnix")
+shape = SubResource("RectangleShape2D_m74tg")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
 [node name="Jeremy" parent="." instance=ExtResource("2_s2grh")]
@@ -236,5 +248,5 @@ shape = SubResource("RectangleShape2D_c5hdm")
 
 [node name="HUD" parent="." instance=ExtResource("12_yb8jp")]
 
-[connection signal="body_entered" from="ExitSign" to="." method="_on_exit_sign_body_entered"]
+[connection signal="body_entered" from="ExitSign" to="ExitSign" method="_on_body_entered"]
 [connection signal="pressed" from="DEBUG" to="." method="_on_button_pressed"]

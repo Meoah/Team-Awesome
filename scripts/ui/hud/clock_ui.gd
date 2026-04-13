@@ -10,7 +10,7 @@ var weather_color : Color = Color.WHITE
 var last_weather_roll : int = -1
 
 const DEGREES_PER_HOUR : float = 15.0
-const ROTATION_OFFSET : float = 85.0
+const ROTATION_OFFSET : float = 45.0
 #--Rotation--
 var target_rotation : float = 0.0
 var smooth_speed : float = 1.0
@@ -21,7 +21,8 @@ func _ready() -> void:
 	TimeManager.time_updated.connect(_on_time_updated)
 	WeatherManager.weather_changed.connect(_on_weather_changed)
 	
-	TimeManager._set_time(6.0)
+	if not TimeManager.initialized: TimeManager._reset_clock(6.0)
+	
 	TimeManager.time_enabled = false
 	last_weather_roll = int(TimeManager.current_hour)
 	

@@ -27,8 +27,11 @@ func _ready() -> void:
 	if SystemData.fresh_run:
 		_equip_license_gear()
 	
-	
 	await hud.fade_in().finished
+	
+	if _check_loss_condition(): return
+	
+	await jeremy_node.walk_up_sequence()
 	await jeremy_node.walk_up_sequence()
 	
 	# Cutscenes
@@ -39,6 +42,18 @@ func _ready() -> void:
 		_ready_day()
 	
 	SystemData.fresh_run = false
+
+
+func _check_loss_condition() -> bool:
+	if SystemData.license == 3:
+		return false
+	
+	var final_day: int = 1 + (SystemData.license * 2)
+	if SystemData.get_day() > final_day and SystemData.get_money() < SystemData.calculate_goal():
+		SignalBus.player_dies.emit()
+		return true
+	
+	return false
 
 
 ## Plays the intro sequence and sets initial bait if first day.
@@ -64,6 +79,8 @@ func is_can_fish() -> bool:
 	return false
 
 func _end_day() -> void:
+	TimeManager._advance_time(1.0, true)
+	
 	if PlayManager.request_idle_night_state():
 		GameManager.change_scene_deferred(GameManager.nighttime_scene)
 
