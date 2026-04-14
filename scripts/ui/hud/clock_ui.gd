@@ -2,20 +2,20 @@ extends Control
 
 @onready var clock_face: Sprite2D = $ClockFace
 @onready var clock_hand: Sprite2D = $ClockHand
-@onready var weather: ColorRect = $WeatherModulate
-@onready var rain: GPUParticles2D = $RainLayer/RainParticles
-@onready var time_label: Label = $Label
+@onready var weather: ColorRect   = $WeatherModulate
+@onready var rain: GPUParticles2D = $"../RainLayer/RainParticles"
+@onready var time_label: Label    = $Label
 
-var time_color: Color = Color.WHITE
-var weather_color: Color = Color.WHITE
+var time_color: Color      = Color.WHITE
+var weather_color: Color   = Color.WHITE
 var last_weather_roll: int = -1
 var _weather_tween: Tween
 
-const DEGREES_PER_HOUR: float = 15.0
-const ROTATION_OFFSET: float = 45.0
+const DEGREES_PER_HOUR : float  = 15.0
+const ROTATION_OFFSET  : float  = 45.0
 
-var target_rotation: float = 0.0
-var smooth_speed: float = 1.0
+var target_rotation    : float  = 0.0
+var smooth_speed       : float  = 1.0
 
 
 func _ready() -> void:
@@ -57,7 +57,7 @@ func _on_time_updated(hour : float) -> void:
 	var int_hour: int = int(hour)
 	if int_hour % 3 == 0 and int_hour != last_weather_roll:
 		last_weather_roll = int_hour
-		WeatherManager._roll_weather()
+		WeatherManager._roll_daily_weather()               
 
 
 func _update_lighting(hour: float, immediate: bool = false) -> void:
@@ -89,20 +89,40 @@ func _on_weather_changed(new_weather : WeatherManager.WEATHER) -> void:
 	_apply_weather(new_weather)
 
 
-func _apply_weather(w: WeatherManager.WEATHER, immediate: bool = false) -> void:
+func _apply_weather(w: WeatherManager.WEATHER) -> void:
 	
 	match w:
 		WeatherManager.WEATHER.CLEAR:
 			weather_color = Color(1.0, 1.0, 1.0)
 			rain.emitting = false
+			rain.amount   = 1
+			
+		WeatherManager.WEATHER.CLOUDY:
+			weather_color = Color(0.85, 0.87, 0.92)
+			rain.emitting = false
+			rain.amount   = 1
+			
 		WeatherManager.WEATHER.RAINY:
 			weather_color = Color(0.6, 0.7, 0.9)
+			rain.amount   = 200
 			rain.emitting = true
-		#WeatherManager.WEATHER.STORM:
-			#weather_color = Color(0.4, 0.4, 0.55)
-			#rain.emitting = true
 			
-	_apply_combined_color(immediate)
+		WeatherManager.WEATHER.STORMY:
+			weather_color = Color(0.4, 0.4, 0.55)
+			rain.amount   = 200
+			rain.emitting = true
+			
+		WeatherManager.WEATHER.FOGGY:
+			weather_color = Color(0.88, 0.88, 0.92)
+			rain.emitting = false
+			rain.amount   = 1
+			
+		WeatherManager.WEATHER.WINDY:
+			weather_color = Color(0.82, 0.87, 0.95)
+			rain.emitting = false
+			rain.amount   = 1
+			
+	_apply_combined_color()
 	print("_apply_weather called | weather: ",w,
 	" | weather_color before: ", weather_color)	              
 

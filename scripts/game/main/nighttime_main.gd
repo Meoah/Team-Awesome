@@ -82,6 +82,7 @@ func sleep_and_return_to_day() -> void:
 	SystemData.camp_scavange = scavange
 	
 	if PlayManager.request_idle_day_state():
+		WeatherManager._roll_daily_weather()
 		GameManager.change_scene_deferred(GameManager.daytime_scene)
 
 
@@ -141,9 +142,10 @@ func _start_bait_shop() -> void:
 func _save_shop_data(save_data : Array[Dictionary], shop_type : ShopPopup.SHOP_TYPE_FLAGS) -> void:
 	shop_save_data.set(shop_type, save_data)
 
+
 func _on_button_pressed() -> void:
 	SystemData._add_money(200.0)
-
+	
 
 func use_campfire_meal() -> void:
 	if !SystemData.can_use_campfire():
