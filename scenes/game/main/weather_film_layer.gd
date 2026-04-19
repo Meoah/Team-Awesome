@@ -14,7 +14,6 @@ var target := { "clear": 1.0, "cloudy": 0.0, "rain": 0.0,
 const BLEND_SPEED : float = 0.8 
 
 func _ready() -> void:
-	layer = 100  # Always on top
 	shader_material = color_rect.material as ShaderMaterial
 	# Connect to WeatherManager when it's ready
 	if WeatherManager:

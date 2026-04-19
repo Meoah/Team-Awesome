@@ -25,7 +25,7 @@ void fragment() {
     grain = (grain - 0.5) * grain_strength;
 
     // ---- Vignette (always present) ----
-    float base_vig = 0.18;
+    float base_vig = 0.12;
     float vig_strength = base_vig
         + blend_cloudy * 0.08
         + blend_storm  * 0.22

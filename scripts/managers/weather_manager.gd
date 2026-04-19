@@ -19,7 +19,7 @@ func _roll_daily_weather() -> void:
 		WEATHER.CLEAR:  40,
 		WEATHER.CLOUDY: 25,
 		WEATHER.RAINY:  18,
-		WEATHER.STORMY:  7,
+		WEATHER.STORMY:  70,
 		WEATHER.FOGGY:   5,
 		WEATHER.WINDY:   5,
 	}

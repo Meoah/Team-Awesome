@@ -31,17 +31,6 @@
 [ext_resource type="BitMap" uid="uid://cjsnaim8vrwj2" path="res://assets/textures/ui/hud/touchscreen/joystick_hexagon_pad_d_clickmask.png" id="24_885y2"]
 [ext_resource type="Texture2D" uid="uid://du7wv7t0dby11" path="res://assets/textures/vfx/raindrop.png" id="30_0kchs"]
 
-[sub_resource type="Theme" id="Theme_swth0"]
-default_font = ExtResource("2_ax4tw")
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e7gie"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_todbw"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a660p"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_swth0"]
-
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r6ol6"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
@@ -56,9 +45,38 @@ gravity = Vector3(0, 900, 0)
 scale_min = 2.0
 scale_max = 3.0
 
+[sub_resource type="Theme" id="Theme_swth0"]
+default_font = ExtResource("2_ax4tw")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_e7gie"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_todbw"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_a660p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_swth0"]
+
 [node name="HUD" type="CanvasLayer" node_paths=PackedStringArray("blocker")]
+layer = 3
 script = ExtResource("1_e7gie")
 blocker = NodePath("Blocker")
+
+[node name="RainLayer" type="CanvasLayer" parent="."]
+follow_viewport_enabled = true
+
+[node name="Parallax2D" type="Parallax2D" parent="RainLayer"]
+scroll_scale = Vector2(1.5, 1.5)
+repeat_size = Vector2(1280, 720)
+repeat_times = 100
+
+[node name="RainParticles" type="GPUParticles2D" parent="RainLayer/Parallax2D"]
+self_modulate = Color(1, 1, 1, 0.4)
+position = Vector2(614, -20)
+emitting = false
+amount = 200
+texture = ExtResource("30_0kchs")
+lifetime = 1.2
+process_material = SubResource("ParticleProcessMaterial_r6ol6")
 
 [node name="Clock_Weather" parent="." instance=ExtResource("2_r6ol6")]
 
@@ -807,17 +825,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 color = Color(0, 0, 0, 1)
-
-[node name="RainLayer" type="CanvasLayer" parent="."]
-layer = 10
-
-[node name="RainParticles" type="GPUParticles2D" parent="RainLayer"]
-position = Vector2(614, -20)
-emitting = false
-amount = 200
-texture = ExtResource("30_0kchs")
-lifetime = 1.2
-process_material = SubResource("ParticleProcessMaterial_r6ol6")
 
 [connection signal="mouse_entered" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_button_mouse_entered"]
 [connection signal="pressed" from="HUDController/Top/MarginContainer/HBoxContainer/FishBucket/PanelContainer/MarginContainer2/FishDropdown" to="HUDController" method="_on_fish_dropdown_pressed"]

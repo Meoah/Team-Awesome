@@ -7,11 +7,8 @@ var intensity   : float = 0.0
 var isFlashing  : bool  = false
 #Timer
 var time_next_flash : float = 0.0
-# Just below the weather film
-const LAYER_INDEX   : int = 99
 
 func _ready() -> void:
-	layer = LAYER_INDEX
 	rect.color = Color(1.0, 1.0, 1.0, 0.0)
 	rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	schedule_next_flash()

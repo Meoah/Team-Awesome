@@ -3,7 +3,7 @@ extends Control
 @onready var clock_face: Sprite2D = $ClockFace
 @onready var clock_hand: Sprite2D = $ClockHand
 @onready var weather: ColorRect   = $WeatherModulate
-@onready var rain: GPUParticles2D = $"../RainLayer/RainParticles"
+@onready var rain: GPUParticles2D = $"../RainLayer/Parallax2D/RainParticles"
 @onready var time_label: Label    = $Label
 
 var time_color: Color      = Color.WHITE

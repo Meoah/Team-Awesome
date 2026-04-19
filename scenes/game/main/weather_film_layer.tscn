@@ -13,6 +13,7 @@ shader_parameter/blend_fog = 0.0
 shader_parameter/blend_windy = 0.0
 
 [node name="WeatherFilmLayer" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_kpnh5")
 
 [node name="ColorRect" type="ColorRect" parent="."]
