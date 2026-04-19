@@ -1,6 +1,8 @@
 extends Control
 class_name NighttimeMain
 
+const NIGHT_TUTORIAL_LICENSE: int = 1
+
 ## Audio exports
 @export_category("Audio")
 @export var default_bgm : AudioStream
@@ -12,12 +14,16 @@ class_name NighttimeMain
 @export var _jeremy_node: MainCharacter
 @export var _house_trigger: CampInteractable
 @export var _campfire_trigger: CampInteractable
-@export var _jerry_trigger: CampInteractable
+@export var _felix_trigger: CampInteractable
+@export var _felix_sprite: Sprite2D
 @export var _scavange_trigger: CampInteractable
 @export var _baitmonger_trigger: CampInteractable
 @export var _food_stall_trigger: CampInteractable
 @export var hud : HUD
 @export var scavange_label : Label
+
+@export_category("PackedScenes")
+@export var tutorial_scene: PackedScene
 
 var shop_save_data : Dictionary[ShopPopup.SHOP_TYPE_FLAGS, Array] = {}
 var scavange: int = -1
@@ -25,8 +31,7 @@ var scavange: int = -1
 func _ready() -> void:
 	_sell_all_fish()
 	_prepare_scavange_bucket()
-		
-	# Bind Signals
+	
 	SignalBus.start_bait_shop.connect(_start_bait_shop)
 	SignalBus.shop_closed.connect(_save_shop_data)
 	
@@ -37,14 +42,56 @@ func _ready() -> void:
 	
 	_check_shops()
 	_check_win_condition()
-	
 	SystemData.camp_day = SystemData.get_day()
+	
+	if _should_play_tutorial():
+		_start_tutorial()
+		return
+	
+	_ready_camp()
+
+
+## Returns true when the campsite tutorial should play.
+func _should_play_tutorial() -> bool:
+	return (
+		tutorial_scene != null
+		and SystemData.license == NIGHT_TUTORIAL_LICENSE
+		and not SystemData.camp_tutorial_shown
+	)
+
+
+## Starts the nighttime tutorial overlay and locks gameplay state.
+func _start_tutorial() -> void:
+	TimeManager.time_enabled = false
+	_felix_sprite.hide()
+	
+	if not PlayManager.request_dialogue_night_state():
+		_ready_camp()
+		return
+	
+	var new_scene: TutorialSequence = tutorial_scene.instantiate()
+	new_scene.tutorial_done.connect(_on_tutorial_done)
+	add_child(new_scene)
+
+
+## Restores standard nighttime gameplay after the tutorial ends.
+func _on_tutorial_done() -> void:
+	SystemData.camp_tutorial_shown = true
+	_felix_sprite.show()
+	_ready_camp()
+
+
+## Enables normal nighttime gameplay.
+func _ready_camp() -> void:
+	TimeManager.time_enabled = true
+	_jeremy_node.suppress_input_until_release()
+	PlayManager.request_idle_night_state()
 
 
 func _check_shops() -> void:
 	_house_trigger.set_interactable_enabled(true)
 	_campfire_trigger.set_interactable_enabled(true)
-	_jerry_trigger.set_interactable_enabled(true)
+	_felix_trigger.set_interactable_enabled(true)
 	_scavange_trigger.set_interactable_enabled(SystemData.license >= 2)
 	_baitmonger_trigger.set_interactable_enabled(SystemData.license >= 2)
 	_food_stall_trigger.set_interactable_enabled(SystemData.license >= 3)
@@ -82,6 +129,7 @@ func sleep_and_return_to_day() -> void:
 	SystemData.camp_scavange = scavange
 	
 	if PlayManager.request_idle_day_state():
+		WeatherManager._roll_daily_weather()
 		GameManager.change_scene_deferred(GameManager.daytime_scene)
 
 
@@ -141,9 +189,10 @@ func _start_bait_shop() -> void:
 func _save_shop_data(save_data : Array[Dictionary], shop_type : ShopPopup.SHOP_TYPE_FLAGS) -> void:
 	shop_save_data.set(shop_type, save_data)
 
+
 func _on_button_pressed() -> void:
 	SystemData._add_money(200.0)
-
+	
 
 func use_campfire_meal() -> void:
 	if !SystemData.can_use_campfire():

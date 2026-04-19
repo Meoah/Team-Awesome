@@ -25,13 +25,15 @@ buses/default_bus_layout="uid://bjhnqgsdy6jgg"
 
 [autoload]
 
+WeatherManager="*res://scripts/managers/weather_manager.gd"
+PlayManager="*res://scripts/managers/play_manager.gd"
 SignalBus="*res://scripts/util/signal_bus.gd"
 SystemData="*res://scripts/system/system_data.gd"
-PlayManager="*res://scripts/managers/play_manager.gd"
 AudioEngine="*res://scripts/util/audio_engine.gd"
-GameManager="*res://scenes/game_manager.tscn"
 TimeManager="*res://scripts/managers/time_manager.gd"
-WeatherManager="*res://scripts/managers/weather_manager.gd"
+GameManager="*res://scenes/game_manager.tscn"
+LightningFlash="*res://scenes/game/main/lightning_flash.tscn"
+WeatherFilmLayer="*res://scenes/game/main/weather_film_layer.tscn"
 
 [debug]
 

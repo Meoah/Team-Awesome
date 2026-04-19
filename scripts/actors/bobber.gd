@@ -83,6 +83,7 @@ func _water_bob(delta : float) -> void:
 	var bob : float = (sin(bob_timer) * bob_amplitude) + waterline_y
 	global_position.y = bob
 
+
 # Makes the exclaimation and starts the progress timer.
 func _play_vfx() -> void:
 	_progress_bar()

@@ -1,0 +1,366 @@
+[gd_scene load_steps=17 format=3 uid="uid://de36yrfdbbm7f"]
+
+[ext_resource type="Script" uid="uid://b8svya20t67fs" path="res://scripts/game/cutscenes/tutorial/tutorial_sequence.gd" id="1_p0gx6"]
+[ext_resource type="Shader" uid="uid://b53gtf3nmu4po" path="res://shaders/spotlight.gdshader" id="2_7rgn2"]
+[ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_dn58n"]
+[ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="4_nonj8"]
+[ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/actors/DetectiveNavi.png" id="5_uwjwv"]
+[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="6_7hri8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jrr4b"]
+resource_local_to_scene = true
+shader = ExtResource("2_7rgn2")
+shader_parameter/hole_uv = Vector2(0, 0)
+shader_parameter/radius = 0.0
+shader_parameter/feather = 0.0
+
+[sub_resource type="Theme" id="Theme_j3af4"]
+default_font = ExtResource("3_dn58n")
+default_font_size = 24
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_dqchs"]
+
+[sub_resource type="Animation" id="Animation_yxihr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Navi:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Navi/SpeechBubble/MarginContainer/Content:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["Welcome to Arrow Fishing!"]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Navi/SpeechBubble:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Blocker:material:shader_parameter/hole_uv")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blocker:material:shader_parameter/radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Blocker:material:shader_parameter/feather")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ofi64"]
+resource_name = "tutorial"
+length = 4.833337
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Navi/SpeechBubble/MarginContainer/Content:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2, 2.0666666, 2.5, 2.7, 3.5666666, 3.7, 4.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["Welcome to the Campsite!", "You can rest up by the fire.", "Resting restores stamina
+and advances time.", "I usually hang out
+on this log. ", "Talk to me for any
+hints or tips!", "You can return to the 
+dock at anytime.", "Just remember to watch
+your stamina gauge!", "When you're ready to end your day
+Interact with your house to sleep for the night."]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Navi:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.0666668, 2.5, 2.7, 3.5666666, 3.7333333, 4.2, 4.836666),
+"transitions": PackedFloat32Array(1, -2, -2, -2, -2, -2, -2, -2, 1, -2),
+"update": 0,
+"values": [Vector2(949, 551), Vector2(640, 360), Vector2(800, 500), Vector2(800, 500), Vector2(950, 551.12), Vector2(950, 551.12), Vector2(141.225, 449.5), Vector2(141.225, 449.5), Vector2(541, 380), Vector2(950, 551.12)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Navi/SpeechBubble:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.0333334, 2, 2.1333334, 2.5, 2.8, 3.5666666, 3.7666667, 4.17, 4.3033333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 2, 2.0666666, 2.5, 2.7, 3.5666666, 3.7, 4.203333, 4.836667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}, {
+"args": [],
+"method": &"_step_marker"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Blocker:material:shader_parameter/hole_uv")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.0666668, 2.5, 2.7666667, 3.5333333, 3.7, 4.1666665, 4.256666),
+"transitions": PackedFloat32Array(1, -2, -2, -2, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(0.585, 0.8), Vector2(0.585, 0.8), Vector2(0.748, 0.805), Vector2(0.748, 0.805), Vector2(0.067, 0.74), Vector2(0.067, 0.74), Vector2(0.295, 0.65), Vector2(0.295, 0.65)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Blocker:material:shader_parameter/radius")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1, 2, 2.0666668, 2.5, 2.7666667, 3.5333333, 3.7, 4.17, 4.26, 4.7366667),
+"transitions": PackedFloat32Array(1, 1, -2, -2, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.02, 0.07, 0.07, 0.19, 0.19, 0.155, 0.155, 0.315, 0.315, 2.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Blocker:material:shader_parameter/feather")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1, 2.5, 2.7666667, 3.5333333, 3.7, 3.9666667, 4.056667, 4.5333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.1, 0.02, 0.02, 0.02, 0.02, 0.07, 0.07, 0.02]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p15s2"]
+_data = {
+&"RESET": SubResource("Animation_yxihr"),
+&"tutorial": SubResource("Animation_ofi64")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_ofi64"]
+font = ExtResource("3_dn58n")
+font_size = 32
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ywqia"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p15s2"]
+resource_name = "blink"
+length = 3.0000036
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5000001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lbj8i"]
+_data = {
+&"RESET": SubResource("Animation_ywqia"),
+&"blink": SubResource("Animation_p15s2")
+}
+
+[node name="TutorialSequence" type="CanvasLayer" node_paths=PackedStringArray("animation_player", "continue_indicator")]
+layer = 5
+script = ExtResource("1_p0gx6")
+animation_player = NodePath("AnimationPlayer")
+continue_indicator = NodePath("ContinueIndicator")
+
+[node name="Blocker" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_jrr4b")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -1.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.6)
+
+[node name="Navi" type="Node2D" parent="."]
+
+[node name="SpeechBubble" type="PanelContainer" parent="Navi"]
+visible = false
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -95.0
+offset_right = 365.0
+offset_bottom = -20.0
+grow_vertical = 0
+theme = SubResource("Theme_j3af4")
+theme_override_styles/panel = SubResource("StyleBoxTexture_dqchs")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Navi/SpeechBubble"]
+layout_mode = 2
+texture = ExtResource("4_nonj8")
+patch_margin_left = 16
+patch_margin_top = 16
+patch_margin_right = 16
+patch_margin_bottom = 16
+
+[node name="MarginContainer" type="MarginContainer" parent="Navi/SpeechBubble"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="Content" type="RichTextLabel" parent="Navi/SpeechBubble/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/outline_size = 4
+bbcode_enabled = true
+text = "Welcome to Arrow Fishing!"
+fit_content = true
+scroll_active = false
+autowrap_mode = 0
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="Navi"]
+scale = Vector2(0.04230577, 0.04230577)
+texture = ExtResource("5_uwjwv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p15s2")
+}
+
+[node name="ContinueIndicator" type="MarginContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ContinueIndicator"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ContinueIndicator/HBoxContainer"]
+layout_mode = 2
+text = "Click to continue.."
+label_settings = SubResource("LabelSettings_ofi64")
+
+[node name="ContinueArrow" type="TextureRect" parent="ContinueIndicator/HBoxContainer"]
+modulate = Color(1, 0.99215686, 1, 0.78431374)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+texture = ExtResource("6_7hri8")
+expand_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ContinueIndicator"]
+libraries = {
+&"": SubResource("AnimationLibrary_lbj8i")
+}
+autoplay = "blink"

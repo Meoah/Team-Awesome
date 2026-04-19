@@ -760,6 +760,7 @@ position = Vector2(635, 479.99994)
 scale = Vector2(0.6746573, 0.6708732)
 
 [node name="ReactionAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(634, 492.00705)
 scale = Vector2(1.5155149, 1.5155149)
 sprite_frames = SubResource("SpriteFrames_rnbwo")

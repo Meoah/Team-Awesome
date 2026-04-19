@@ -65,6 +65,7 @@ var _current_name: String = ""
 var _current_image: NodePath
 var _current_weight: float = 0.0
 var _current_value: float = 0.0
+var _current_description: String = ""
 
 
 func _on_set_params() -> void:
@@ -86,10 +87,11 @@ func _ready() -> void:
 
 func _setup_reward_data() -> void:
 	var chosen_fish: Dictionary = FishData.BOSS_ID[BOSS_FISH_ID]
-	_current_name = chosen_fish["name"]
-	_current_image = chosen_fish["image"]
-	_current_weight = chosen_fish["weight"]
-	_current_value = chosen_fish["value"]
+	_current_name = chosen_fish.get("name", "")
+	_current_image = chosen_fish.get("image", null)
+	_current_weight = chosen_fish.get("weight", 0.0)
+	_current_value = chosen_fish.get("value", 0.0)
+	_current_description = chosen_fish.get("description", "")
 
 
 func _setup_stamina_ui() -> void:
@@ -351,10 +353,6 @@ func _win() -> void:
 	$ReactionAnimation.visible = true
 	$ReactionAnimation.play("joel")
 	
-	
-	#var fish_image: Texture = load(_current_image)
-	#_reaction_node.texture = fish_image
-	
 	var payout: float = _current_value
 	
 	if _distance > 0.0:
@@ -363,23 +361,18 @@ func _win() -> void:
 	
 	payout *= SystemData.value_multiplier
 	
-	_results_window.set_text("Boss Fish Caught !!\n%s\nWeight: %.2f\nValue: %.2f" % [
+	_results_window.set_text("Boss Fish Caught !!\n%s\nWeight: %.2f\nValue: %.2f\n%s" % [
 		_current_name,
 		_current_weight,
-		payout
+		payout,
+		_current_description
 	])
 	_results_window.show()
 	
 	SystemData._add_money_delay(payout)
 	SystemData._add_fish(BOSS_FISH_ID)
 	
-	await get_tree().create_timer(1.0).timeout
-	_set_continue_visible(true)
-	set_process_input(true)
-	_delay = true
-	
-	await get_tree().create_timer(5.0).timeout
-	_return_to_fishing()
+	_prep_return_to_fishing()
 
 
 func _fail() -> void:
@@ -394,13 +387,14 @@ func _fail() -> void:
 	_results_window.set_text("The boss fish got away !!")
 	_results_window.show()
 	
+	_prep_return_to_fishing()
+
+
+func _prep_return_to_fishing() -> void:
 	await get_tree().create_timer(1.0).timeout
 	_set_continue_visible(true)
 	set_process_input(true)
 	_delay = true
-	
-	await get_tree().create_timer(5.0).timeout
-	_return_to_fishing()
 
 
 func _return_to_fishing() -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=40 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_1pk0j"]
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/main/nighttime_main.gd" id="1_53syt"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://i3smng8yxpbe" path="res://assets/textures/placeholders/blue-house-md.png" id="4_y133y"]
 [ext_resource type="AudioStream" uid="uid://dckbjxm0wsw5h" path="res://assets/audio/sfx/campsite/scavange_bucket_empty.ogg" id="5_c5hdm"]
 [ext_resource type="AudioStream" uid="uid://dkfcuh06uxjyn" path="res://assets/audio/sfx/campsite/sleep.ogg" id="6_6b7ln"]
+[ext_resource type="PackedScene" uid="uid://de36yrfdbbm7f" path="res://scenes/game/cutscenes/tutorial_sequence_nighttime.tscn" id="7_m74tg"]
 [ext_resource type="Texture2D" uid="uid://o4rx0t814322" path="res://assets/textures/placeholders/Stanley_bucket.webp" id="8_7dbdj"]
 [ext_resource type="Script" uid="uid://ew6c2wpg0r62" path="res://scripts/game/camp/camp_house.gd" id="9_6b7ln"]
 [ext_resource type="Script" uid="uid://bfuyuw7kfy23" path="res://scripts/game/camera/night_cam.gd" id="9_kpww7"]
@@ -64,7 +65,7 @@ size = Vector2(100, 720)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c5hdm"]
 size = Vector2(100, 720)
 
-[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("_jeremy_node", "_house_trigger", "_campfire_trigger", "_jerry_trigger", "_scavange_trigger", "_baitmonger_trigger", "_food_stall_trigger", "hud", "scavange_label")]
+[node name="NighttimeMain" type="Control" node_paths=PackedStringArray("_jeremy_node", "_house_trigger", "_campfire_trigger", "_felix_trigger", "_felix_sprite", "_scavange_trigger", "_baitmonger_trigger", "_food_stall_trigger", "hud", "scavange_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -82,12 +83,14 @@ sleeping_sfx = ExtResource("6_6b7ln")
 _jeremy_node = NodePath("Jeremy")
 _house_trigger = NodePath("House")
 _campfire_trigger = NodePath("Campfire")
-_jerry_trigger = NodePath("Jerry")
+_felix_trigger = NodePath("Felix")
+_felix_sprite = NodePath("Felix/FelixSprite")
 _scavange_trigger = NodePath("ScavangePile")
 _baitmonger_trigger = NodePath("Baitmonger")
 _food_stall_trigger = NodePath("FoodStall")
 hud = NodePath("HUD")
 scavange_label = NodePath("ScavangePile/Scavange")
+tutorial_scene = ExtResource("7_m74tg")
 
 [node name="Background" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 0.5)
@@ -137,23 +140,23 @@ position = Vector2(-75, 0)
 shape = SubResource("RectangleShape2D_qt33y")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
-[node name="Jerry" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
+[node name="Felix" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(950, 585)
 collision_layer = 4
 script = ExtResource("13_gbmub")
 collision_shape = NodePath("CollisionShape2D")
 
-[node name="Sprite2D" type="Sprite2D" parent="Jerry"]
+[node name="Sprite2D" type="Sprite2D" parent="Felix"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("11_6b7ln")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Jerry"]
+[node name="FelixSprite" type="Sprite2D" parent="Felix"]
 position = Vector2(0, -34.999996)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("15_xxygj")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Jerry"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Felix"]
 shape = SubResource("RectangleShape2D_dtf4f")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
 
