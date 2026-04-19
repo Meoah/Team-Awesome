@@ -28,6 +28,7 @@ class_name MinigamePopup
 var current_name: String = ""
 var current_image: NodePath
 var current_weight: float = 0.0
+var current_description: String = ""
 var correct_inputs: Array
 var current_value: float = 0.0
 var time: float = 0.0
@@ -130,13 +131,14 @@ func _pick_weighted(weights: Dictionary) -> Variant:
 
 
 func _apply_data() -> void:
-	var chosen_fish = FishData.FISH_ID[chosen_fish_id]
-	current_name = chosen_fish["name"]
-	current_image = chosen_fish["image"]
-	current_weight = chosen_fish["weight"]
-	correct_inputs = chosen_fish["inputs"]
-	current_value = chosen_fish["value"]
-	time = chosen_fish["time"]
+	var chosen_fish: Dictionary = FishData.FISH_ID[chosen_fish_id]
+	current_name = chosen_fish.get("name", "")
+	current_image = chosen_fish.get("image", null)
+	current_weight = chosen_fish.get("weight", 0.0)
+	current_description = chosen_fish.get("description", "")
+	correct_inputs = chosen_fish.get("inputs", [])
+	current_value = chosen_fish.get("value", 0.0)
+	time = chosen_fish.get("time", 0.0)
 	
 	_input_array = correct_inputs
 
@@ -294,7 +296,7 @@ func _win():
 	
 	current_value *= SystemData.value_multiplier
 	
-	_results_window.set_text(current_name + "\n Weight: %.2f\n Value: %.2f" % [current_weight, current_value])
+	_results_window.set_text(current_name + "\n Weight: %.2f\n Value: %.2f\n" % [current_weight, current_value] + current_description)
 	_results_window.show()
 	
 	SystemData._add_money_delay(current_value)
@@ -314,9 +316,6 @@ func _prep_return_to_fishing() -> void:
 	_set_continue_visible(true)
 	set_process_input(true)
 	_delay = true
-	
-	await get_tree().create_timer(5.0).timeout
-	_return_to_fishing()
 
 
 func _return_to_fishing() -> void:
