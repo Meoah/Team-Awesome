@@ -259,7 +259,7 @@ const NATEKEK : Dictionary = {
 	"inputs" : ["Down","Right","Up","Up","Up"],
 	"value" : 20.0,
 	"time" :2.5,
-	"description" : "This toad like to blow himself up sometimes"
+	"description" : "This toad like to blow himself up for some reason"
 }
 #22
 const SHEEBA_SHIBA : Dictionary = {
@@ -268,7 +268,8 @@ const SHEEBA_SHIBA : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Down","Left","Down","Right","Down"],
 	"value" : 15.0,
-	"time" : 3.5
+	"time" : 3.5,
+	"description" : "What the dog doin?"
 }
 #23
 const TADPOLE_BOBA : Dictionary = {
@@ -277,7 +278,9 @@ const TADPOLE_BOBA : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : ["Left","Right","Left","Left","Right","Right"],
 	"value" : 8.0,
-	"time" : 4.5
+	"time" : 4.5,
+	"description" : "Is your boba [i]really[/i] worth it?"
+	
 }
 
 
@@ -289,5 +292,6 @@ const JOEL_FISH : Dictionary = {
 	"weight" : 5.0,
 	"inputs" : [], # Leave it empty
 	"value" : 8.0,
-	"time" : 10.0
+	"time" : 10.0,
+	"description" : "Due to reasons unknown to modern science, this fish keeps perpetually spinning. \n No wonder he put you through an endurance test"
 }
