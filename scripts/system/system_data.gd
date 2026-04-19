@@ -32,6 +32,7 @@ var upgrade_inventory : Dictionary = {
 var license: int = -1
 var player_stamina: float = 100.0
 var fresh_run: bool = true
+var camp_tutorial_shown: bool = false
 var camp_day: int = 0
 var camp_scavange: int = 3
 var boss_defeated: bool = false
@@ -56,6 +57,7 @@ func _reset_all() -> void:
 	camp_scavange = 3
 	player_stamina = 100.0
 	fresh_run = true
+	camp_tutorial_shown = false
 	boss_defeated = false
 	winner_screen_shown = false
 	value_multiplier = 1.0
