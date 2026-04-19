@@ -189,7 +189,7 @@ const BOSS_DETECTOR : Dictionary = {
 ## Bait Bundles
 const GENERIC_BAIT : Dictionary = {
 	KEY_NAME : "Generic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitNormal.png"),
 	KEY_TYPE : BAIT,
 	KEY_DESCRIPTION : "As generic as it comes."
 }
@@ -204,7 +204,7 @@ const DUMMY_BAIT : Dictionary = {
 
 const WORM_BAIT : Dictionary = {
 	KEY_NAME : "Worm Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/worm_bait_placeholder.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitNormal.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 1.0,
 	KEY_COST_STABILITY : 0.7,
@@ -215,7 +215,7 @@ const WORM_BAIT : Dictionary = {
 
 const MAGIC_BAIT : Dictionary = {
 	KEY_NAME : "Magic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/placeholder_bait.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitMagic.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 50.0,
 	KEY_COST_STABILITY : 0.7,

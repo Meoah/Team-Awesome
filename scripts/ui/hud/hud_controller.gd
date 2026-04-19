@@ -1,8 +1,13 @@
 extends Control
 class_name HUDController
 
+@export_category("Textures")
+@export var empty_bucket: Texture
+@export var full_bucket: Texture
+
 @export_category("Node Exports")
 @export var fish_inventory : PanelContainer
+@export var fish_bucket_icon: TextureRect
 @export var bait_inventory : PanelContainer
 @export var rod_slot : Slot
 @export var reel_slot : Slot
@@ -14,7 +19,7 @@ class_name HUDController
 @export var goal_label : RichTextLabel
 @export var fish_bucket_value_label : Label
 @export var day_label : Label
-@export var stamina_bar : ProgressBar
+@export var stamina_bar : TextureProgressBar
 
 @export_category("Audio")
 @export var receiving_money_sfx: AudioStream
@@ -77,6 +82,10 @@ func _tooltip(hovered : Control, tooltip_layer : TooltipLayer) -> void:
 
 ## Refreshes each module.
 func _refresh_ui() -> void:
+	if SystemData.fish_inventory != {}:
+		fish_bucket_icon.texture = full_bucket
+	else:
+		fish_bucket_icon.texture = empty_bucket
 	_update_equipment()
 	_update_active_bait()
 	_update_money()

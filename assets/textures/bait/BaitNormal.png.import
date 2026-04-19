@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://clafw8cbt6f6o"
-path="res://.godot/imported/ClockFace_00002_.png-a152da8ba1dca8f289253f6a051501d8.ctex"
+uid="uid://86a63it27ce1"
+path="res://.godot/imported/BaitNormal.png-ddfff38539cb62b457c35a8430fbca87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/Inventory_Images/ClockFace_00002_.png"
-dest_files=["res://.godot/imported/ClockFace_00002_.png-a152da8ba1dca8f289253f6a051501d8.ctex"]
+source_file="res://assets/textures/bait/BaitNormal.png"
+dest_files=["res://.godot/imported/BaitNormal.png-ddfff38539cb62b457c35a8430fbca87.ctex"]
 
 [params]
 
