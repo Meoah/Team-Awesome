@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://emps5yrliobm"
-path="res://.godot/imported/My_Event061_Tarrot_Showcase.webp-37d1e903fd2bf6783c09ed79be8b42e3.ctex"
+uid="uid://cqt3fy3gstgi5"
+path="res://.godot/imported/LampPost.png-6fe5e7e808610d6e08e4b9200d53f70c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/placeholders/My_Event061_Tarrot_Showcase.webp"
-dest_files=["res://.godot/imported/My_Event061_Tarrot_Showcase.webp-37d1e903fd2bf6783c09ed79be8b42e3.ctex"]
+source_file="res://assets/textures/background/lamp/LampPost.png"
+dest_files=["res://.godot/imported/LampPost.png-6fe5e7e808610d6e08e4b9200d53f70c.ctex"]
 
 [params]
 

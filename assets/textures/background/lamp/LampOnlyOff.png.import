@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bw4tjg280q6k6"
-path="res://.godot/imported/LampOnlyOn.png-a33584a66899e3c045e35236d0e73e69.ctex"
+uid="uid://h2aai25ilwex"
+path="res://.godot/imported/LampOnlyOff.png-67b01478288094f38175beae54e1661a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/background/dock_pieces/LampOnlyOn.png"
-dest_files=["res://.godot/imported/LampOnlyOn.png-a33584a66899e3c045e35236d0e73e69.ctex"]
+source_file="res://assets/textures/background/lamp/LampOnlyOff.png"
+dest_files=["res://.godot/imported/LampOnlyOff.png-67b01478288094f38175beae54e1661a.ctex"]
 
 [params]
 

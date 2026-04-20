@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da0at2yyqtmkh"
-path="res://.godot/imported/Peter's_Fishing_Store.png-5d5709186e0db1c4ebbae36106a42e9f.ctex"
+uid="uid://dfg00ns55mun1"
+path="res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-112ae2a9b02196bc0912b8eba8ffc79d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/placeholders/Peter's_Fishing_Store.png"
-dest_files=["res://.godot/imported/Peter's_Fishing_Store.png-5d5709186e0db1c4ebbae36106a42e9f.ctex"]
+source_file="res://assets/textures/vfx/2d_lights_and_shadows_neutral_point_light.webp"
+dest_files=["res://.godot/imported/2d_lights_and_shadows_neutral_point_light.webp-112ae2a9b02196bc0912b8eba8ffc79d.ctex"]
 
 [params]
 

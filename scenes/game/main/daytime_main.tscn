@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=36 format=3 uid="uid://b856gwtwh1bno"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -20,8 +20,14 @@
 [ext_resource type="Texture2D" uid="uid://djui7gjwjptwd" path="res://assets/textures/background/dock_pieces/CampSign.png" id="13_pj6yd"]
 [ext_resource type="Texture2D" uid="uid://b4so1s0p3hdbr" path="res://assets/textures/background/dock_pieces/DockFloor.png" id="14_ajsgr"]
 [ext_resource type="PackedScene" uid="uid://5ebmwhe881d" path="res://scenes/game/cutscenes/tutorial_sequence.tscn" id="14_i6nw5"]
+[ext_resource type="Script" uid="uid://cca55pno7ypge" path="res://scripts/game/main/lamp.gd" id="16_s1m3y"]
 [ext_resource type="Texture2D" uid="uid://dakggumatebv8" path="res://assets/textures/background/dock_pieces/Post.png" id="17_b82wd"]
+[ext_resource type="Texture2D" uid="uid://bbysu2jo27h85" path="res://assets/textures/background/lamp/LampOnlyOn.png" id="17_ej6ix"]
 [ext_resource type="PackedScene" uid="uid://d3lb2hsqyd5mi" path="res://scenes/actors/boss_shadow.tscn" id="18_e7nxg"]
+[ext_resource type="Texture2D" uid="uid://h2aai25ilwex" path="res://assets/textures/background/lamp/LampOnlyOff.png" id="18_g1hhs"]
+[ext_resource type="Texture2D" uid="uid://cqt3fy3gstgi5" path="res://assets/textures/background/lamp/LampPost.png" id="19_tqnw5"]
+[ext_resource type="Texture2D" uid="uid://dfg00ns55mun1" path="res://assets/textures/vfx/2d_lights_and_shadows_neutral_point_light.webp" id="20_ff28f"]
+[ext_resource type="Script" uid="uid://budmag5v7dn2n" path="res://scripts/util/random_lighting.gd" id="21_i1fav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
 size = Vector2(10, 100)
@@ -226,6 +232,32 @@ texture = ExtResource("13_pj6yd")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Midground/ExitSign"]
 shape = SubResource("RectangleShape2D_f86r6")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="Lamp" type="Node2D" parent="Midground" node_paths=PackedStringArray("_lamp_sprite", "_lamp_light")]
+position = Vector2(604, 352)
+scale = Vector2(0.5, 0.5)
+script = ExtResource("16_s1m3y")
+_on_texture = ExtResource("17_ej6ix")
+_off_texture = ExtResource("18_g1hhs")
+_lamp_sprite = NodePath("Lamp")
+_lamp_light = NodePath("Lamp/PointLight2D")
+
+[node name="Post" type="Sprite2D" parent="Midground/Lamp"]
+texture = ExtResource("19_tqnw5")
+
+[node name="Lamp" type="Sprite2D" parent="Midground/Lamp"]
+use_parent_material = true
+position = Vector2(120, -226)
+texture = ExtResource("18_g1hhs")
+offset = Vector2(0, 86)
+
+[node name="PointLight2D" type="PointLight2D" parent="Midground/Lamp/Lamp"]
+position = Vector2(0, 102)
+texture = ExtResource("20_ff28f")
+texture_scale = 2.0
+script = ExtResource("21_i1fav")
+min_scale = 2.0
+max_scale = 2.4
 
 [node name="Jeremy" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("1_oxlu7")]
 position = Vector2(-50, 425)

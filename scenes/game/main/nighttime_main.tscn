@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://d2bt5ycjrdnix"]
+[gd_scene load_steps=42 format=3 uid="uid://d2bt5ycjrdnix"]
 
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_1pk0j"]
 [ext_resource type="Script" uid="uid://d4fc18nb3y6m5" path="res://scripts/game/main/nighttime_main.gd" id="1_53syt"]
@@ -20,8 +20,10 @@
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="12_yb8jp"]
 [ext_resource type="Script" uid="uid://xk43qet2andi" path="res://scripts/game/camp/camp_jerry.gd" id="13_gbmub"]
 [ext_resource type="Texture2D" uid="uid://m5nped6t8u60" path="res://assets/textures/placeholders/baitmonger.png" id="13_x8obj"]
+[ext_resource type="Texture2D" uid="uid://dfg00ns55mun1" path="res://assets/textures/vfx/2d_lights_and_shadows_neutral_point_light.webp" id="14_8i1vf"]
 [ext_resource type="Texture2D" uid="uid://v2dqapay6yd6" path="res://assets/textures/placeholders/foodstall.png" id="14_gbmub"]
 [ext_resource type="Texture2D" uid="uid://djui7gjwjptwd" path="res://assets/textures/background/dock_pieces/CampSign.png" id="14_pracl"]
+[ext_resource type="Script" uid="uid://budmag5v7dn2n" path="res://scripts/util/random_lighting.gd" id="15_otbrs"]
 [ext_resource type="Script" uid="uid://dpm2uq0q842a2" path="res://scripts/game/camp/camp_scavange_pile.gd" id="15_qt33y"]
 [ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/actors/DetectiveNavi.png" id="15_xxygj"]
 [ext_resource type="Script" uid="uid://d0h8m3nuc56sh" path="res://scripts/game/camp/camp_baitmonger.gd" id="17_dtf4f"]
@@ -139,6 +141,12 @@ texture = ExtResource("10_c5hdm")
 position = Vector2(-75, 0)
 shape = SubResource("RectangleShape2D_qt33y")
 debug_color = Color(0.6256581, 0.52917874, 0.15804198, 0.41960785)
+
+[node name="Light" type="PointLight2D" parent="Campfire"]
+position = Vector2(0, 7)
+color = Color(1, 0.62692326, 0.4370838, 1)
+texture = ExtResource("14_8i1vf")
+script = ExtResource("15_otbrs")
 
 [node name="Felix" type="Area2D" parent="." node_paths=PackedStringArray("collision_shape")]
 position = Vector2(950, 585)
