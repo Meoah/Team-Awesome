@@ -2,7 +2,8 @@ extends Control
 class_name DaytimeMain
 
 @export_category("Audio")
-@export var default_bgm : AudioStream
+@export var day_bgm: AudioStream
+@export var night_bgm: AudioStream
 
 @export_category("Children Nodes")
 @export var jeremy_node: MainCharacter
@@ -12,6 +13,9 @@ class_name DaytimeMain
 
 const MAGIC_BAIT_ID: int = 2
 
+const DAY_BGM_START_HOUR: float = 6.0
+const NIGHT_BGM_START_HOUR: float = 18.0
+
 @export_category("PackedScenes")
 @export var bobber_scene : PackedScene
 @export var tutorial_scene : PackedScene
@@ -20,9 +24,10 @@ const MAGIC_BAIT_ID: int = 2
 func _ready() -> void: 
 	# Binds Signals
 	PlayManager.idle_day_state.signal_idle_day.connect(_idle_state)
+	TimeManager.time_updated.connect(_on_time_updated)
 	
 	# Initial setup
-	AudioEngine.play_bgm(default_bgm)
+	_update_bgm_for_time(TimeManager.current_hour)
 	PlayManager.request_dialogue_day_state()
 	if SystemData.fresh_run:
 		_equip_license_gear()
@@ -118,7 +123,26 @@ func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.seek(0)
 
 func _idle_state() -> void:
-	AudioEngine.play_bgm(default_bgm)
+	_update_bgm_for_time(TimeManager.current_hour)
+
+## Updates the daytime scene BGM based on the current hour.
+func _on_time_updated(new_hour: float) -> void:
+	_update_bgm_for_time(new_hour)
+
+
+## Plays the correct daytime-scene BGM for the given hour.
+func _update_bgm_for_time(hour: float) -> void:
+	var target_bgm: AudioStream = _get_bgm_for_hour(hour)
+	if target_bgm:
+		AudioEngine.play_bgm(target_bgm, "", false, 2.0)
+
+
+## Returns the correct daytime-scene BGM for the given hour.
+func _get_bgm_for_hour(hour: float) -> AudioStream:
+	if hour >= DAY_BGM_START_HOUR and hour < NIGHT_BGM_START_HOUR:
+		return day_bgm
+
+	return night_bgm
 
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()

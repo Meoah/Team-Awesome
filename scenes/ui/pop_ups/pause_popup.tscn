@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d0o1muj4f7jbw" path="res://scripts/ui/pop_ups/pause_popup.gd" id="1"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="1_ctmim"]
-[ext_resource type="AudioStream" uid="uid://dwwx23aa1xjui" path="res://assets/audio/bgm/shoppins.ogg" id="2_2vhs1"]
+[ext_resource type="AudioStream" uid="uid://cmrjitxvhw4nn" path="res://assets/audio/bgm/pick_a_card.ogg" id="3_lbb0v"]
 [ext_resource type="Texture2D" uid="uid://cxs5kohvf3hmy" path="res://assets/textures/ui/nine_slices/ChocolateTile.png" id="4_ctmim"]
 [ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="4_lbb0v"]
 [ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="5_nkmn3"]
@@ -22,7 +22,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_kbel7")
 script = ExtResource("1")
-default_bgm = ExtResource("2_2vhs1")
+default_bgm = ExtResource("3_lbb0v")
 hover_sfx = ExtResource("4_lbb0v")
 confirm_sfx = ExtResource("5_nkmn3")
 cancel_sfx = ExtResource("6_iuaci")
