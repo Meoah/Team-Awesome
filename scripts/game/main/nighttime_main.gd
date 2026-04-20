@@ -17,6 +17,7 @@ const NIGHT_TUTORIAL_LICENSE: int = 1
 @export var _felix_trigger: CampInteractable
 @export var _felix_sprite: Sprite2D
 @export var _scavange_trigger: CampInteractable
+@export var _scavange_sprite: AnimatedSprite2D
 @export var _baitmonger_trigger: CampInteractable
 @export var _food_stall_trigger: CampInteractable
 @export var hud : HUD
@@ -165,7 +166,9 @@ func use_scavenge_pile() -> void:
 func _update_bucket() -> void:
 	var scavenge_pile := get_node_or_null("ScavangePile") as Area2D
 	if scavenge_pile and scavange <= 0:
-		scavenge_pile.rotation_degrees = 90
+		_scavange_sprite.play("spent")
+	else:
+		_scavange_sprite.play("default")
 	
 	var label := get_node_or_null("ScavangePile/Scavange") as Label
 	if label:

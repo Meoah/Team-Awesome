@@ -97,7 +97,7 @@ const DUMMY_REEL : Dictionary = {
 
 const WOODEN_REEL : Dictionary = {
 	KEY_NAME : "Wooden Reel",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/reels/Wooden_Reel_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/reels/ReelBasic.png"),
 	KEY_TYPE : REEL,
 	KEY_COST : 15.0,
 	KEY_DESCRIPTION : "Gives a 25% chance to reduce input by 1"
@@ -122,7 +122,7 @@ const DUMMY_ROD : Dictionary = {
 
 const WOODEN_ROD : Dictionary = {
 	KEY_NAME : "Wooden Rod",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/wooden_rod_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/RodBasic.png"),
 	KEY_TYPE : ROD,
 	KEY_COST : 15.0,
 	KEY_DESCRIPTION : "+20% fish value[br]-25% stamina usage"
@@ -147,7 +147,7 @@ const DUMMY_LURE : Dictionary = {
 
 const PLASTIC_LURE : Dictionary = {
 	KEY_NAME : "Plastic Lure",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/lures/plastic_lure_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/lures/LureBasic.png"),
 	KEY_TYPE : LURE,
 	KEY_COST : 15.0,
 	KEY_DESCRIPTION : "+25% fishing speed"
@@ -172,7 +172,7 @@ const MULTI_BOBBER : Dictionary = {
 
 const ROCKET_LAUNCHER : Dictionary = {
 	KEY_NAME : "Rocket Launcher",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/rocket_launcher.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/RocketLauncher.png"),
 	KEY_TYPE : EXOTIC,
 	KEY_COST : 200.0,
 	KEY_DESCRIPTION : "Okay hear me out...[br]rockets.[br][br]+1000% casting strength."
@@ -180,7 +180,7 @@ const ROCKET_LAUNCHER : Dictionary = {
 
 const BOSS_DETECTOR : Dictionary = {
 	KEY_NAME : "Boss Detector",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/metal_detector.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/BossRadar.png"),
 	KEY_TYPE : EXOTIC,
 	KEY_COST : 200.0,
 	KEY_DESCRIPTION : "Allows Jeremy to locate exceptionally rare fish.[br][br]Shows the shadow of the boss fish."
@@ -189,7 +189,7 @@ const BOSS_DETECTOR : Dictionary = {
 ## Bait Bundles
 const GENERIC_BAIT : Dictionary = {
 	KEY_NAME : "Generic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitNormal.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitGeneric.png"),
 	KEY_TYPE : BAIT,
 	KEY_DESCRIPTION : "As generic as it comes."
 }

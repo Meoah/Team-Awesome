@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://b53gtf3nmu4po" path="res://shaders/spotlight.gdshader" id="2_pyu63"]
 [ext_resource type="Texture2D" uid="uid://cs50uco2oilso" path="res://assets/textures/actors/DetectiveNavi.png" id="3_64mbj"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="4_dqchs"]
-[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="6_dqchs"]
+[ext_resource type="Texture2D" uid="uid://bu2rd7lttd6mr" path="res://assets/textures/actors/jeremy/GenericArrow.png" id="6_rah6t"]
 [ext_resource type="Texture2D" uid="uid://s547mvojrov2" path="res://assets/textures/actors/jeremy/bobber.png" id="7_yxihr"]
 [ext_resource type="Texture2D" uid="uid://l57dxqeycwpg" path="res://assets/textures/vfx/exclaim.png" id="8_p15s2"]
 [ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="9_ywqia"]
@@ -470,7 +470,7 @@ tracks/4/keys = {
 "times": PackedFloat32Array(0, 1, 2, 2.5, 2.5333333, 3.1666667, 3.3333335, 4.066667, 4.9666667),
 "transitions": PackedFloat32Array(1, -2, -2, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(0.273, 0.66), Vector2(0.273, 0.66), Vector2(0.572, 0.12), Vector2(0.572, 0.12), Vector2(0.625, 0.7), Vector2(0.625, 0.7), Vector2(0, 0.65)]
+"values": [Vector2(0, 0), Vector2(0.5, 0.5), Vector2(0.273, 0.66), Vector2(0.273, 0.66), Vector2(0.45, 0.12), Vector2(0.45, 0.12), Vector2(0.625, 0.7), Vector2(0.625, 0.7), Vector2(0, 0.65)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -479,10 +479,10 @@ tracks/5/path = NodePath("Blocker:material:shader_parameter/radius")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 1, 2, 2.5, 3, 3.1666667, 3.3333335, 3.8666666, 4.0333333, 4.9666667, 5.766667, 6.266667),
-"transitions": PackedFloat32Array(1, 1, -2, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2, 2.5, 2.5328393, 3, 3.1333334, 3.3333335, 3.8666666, 4.0333333, 4.9666667, 5.766667, 6.266667),
+"transitions": PackedFloat32Array(1, 1, -2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.02, 0.12, 0.0, 0.18, 0.0, 0.0, 0.18, 0.0, 0.0, 0.18, 0.0]
+"values": [0.0, 0.02, 0.12, 0.0, 0.0, 0.18, 0.0, 0.0, 0.18, 0.0, 0.0, 0.18, 0.0]
 }
 tracks/6/type = "value"
 tracks/6/imported = false
@@ -491,10 +491,10 @@ tracks/6/path = NodePath("Blocker:material:shader_parameter/feather")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 1, 2.4666667, 2.5, 3, 3.1666667, 3.2, 3.3333333, 3.8666666, 4.0333333, 4.0666666, 5, 5.766667, 6.233333, 6.266667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 1, 2.4666667, 2.5, 2.5328393, 3, 3.1333334, 3.1666667, 3.3333333, 3.8666666, 4.0333333, 4.0666666, 5, 5.766667, 6.233333, 6.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.1, 0.02, 0.0, 0.07, 0.02, 0.0, 0.0, 0.07, 0.02, 0.0, 0.0, 0.07, 0.02, 0.0]
+"values": [0.0, 0.1, 0.02, 0.0, 0.0, 0.07, 0.02, 0.0, 0.0, 0.07, 0.02, 0.0, 0.0, 0.07, 0.02, 0.0]
 }
 tracks/7/type = "value"
 tracks/7/imported = false
@@ -911,7 +911,7 @@ modulate = Color(1, 0.99215686, 1, 0.78431374)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-texture = ExtResource("6_dqchs")
+texture = ExtResource("6_rah6t")
 expand_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ContinueIndicator"]
@@ -936,7 +936,7 @@ texture = ExtResource("8_p15s2")
 [node name="ArrowContainer" type="PanelContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(800, 100)
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -944,7 +944,7 @@ anchor_bottom = 0.5
 offset_left = -422.0
 offset_top = -270.0
 offset_right = 422.00037
-offset_bottom = -129.99997
+offset_bottom = -129.99992
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_5yrwu")

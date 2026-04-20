@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://b856gwtwh1bno"]
+[gd_scene load_steps=36 format=3 uid="uid://b856gwtwh1bno"]
 
 [ext_resource type="Script" uid="uid://n3jjvqnan6hy" path="res://scripts/game/main/daytime_main.gd" id="1_2jsv6"]
 [ext_resource type="PackedScene" uid="uid://c4g7xtu4dc0po" path="res://scenes/actors/main_character.tscn" id="1_oxlu7"]
@@ -10,11 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://c12qijslqo1mg" path="res://assets/textures/background/SkyBackground.png" id="7_pj6yd"]
 [ext_resource type="Script" uid="uid://kbal7ers7gbb" path="res://scripts/game/camera/day_cam.gd" id="8_3kam8"]
 [ext_resource type="Texture2D" uid="uid://clte66jao3y3i" path="res://assets/textures/background/clouds/Cloud01.png" id="8_b82wd"]
-[ext_resource type="Texture2D" uid="uid://gm82txfpgbpv" path="res://assets/textures/vfx/FISH/Fish 01.png" id="9_3kam8"]
 [ext_resource type="Texture2D" uid="uid://b3c27srtlb2sa" path="res://assets/textures/background/clouds/Cloud03.png" id="9_s5bea"]
 [ext_resource type="Texture2D" uid="uid://0of2npxdth2d" path="res://assets/textures/background/clouds/Cloud02.png" id="10_3cdms"]
 [ext_resource type="PackedScene" uid="uid://cjoxd6e64nw52" path="res://scenes/ui/hud/hud.tscn" id="10_3kam8"]
-[ext_resource type="Texture2D" uid="uid://q3uv13ote634" path="res://assets/textures/vfx/FISH/Fish 02.png" id="10_nw8sa"]
 [ext_resource type="Texture2D" uid="uid://dcosx8b8oj3qg" path="res://assets/textures/background/clouds/Cloud04.png" id="11_jmtsn"]
 [ext_resource type="Texture2D" uid="uid://b3sq2udilgcya" path="res://assets/textures/background/water/Water_01.png" id="12_6xinc"]
 [ext_resource type="Texture2D" uid="uid://ckeuboh7v0jsc" path="res://assets/textures/background/water/Water_03.png" id="13_e7nxg"]
@@ -29,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://cqt3fy3gstgi5" path="res://assets/textures/background/lamp/LampPost.png" id="19_tqnw5"]
 [ext_resource type="Texture2D" uid="uid://dfg00ns55mun1" path="res://assets/textures/vfx/2d_lights_and_shadows_neutral_point_light.webp" id="20_ff28f"]
 [ext_resource type="Script" uid="uid://budmag5v7dn2n" path="res://scripts/util/random_lighting.gd" id="21_i1fav"]
+[ext_resource type="Texture2D" uid="uid://dv8ih5vnenrga" path="res://assets/textures/vfx/FISH/Fishhh.png" id="26_s1m3y"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f86r6"]
 size = Vector2(10, 100)
@@ -47,47 +46,23 @@ length = 1.75
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("FISH/CanvasLayer/FISH 01:position")
+tracks/0/path = NodePath("FISH/CanvasLayer/FishFlyby:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.39960003, 0.69930005, 1, 1.2987001),
-"transitions": PackedFloat32Array(1, 0.23325841, 0.13869627, 1, 1),
+"times": PackedFloat32Array(0, 0.36666667, 1.1666666, 1.4),
+"transitions": PackedFloat32Array(2, 0.5, 2, 1),
 "update": 0,
-"values": [Vector2(442.746, 430.623), Vector2(642.73, 430.59998), Vector2(542.746, 430.623), Vector2(642.74646, 430.62347), Vector2(642.74646, 430.62347)]
+"values": [Vector2(-200, 430), Vector2(540, 430), Vector2(740, 430.623), Vector2(1500, 430)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("FISH/CanvasLayer/FISH 02:position")
-tracks/1/interp = 1
+tracks/1/path = NodePath("FISH/CanvasLayer/FishFlyby:modulate")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.39960003, 0.69930005, 1, 1.2987001),
-"transitions": PackedFloat32Array(1, 0.23325841, 0.13869627, 1, 1),
-"update": 0,
-"values": [Vector2(842.746, 430.623), Vector2(642.73, 430.59998), Vector2(742.746, 430.623), Vector2(642.74646, 430.62347), Vector2(642.74646, 430.62347)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FISH/CanvasLayer/FISH 01:modulate")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1992155, 1.2987001, 1.3986001),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("FISH/CanvasLayer/FISH 02:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1992155, 1.4013106, 1.5012106),
+"times": PackedFloat32Array(0, 0.36666667, 1.2987001, 1.3986001),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -95,6 +70,18 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_sd21a"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FISH/CanvasLayer/FishFlyby:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-196.99997, 430.623)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i6nw5"]
 _data = {
@@ -111,7 +98,7 @@ night_bgm = ExtResource("3_g1hhs")
 jeremy_node = NodePath("Jeremy")
 hud = NodePath("HUD")
 camera = NodePath("DayCam")
-boss_shadow = NodePath("BossShadow")
+boss_shadow = NodePath("Foreground/BossShadow")
 bobber_scene = ExtResource("3_6j7wl")
 tutorial_scene = ExtResource("14_i6nw5")
 
@@ -276,6 +263,10 @@ texture = ExtResource("17_b82wd")
 position = Vector2(63, 600)
 texture = ExtResource("17_b82wd")
 
+[node name="BossShadow" parent="Foreground" instance=ExtResource("18_e7nxg")]
+z_index = 2
+position = Vector2(891, 633)
+
 [node name="WaterFront" type="Parallax2D" parent="Foreground"]
 z_index = 2
 scroll_scale = Vector2(1.2, 1)
@@ -299,10 +290,6 @@ shape = SubResource("RectangleShape2D_ovom5")
 position = Vector2(650, 360)
 shape = SubResource("RectangleShape2D_3kam8")
 
-[node name="BossShadow" parent="." instance=ExtResource("18_e7nxg")]
-z_index = 2
-position = Vector2(918, 650)
-
 [node name="FISH" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_i6nw5")
@@ -311,17 +298,11 @@ movie_quit_on_finish = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="FISH"]
 
-[node name="FISH 01" type="Sprite2D" parent="FISH/CanvasLayer"]
+[node name="FishFlyby" type="Sprite2D" parent="FISH/CanvasLayer"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(442.746, 430.623)
-scale = Vector2(3, 3)
-texture = ExtResource("9_3kam8")
-
-[node name="FISH 02" type="Sprite2D" parent="FISH/CanvasLayer"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(842.746, 430.623)
-scale = Vector2(3, 3)
-texture = ExtResource("10_nw8sa")
+position = Vector2(-196.99997, 430.623)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("26_s1m3y")
 
 [node name="DayCam" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 position = Vector2(640, 360)

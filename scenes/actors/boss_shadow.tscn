@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3lb2hsqyd5mi"]
+[gd_scene load_steps=6 format=3 uid="uid://d3lb2hsqyd5mi"]
 
-[ext_resource type="Texture2D" uid="uid://bf7n3potbkk26" path="res://assets/textures/placeholders/boss_shadow.png" id="1_3ggsr"]
 [ext_resource type="Script" uid="uid://244xlpxgfq4b" path="res://scripts/actors/boss_shadow.gd" id="1_bwncg"]
+[ext_resource type="Texture2D" uid="uid://be4w8ckf7na3e" path="res://assets/textures/fish/BossShadow01.png" id="2_deu7f"]
+[ext_resource type="Texture2D" uid="uid://c3ofq4du2qrjm" path="res://assets/textures/fish/BossShadow02.png" id="3_jmr4k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwncg"]
 size = Vector2(256, 94)
@@ -10,11 +11,14 @@ size = Vector2(256, 94)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_3ggsr")
+"texture": ExtResource("2_deu7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_jmr4k")
 }],
-"loop": false,
+"loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 1.0
 }]
 
 [node name="BossShadow" type="Area2D" node_paths=PackedStringArray("collision_shape")]
@@ -26,5 +30,8 @@ shape = SubResource("RectangleShape2D_bwncg")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.5019608)
+position = Vector2(0, -46)
+scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_deu7f")
 autoplay = "default"
+frame_progress = 0.3841293

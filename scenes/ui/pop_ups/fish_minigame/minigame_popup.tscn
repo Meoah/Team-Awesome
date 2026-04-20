@@ -16,7 +16,7 @@
 [ext_resource type="Texture2D" uid="uid://dreyt8f5wrd8q" path="res://assets/textures/ui/nine_slices/progress_white_small.png" id="20_mv0ug"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="22_gjchp"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="23_vgf2p"]
-[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="24_2eskw"]
+[ext_resource type="Texture2D" uid="uid://bu2rd7lttd6mr" path="res://assets/textures/actors/jeremy/GenericArrow.png" id="25_5vhg8"]
 [ext_resource type="Script" uid="uid://bw1d8jfjije3h" path="res://scripts/ui/fish_minigame/countdown_bar.gd" id="25_ef8oi"]
 [ext_resource type="Script" uid="uid://bjqerl6c0hfo6" path="res://scripts/ui/fish_minigame/arrow_container.gd" id="25_wvna3"]
 [ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://shaders/sparks.gdshader" id="26_3cm2c"]
@@ -543,7 +543,7 @@ modulate = Color(1, 0.99215686, 1, 0.78431374)
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
-texture = ExtResource("24_2eskw")
+texture = ExtResource("25_5vhg8")
 expand_mode = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ContinueIndicator"]

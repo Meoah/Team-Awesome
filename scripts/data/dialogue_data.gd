@@ -4,11 +4,14 @@ class_name DialogueData
 const NAME_MAIN_CHARACTER = "Jeremy"
 const NAME_MOB_BOSS = "Mob Boss"
 const NAME_BAIT_VENDOR = "Barry"
+const NAME_FELIX = "Felix"
 const UNKNOWN = "Unknown"
 
 ## Image Paths
-const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/mobboss.png")
-const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/jeremy_portrait.png")
+const IMAGE_MOB_BOSS_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/PortraitBoss.png")
+const IMAGE_MAIN_CHARACTER_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/PortraitJeremy.png")
+const IMAGE_FELIX_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/PortraitFelix.png")
+const IMAGE_BARRY_DEFAULT = NodePath("res://assets/textures/ui/dialogue/character_portraits/PortraitBarry.png")
 
 const DEFAULT_SPEAKER_PROFILE : Dictionary = {
 	"beep_key": "dialogue_typewriter_beep",
@@ -22,7 +25,10 @@ const DEFAULT_SPEAKER_PROFILE : Dictionary = {
 
 const SPEAKER_PROFILES : Dictionary = {
 	NAME_MAIN_CHARACTER: {"beep_base_pitch_scale": 1.08},
-	NAME_MOB_BOSS: {"beep_base_pitch_scale": 0.3, "beep_chance": 0.65}
+	NAME_MOB_BOSS: {"beep_base_pitch_scale": 0.3, "beep_chance": 0.65},
+	UNKNOWN: {"beep_base_pitch_scale": 0.3, "beep_chance": 0.65},
+	NAME_BAIT_VENDOR: {"beep_base_pitch_scale": 0.7, "beep_chance": 0.85},
+	NAME_FELIX: {"beep_base_pitch_scale": 1.4},
 }
 
 # Getter functions.
@@ -135,7 +141,6 @@ const DEBUG_EXAMPLE : Dictionary = {
 
 const INTRO : Dictionary = {
 	0001 : {
-		KEY_NAME : UNKNOWN,
 		KEY_TEXT : "*Knock Knock Knock*",
 	},
 	0002 : {
@@ -275,6 +280,8 @@ const BAIT_SHOP : Dictionary = {
 	},
 	0001 : {
 		KEY_NAME : NAME_BAIT_VENDOR,
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
+		KEY_IMAGE_R : IMAGE_BARRY_DEFAULT,
 		KEY_TEXT : "'sup man. I found some bait. Gonna cost ya though.",
 		KEY_RETURN : true,
 		KEY_PARAMETERS : [PARAMETER_SIGNAL_ON_EXIT],
@@ -284,15 +291,18 @@ const BAIT_SHOP : Dictionary = {
 
 const JERRY_LICENSE_1 : Dictionary = {
 	0001 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "Hey Jeremy!\nWe'll make it through this, just gotta get enough money to pay the boss right?"
 	},
 	0002 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "Just keep going what you do best and fish! I heard that the further out you cast, the higher value the fish, so aim far!"
 	},
 	0003 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "Don't forget to rest as well. Can't exactly fish when you can't even stay awake right? Have a break, a meal, or just go to sleep when you're tired, alright?",
 		KEY_RETURN : true
 	}
@@ -300,23 +310,28 @@ const JERRY_LICENSE_1 : Dictionary = {
 
 const JERRY_LICENSE_2 : Dictionary = {
 	0001 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "Another overpriced license.. Oh well, we'll make it through as always.",
 	},
 	0002 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "Luckily we brought our new gadget along. Your lure shoots so far now!"
 	},
 	0003 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "That guy came along with us as well.. said he got some special bait you can try. Shady guy.. If you don't want to buy from him, you could always.. uh.. dig and scavange through..",
 	},
 	0004 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "..THAT.",
 	},
 	0005 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "I'm sure there's some worms in there if you're lucky.",
 		KEY_RETURN : true
 	}
@@ -324,7 +339,8 @@ const JERRY_LICENSE_2 : Dictionary = {
 
 const JERRY_LICENSE_3 : Dictionary = {
 	0001 : {
-		KEY_NAME : "Felix",
+		KEY_NAME : NAME_FELIX,
+		KEY_IMAGE_R : IMAGE_FELIX_DEFAULT,
 		KEY_TEXT : "There's something in the waters.. I guess that's why they sent us here. Our sources tells us that our target's fond of this 'Magic Bait'.. Maybe that weird guy has some for sale?",
 		KEY_RETURN : true
 	}
@@ -333,6 +349,7 @@ const JERRY_LICENSE_3 : Dictionary = {
 const CAMPFIRE_MEAL : Dictionary = {
 	0001 : {
 		KEY_NAME : "Campfire",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
 		KEY_TEXT : "Jeremy has a quick meal. +25 stamina. 30 minutes pass.",
 		KEY_RETURN : true
 	}
@@ -341,6 +358,7 @@ const CAMPFIRE_MEAL : Dictionary = {
 const CAMPFIRE_COOLDOWN : Dictionary = {
 	0001 : {
 		KEY_NAME : "Campfire",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
 		KEY_TEXT : "Still too full for another meal. Come back later.",
 		KEY_RETURN : true
 	}
@@ -349,6 +367,7 @@ const CAMPFIRE_COOLDOWN : Dictionary = {
 const FOODSTALL_TEASER : Dictionary = {
 	0001 : {
 		KEY_NAME : "Food Stall",
+		KEY_IMAGE_L : IMAGE_MAIN_CHARACTER_DEFAULT,
 		KEY_TEXT : "Yo. Sorry pal, but I ain't got no ingredents atta moment. Come back later, ya hear? (Not available in the demo, sorry.)",
 		KEY_RETURN : true
 	}

@@ -1,12 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cwo1dpi7dssjg"]
+[gd_scene load_steps=17 format=3 uid="uid://cwo1dpi7dssjg"]
 
 [ext_resource type="Script" uid="uid://bv0ieg1ihbpof" path="res://scripts/ui/pop_ups/dialogue_popup.gd" id="1_jhcxe"]
 [ext_resource type="AudioStream" uid="uid://ceq84o58id851" path="res://assets/audio/sfx/dialogue/dialogue_blip.wav" id="2_jqb3i"]
-[ext_resource type="Texture2D" uid="uid://bfm2wj2amel5w" path="res://assets/textures/ui/dialogue/character_portraits/mobboss.png" id="2_qpbe1"]
 [ext_resource type="AudioStream" uid="uid://snu7d8811xkm" path="res://assets/audio/sfx/dialogue/advance_dialogue.ogg" id="3_gfr62"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="4_a0ly1"]
-[ext_resource type="Texture2D" uid="uid://dxengg22601k2" path="res://assets/textures/actors/jeremy/arrow.png" id="4_piijg"]
+[ext_resource type="Texture2D" uid="uid://dwvx22a4om4p0" path="res://assets/textures/ui/dialogue/character_portraits/PortraitJeremy.png" id="4_gfr62"]
+[ext_resource type="Texture2D" uid="uid://cyvru2gl73c02" path="res://assets/textures/ui/dialogue/character_portraits/PortraitBoss.png" id="5_arc3p"]
 [ext_resource type="Texture2D" uid="uid://7drcsguouckx" path="res://assets/textures/ui/nine_slices/SimpleBox.png" id="5_jqb3i"]
+[ext_resource type="Texture2D" uid="uid://bu2rd7lttd6mr" path="res://assets/textures/actors/jeremy/GenericArrow.png" id="8_gfr62"]
 
 [sub_resource type="Theme" id="Theme_piijg"]
 default_font = ExtResource("4_a0ly1")
@@ -134,7 +135,7 @@ anchor_bottom = 1.0
 offset_top = -391.0
 offset_right = 495.0
 grow_vertical = 0
-texture = ExtResource("2_qpbe1")
+texture = ExtResource("4_gfr62")
 stretch_mode = 4
 
 [node name="SpeakerImageRight" type="TextureRect" parent="."]
@@ -148,7 +149,7 @@ offset_left = -495.0
 offset_top = -391.0
 grow_horizontal = 0
 grow_vertical = 0
-texture = ExtResource("2_qpbe1")
+texture = ExtResource("5_arc3p")
 stretch_mode = 4
 flip_h = true
 
@@ -209,7 +210,7 @@ offset_top = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
-texture = ExtResource("4_piijg")
+texture = ExtResource("8_gfr62")
 expand_mode = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="DialogueBox/Content/ContinueArrow"]
