@@ -31,6 +31,8 @@ func _ready() -> void:
 	# Auto-plays the first segment.
 	_play_to_next_step()
 
+
+
 func _input(event: InputEvent) -> void:
 	if input_locked : return
 	

@@ -72,6 +72,7 @@ const KEY_COST_STABILITY : String = "cost_stability"
 const KEY_DESCRIPTION : String = "description"
 const KEY_QUANTITY_MIN : String = "quantity_min"
 const KEY_QUANTITY_MAX : String = "quantity_max"
+const KEY_VALUE_MULTIPLIER: String = "value_multiplier"
 const KEY_SIGNAL : String = "signal"
 # Must include the following:
 #	KEY_NAME : String
@@ -97,7 +98,7 @@ const DUMMY_REEL : Dictionary = {
 
 const WOODEN_REEL : Dictionary = {
 	KEY_NAME : "Wooden Reel",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/reels/Wooden_Reel_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/reels/ReelBasic.png"),
 	KEY_TYPE : REEL,
 	KEY_COST : 15.0,
 	KEY_DESCRIPTION : "Gives a 25% chance to reduce input by 1"
@@ -122,7 +123,7 @@ const DUMMY_ROD : Dictionary = {
 
 const WOODEN_ROD : Dictionary = {
 	KEY_NAME : "Wooden Rod",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/wooden_rod_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/rods/RodBasic.png"),
 	KEY_TYPE : ROD,
 	KEY_COST : 15.0,
 	KEY_DESCRIPTION : "+20% fish value[br]-25% stamina usage"
@@ -147,7 +148,7 @@ const DUMMY_LURE : Dictionary = {
 
 const PLASTIC_LURE : Dictionary = {
 	KEY_NAME : "Plastic Lure",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/lures/plastic_lure_temp.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/lures/LureBasic.png"),
 	KEY_TYPE : LURE,
 	KEY_COST : 15.0,
 	KEY_DESCRIPTION : "+25% fishing speed"
@@ -172,7 +173,7 @@ const MULTI_BOBBER : Dictionary = {
 
 const ROCKET_LAUNCHER : Dictionary = {
 	KEY_NAME : "Rocket Launcher",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/rocket_launcher.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/RocketLauncher.png"),
 	KEY_TYPE : EXOTIC,
 	KEY_COST : 200.0,
 	KEY_DESCRIPTION : "Okay hear me out...[br]rockets.[br][br]+1000% casting strength."
@@ -180,7 +181,7 @@ const ROCKET_LAUNCHER : Dictionary = {
 
 const BOSS_DETECTOR : Dictionary = {
 	KEY_NAME : "Boss Detector",
-	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/metal_detector.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/upgrades/exotic/BossRadar.png"),
 	KEY_TYPE : EXOTIC,
 	KEY_COST : 200.0,
 	KEY_DESCRIPTION : "Allows Jeremy to locate exceptionally rare fish.[br][br]Shows the shadow of the boss fish."
@@ -189,9 +190,10 @@ const BOSS_DETECTOR : Dictionary = {
 ## Bait Bundles
 const GENERIC_BAIT : Dictionary = {
 	KEY_NAME : "Generic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/generic_bait_placeholder.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitGeneric.png"),
 	KEY_TYPE : BAIT,
-	KEY_DESCRIPTION : "As generic as it comes."
+	KEY_DESCRIPTION : "As generic as it comes.",
+	KEY_VALUE_MULTIPLIER : 1.0,
 }
 
 const DUMMY_BAIT : Dictionary = {
@@ -199,27 +201,30 @@ const DUMMY_BAIT : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 0.0,
-	KEY_DESCRIPTION : "Get baited."
+	KEY_DESCRIPTION : "Get baited.",
+	KEY_VALUE_MULTIPLIER : 1.0,
 }
 
 const WORM_BAIT : Dictionary = {
 	KEY_NAME : "Worm Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/worm_bait_placeholder.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitNormal.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 1.0,
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 10,
-	KEY_DESCRIPTION : "Ew, slimy."
+	KEY_DESCRIPTION : "Ew, slimy.",
+	KEY_VALUE_MULTIPLIER : 1.75,
 }
 
 const MAGIC_BAIT : Dictionary = {
 	KEY_NAME : "Magic Bait",
-	KEY_IMAGE : NodePath("res://assets/textures/bait/placeholder_bait.png"),
+	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitMagic.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 50.0,
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 2,
-	KEY_DESCRIPTION : "[font_size=8]This may or may not be a scam.[/font_size]\nThis is [color=red]DEFINITELY[/color] worth it."
+	KEY_DESCRIPTION : "[font_size=8]This may or may not be a scam.[/font_size]\nThis is [color=red]DEFINITELY[/color] worth it.",
+	KEY_VALUE_MULTIPLIER : 5.0,
 }

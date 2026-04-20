@@ -2,7 +2,8 @@ extends Control
 class_name DaytimeMain
 
 @export_category("Audio")
-@export var default_bgm : AudioStream
+@export var day_bgm: AudioStream
+@export var night_bgm: AudioStream
 
 @export_category("Children Nodes")
 @export var jeremy_node: MainCharacter
@@ -12,6 +13,9 @@ class_name DaytimeMain
 
 const MAGIC_BAIT_ID: int = 2
 
+const DAY_BGM_START_HOUR: float = 6.0
+const NIGHT_BGM_START_HOUR: float = 18.0
+
 @export_category("PackedScenes")
 @export var bobber_scene : PackedScene
 @export var tutorial_scene : PackedScene
@@ -20,9 +24,10 @@ const MAGIC_BAIT_ID: int = 2
 func _ready() -> void: 
 	# Binds Signals
 	PlayManager.idle_day_state.signal_idle_day.connect(_idle_state)
+	TimeManager.time_updated.connect(_on_time_updated)
 	
 	# Initial setup
-	AudioEngine.play_bgm(default_bgm)
+	_update_bgm_for_time(TimeManager.current_hour)
 	PlayManager.request_dialogue_day_state()
 	if SystemData.fresh_run:
 		_equip_license_gear()
@@ -31,7 +36,6 @@ func _ready() -> void:
 	
 	if _check_loss_condition(): return
 	
-	await jeremy_node.walk_up_sequence()
 	await jeremy_node.walk_up_sequence()
 	
 	# Cutscenes
@@ -67,10 +71,12 @@ func _play_tutorial() -> void:
 	new_scene.tutorial_done.connect(_ready_day)
 	add_child(new_scene)
 
-## Default function for the day.
+## Enables normal daytime gameplay.
 func _ready_day() -> void:
 	TimeManager.time_enabled = true
 	PlayManager.request_idle_day_state()
+	jeremy_node.suppress_action_until_release()
+	jeremy_node.apply_held_movement_input()
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:
@@ -97,7 +103,7 @@ func _on_bobber_landed_in_water(bobber: Bobber) -> void:
 	
 	if boss_shadow.contains_bobber(bobber): bobber.encounter_type = Bobber.EncounterType.BOSS
 
-func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: float) -> void:
+func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: float, bait_id: int = -1) -> void:
 	$FISH.play("FISH!")
 	await $FISH.animation_finished
 	
@@ -106,7 +112,8 @@ func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: flo
 	
 	var popup_parameters = {
 		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE,
-		"_distance" = distance
+		"_distance" = distance,
+		"_bait_id" = bait_id,
 	}
 	
 	GameManager.popup_queue.show_popup(popup_type, popup_parameters)
@@ -117,7 +124,26 @@ func _on_fish_animation_finished(_anim_name: StringName) -> void:
 	$FISH.seek(0)
 
 func _idle_state() -> void:
-	AudioEngine.play_bgm(default_bgm)
+	_update_bgm_for_time(TimeManager.current_hour)
+
+## Updates the daytime scene BGM based on the current hour.
+func _on_time_updated(new_hour: float) -> void:
+	_update_bgm_for_time(new_hour)
+
+
+## Plays the correct daytime-scene BGM for the given hour.
+func _update_bgm_for_time(hour: float) -> void:
+	var target_bgm: AudioStream = _get_bgm_for_hour(hour)
+	if target_bgm:
+		AudioEngine.play_bgm(target_bgm, "", false, 2.0)
+
+
+## Returns the correct daytime-scene BGM for the given hour.
+func _get_bgm_for_hour(hour: float) -> AudioStream:
+	if hour >= DAY_BGM_START_HOUR and hour < NIGHT_BGM_START_HOUR:
+		return day_bgm
+
+	return night_bgm
 
 func _on_exit_sign_body_entered(body: Node2D) -> void:
 	if body is MainCharacter : _end_day()

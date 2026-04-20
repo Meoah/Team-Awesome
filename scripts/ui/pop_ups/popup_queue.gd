@@ -142,21 +142,16 @@ func _on_after_dismiss(popup: BasePopup) -> void:
 	popup.on_after_dismiss() # TODO Unsure if await is required here.
 	popup.queue_free() # Placed here at the very end to ensure the function finishes its procedure before freeing.
 
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		# Allows escape to dismiss popup.
-		if event.keycode == KEY_ESCAPE and event.is_released():
-			var popup : BasePopup = null
-			# Checks if state needs to be set back from pause.
-			if _queue.size() > 0 : popup = _queue.values().back()
-			var current_state = GameManager.get_current_state()
-			
-			if popup and popup.is_dismiss_on_escape():
-				GameManager.dismiss_popup()
-				get_viewport().set_input_as_handled()
-				return
-			
-			# Pause only happens after all the DISMISS_ON_ESCAPE are down.
-			if current_state == GameManager.play_state:
-				GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
-				get_viewport().set_input_as_handled()
+## Opens the pause popup only when no other popup is currently open.
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_cancel"):
+		return
+
+	if _queue.size() > 0:
+		return
+
+	if GameManager.get_current_state() != GameManager.play_state:
+		return
+
+	GameManager.show_popup(BasePopup.POPUP_TYPE.PAUSE)
+	get_viewport().set_input_as_handled()

@@ -28,6 +28,7 @@ class_name MinigamePopup
 var current_name: String = ""
 var current_image: NodePath
 var current_weight: float = 0.0
+var current_description: String = ""
 var correct_inputs: Array
 var current_value: float = 0.0
 var time: float = 0.0
@@ -66,10 +67,12 @@ var _input_array: Array = [] # Holds the correct sequence of inputs per fish
 var _input_index: int = 0 # Holds the index for the current input in the input array
 var _delay : bool = false
 var _distance: float = -1
+var _bait_id: int = -1
 var _cleared = false
 
 func _on_set_params() -> void:
-	_distance = params.get("_distance", -1)
+	_distance = params.get("_distance", -1.0)
+	_bait_id = params.get("_bait_id", -1)
 
 
 # Initialize Script
@@ -130,13 +133,14 @@ func _pick_weighted(weights: Dictionary) -> Variant:
 
 
 func _apply_data() -> void:
-	var chosen_fish = FishData.FISH_ID[chosen_fish_id]
-	current_name = chosen_fish["name"]
-	current_image = chosen_fish["image"]
-	current_weight = chosen_fish["weight"]
-	correct_inputs = chosen_fish["inputs"]
-	current_value = chosen_fish["value"]
-	time = chosen_fish["time"]
+	var chosen_fish: Dictionary = FishData.FISH_ID[chosen_fish_id]
+	current_name = chosen_fish.get("name", "")
+	current_image = chosen_fish.get("image", null)
+	current_weight = chosen_fish.get("weight", 0.0)
+	current_description = chosen_fish.get("description", "")
+	correct_inputs = chosen_fish.get("inputs", [])
+	current_value = chosen_fish.get("value", 0.0)
+	time = chosen_fish.get("time", 0.0)
 	
 	_input_array = correct_inputs
 
@@ -269,44 +273,148 @@ func _fail():
 	_prep_return_to_fishing()
 
 
+## Returns the value multiplier for the hooked fish variant.
+func _get_variant_value_multiplier() -> float:
+	match chosen_fish_variant:
+		FishVariantType.GOLD:
+			return 2.0
+		FishVariantType.EVIL:
+			return 1.5
+		FishVariantType.OBSCURED:
+			return 1.75
+		_:
+			return 1.0
+
+
+## Returns the display name for the hooked fish variant.
+func _get_variant_display_name() -> String:
+	match chosen_fish_variant:
+		FishVariantType.GOLD:
+			return "Gold"
+		FishVariantType.EVIL:
+			return "Evil"
+		FishVariantType.OBSCURED:
+			return "Obscured"
+		_:
+			return "Normal"
+
+
+## Returns the bait data used for this catch.
+func _get_bait_data() -> Dictionary:
+	return ItemData.get_data(ItemData.BAIT, _bait_id)
+
+
+## Returns the value multiplier for the bait used on this catch.
+func _get_bait_value_multiplier() -> float:
+	return float(_get_bait_data().get(ItemData.KEY_VALUE_MULTIPLIER, 1.0))
+
+
+## Returns the display name for the bait used on this catch.
+func _get_bait_display_name() -> String:
+	return _get_bait_data().get(ItemData.KEY_NAME, "Generic Bait")
+
+
+## Returns the distance value multiplier for this catch.
+func _get_distance_multiplier() -> float:
+	if _distance <= 0.0:
+		return 1.0
+
+	return pow(2.0, log(_distance / 100.0) / log(10.0))
+
+
+## Builds the results text shown after catching a fish.
+func _build_results_text(
+	base_value: float,
+	final_value: float,
+	variant_multiplier: float,
+	bait_multiplier: float,
+	distance_multiplier: float,
+	gear_multiplier: float
+) -> String:
+	var total_multiplier: float = (
+		variant_multiplier
+		* bait_multiplier
+		* distance_multiplier
+		* gear_multiplier
+	)
+	
+	return (
+		"[b]%s[/b]\n\n"+
+		"Weight: %.2f\n"+
+		"Base Value: %.2f\n"+
+		"Variant Bonus (%s): x%.2f\n"+
+		"Bait Bonus (%s): x%.2f\n"+
+		"Distance Bonus: x%.2f\n"+
+		"Gear Bonus: x%.2f\n"+
+		"Total Multiplier: x%.2f\n"+
+		"Final Value: %.2f\n\n"+
+		"%s"
+	) % [
+		current_name,
+		current_weight,
+		base_value,
+		_get_variant_display_name(),
+		variant_multiplier,
+		_get_bait_display_name(),
+		bait_multiplier,
+		distance_multiplier,
+		gear_multiplier,
+		total_multiplier,
+		final_value,
+		current_description,
+	]
+
+
 func _win():
 	set_process_input(false)
 	_arrow_container.hide()
-	
+
 	AudioEngine.stop_all_sfx()
 	AudioEngine.stop_sfx_key(_sfx_timer_start)
 	AudioEngine.play_sfx(_sfx_timer_end)
 	AudioEngine.play_sfx(_sfx_fish_caught)
-	
+
 	_cleared = true
-	
+
 	var fish_image: Texture = load(current_image)
 	_reaction_node.texture = fish_image
-	
-	match chosen_fish_variant:
-		FishVariantType.GOLD:		current_value = current_value * 2
-		FishVariantType.EVIL:		current_value = current_value * 1.5
-		FishVariantType.OBSCURED:	current_value = current_value * 1.75
-	
-	if _distance > 0:
-		var distance_multiplier: float = pow(2.0, log(_distance / 100) / log(10))
-		current_value *= distance_multiplier
-	
-	current_value *= SystemData.value_multiplier
-	
-	_results_window.set_text(current_name + "\n Weight: %.2f\n Value: %.2f" % [current_weight, current_value])
+
+	var base_value: float = current_value
+	var variant_multiplier: float = _get_variant_value_multiplier()
+	var bait_multiplier: float = _get_bait_value_multiplier()
+	var distance_multiplier: float = _get_distance_multiplier()
+	var gear_multiplier: float = SystemData.value_multiplier
+
+	var payout: float = (
+		base_value
+		* variant_multiplier
+		* bait_multiplier
+		* distance_multiplier
+		* gear_multiplier
+	)
+
+	_results_window.set_text(
+		_build_results_text(
+			base_value,
+			payout,
+			variant_multiplier,
+			bait_multiplier,
+			distance_multiplier,
+			gear_multiplier
+		)
+	)
 	_results_window.show()
-	
-	SystemData._add_money_delay(current_value)
+
+	SystemData._add_money_delay(payout)
 	SystemData._add_fish(chosen_fish_id)
-	
+
 	if chosen_fish_id == 21:
 		await get_tree().create_timer(2.5).timeout
 		$ReactionAnimation.play()
 		await get_tree().create_timer(0.5).timeout
 		_return_to_fishing()
-	
-	else: _prep_return_to_fishing()
+	else:
+		_prep_return_to_fishing()
 
 
 func _prep_return_to_fishing() -> void:
@@ -314,31 +422,28 @@ func _prep_return_to_fishing() -> void:
 	_set_continue_visible(true)
 	set_process_input(true)
 	_delay = true
-	
-	await get_tree().create_timer(5.0).timeout
-	_return_to_fishing()
 
 
 func _return_to_fishing() -> void:
-	if !is_inside_tree() or is_queued_for_deletion(): return
-	
-	_suppress_player_input()
+	if !is_inside_tree() or is_queued_for_deletion():
+		return
 	
 	PlayManager.request_catching_state()
 	AudioEngine.stop_all_sfx()
 	PlayManager.request_idle_day_state()
+	_resume_player_input_after_minigame()
 	GameManager.popup_queue.dismiss_popup()
 
 
-func _suppress_player_input() -> void:
+func _resume_player_input_after_minigame() -> void:
 	var scene_container: Control = GameManager.get_scene_container()
 	if scene_container.get_child_count() <= 0:
 		return
 	
 	var active_scene = scene_container.get_child(0)
 	if active_scene is DaytimeMain and active_scene.jeremy_node:
-		active_scene.jeremy_node.suppress_input_until_release()
-
+		active_scene.jeremy_node.suppress_action_until_release()
+		active_scene.jeremy_node.apply_held_movement_input()
 
 ## Sets the continue UI element visibility.
 func _set_continue_visible(visible_value: bool) -> void:

@@ -51,6 +51,7 @@ const BAR_SHAKE_STEP_TIME: float = 0.04
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var _distance: float = -1.0
+var _bait_id: int = -1
 var _cleared: bool = false
 var _delay: bool = false
 var _between_rows: bool = false
@@ -65,10 +66,12 @@ var _current_name: String = ""
 var _current_image: NodePath
 var _current_weight: float = 0.0
 var _current_value: float = 0.0
+var _current_description: String = ""
 
 
 func _on_set_params() -> void:
 	_distance = params.get("_distance", -1.0)
+	_bait_id = params.get("_bait_id", -1)
 
 
 func _ready() -> void:
@@ -86,10 +89,11 @@ func _ready() -> void:
 
 func _setup_reward_data() -> void:
 	var chosen_fish: Dictionary = FishData.BOSS_ID[BOSS_FISH_ID]
-	_current_name = chosen_fish["name"]
-	_current_image = chosen_fish["image"]
-	_current_weight = chosen_fish["weight"]
-	_current_value = chosen_fish["value"]
+	_current_name = chosen_fish.get("name", "")
+	_current_image = chosen_fish.get("image", null)
+	_current_weight = chosen_fish.get("weight", 0.0)
+	_current_value = chosen_fish.get("value", 0.0)
+	_current_description = chosen_fish.get("description", "")
 
 
 func _setup_stamina_ui() -> void:
@@ -202,6 +206,9 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			_return_to_fishing()
 		return
+	
+	if Input.is_action_just_pressed("mouse_click") :
+		_win()
 	
 	if _between_rows: return
 	
@@ -334,45 +341,109 @@ func _process(delta: float) -> void:
 	if !AudioEngine.is_sfx_key_stream_playing(_sfx_struggle): AudioEngine.play_sfx(_sfx_struggle)
 
 
+## Returns the bait data used for this catch.
+func _get_bait_data() -> Dictionary:
+	return ItemData.get_data(ItemData.BAIT, _bait_id)
+
+
+## Returns the display name for the bait used on this catch.
+func _get_bait_display_name() -> String:
+	return _get_bait_data().get(ItemData.KEY_NAME, "Generic Bait")
+
+
+## Returns the bait value multiplier for this catch.
+func _get_bait_value_multiplier() -> float:
+	return float(_get_bait_data().get(ItemData.KEY_VALUE_MULTIPLIER, 1.0))
+
+
+## Returns the distance multiplier for this catch.
+func _get_distance_multiplier() -> float:
+	if _distance <= 0.0:
+		return 1.0
+
+	return pow(2.0, log(_distance / 100.0) / log(10.0))
+
+
+## Builds the boss results text shown after a successful catch.
+func _build_results_text(
+	base_value: float,
+	final_value: float,
+	bait_multiplier: float,
+	distance_multiplier: float,
+	gear_multiplier: float
+) -> String:
+	var total_multiplier: float = (
+		bait_multiplier
+		* distance_multiplier
+		* gear_multiplier
+	)
+
+	return (
+		"[b]Boss Fish Caught !![/b]\n"+
+		"%s\n"+
+		"Weight: %.2f\n\n"+
+		"Base Value: %.2f\n"+
+		"Bait Bonus (%s): x%.2f\n"+
+		"Distance Bonus: x%.2f\n"+
+		"Gear Bonus: x%.2f\n"+
+		"Total Multiplier: x%.2f\n"+
+		"Final Value: %.2f\n\n"+
+		"%s"
+	) % [
+		_current_name,
+		_current_weight,
+		base_value,
+		_get_bait_display_name(),
+		bait_multiplier,
+		distance_multiplier,
+		gear_multiplier,
+		total_multiplier,
+		final_value,
+		_current_description,
+	]
+
+
 func _win() -> void:
 	set_process(false)
 	set_process_input(false)
 	_cleared = true
-	
+
 	_arrow_container.hide()
 	AudioEngine.stop_all_sfx()
 	AudioEngine.play_sfx(_sfx_fish_caught)
-	
+
 	SystemData.boss_defeated = true
-	
-	var fish_image: Texture = load(_current_image)
-	_reaction_node.texture = fish_image
-	
-	var payout: float = _current_value
-	
-	if _distance > 0.0:
-		var distance_multiplier: float = pow(2.0, log(_distance / 100.0) / log(10.0))
-		payout *= distance_multiplier
-	
-	payout *= SystemData.value_multiplier
-	
-	_results_window.set_text("Boss Fish Caught !!\n%s\nWeight: %.2f\nValue: %.2f" % [
-		_current_name,
-		_current_weight,
-		payout
-	])
+
+	$ReactionAnimation.visible = true
+	$ReactionAnimation.play("joel")
+
+	var base_value: float = _current_value
+	var bait_multiplier: float = _get_bait_value_multiplier()
+	var distance_multiplier: float = _get_distance_multiplier()
+	var gear_multiplier: float = SystemData.value_multiplier
+
+	var payout: float = (
+		base_value
+		* bait_multiplier
+		* distance_multiplier
+		* gear_multiplier
+	)
+
+	_results_window.set_text(
+		_build_results_text(
+			base_value,
+			payout,
+			bait_multiplier,
+			distance_multiplier,
+			gear_multiplier
+		)
+	)
 	_results_window.show()
-	
+
 	SystemData._add_money_delay(payout)
 	SystemData._add_fish(BOSS_FISH_ID)
-	
-	await get_tree().create_timer(1.0).timeout
-	_set_continue_visible(true)
-	set_process_input(true)
-	_delay = true
-	
-	await get_tree().create_timer(5.0).timeout
-	_return_to_fishing()
+
+	_prep_return_to_fishing()
 
 
 func _fail() -> void:
@@ -387,34 +458,36 @@ func _fail() -> void:
 	_results_window.set_text("The boss fish got away !!")
 	_results_window.show()
 	
+	_prep_return_to_fishing()
+
+
+func _prep_return_to_fishing() -> void:
 	await get_tree().create_timer(1.0).timeout
 	_set_continue_visible(true)
 	set_process_input(true)
 	_delay = true
-	
-	await get_tree().create_timer(5.0).timeout
-	_return_to_fishing()
 
 
 func _return_to_fishing() -> void:
-	if !is_inside_tree() or is_queued_for_deletion(): return
-	
-	_suppress_player_input()
+	if !is_inside_tree() or is_queued_for_deletion():
+		return
 	
 	PlayManager.request_catching_state()
 	AudioEngine.stop_all_sfx()
 	PlayManager.request_idle_day_state()
+	_resume_player_input_after_minigame()
 	GameManager.popup_queue.dismiss_popup()
 
 
-func _suppress_player_input() -> void:
+func _resume_player_input_after_minigame() -> void:
 	var scene_container: Control = GameManager.get_scene_container()
 	if scene_container.get_child_count() <= 0:
 		return
 	
 	var active_scene = scene_container.get_child(0)
 	if active_scene is DaytimeMain and active_scene.jeremy_node:
-		active_scene.jeremy_node.suppress_input_until_release()
+		active_scene.jeremy_node.suppress_action_until_release()
+		active_scene.jeremy_node.apply_held_movement_input()
 
 
 ## Sets the continue UI element visibility.

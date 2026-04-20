@@ -6,7 +6,7 @@ class_name MainCharacter
 @export var collision_shape: CollisionShape2D
 @export var arrow_sprite : Sprite2D
 @export var body_sprite: AnimatedSprite2D
-@export var power_bar : ProgressBar
+@export var power_bar : TextureProgressBar
 @export var camera: DayCam
 @export_category("Audio")
 @export var charging_sfx : AudioStream
@@ -20,9 +20,15 @@ var arrow_distance : float = 0.0
 var cast_angle : float = 20.0
 var angle_speed : float = 120.0
 # Bobber
-var active_bobber_count : int = 0
-var bobber_limit : int = 1
-var bobber_hook : int = 0
+var active_bobber_count: int = 0
+var bobber_limit: int = 1
+var bobber_hook: int = 0
+
+## How much stamina is refunded when retracting an unhooked bobber.
+const EARLY_REEL_STAMINA_REFUND_RATIO: float = 0.5
+
+## Prevents repeated stamina warning spam while the action button is held.
+var cast_blocked_until_action_release: bool = false
 # Movement
 enum InputFlags{
 	MOVE_LEFT	= 1 << 0,
@@ -34,6 +40,7 @@ enum InputFlags{
 var input_flags : int = 0
 var move_speed : float = 250.0
 var suppress_gameplay_input_until_release: bool = false
+var suppress_action_input_until_release: bool = false
 # Bobbing
 var bob_amplitude : float = 40.0
 var bob_speed : float = 8.0
@@ -103,6 +110,18 @@ func _input(event : InputEvent) -> void:
 		
 		suppress_gameplay_input_until_release = false
 	
+	if suppress_action_input_until_release:
+		if event.is_action_pressed("action"):
+			_set_flag(InputFlags.ACTION, false)
+			get_viewport().set_input_as_handled()
+			return
+		
+		if event.is_action_released("action"):
+			_set_flag(InputFlags.ACTION, false)
+			suppress_action_input_until_release = false
+			cast_blocked_until_action_release = false
+			return
+	
 	# Arrow Keys
 	if event.is_action_pressed("left"):		_set_flag(InputFlags.MOVE_LEFT, true)
 	if event.is_action_released("left"):	_set_flag(InputFlags.MOVE_LEFT, false)
@@ -114,8 +133,12 @@ func _input(event : InputEvent) -> void:
 	if event.is_action_released("down"):	_set_flag(InputFlags.AIM_DOWN, false)
 	
 	# Action
-	if event.is_action_pressed("action"):	_set_flag(InputFlags.ACTION, true)
-	if event.is_action_released("action"):	_set_flag(InputFlags.ACTION, false)
+	if event.is_action_pressed("action"):
+		_set_flag(InputFlags.ACTION, true)
+	
+	if event.is_action_released("action"):
+		_set_flag(InputFlags.ACTION, false)
+		cast_blocked_until_action_release = false
 
 
 func _process(delta: float) -> void:
@@ -139,36 +162,57 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT : input_flags = 0
 
 
-func walk_up_sequence() -> void:
+func walk_up_sequence(target_x: float = 350.0) -> void:
 	set_physics_process(false)
 	body_sprite.flip_h = false
 	collision_shape.set_disabled(true)
 	
-	var target_x : float = 350.0
 	body_sprite.play("walking")
 	
 	while global_position.x < target_x:
 		velocity.x = move_speed
 		move_and_slide()
 		
-		if global_position.x >= target_x : break
+		if global_position.x >= target_x:
+			break
 		
 		await get_tree().physics_frame
 	
 	velocity.x = 0.0
 	collision_shape.set_disabled(false)
 	set_physics_process(true)
+	_sync_held_movement_input()
 
 
-# Resets the flags back to 0.
+## Resets the gameplay input flags.
 func _reset_flags() -> void:
 	input_flags = 0
+	cast_blocked_until_action_release = false
+	suppress_action_input_until_release = false
 
 
+## Suppresses gameplay input until all current inputs are released.
 func suppress_input_until_release() -> void:
 	suppress_gameplay_input_until_release = true
 	input_flags = 0
 	interacted = false
+	cast_blocked_until_action_release = false
+
+
+## Suppresses only the action input until it is released.
+##
+## This is only armed if the action button is currently being held when
+## control is returned to the player. If action is not held, do not consume the
+## next press.
+func suppress_action_until_release() -> void:
+	_set_flag(InputFlags.ACTION, false)
+	interacted = false
+	cast_blocked_until_action_release = false
+
+	if Input.is_action_pressed("action"):
+		suppress_action_input_until_release = true
+	else:
+		suppress_action_input_until_release = false
 
 
 func _has_any_gameplay_input_pressed() -> bool:
@@ -181,21 +225,50 @@ func _has_any_gameplay_input_pressed() -> bool:
 	)
 
 
-# Transitions to casting state, then continously charge while action held.
-func _cast_handler(delta : float) -> void:
-	if input_flags & InputFlags.ACTION: 
+## Syncs held movement inputs after scripted movement finishes.
+func _sync_held_movement_input() -> void:
+	_set_flag(InputFlags.MOVE_LEFT, Input.is_action_pressed("left"))
+	_set_flag(InputFlags.MOVE_RIGHT, Input.is_action_pressed("right"))
+
+
+## Re-applies currently held movement input after a scripted handoff.
+func apply_held_movement_input() -> void:
+	_sync_held_movement_input()
+
+
+## Handles cast input and charge state transitions.
+func _cast_handler(delta: float) -> void:
+	if input_flags & InputFlags.ACTION:
 		if PlayManager.get_current_state() is CastingState:
 			body_sprite.flip_h = false
 			_charging(delta)
-		
+
 		elif active_bobber_count < bobber_limit:
-			body_sprite.flip_h = false
-			PlayManager.request_casting_state()
-	
+			_try_begin_cast()
+
 	elif PlayManager.get_current_state() is CastingState:
 		AudioEngine.play_sfx(casting_sfx)
-		if _throw_bobber(): PlayManager.request_waiting_state()
-		else: PlayManager.request_idle_day_state()
+
+		if _throw_bobber():
+			PlayManager.request_waiting_state()
+		else:
+			PlayManager.request_idle_day_state()
+
+
+## Attempts to enter the casting state.
+##
+## If the player does not have enough stamina, the cast is blocked before the
+## charging phase begins and the stamina UI is asked to shake and flash.
+func _try_begin_cast() -> void:
+	if SystemData.get_stamina() < stamina_usage:
+		if not cast_blocked_until_action_release:
+			SystemData.not_enough_stamina.emit()
+			cast_blocked_until_action_release = true
+		return
+
+	body_sprite.flip_h = false
+	PlayManager.request_casting_state()
+
 
 # Charges the power bar.
 func _charging(delta : float) -> void:
@@ -268,28 +341,36 @@ func _movement() -> void:
 	velocity = Vector2(direction * move_speed, 0)
 
 # Action handler.
-var interacted : bool = false
+var interacted: bool = false
+
+## Handles the action button while not in dialogue.
 func _action() -> void:
 	if !(input_flags & InputFlags.ACTION):
 		interacted = false
 		return
-	
-	if !interacted:
+
+	if not interacted:
 		player_interact.emit()
 		interacted = true
-	
+
+	if _try_retract_waiting_bobber():
+		return
+
 	if bobber_hook > 0:
 		if PlayManager.request_reeling_state():
 			var hooked_bobber: Bobber = _get_reel_target_bobber()
-			if !hooked_bobber: return
-			
+			if not hooked_bobber:
+				return
+
 			var distance: float = hooked_bobber.position.x
 			var encounter_type: Bobber.EncounterType = hooked_bobber.encounter_type
-			
+			var bait_id: int = hooked_bobber.cast_bait_id
+
 			AudioEngine.play_sfx(hook_success_sfx)
 			_clear_bobbers()
-			
-			if daytime_node: daytime_node.start_fishing_encounter(encounter_type, distance)
+
+			if daytime_node:
+				daytime_node.start_fishing_encounter(encounter_type, distance, bait_id)
 
 # Aiming handler
 func _aiming(delta) -> void:
@@ -354,6 +435,78 @@ func _get_reel_target_bobber() -> Bobber:
 			chosen = bobber
 	
 	return chosen
+
+
+## Returns the best landed, unhooked bobber that can be retracted manually.
+func _get_waiting_target_bobber() -> Bobber:
+	var chosen: Bobber = null
+	var best_x: float = -INF
+
+	for child in get_children():
+		var bobber: Bobber = child as Bobber
+		if not bobber:
+			continue
+
+		if not is_instance_valid(bobber):
+			continue
+
+		if bobber.is_queued_for_deletion():
+			continue
+
+		if bobber.fish_hooked:
+			continue
+
+		if not bobber.is_in_water:
+			continue
+
+		if bobber.global_position.x > best_x:
+			best_x = bobber.global_position.x
+			chosen = bobber
+
+	return chosen
+
+
+## Attempts to retract an unhooked bobber before a fish bites.
+##
+## Refunds the bait used for the cast and half of the stamina cost.
+func _try_retract_waiting_bobber() -> bool:
+	if !(PlayManager.get_current_state() is WaitingState):
+		return false
+
+	if bobber_hook > 0:
+		return false
+
+	var waiting_bobber: Bobber = _get_waiting_target_bobber()
+	if not waiting_bobber:
+		return false
+
+	_refund_retracted_cast(waiting_bobber)
+
+	if waiting_bobber.timer:
+		waiting_bobber.timer.stop()
+
+	waiting_bobber.queue_free()
+	active_bobber_count = max(active_bobber_count - 1, 0)
+	hooked_bobbers.erase(waiting_bobber)
+
+	if active_bobber_count <= 0:
+		PlayManager.request_idle_day_state()
+
+	return true
+
+
+## Refunds the resources used by a manually retracted cast.
+func _refund_retracted_cast(bobber: Bobber) -> void:
+	SystemData.add_stamina(stamina_usage * EARLY_REEL_STAMINA_REFUND_RATIO)
+
+	if bobber.cast_bait_id == -1:
+		return
+
+	SystemData._add_bait(bobber.cast_bait_id, 1)
+
+	if SystemData.get_active_bait() == -1:
+		SystemData.set_active_bait(bobber.cast_bait_id)
+
 
 ## Handles signal functions
 # Sets flag if fish is hooked.

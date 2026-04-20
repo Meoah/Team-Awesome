@@ -44,10 +44,16 @@ func _init() -> void:
 func _ready() -> void:
 	_on_ready()
 
+## Dismisses this popup when the cancel action is pressed.
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_released("ui_cancel") and is_dismiss_on_escape():
-		GameManager.dismiss_popup(name)
-		get_viewport().set_input_as_handled()
+	if not event.is_action_pressed("ui_cancel"):
+		return
+
+	if not is_dismiss_on_escape():
+		return
+
+	GameManager.dismiss_popup(name)
+	get_viewport().set_input_as_handled()
 
 # Sets parameters to be used on a case by case basis.
 func set_params(_params: Dictionary = {}) -> void:

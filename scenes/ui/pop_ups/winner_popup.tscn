@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dttdn3i1dmhah" path="res://scripts/ui/pop_ups/winner_popup.gd" id="1_fga4m"]
 [ext_resource type="Texture2D" uid="uid://y2mh7rjf6x1s" path="res://assets/textures/ui/nine_slices/WoodTexture.png" id="2_6kubv"]
-[ext_resource type="AudioStream" uid="uid://cmrjitxvhw4nn" path="res://assets/audio/bgm/pick_a_card.ogg" id="2_lxeym"]
+[ext_resource type="AudioStream" uid="uid://b7gt6knr6b4by" path="res://assets/audio/bgm/Your_Did_It.ogg" id="2_lxeym"]
 [ext_resource type="AudioStream" uid="uid://caem7hu8bst0r" path="res://assets/audio/sfx/ui/hover.ogg" id="2_smd30"]
 [ext_resource type="AudioStream" uid="uid://bhqnfgqqqx8a" path="res://assets/audio/sfx/ui/confirm.ogg" id="3_lxeym"]
 [ext_resource type="FontFile" uid="uid://ciwjf56aydm2a" path="res://assets/fonts/CherryBombOne-Regular.ttf" id="3_xfb5r"]

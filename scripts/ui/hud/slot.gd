@@ -4,7 +4,6 @@ class_name Slot
 
 @onready var icon_rect = $Icon
 @onready var count_label = $Icon/CountLabel
-@onready var infinite_label = $Icon/InfinitySign
 
 var saved_data : Dictionary = {}
 var saved_item_id : int = 0
@@ -28,17 +27,10 @@ func set_slot(data : Dictionary, quantity : int = 1, item_id : int = -1):
 	else:
 		icon_rect.hide()
 		
-	# Special case for generic bait to display infinite sign.
-	if saved_data.get(ItemData.KEY_TYPE, "") == ItemData.BAIT and item_id == -1:
-		infinite_label.text = "8"
-		saved_item_id = item_id
-		count_label.hide()
 	# Show count if count is > 1.
-	elif quantity > 1:
-		infinite_label.text = ""
+	if quantity > 1:
 		count_label.text = str(quantity)
 		count_label.show()
 	else:
-		infinite_label.text = ""
 		count_label.text = ""
 		count_label.hide()

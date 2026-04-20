@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bdgfhkdqds4mm"]
 
-[ext_resource type="Script" uid="uid://dx5jttvh2axb6" path="res://scenes/game/main/weather_film_layer.gd" id="1_kpnh5"]
+[ext_resource type="Script" uid="uid://dx5jttvh2axb6" path="res://scripts/util/weather_film_layer.gd" id="1_kpnh5"]
 [ext_resource type="Shader" uid="uid://bvxxl5mfaf5gb" path="res://shaders/weather_shader.gdshader" id="1_qi5id"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kpnh5"]

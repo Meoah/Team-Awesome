@@ -82,11 +82,7 @@ func _water_bob(delta : float) -> void:
 	bob_timer += delta
 	var bob : float = (sin(bob_timer) * bob_amplitude) + waterline_y
 	global_position.y = bob
-	
-	#Drift based on wind strength
-	if WeatherManager:
-		var drift_speed : float = WeatherManager.wind_strength * 28.0
-		global_position.x += drift_speed * delta
+
 
 # Makes the exclaimation and starts the progress timer.
 func _play_vfx() -> void:

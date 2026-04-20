@@ -113,3 +113,12 @@ func _on_reroll_pressed() -> void:
 
 func _on_button_mouse_entered() -> void:
 	AudioEngine.play_sfx(hover_sfx)
+
+
+## Closes the shop when the player presses the cancel action.
+func _unhandled_input(event: InputEvent) -> void:
+	if not event.is_action_pressed("ui_cancel"):
+		return
+
+	get_viewport().set_input_as_handled()
+	_on_back_pressed()

@@ -19,10 +19,11 @@ func _roll_daily_weather() -> void:
 		WEATHER.CLEAR:  40,
 		WEATHER.CLOUDY: 25,
 		WEATHER.RAINY:  18,
-		WEATHER.STORMY:  70,
+		WEATHER.STORMY:  7,
 		WEATHER.FOGGY:   5,
 		WEATHER.WINDY:   5,
 	}
+	
 	current_weather = weight_random(weights)
 	wind_strength = randf_range(0.3, 1.0 ) if current_weather == WEATHER.WINDY\
 					else(randf_range(0.0, 0.3) if current_weather == WEATHER.STORMY\
