@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bol88hosvsvta"
-path="res://.godot/imported/ClockHand.png-5fd2bb9e9e82d0c1cb0f3717a04e3017.ctex"
+uid="uid://btfgjrdn8pmr1"
+path="res://.godot/imported/Splash01.png-145df5ae5000b95247607dd685b3ba77.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/textures/ui/hud/clock/ClockHand.png"
-dest_files=["res://.godot/imported/ClockHand.png-5fd2bb9e9e82d0c1cb0f3717a04e3017.ctex"]
+source_file="res://assets/textures/vfx/water_splashing/Splash01.png"
+dest_files=["res://.godot/imported/Splash01.png-145df5ae5000b95247607dd685b3ba77.ctex"]
 
 [params]
 

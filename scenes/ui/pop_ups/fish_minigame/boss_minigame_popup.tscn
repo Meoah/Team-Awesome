@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://264lc2go5kdr"]
+[gd_scene load_steps=93 format=3 uid="uid://264lc2go5kdr"]
 
 [ext_resource type="Script" uid="uid://dmhqh0vxrg3j6" path="res://scripts/ui/fish_minigame/boss_minigame_popup.gd" id="1_lut1a"]
 [ext_resource type="AudioStream" uid="uid://csjtfyjxrb8rc" path="res://assets/audio/bgm/boss_fight.ogg" id="2_v3msc"]
@@ -20,6 +20,9 @@
 [ext_resource type="Texture2D" uid="uid://bt21lg10tl72u" path="res://assets/textures/vfx/explosion_sprite_sheet.png" id="17_c5lks"]
 [ext_resource type="Texture2D" uid="uid://bxi1lboi72dby" path="res://assets/textures/fish/final_fish/boss_fish/world_1_boss/Joel_sprite_sheet.png" id="19_kn60h"]
 [ext_resource type="Texture2D" uid="uid://bu2rd7lttd6mr" path="res://assets/textures/actors/jeremy/GenericArrow.png" id="20_kn60h"]
+[ext_resource type="Texture2D" uid="uid://btfgjrdn8pmr1" path="res://assets/textures/vfx/water_splashing/Splash01.png" id="21_l83bu"]
+[ext_resource type="Texture2D" uid="uid://spd6tjr5lxyj" path="res://assets/textures/vfx/water_splashing/Splash02.png" id="22_4fy5r"]
+[ext_resource type="Texture2D" uid="uid://dysy0ksbjb3om" path="res://assets/textures/vfx/water_splashing/Splash03.png" id="23_ceqid"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_np22p"]
 content_margin_top = 20.0
@@ -619,6 +622,61 @@ _data = {
 &"blink": SubResource("Animation_p15s2")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_i14j2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_l83bu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_4fy5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_ceqid")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
+[sub_resource type="Animation" id="Animation_ljtpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 650)]
+}
+
+[sub_resource type="Animation" id="Animation_1o4p6"]
+resource_name = "new_animation"
+length = 30.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.8666667, 3.7333336, 5.6000004, 7.4333334, 9.266666, 11.166667, 13.033334, 14.866667, 16.733334, 18.6, 20.466667, 22.3, 24.133333, 26.033333, 27.900002, 30),
+"transitions": PackedFloat32Array(-0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5, -0.5),
+"update": 0,
+"values": [Vector2(200, 650), Vector2(1080, 650), Vector2(800, 650), Vector2(350, 650), Vector2(540, 650), Vector2(650, 650), Vector2(800, 650), Vector2(480, 650), Vector2(500, 650), Vector2(1100, 650), Vector2(480, 650), Vector2(210, 650), Vector2(670, 650), Vector2(400, 650), Vector2(80, 650), Vector2(800, 650), Vector2(180, 650)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tg0un"]
+_data = {
+&"RESET": SubResource("Animation_ljtpn"),
+&"new_animation": SubResource("Animation_1o4p6")
+}
+
 [node name="BossMinigamePopup" type="Control" node_paths=PackedStringArray("_reaction_node", "_arrow_container", "_results_window", "_player_stamina_bar", "_boss_stamina_bar", "_player_stamina_label", "_boss_stamina_label", "_animation_player", "_continue_indicator")]
 process_mode = 3
 layout_mode = 3
@@ -805,3 +863,14 @@ libraries = {
 &"": SubResource("AnimationLibrary_lbj8i")
 }
 autoplay = "blink"
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(0, 650)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_i14j2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatedSprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_tg0un")
+}

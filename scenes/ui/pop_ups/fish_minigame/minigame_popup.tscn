@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://bbklku0slqk5d"]
+[gd_scene load_steps=69 format=3 uid="uid://bbklku0slqk5d"]
 
 [ext_resource type="Script" uid="uid://bmvd1knujqejq" path="res://scripts/ui/fish_minigame/minigame_popup.gd" id="1_co3bf"]
 [ext_resource type="AudioStream" uid="uid://bx4hcgewtdxc3" path="res://assets/audio/bgm/pressing_arrows.ogg" id="2_06j22"]
@@ -20,7 +20,10 @@
 [ext_resource type="Script" uid="uid://bw1d8jfjije3h" path="res://scripts/ui/fish_minigame/countdown_bar.gd" id="25_ef8oi"]
 [ext_resource type="Script" uid="uid://bjqerl6c0hfo6" path="res://scripts/ui/fish_minigame/arrow_container.gd" id="25_wvna3"]
 [ext_resource type="Shader" uid="uid://cnydmao6vyvbe" path="res://shaders/sparks.gdshader" id="26_3cm2c"]
+[ext_resource type="Texture2D" uid="uid://btfgjrdn8pmr1" path="res://assets/textures/vfx/water_splashing/Splash01.png" id="26_gxcjo"]
 [ext_resource type="Script" uid="uid://cn36bdgkpsbur" path="res://scripts/ui/fish_minigame/results_window.gd" id="26_mv0ug"]
+[ext_resource type="Texture2D" uid="uid://spd6tjr5lxyj" path="res://assets/textures/vfx/water_splashing/Splash02.png" id="27_lgnu2"]
+[ext_resource type="Texture2D" uid="uid://dysy0ksbjb3om" path="res://assets/textures/vfx/water_splashing/Splash03.png" id="28_thhsj"]
 [ext_resource type="Texture2D" uid="uid://qhf81wyvio6r" path="res://assets/textures/ui/nine_slices/SimpleLogBorder.png" id="29_31lnn"]
 [ext_resource type="Texture2D" uid="uid://bt21lg10tl72u" path="res://assets/textures/vfx/explosion_sprite_sheet.png" id="31_mxv1m"]
 [ext_resource type="Texture2D" uid="uid://b8g8wbn7tntvi" path="res://assets/textures/upgrades/reels/Fishtagram_reel_temp.png" id="32_fosbr"]
@@ -343,6 +346,23 @@ _data = {
 &"blink": SubResource("Animation_p15s2")
 }
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_mv0ug"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("26_gxcjo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_lgnu2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_thhsj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 4.0
+}]
+
 [node name="MinigamePopup" type="Control" node_paths=PackedStringArray("_reaction_node", "_countdown_bar", "_arrow_container", "_results_window", "_continue_indicator")]
 process_mode = 3
 layout_mode = 3
@@ -551,5 +571,19 @@ libraries = {
 &"": SubResource("AnimationLibrary_lbj8i")
 }
 autoplay = "blink"
+
+[node name="WaterSplashingVFX" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="WaterSplashingVFX"]
+position = Vector2(200, 703)
+points = PackedVector2Array(0, 0, 0, 0)
+width = 1.0
+
+[node name="WaterSplash" type="AnimatedSprite2D" parent="WaterSplashingVFX"]
+position = Vector2(200, 650)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_mv0ug")
+autoplay = "default"
+frame_progress = 0.22578195
 
 [connection signal="timeout" from="CountdownBar/Timer" to="." method="_on_timer_timeout"]
