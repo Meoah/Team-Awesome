@@ -51,6 +51,7 @@ const BAR_SHAKE_STEP_TIME: float = 0.04
 var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 var _distance: float = -1.0
+var _bait_id: int = -1
 var _cleared: bool = false
 var _delay: bool = false
 var _between_rows: bool = false
@@ -70,6 +71,7 @@ var _current_description: String = ""
 
 func _on_set_params() -> void:
 	_distance = params.get("_distance", -1.0)
+	_bait_id = params.get("_bait_id", -1)
 
 
 func _ready() -> void:
@@ -339,39 +341,108 @@ func _process(delta: float) -> void:
 	if !AudioEngine.is_sfx_key_stream_playing(_sfx_struggle): AudioEngine.play_sfx(_sfx_struggle)
 
 
+## Returns the bait data used for this catch.
+func _get_bait_data() -> Dictionary:
+	return ItemData.get_data(ItemData.BAIT, _bait_id)
+
+
+## Returns the display name for the bait used on this catch.
+func _get_bait_display_name() -> String:
+	return _get_bait_data().get(ItemData.KEY_NAME, "Generic Bait")
+
+
+## Returns the bait value multiplier for this catch.
+func _get_bait_value_multiplier() -> float:
+	return float(_get_bait_data().get(ItemData.KEY_VALUE_MULTIPLIER, 1.0))
+
+
+## Returns the distance multiplier for this catch.
+func _get_distance_multiplier() -> float:
+	if _distance <= 0.0:
+		return 1.0
+
+	return pow(2.0, log(_distance / 100.0) / log(10.0))
+
+
+## Builds the boss results text shown after a successful catch.
+func _build_results_text(
+	base_value: float,
+	final_value: float,
+	bait_multiplier: float,
+	distance_multiplier: float,
+	gear_multiplier: float
+) -> String:
+	var total_multiplier: float = (
+		bait_multiplier
+		* distance_multiplier
+		* gear_multiplier
+	)
+
+	return (
+		"[b]Boss Fish Caught !![/b]\n"+
+		"%s\n"+
+		"Weight: %.2f\n\n"+
+		"Base Value: %.2f\n"+
+		"Bait Bonus (%s): x%.2f\n"+
+		"Distance Bonus: x%.2f\n"+
+		"Gear Bonus: x%.2f\n"+
+		"Total Multiplier: x%.2f\n"+
+		"Final Value: %.2f\n\n"+
+		"%s"
+	) % [
+		_current_name,
+		_current_weight,
+		base_value,
+		_get_bait_display_name(),
+		bait_multiplier,
+		distance_multiplier,
+		gear_multiplier,
+		total_multiplier,
+		final_value,
+		_current_description,
+	]
+
+
 func _win() -> void:
 	set_process(false)
 	set_process_input(false)
 	_cleared = true
-	
+
 	_arrow_container.hide()
 	AudioEngine.stop_all_sfx()
 	AudioEngine.play_sfx(_sfx_fish_caught)
-	
+
 	SystemData.boss_defeated = true
-	
+
 	$ReactionAnimation.visible = true
 	$ReactionAnimation.play("joel")
-	
-	var payout: float = _current_value
-	
-	if _distance > 0.0:
-		var distance_multiplier: float = pow(2.0, log(_distance / 100.0) / log(10.0))
-		payout *= distance_multiplier
-	
-	payout *= SystemData.value_multiplier
-	
-	_results_window.set_text("Boss Fish Caught !!\n%s\nWeight: %.2f\nValue: %.2f\n%s" % [
-		_current_name,
-		_current_weight,
-		payout,
-		_current_description
-	])
+
+	var base_value: float = _current_value
+	var bait_multiplier: float = _get_bait_value_multiplier()
+	var distance_multiplier: float = _get_distance_multiplier()
+	var gear_multiplier: float = SystemData.value_multiplier
+
+	var payout: float = (
+		base_value
+		* bait_multiplier
+		* distance_multiplier
+		* gear_multiplier
+	)
+
+	_results_window.set_text(
+		_build_results_text(
+			base_value,
+			payout,
+			bait_multiplier,
+			distance_multiplier,
+			gear_multiplier
+		)
+	)
 	_results_window.show()
-	
+
 	SystemData._add_money_delay(payout)
 	SystemData._add_fish(BOSS_FISH_ID)
-	
+
 	_prep_return_to_fishing()
 
 

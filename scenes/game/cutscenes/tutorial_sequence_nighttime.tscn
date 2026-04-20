@@ -316,6 +316,7 @@ theme_override_constants/margin_bottom = 20
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 20
 bbcode_enabled = true
 text = "Welcome to Arrow Fishing!"
 fit_content = true

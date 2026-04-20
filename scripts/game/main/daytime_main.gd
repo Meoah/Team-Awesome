@@ -103,7 +103,7 @@ func _on_bobber_landed_in_water(bobber: Bobber) -> void:
 	
 	if boss_shadow.contains_bobber(bobber): bobber.encounter_type = Bobber.EncounterType.BOSS
 
-func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: float) -> void:
+func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: float, bait_id: int = -1) -> void:
 	$FISH.play("FISH!")
 	await $FISH.animation_finished
 	
@@ -112,7 +112,8 @@ func start_fishing_encounter(encounter_type: Bobber.EncounterType, distance: flo
 	
 	var popup_parameters = {
 		"flags" = BasePopup.POPUP_FLAG.WILL_PAUSE,
-		"_distance" = distance
+		"_distance" = distance,
+		"_bait_id" = bait_id,
 	}
 	
 	GameManager.popup_queue.show_popup(popup_type, popup_parameters)

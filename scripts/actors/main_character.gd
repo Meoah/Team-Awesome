@@ -364,12 +364,13 @@ func _action() -> void:
 
 			var distance: float = hooked_bobber.position.x
 			var encounter_type: Bobber.EncounterType = hooked_bobber.encounter_type
+			var bait_id: int = hooked_bobber.cast_bait_id
 
 			AudioEngine.play_sfx(hook_success_sfx)
 			_clear_bobbers()
 
 			if daytime_node:
-				daytime_node.start_fishing_encounter(encounter_type, distance)
+				daytime_node.start_fishing_encounter(encounter_type, distance, bait_id)
 
 # Aiming handler
 func _aiming(delta) -> void:

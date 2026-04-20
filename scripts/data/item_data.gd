@@ -72,6 +72,7 @@ const KEY_COST_STABILITY : String = "cost_stability"
 const KEY_DESCRIPTION : String = "description"
 const KEY_QUANTITY_MIN : String = "quantity_min"
 const KEY_QUANTITY_MAX : String = "quantity_max"
+const KEY_VALUE_MULTIPLIER: String = "value_multiplier"
 const KEY_SIGNAL : String = "signal"
 # Must include the following:
 #	KEY_NAME : String
@@ -191,7 +192,8 @@ const GENERIC_BAIT : Dictionary = {
 	KEY_NAME : "Generic Bait",
 	KEY_IMAGE : NodePath("res://assets/textures/bait/BaitGeneric.png"),
 	KEY_TYPE : BAIT,
-	KEY_DESCRIPTION : "As generic as it comes."
+	KEY_DESCRIPTION : "As generic as it comes.",
+	KEY_VALUE_MULTIPLIER : 1.0,
 }
 
 const DUMMY_BAIT : Dictionary = {
@@ -199,7 +201,8 @@ const DUMMY_BAIT : Dictionary = {
 	KEY_IMAGE : NodePath("res://assets/textures/debug/prohibited.png"),
 	KEY_TYPE : BAIT,
 	KEY_COST : 0.0,
-	KEY_DESCRIPTION : "Get baited."
+	KEY_DESCRIPTION : "Get baited.",
+	KEY_VALUE_MULTIPLIER : 1.0,
 }
 
 const WORM_BAIT : Dictionary = {
@@ -210,7 +213,8 @@ const WORM_BAIT : Dictionary = {
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 10,
-	KEY_DESCRIPTION : "Ew, slimy."
+	KEY_DESCRIPTION : "Ew, slimy.",
+	KEY_VALUE_MULTIPLIER : 1.75,
 }
 
 const MAGIC_BAIT : Dictionary = {
@@ -221,5 +225,6 @@ const MAGIC_BAIT : Dictionary = {
 	KEY_COST_STABILITY : 0.7,
 	KEY_QUANTITY_MIN : 1,
 	KEY_QUANTITY_MAX : 2,
-	KEY_DESCRIPTION : "[font_size=8]This may or may not be a scam.[/font_size]\nThis is [color=red]DEFINITELY[/color] worth it."
+	KEY_DESCRIPTION : "[font_size=8]This may or may not be a scam.[/font_size]\nThis is [color=red]DEFINITELY[/color] worth it.",
+	KEY_VALUE_MULTIPLIER : 5.0,
 }

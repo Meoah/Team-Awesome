@@ -30,7 +30,7 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_thhsj"]
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kn60h"]
 texture = ExtResource("14_jjgpa")
 texture_margin_left = 8.0
 texture_margin_top = 8.0
@@ -733,13 +733,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -350.0
-offset_top = -300.0
-offset_right = 350.0
-offset_bottom = -100.0
+offset_left = -346.0
+offset_top = -341.0
+offset_right = 354.0
+offset_bottom = -141.0
 grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_thhsj")
+theme_override_styles/panel = SubResource("StyleBoxTexture_kn60h")
 script = ExtResource("15_pkrwe")
 _results_label = NodePath("Results")
 
@@ -747,7 +746,8 @@ _results_label = NodePath("Results")
 layout_mode = 2
 theme_override_constants/outline_size = 4
 theme_override_fonts/normal_font = ExtResource("16_7krjj")
-theme_override_font_sizes/normal_font_size = 24
+theme_override_font_sizes/normal_font_size = 20
+theme_override_font_sizes/bold_font_size = 30
 bbcode_enabled = true
 fit_content = true
 autowrap_mode = 0
