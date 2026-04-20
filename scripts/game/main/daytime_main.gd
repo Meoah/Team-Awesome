@@ -32,7 +32,6 @@ func _ready() -> void:
 	if _check_loss_condition(): return
 	
 	await jeremy_node.walk_up_sequence()
-	await jeremy_node.walk_up_sequence()
 	
 	# Cutscenes
 	if SystemData.fresh_run:
@@ -67,10 +66,12 @@ func _play_tutorial() -> void:
 	new_scene.tutorial_done.connect(_ready_day)
 	add_child(new_scene)
 
-## Default function for the day.
+## Enables normal daytime gameplay.
 func _ready_day() -> void:
 	TimeManager.time_enabled = true
 	PlayManager.request_idle_day_state()
+	jeremy_node.suppress_action_until_release()
+	jeremy_node.apply_held_movement_input()
 
 func is_can_fish() -> bool:
 	for each in SystemData.bait_inventory:

@@ -319,25 +319,25 @@ func _prep_return_to_fishing() -> void:
 
 
 func _return_to_fishing() -> void:
-	if !is_inside_tree() or is_queued_for_deletion(): return
-	
-	_suppress_player_input()
+	if !is_inside_tree() or is_queued_for_deletion():
+		return
 	
 	PlayManager.request_catching_state()
 	AudioEngine.stop_all_sfx()
 	PlayManager.request_idle_day_state()
+	_resume_player_input_after_minigame()
 	GameManager.popup_queue.dismiss_popup()
 
 
-func _suppress_player_input() -> void:
+func _resume_player_input_after_minigame() -> void:
 	var scene_container: Control = GameManager.get_scene_container()
 	if scene_container.get_child_count() <= 0:
 		return
 	
 	var active_scene = scene_container.get_child(0)
 	if active_scene is DaytimeMain and active_scene.jeremy_node:
-		active_scene.jeremy_node.suppress_input_until_release()
-
+		active_scene.jeremy_node.suppress_action_until_release()
+		active_scene.jeremy_node.apply_held_movement_input()
 
 ## Sets the continue UI element visibility.
 func _set_continue_visible(visible_value: bool) -> void:

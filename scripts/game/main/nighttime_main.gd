@@ -84,7 +84,7 @@ func _on_tutorial_done() -> void:
 ## Enables normal nighttime gameplay.
 func _ready_camp() -> void:
 	TimeManager.time_enabled = true
-	_jeremy_node.suppress_input_until_release()
+	_jeremy_node.suppress_action_until_release()
 	PlayManager.request_idle_night_state()
 
 

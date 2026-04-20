@@ -40,6 +40,7 @@ enum InputFlags{
 var input_flags : int = 0
 var move_speed : float = 250.0
 var suppress_gameplay_input_until_release: bool = false
+var suppress_action_input_until_release: bool = false
 # Bobbing
 var bob_amplitude : float = 40.0
 var bob_speed : float = 8.0
@@ -109,6 +110,18 @@ func _input(event : InputEvent) -> void:
 		
 		suppress_gameplay_input_until_release = false
 	
+	if suppress_action_input_until_release:
+		if event.is_action_pressed("action"):
+			_set_flag(InputFlags.ACTION, false)
+			get_viewport().set_input_as_handled()
+			return
+		
+		if event.is_action_released("action"):
+			_set_flag(InputFlags.ACTION, false)
+			suppress_action_input_until_release = false
+			cast_blocked_until_action_release = false
+			return
+	
 	# Arrow Keys
 	if event.is_action_pressed("left"):		_set_flag(InputFlags.MOVE_LEFT, true)
 	if event.is_action_released("left"):	_set_flag(InputFlags.MOVE_LEFT, false)
@@ -149,31 +162,33 @@ func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT : input_flags = 0
 
 
-func walk_up_sequence() -> void:
+func walk_up_sequence(target_x: float = 350.0) -> void:
 	set_physics_process(false)
 	body_sprite.flip_h = false
 	collision_shape.set_disabled(true)
 	
-	var target_x : float = 350.0
 	body_sprite.play("walking")
 	
 	while global_position.x < target_x:
 		velocity.x = move_speed
 		move_and_slide()
 		
-		if global_position.x >= target_x : break
+		if global_position.x >= target_x:
+			break
 		
 		await get_tree().physics_frame
 	
 	velocity.x = 0.0
 	collision_shape.set_disabled(false)
 	set_physics_process(true)
+	_sync_held_movement_input()
 
 
 ## Resets the gameplay input flags.
 func _reset_flags() -> void:
 	input_flags = 0
 	cast_blocked_until_action_release = false
+	suppress_action_input_until_release = false
 
 
 ## Suppresses gameplay input until all current inputs are released.
@@ -184,6 +199,22 @@ func suppress_input_until_release() -> void:
 	cast_blocked_until_action_release = false
 
 
+## Suppresses only the action input until it is released.
+##
+## This is only armed if the action button is currently being held when
+## control is returned to the player. If action is not held, do not consume the
+## next press.
+func suppress_action_until_release() -> void:
+	_set_flag(InputFlags.ACTION, false)
+	interacted = false
+	cast_blocked_until_action_release = false
+
+	if Input.is_action_pressed("action"):
+		suppress_action_input_until_release = true
+	else:
+		suppress_action_input_until_release = false
+
+
 func _has_any_gameplay_input_pressed() -> bool:
 	return (
 		Input.is_action_pressed("left")
@@ -192,6 +223,17 @@ func _has_any_gameplay_input_pressed() -> bool:
 		or Input.is_action_pressed("down")
 		or Input.is_action_pressed("action")
 	)
+
+
+## Syncs held movement inputs after scripted movement finishes.
+func _sync_held_movement_input() -> void:
+	_set_flag(InputFlags.MOVE_LEFT, Input.is_action_pressed("left"))
+	_set_flag(InputFlags.MOVE_RIGHT, Input.is_action_pressed("right"))
+
+
+## Re-applies currently held movement input after a scripted handoff.
+func apply_held_movement_input() -> void:
+	_sync_held_movement_input()
 
 
 ## Handles cast input and charge state transitions.
