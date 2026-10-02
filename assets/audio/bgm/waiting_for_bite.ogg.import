@@ -3,12 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://hcu8wjatuujx"
-path="res://.godot/imported/Waiting_For_Bite.ogg-33b3387c320fd817bffdca3859a512b0.oggvorbisstr"
+path="res://.godot/imported/waiting_for_bite.ogg-9679cc6d44196846b6dc5942ef6fc5bb.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/audio/bgm/Waiting_For_Bite.ogg"
-dest_files=["res://.godot/imported/Waiting_For_Bite.ogg-33b3387c320fd817bffdca3859a512b0.oggvorbisstr"]
+source_file="res://assets/audio/bgm/waiting_for_bite.ogg"
+dest_files=["res://.godot/imported/waiting_for_bite.ogg-9679cc6d44196846b6dc5942ef6fc5bb.oggvorbisstr"]
 
 [params]
 
